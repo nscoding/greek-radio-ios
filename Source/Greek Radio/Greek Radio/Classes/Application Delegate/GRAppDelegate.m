@@ -7,13 +7,20 @@
 //
 
 #import "GRAppDelegate.h"
-
 #import "GRViewController.h"
+
+#import "TestFlight.h"
 
 @implementation GRAppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+#if !APPSTORE
+    [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
+#endif
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[GRViewController alloc] initWithNibName:@"GRViewController" bundle:nil];
