@@ -10,6 +10,12 @@
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
+		CDA752E8173049A0005B25EC /* GRWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752E7173049A0005B25EC /* GRWebService.m */; };
+		CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752EE1730548F005B25EC /* GRCoreDataStack.m */; };
+		CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752F0173055DA005B25EC /* CoreData.framework */; };
+		CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752FD1730573C005B25EC /* GRStationsDAO.m */; };
+		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
+		CDA7531017305B52005B25EC /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA7530F17305B52005B25EC /* GRStation.m */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -28,6 +34,16 @@
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		CDA752E6173049A0005B25EC /* GRWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRWebService.h; sourceTree = "<group>"; };
+		CDA752E7173049A0005B25EC /* GRWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRWebService.m; sourceTree = "<group>"; };
+		CDA752ED1730548F005B25EC /* GRCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCoreDataStack.h; sourceTree = "<group>"; };
+		CDA752EE1730548F005B25EC /* GRCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCoreDataStack.m; sourceTree = "<group>"; };
+		CDA752F0173055DA005B25EC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CDA752FC1730573C005B25EC /* GRStationsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsDAO.h; sourceTree = "<group>"; };
+		CDA752FD1730573C005B25EC /* GRStationsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsDAO.m; sourceTree = "<group>"; };
+		CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreekRadioModel.xcdatamodel; sourceTree = "<group>"; };
+		CDA7530E17305B52005B25EC /* GRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStation.h; sourceTree = "<group>"; };
+		CDA7530F17305B52005B25EC /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -53,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */,
 				CDA752E01730451E005B25EC /* libz.dylib in Frameworks */,
 				CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */,
 				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
@@ -64,6 +81,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CDA752E5173049A0005B25EC /* Web Service */ = {
+			isa = PBXGroup;
+			children = (
+				CDA752E6173049A0005B25EC /* GRWebService.h */,
+				CDA752E7173049A0005B25EC /* GRWebService.m */,
+			);
+			path = "Web Service";
+			sourceTree = "<group>";
+		};
+		CDA752EC17305471005B25EC /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				CDA752ED1730548F005B25EC /* GRCoreDataStack.h */,
+				CDA752EE1730548F005B25EC /* GRCoreDataStack.m */,
+				CDA752FC1730573C005B25EC /* GRStationsDAO.h */,
+				CDA752FD1730573C005B25EC /* GRStationsDAO.m */,
+				CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */,
+				CDA7530E17305B52005B25EC /* GRStation.h */,
+				CDA7530F17305B52005B25EC /* GRStation.m */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
 		CDE43A7217303DD4004C0698 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
+				CDA752EC17305471005B25EC /* Core Data */,
+				CDA752E5173049A0005B25EC /* Web Service */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -172,6 +214,7 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CDA752F0173055DA005B25EC /* CoreData.framework */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
 				CDE43ABA173041B8004C0698 /* libTestFlight.a */,
 				CDE43ABB173041B8004C0698 /* TestFlight.h */,
@@ -251,6 +294,11 @@
 				CDE43A8B17303DD5004C0698 /* main.m in Sources */,
 				CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */,
 				CDE43AB517303F5B004C0698 /* GRViewController.m in Sources */,
+				CDA752E8173049A0005B25EC /* GRWebService.m in Sources */,
+				CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */,
+				CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */,
+				CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */,
+				CDA7531017305B52005B25EC /* GRStation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +464,19 @@
 			defaultConfigurationName = "App Store";
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */,
+			);
+			currentVersion = CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */;
+			path = GreekRadioModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CDE43A7317303DD5004C0698 /* Project object */;
 }
