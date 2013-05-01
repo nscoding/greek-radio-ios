@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) GRViewController *viewController;
+@property (strong, nonatomic) UINavigationController *menuNavigationController;
 
 @end

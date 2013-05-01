@@ -16,6 +16,8 @@
 		CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752FD1730573C005B25EC /* GRStationsDAO.m */; };
 		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
 		CDA7531017305B52005B25EC /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA7530F17305B52005B25EC /* GRStation.m */; };
+		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
+		CDA75353173070B0005B25EC /* GRStationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA75352173070B0005B25EC /* GRStationCellView.xib */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -44,6 +46,9 @@
 		CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreekRadioModel.xcdatamodel; sourceTree = "<group>"; };
 		CDA7530E17305B52005B25EC /* GRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStation.h; sourceTree = "<group>"; };
 		CDA7530F17305B52005B25EC /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
+		CDA7534F173070A6005B25EC /* GRStationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStationCellView.h; path = Cells/GRStationCellView.h; sourceTree = "<group>"; };
+		CDA75350173070A6005B25EC /* GRStationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStationCellView.m; path = Cells/GRStationCellView.m; sourceTree = "<group>"; };
+		CDA75352173070B0005B25EC /* GRStationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRStationCellView.xib; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,6 +107,16 @@
 				CDA7530F17305B52005B25EC /* GRStation.m */,
 			);
 			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		CDA7534E17306A56005B25EC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				CDA75352173070B0005B25EC /* GRStationCellView.xib */,
+				CDA7534F173070A6005B25EC /* GRStationCellView.h */,
+				CDA75350173070A6005B25EC /* GRStationCellView.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		CDE43A7217303DD4004C0698 = {
@@ -196,18 +211,20 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CDE43AAD17303F5B004C0698 /* Main */,
+				CDA7534E17306A56005B25EC /* Cells */,
+				CDE43AAD17303F5B004C0698 /* Station List */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CDE43AAD17303F5B004C0698 /* Main */ = {
+		CDE43AAD17303F5B004C0698 /* Station List */ = {
 			isa = PBXGroup;
 			children = (
 				CDE43AAE17303F5B004C0698 /* GRViewController.h */,
 				CDE43AAF17303F5B004C0698 /* GRViewController.m */,
 				CDE43AB017303F5B004C0698 /* GRViewController.xib */,
 			);
+			name = "Station List";
 			path = Main;
 			sourceTree = "<group>";
 		};
@@ -281,6 +298,7 @@
 				CDE43AB617303F5B004C0698 /* GRViewController.xib in Resources */,
 				CDA752DD173044EE005B25EC /* icon57x57.png in Resources */,
 				CDA752DE173044EE005B25EC /* icon114x114.png in Resources */,
+				CDA75353173070B0005B25EC /* GRStationCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +317,7 @@
 				CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */,
 				CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */,
 				CDA7531017305B52005B25EC /* GRStation.m in Sources */,
+				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +336,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -333,7 +352,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
 				SDKROOT = iphoneos;
 			};
 			name = Development;
@@ -350,7 +368,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APPSTORE=1";
@@ -359,7 +377,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -368,6 +385,7 @@
 		CDE43A9F17303DD5004C0698 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -377,6 +395,7 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -384,6 +403,7 @@
 		CDE43AA017303DD5004C0698 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -393,6 +413,7 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "App Store";
@@ -409,7 +430,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APPSTORE=0";
@@ -418,7 +439,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C2123F59-669E-4E7A-B1AA-B058DB8991D6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -427,6 +447,7 @@
 		CDE43AB817303FA6004C0698 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -436,6 +457,7 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "AF21A1D3-89D9-4D57-A578-889919129726";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Adhoc;

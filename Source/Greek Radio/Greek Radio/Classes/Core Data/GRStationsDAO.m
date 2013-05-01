@@ -24,8 +24,12 @@
                       location:(NSString *)location
 {
     NSManagedObjectContext *managedObjectContext = [[GRCoreDataStack shared] managedObjectContext];
+    GRStation *newStation = [self retrieveByTitle:title];
     
-    GRStation *newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation" inManagedObjectContext:managedObjectContext];
+    if (newStation == nil)
+    {
+        newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation" inManagedObjectContext:managedObjectContext];
+    }
     
     newStation.title = title;
     newStation.stationURL = stationURL;
@@ -69,7 +73,8 @@
 - (GRStation *)retrieveByTitle:(NSString *)title
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", title];
-    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation" withPredicate:predicate];
+    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
+                                                              withPredicate:predicate];
     
     if ([stations count] > 0)
     {

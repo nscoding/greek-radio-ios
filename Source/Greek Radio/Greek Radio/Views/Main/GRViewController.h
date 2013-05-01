@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 @interface GRViewController : UIViewController
+
+@property (nonatomic, assign) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, assign) IBOutlet UITableView *stationsTableView;
 
 @end

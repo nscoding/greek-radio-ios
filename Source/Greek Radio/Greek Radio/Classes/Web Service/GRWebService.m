@@ -15,7 +15,7 @@
 
 #define kWebServiceURL @"http://nscoding.co.uk/xml/radioStations.xml"
 
-#define kTopElement @"Station"
+#define kTopElement @"station"
     #define kElementTitle @"title"
     #define kElementStreamURL @"streamURL"
     #define kElementStationURL @"stationURL"
@@ -154,6 +154,7 @@ didStartElement:(NSString *)elementName
 {
 	NSLog(@"found characters: %@", string);
 
+    
     [[self propertyForCurrentElement] appendString:string];
 }
 

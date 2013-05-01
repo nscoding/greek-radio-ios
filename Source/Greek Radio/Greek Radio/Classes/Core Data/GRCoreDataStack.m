@@ -142,8 +142,11 @@
 	
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
+    request.returnsObjectsAsFaults = NO;
+    request.includesPropertyValues = YES;
+    request.includesSubentities = YES;
     
-	if(predicate)
+	if (predicate)
     {
         [request setPredicate:predicate];
     }
