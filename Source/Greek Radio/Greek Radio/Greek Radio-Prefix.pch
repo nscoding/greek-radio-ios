@@ -6,6 +6,7 @@
 #import <CoreData/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "GRAppearance‎Helper.h"
 #import "GRNotificationCenter.h"
 #import "GRWebService.h"
 

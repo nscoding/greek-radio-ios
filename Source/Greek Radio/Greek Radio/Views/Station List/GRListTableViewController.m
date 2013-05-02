@@ -10,8 +10,8 @@
 #import "GRStationsDAO.h"
 #import "GRStationCellView.h"
 #import "GRPlayerViewController.h"
-#import "GRAddStationViewController.h"
 #import "BlockAlertView.h"
+#import "BlockActionSheet.h"
 
 #import "GRWebService.h"
 
@@ -22,7 +22,10 @@
 @interface GRListTableViewController ()
 
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
-@property (nonatomic, strong) NSMutableArray *stations;
+
+@property (nonatomic, strong) NSMutableArray *serverStations;
+@property (nonatomic, strong) NSMutableArray *localStations;
+@property (nonatomic, strong) NSMutableArray *favoriteStations;
 
 @end
 
@@ -39,7 +42,8 @@
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
     {
-        [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"GRPaperBackground"]]];
+        [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
+                                            [UIImage imageNamed:@"GRPaperBackground"]]];
     }
     
     return self;
@@ -75,24 +79,38 @@
     [self registerObservers];
     
     
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    addButton.frame = CGRectMake(0, 0, 30, 30);
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    moreButton.frame = CGRectMake(0, 0, 30, 12);
     
-    [addButton setImage:[UIImage imageNamed:@"GRAddIcon"] forState:UIControlStateNormal];
-    [addButton addTarget:self action:@selector(addButtonPressed:)
+    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(moreButtonPressed:)
         forControlEvents:UIControlEventTouchUpInside];
     
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
-                               initWithCustomView:addButton];
+                               initWithCustomView:moreButton];
 
     self.navigationItem.rightBarButtonItem = rightButton;
 }
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.searchBar resignFirstResponder];
+}
+
+
 - (void)configureStations
 {
-    [self.stations removeAllObjects];
-    self.stations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAll]];
+    [self.serverStations removeAllObjects];
+    self.serverStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllServerBased]];
+
+    [self.localStations removeAllObjects];
+    self.localStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllLocalBased]];
+
+    [self.favoriteStations removeAllObjects];
+    self.favoriteStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllFavorites]];
+    
     [self.tableView reloadData];
 }
 
@@ -107,6 +125,7 @@
     
     [self.refreshControl endRefreshing];
 }
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Pull to refresh
@@ -142,7 +161,26 @@
 // ------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.stations.count;
+    if (section == 0)
+    {
+        return self.favoriteStations.count;
+    }
+    else if (section == 1)
+    {
+        return self.localStations.count;
+    }    
+    else if (section == 2)
+    {
+        return self.serverStations.count;
+    }
+
+    return 0;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+{
+    return 3;
 }
 
 
@@ -156,22 +194,70 @@
     {
         cell = [[GRStationCellView alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:identifier];
-    
-        GRStation *station = [self.stations objectAtIndex:indexPath.row];
-        cell.title.text = [NSString stringWithFormat:@"%@",station.title];
-        cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
     }
     
+    GRStation *station = nil;
+    if (indexPath.section == 0)
+    {
+        station = [self.favoriteStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 1)
+    {
+        station = [self.localStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 2)
+    {
+        station = [self.serverStations objectAtIndex:indexPath.row];
+    }
+
+    cell.title.text = [NSString stringWithFormat:@"%@",station.title];
+    cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
+    cell.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", station.genre];
+
     [cell setNeedsDisplay];
     
     return cell;
 }
 
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    GRStation *station = [self.stations objectAtIndex:indexPath.row];
+    NSString *sectionName;
+    switch (section)
+    {
+        case 0:
+            sectionName = (self.favoriteStations.count > 0) ?
+            NSLocalizedString(@"Favorites", @"") : @"";
+            break;
+        case 1:
+            sectionName = (self.localStations.count > 0) ?
+            NSLocalizedString(@"Local Stations", @"") : @"";
+            break;
+        case 2:
+            sectionName = (self.serverStations.count > 0) ?
+            NSLocalizedString(@"Stations", @"") : @"";
+            break;
+        default:
+            sectionName = @"";
+            break;
+    }
+    
+    return sectionName;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GRStation *station = nil;
+    if (indexPath.section == 0)
+    {
+        station = [self.localStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 1)
+    {
+        station = [self.serverStations objectAtIndex:indexPath.row];
+    }
+
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station];
     [self.navigationController pushViewController:playController animated:YES];
 }
@@ -180,11 +266,42 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
-- (void)addButtonPressed:(UIButton *)sender
+- (void)moreButtonPressed:(UIButton *)sender
 {
-    GRAddStationViewController *addStationController = [[GRAddStationViewController alloc] init];
-    [self.navigationController presentModalViewController:addStationController animated:YES];
+    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
+    [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
+    [sheet addButtonWithTitle:@"Suggest a station" block:^{
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        mailController.mailComposeDelegate = self;
+        [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+        mailController.subject = @"New station proposal";
+        
+        [GRAppearanceHelper setUpDefaultAppearance];
+        [self.navigationController presentModalViewController:mailController animated:YES];
+    }];
+    [sheet setDestructiveButtonWithTitle:@"Report a problem" block:^{
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        mailController.mailComposeDelegate = self;
+        [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+        mailController.subject = @"Something is wrong...";
+        
+        [GRAppearanceHelper setUpDefaultAppearance];
+        [self.navigationController presentModalViewController:mailController animated:YES];
+    }];
+    [sheet showInView:self.view];
 }
+
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    [GRAppearanceHelper setUpGreekRadioAppearance];
+    
+    [controller dismissModalViewControllerAnimated:YES];
+}
+
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Memory

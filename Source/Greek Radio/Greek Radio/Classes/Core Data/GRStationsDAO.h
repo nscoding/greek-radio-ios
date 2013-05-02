@@ -14,10 +14,15 @@
                        siteURL:(NSString *)stationURL
                      streamURL:(NSString *)streamURL
                          genre:(NSString *)genre
-                      location:(NSString *)location;
+                      location:(NSString *)location
+                   serverBased:(BOOL)server;
 
 - (BOOL)removeAll;
 - (NSArray *)retrieveAll;
 - (GRStation *)retrieveByTitle:(NSString *)title;
+
+- (NSArray *)retrieveAllFavorites;
+- (NSArray *)retrieveAllServerBased;
+- (NSArray *)retrieveAllLocalBased;
 
 @end

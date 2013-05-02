@@ -148,7 +148,8 @@ didStartElement:(NSString *)elementName
                                              siteURL:self.currentStationURL
                                            streamURL:self.currentStreamURL
                                                genre:self.currentGenre
-                                            location:self.currentLocation];
+                                            location:self.currentLocation
+                                         serverBased:YES];
         });
 
 	}
@@ -158,8 +159,6 @@ didStartElement:(NSString *)elementName
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
 	NSLog(@"found characters: %@", string);
-
-    
     [[self propertyForCurrentElement] appendString:string];
 }
 

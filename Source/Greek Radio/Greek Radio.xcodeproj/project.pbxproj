@@ -30,10 +30,6 @@
 		CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A0222173299AF003A2E2D /* QuartzCore.framework */; };
 		CD7A02531732B33B003A2E2D /* GRSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02511732B33B003A2E2D /* GRSplashViewController.m */; };
 		CD7A02541732B33B003A2E2D /* GRSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02521732B33B003A2E2D /* GRSplashViewController.xib */; };
-		CD7A02591732B77D003A2E2D /* GRAddIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02571732B77D003A2E2D /* GRAddIcon.png */; };
-		CD7A025A1732B77D003A2E2D /* GRAddIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */; };
-		CD7A025F1732BB26003A2E2D /* GRAddStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */; };
-		CD7A02601732BB26003A2E2D /* GRAddStationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */; };
 		CD7A02631732BDD1003A2E2D /* GRPaperBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */; };
 		CD7A02641732BDD1003A2E2D /* GRPaperBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02621732BDD1003A2E2D /* GRPaperBackground@2x.png */; };
 		CD7A02711732C177003A2E2D /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02671732C177003A2E2D /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -64,6 +60,11 @@
 		CD7A02A61732C1E7003A2E2D /* alert-window.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028E1732C1E7003A2E2D /* alert-window.png */; };
 		CD7A02A71732C1E7003A2E2D /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */; };
 		CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */; };
+		CD7A02B51732D852003A2E2D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02B41732D852003A2E2D /* JSBadgeView.m */; };
+		CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */; };
+		CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */; };
+		CD7A02C31732FE89003A2E2D /* GRMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C11732FE89003A2E2D /* GRMore@2x.png */; };
+		CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C21732FE89003A2E2D /* GRMore.png */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -131,11 +132,6 @@
 		CD7A02501732B33B003A2E2D /* GRSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSplashViewController.h; sourceTree = "<group>"; };
 		CD7A02511732B33B003A2E2D /* GRSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSplashViewController.m; sourceTree = "<group>"; };
 		CD7A02521732B33B003A2E2D /* GRSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSplashViewController.xib; sourceTree = "<group>"; };
-		CD7A02571732B77D003A2E2D /* GRAddIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddIcon.png; sourceTree = "<group>"; };
-		CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddIcon@2x.png"; sourceTree = "<group>"; };
-		CD7A025C1732BB26003A2E2D /* GRAddStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAddStationViewController.h; sourceTree = "<group>"; };
-		CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAddStationViewController.m; sourceTree = "<group>"; };
-		CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRAddStationViewController.xib; sourceTree = "<group>"; };
 		CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPaperBackground.png; sourceTree = "<group>"; };
 		CD7A02621732BDD1003A2E2D /* GRPaperBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPaperBackground@2x.png"; sourceTree = "<group>"; };
 		CD7A02661732C177003A2E2D /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
@@ -172,6 +168,13 @@
 		CD7A028E1732C1E7003A2E2D /* alert-window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window.png"; sourceTree = "<group>"; };
 		CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window@2x.png"; sourceTree = "<group>"; };
 		CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoverPlaceholder.png; sourceTree = "<group>"; };
+		CD7A02B31732D852003A2E2D /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		CD7A02B41732D852003A2E2D /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
+		CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		CD7A02BD1732E9C8003A2E2D /* GRAppearance‎Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GRAppearance‎Helper.h"; sourceTree = "<group>"; };
+		CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GRAppearance‎Helper.m"; sourceTree = "<group>"; };
+		CD7A02C11732FE89003A2E2D /* GRMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRMore@2x.png"; sourceTree = "<group>"; };
+		CD7A02C21732FE89003A2E2D /* GRMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRMore.png; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -207,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
 				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
 				CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */,
 				CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */,
@@ -252,8 +256,8 @@
 		CD7A018117327799003A2E2D /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
-				CD7A02571732B77D003A2E2D /* GRAddIcon.png */,
-				CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */,
+				CD7A02C21732FE89003A2E2D /* GRMore.png */,
+				CD7A02C11732FE89003A2E2D /* GRMore@2x.png */,
 				CD7A018217327799003A2E2D /* GRWoodHeader.png */,
 				CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */,
 				CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */,
@@ -334,16 +338,6 @@
 			path = "Splash Screen";
 			sourceTree = "<group>";
 		};
-		CD7A025B1732BB14003A2E2D /* Add Station */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A025C1732BB26003A2E2D /* GRAddStationViewController.h */,
-				CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */,
-				CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */,
-			);
-			path = "Add Station";
-			sourceTree = "<group>";
-		};
 		CD7A02651732C176003A2E2D /* Block Alert */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +390,24 @@
 				CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */,
 			);
 			path = AlertView;
+			sourceTree = "<group>";
+		};
+		CD7A02B21732D852003A2E2D /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02B31732D852003A2E2D /* JSBadgeView.h */,
+				CD7A02B41732D852003A2E2D /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
+		CD7A02BC1732E9AF003A2E2D /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02BD1732E9C8003A2E2D /* GRAppearance‎Helper.h */,
+				CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */,
+			);
+			path = Appearance;
 			sourceTree = "<group>";
 		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
@@ -509,6 +521,7 @@
 		CDE43AA817303F5B004C0698 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A02BC1732E9AF003A2E2D /* Appearance */,
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
 				CD7A02071732939F003A2E2D /* Notification Center */,
 				CDA752EC17305471005B25EC /* Core Data */,
@@ -529,7 +542,6 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CD7A025B1732BB14003A2E2D /* Add Station */,
 				CD7A017D1732774F003A2E2D /* Helpers */,
 				CDA7534E17306A56005B25EC /* Cells */,
 				CD7A018717327ADD003A2E2D /* Station List */,
@@ -542,16 +554,18 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
+				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD7A02651732C176003A2E2D /* Block Alert */,
+				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
 				CD7A020F17329980003A2E2D /* CKRefreshControl */,
 				CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */,
-				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
-				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
-				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
-				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
-				CD6AD36217312F5D0009A106 /* TestFlight */,
+				CD7A02B21732D852003A2E2D /* JSBadgeView */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
+				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
+				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
+				CD6AD36217312F5D0009A106 /* TestFlight */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -640,9 +654,6 @@
 				CD7A019D17328E74003A2E2D /* GRSeparatorBottom@2x.png in Resources */,
 				CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */,
 				CD7A02541732B33B003A2E2D /* GRSplashViewController.xib in Resources */,
-				CD7A02591732B77D003A2E2D /* GRAddIcon.png in Resources */,
-				CD7A025A1732B77D003A2E2D /* GRAddIcon@2x.png in Resources */,
-				CD7A02601732BB26003A2E2D /* GRAddStationViewController.xib in Resources */,
 				CD7A02631732BDD1003A2E2D /* GRPaperBackground.png in Resources */,
 				CD7A02641732BDD1003A2E2D /* GRPaperBackground@2x.png in Resources */,
 				CD7A02901732C1E7003A2E2D /* action-black-button-selected.png in Resources */,
@@ -668,6 +679,8 @@
 				CD7A02A61732C1E7003A2E2D /* alert-window.png in Resources */,
 				CD7A02A71732C1E7003A2E2D /* alert-window@2x.png in Resources */,
 				CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */,
+				CD7A02C31732FE89003A2E2D /* GRMore@2x.png in Resources */,
+				CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,12 +708,13 @@
 				CD7A021B17329980003A2E2D /* CKRefreshArrowView.m in Sources */,
 				CD7A021C17329980003A2E2D /* CKRefreshControl.m in Sources */,
 				CD7A02531732B33B003A2E2D /* GRSplashViewController.m in Sources */,
-				CD7A025F1732BB26003A2E2D /* GRAddStationViewController.m in Sources */,
 				CD7A02711732C177003A2E2D /* BlockActionSheet.m in Sources */,
 				CD7A02721732C177003A2E2D /* BlockAlertView.m in Sources */,
 				CD7A02731732C177003A2E2D /* BlockBackground.m in Sources */,
 				CD7A02741732C177003A2E2D /* BlockTableAlertView.m in Sources */,
 				CD7A02751732C177003A2E2D /* BlockTextPromptAlertView.m in Sources */,
+				CD7A02B51732D852003A2E2D /* JSBadgeView.m in Sources */,
+				CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

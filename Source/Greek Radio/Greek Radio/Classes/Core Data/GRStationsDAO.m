@@ -22,6 +22,7 @@
                      streamURL:(NSString *)streamURL
                          genre:(NSString *)genre
                       location:(NSString *)location
+                   serverBased:(BOOL)server
 {
     if (title.length == 0 || stationURL.length == 0 || streamURL.length == 0 ||
         genre.length == 0 || location.length == 0)
@@ -43,6 +44,7 @@
     newStation.streamURL = streamURL;
     newStation.genre = genre;
     newStation.location = location;
+    newStation.server = [NSNumber numberWithBool:server];
     
     NSError *error = nil;
     
@@ -100,6 +102,35 @@
     return stations;
 }
 
+
+- (NSArray *)retrieveAllServerBased
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES"];
+    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
+                                                              withPredicate:predicate];
+    
+    return stations;
+}
+
+
+- (NSArray *)retrieveAllLocalBased
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == NO"];
+    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
+                                                              withPredicate:predicate];
+    
+    return stations;
+}
+
+
+- (NSArray *)retrieveAllFavorites
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"favourite == NO"];
+    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
+                                                              withPredicate:predicate];
+    
+    return stations;
+}
 
 
 @end

@@ -25,7 +25,8 @@
 
 @implementation GRStationCellView
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style
+    reuseIdentifier:(NSString *)reuseIdentifier
 {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
     {
@@ -44,6 +45,12 @@
         self.subtitle.shadowOffset = CGSizeMake(0, 1);
         self.subtitle.textAlignment = NSTextAlignmentLeft;
         self.subtitle.numberOfLines = 1;
+        
+        self.genreBadgeView = [[JSBadgeView alloc] initWithParentView:self
+                                                            alignment:JSBadgeViewAlignmentCenterRight];
+
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f green:0.522f blue:0.482f alpha:1.00f];
+        self.genreBadgeView.badgeText = [NSString stringWithFormat:@"..."];
     }
 
     return self;
