@@ -24,7 +24,6 @@
 		CD7A019D17328E74003A2E2D /* GRSeparatorBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019B17328E74003A2E2D /* GRSeparatorBottom@2x.png */; };
 		CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019C17328E74003A2E2D /* GRSeparatorBottom.png */; };
 		CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */; };
-		CD7A020C17329902003A2E2D /* libCKRefreshControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A020B17329902003A2E2D /* libCKRefreshControl.a */; };
 		CD7A021A17329980003A2E2D /* CKParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021117329980003A2E2D /* CKParagraphStyle.m */; };
 		CD7A021B17329980003A2E2D /* CKRefreshArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021317329980003A2E2D /* CKRefreshArrowView.m */; };
 		CD7A021C17329980003A2E2D /* CKRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021617329980003A2E2D /* CKRefreshControl.m */; };
@@ -94,13 +93,6 @@
 			remoteGlobalIDString = B71610E31631C4BC00B08595;
 			remoteInfo = CKRefreshControl;
 		};
-		CD7A022017329988003A2E2D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = B71610E21631C4BC00B08595;
-			remoteInfo = CKRefreshControl;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -127,7 +119,6 @@
 		CD7A019C17328E74003A2E2D /* GRSeparatorBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRSeparatorBottom.png; sourceTree = "<group>"; };
 		CD7A0208173293D2003A2E2D /* GRNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationCenter.h; sourceTree = "<group>"; };
 		CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationCenter.m; sourceTree = "<group>"; };
-		CD7A020B17329902003A2E2D /* libCKRefreshControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCKRefreshControl.a; sourceTree = "<group>"; };
 		CD7A021017329980003A2E2D /* CKParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKParagraphStyle.h; sourceTree = "<group>"; };
 		CD7A021117329980003A2E2D /* CKParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKParagraphStyle.m; sourceTree = "<group>"; };
 		CD7A021217329980003A2E2D /* CKRefreshArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshArrowView.h; sourceTree = "<group>"; };
@@ -225,7 +216,6 @@
 				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
 				CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */,
 				CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */,
-				CD7A020C17329902003A2E2D /* libCKRefreshControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,7 +545,6 @@
 				CD7A02651732C176003A2E2D /* Block Alert */,
 				CD7A020F17329980003A2E2D /* CKRefreshControl */,
 				CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */,
-				CD7A020B17329902003A2E2D /* libCKRefreshControl.a */,
 				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
@@ -581,7 +570,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CD7A022117329988003A2E2D /* PBXTargetDependency */,
 			);
 			name = "Greek Radio";
 			productName = "Greek Radio";
@@ -717,14 +705,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CD7A022117329988003A2E2D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CKRefreshControl;
-			targetProxy = CD7A022017329988003A2E2D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CDE43A9C17303DD5004C0698 /* Development */ = {
