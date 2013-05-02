@@ -9,6 +9,20 @@
 
 #import "GRStationCellView.h"
 
+
+// ------------------------------------------------------------------------------------------
+
+
+@interface GRStationCellView()
+
+@property (nonatomic, strong) UIView *selectionColor;
+
+@end
+
+
+// ------------------------------------------------------------------------------------------
+
+
 @implementation GRStationCellView
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -35,11 +49,26 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    [super setHighlighted:highlighted animated:animated];
+    
+    if (highlighted)
+    {
+        self.selectionColor = [[UIView alloc] init];
+        self.selectionColor.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 2);
+        self.selectionColor.backgroundColor = [UIColor colorWithRed:0.614f green:0.635f blue:0.619f alpha:0.40];
+        [self.backgroundView addSubview:self.selectionColor];
+    }
+    else
+    {
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            self.selectionColor.alpha = 0.0f;
+        } completion:^(BOOL finished) {
+            [self.selectionColor removeFromSuperview];
+        }];
+    }
 }
 
 

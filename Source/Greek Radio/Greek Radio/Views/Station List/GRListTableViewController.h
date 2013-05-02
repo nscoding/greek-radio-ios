@@ -1,5 +1,5 @@
 //
-//  GRViewController.h
+//  GRListTableViewController.h
 //  Greek Radio
 //
 //  Created by Patrick on 4/30/13.
@@ -7,9 +7,8 @@
 //
 
 
-@interface GRViewController : UIViewController
+@interface GRListTableViewController : UITableViewController
 
 @property (nonatomic, assign) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, assign) IBOutlet UITableView *stationsTableView;
 
 @end

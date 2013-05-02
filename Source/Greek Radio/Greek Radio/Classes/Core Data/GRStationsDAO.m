@@ -23,6 +23,12 @@
                          genre:(NSString *)genre
                       location:(NSString *)location
 {
+    if (title.length == 0 || stationURL.length == 0 || streamURL.length == 0 ||
+        genre.length == 0 || location.length == 0)
+    {
+        return NO;
+    }
+    
     NSManagedObjectContext *managedObjectContext = [[GRCoreDataStack shared] managedObjectContext];
     GRStation *newStation = [self retrieveByTitle:title];
     

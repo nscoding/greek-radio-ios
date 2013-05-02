@@ -15,10 +15,56 @@
 		CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */; };
 		CD7A018417327799003A2E2D /* GRWoodHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018217327799003A2E2D /* GRWoodHeader.png */; };
 		CD7A018517327799003A2E2D /* GRWoodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */; };
-		CD7A018B17327ADD003A2E2D /* GRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018917327ADD003A2E2D /* GRViewController.m */; };
-		CD7A018C17327ADD003A2E2D /* GRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018A17327ADD003A2E2D /* GRViewController.xib */; };
+		CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018917327ADD003A2E2D /* GRListTableViewController.m */; };
+		CD7A018C17327ADD003A2E2D /* GRListTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018A17327ADD003A2E2D /* GRListTableViewController.xib */; };
 		CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */; };
 		CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */; };
+		CD7A019917328DC2003A2E2D /* GRMicrophone.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019717328DC2003A2E2D /* GRMicrophone.png */; };
+		CD7A019A17328DC2003A2E2D /* GRMicrophone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019817328DC2003A2E2D /* GRMicrophone@2x.png */; };
+		CD7A019D17328E74003A2E2D /* GRSeparatorBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019B17328E74003A2E2D /* GRSeparatorBottom@2x.png */; };
+		CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A019C17328E74003A2E2D /* GRSeparatorBottom.png */; };
+		CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */; };
+		CD7A020C17329902003A2E2D /* libCKRefreshControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A020B17329902003A2E2D /* libCKRefreshControl.a */; };
+		CD7A021A17329980003A2E2D /* CKParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021117329980003A2E2D /* CKParagraphStyle.m */; };
+		CD7A021B17329980003A2E2D /* CKRefreshArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021317329980003A2E2D /* CKRefreshArrowView.m */; };
+		CD7A021C17329980003A2E2D /* CKRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A021617329980003A2E2D /* CKRefreshControl.m */; };
+		CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A0222173299AF003A2E2D /* QuartzCore.framework */; };
+		CD7A02531732B33B003A2E2D /* GRSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02511732B33B003A2E2D /* GRSplashViewController.m */; };
+		CD7A02541732B33B003A2E2D /* GRSplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02521732B33B003A2E2D /* GRSplashViewController.xib */; };
+		CD7A02591732B77D003A2E2D /* GRAddIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02571732B77D003A2E2D /* GRAddIcon.png */; };
+		CD7A025A1732B77D003A2E2D /* GRAddIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */; };
+		CD7A025F1732BB26003A2E2D /* GRAddStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */; };
+		CD7A02601732BB26003A2E2D /* GRAddStationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */; };
+		CD7A02631732BDD1003A2E2D /* GRPaperBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */; };
+		CD7A02641732BDD1003A2E2D /* GRPaperBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02621732BDD1003A2E2D /* GRPaperBackground@2x.png */; };
+		CD7A02711732C177003A2E2D /* BlockActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02671732C177003A2E2D /* BlockActionSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD7A02721732C177003A2E2D /* BlockAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02691732C177003A2E2D /* BlockAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD7A02731732C177003A2E2D /* BlockBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A026B1732C177003A2E2D /* BlockBackground.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD7A02741732C177003A2E2D /* BlockTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A026D1732C177003A2E2D /* BlockTableAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD7A02751732C177003A2E2D /* BlockTextPromptAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A026F1732C177003A2E2D /* BlockTextPromptAlertView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD7A02901732C1E7003A2E2D /* action-black-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02771732C1E6003A2E2D /* action-black-button-selected.png */; };
+		CD7A02911732C1E7003A2E2D /* action-black-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02781732C1E6003A2E2D /* action-black-button-selected@2x.png */; };
+		CD7A02921732C1E7003A2E2D /* action-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02791732C1E6003A2E2D /* action-black-button.png */; };
+		CD7A02931732C1E7003A2E2D /* action-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027A1732C1E6003A2E2D /* action-black-button@2x.png */; };
+		CD7A02941732C1E7003A2E2D /* action-gray-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027B1732C1E6003A2E2D /* action-gray-button-selected.png */; };
+		CD7A02951732C1E7003A2E2D /* action-gray-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027C1732C1E6003A2E2D /* action-gray-button-selected@2x.png */; };
+		CD7A02961732C1E7003A2E2D /* action-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027D1732C1E6003A2E2D /* action-gray-button.png */; };
+		CD7A02971732C1E7003A2E2D /* action-gray-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027E1732C1E6003A2E2D /* action-gray-button@2x.png */; };
+		CD7A02981732C1E7003A2E2D /* action-red-button-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A027F1732C1E6003A2E2D /* action-red-button-selected.png */; };
+		CD7A02991732C1E7003A2E2D /* action-red-button-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02801732C1E6003A2E2D /* action-red-button-selected@2x.png */; };
+		CD7A029A1732C1E7003A2E2D /* action-red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02811732C1E6003A2E2D /* action-red-button.png */; };
+		CD7A029B1732C1E7003A2E2D /* action-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02821732C1E6003A2E2D /* action-red-button@2x.png */; };
+		CD7A029C1732C1E7003A2E2D /* action-sheet-panel.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02831732C1E6003A2E2D /* action-sheet-panel.png */; };
+		CD7A029D1732C1E7003A2E2D /* action-sheet-panel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02841732C1E6003A2E2D /* action-sheet-panel@2x.png */; };
+		CD7A029E1732C1E7003A2E2D /* alert-black-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02861732C1E6003A2E2D /* alert-black-button.png */; };
+		CD7A029F1732C1E7003A2E2D /* alert-black-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02871732C1E6003A2E2D /* alert-black-button@2x.png */; };
+		CD7A02A01732C1E7003A2E2D /* alert-gray-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02881732C1E6003A2E2D /* alert-gray-button.png */; };
+		CD7A02A11732C1E7003A2E2D /* alert-gray-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02891732C1E6003A2E2D /* alert-gray-button@2x.png */; };
+		CD7A02A21732C1E7003A2E2D /* alert-red-button.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028A1732C1E6003A2E2D /* alert-red-button.png */; };
+		CD7A02A31732C1E7003A2E2D /* alert-red-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028B1732C1E7003A2E2D /* alert-red-button@2x.png */; };
+		CD7A02A61732C1E7003A2E2D /* alert-window.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028E1732C1E7003A2E2D /* alert-window.png */; };
+		CD7A02A71732C1E7003A2E2D /* alert-window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */; };
+		CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -40,6 +86,23 @@
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD7A021E17329981003A2E2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B71610E31631C4BC00B08595;
+			remoteInfo = CKRefreshControl;
+		};
+		CD7A022017329988003A2E2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = B71610E21631C4BC00B08595;
+			remoteInfo = CKRefreshControl;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		CD6AD36017312F5D0009A106 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		CD6AD36117312F5D0009A106 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
@@ -52,12 +115,72 @@
 		CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRWoodNavigationBar.m; sourceTree = "<group>"; };
 		CD7A018217327799003A2E2D /* GRWoodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader.png; sourceTree = "<group>"; };
 		CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader@2x.png"; sourceTree = "<group>"; };
-		CD7A018817327ADD003A2E2D /* GRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewController.h; sourceTree = "<group>"; };
-		CD7A018917327ADD003A2E2D /* GRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRViewController.m; sourceTree = "<group>"; };
-		CD7A018A17327ADD003A2E2D /* GRViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRViewController.xib; sourceTree = "<group>"; };
+		CD7A018817327ADD003A2E2D /* GRListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRListTableViewController.h; sourceTree = "<group>"; };
+		CD7A018917327ADD003A2E2D /* GRListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRListTableViewController.m; sourceTree = "<group>"; };
+		CD7A018A17327ADD003A2E2D /* GRListTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRListTableViewController.xib; sourceTree = "<group>"; };
 		CD7A018D17327AF4003A2E2D /* GRPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPlayerViewController.h; sourceTree = "<group>"; };
 		CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPlayerViewController.m; sourceTree = "<group>"; };
 		CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRPlayerViewController.xib; sourceTree = "<group>"; };
+		CD7A019717328DC2003A2E2D /* GRMicrophone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRMicrophone.png; sourceTree = "<group>"; };
+		CD7A019817328DC2003A2E2D /* GRMicrophone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRMicrophone@2x.png"; sourceTree = "<group>"; };
+		CD7A019B17328E74003A2E2D /* GRSeparatorBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRSeparatorBottom@2x.png"; sourceTree = "<group>"; };
+		CD7A019C17328E74003A2E2D /* GRSeparatorBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRSeparatorBottom.png; sourceTree = "<group>"; };
+		CD7A0208173293D2003A2E2D /* GRNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationCenter.h; sourceTree = "<group>"; };
+		CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationCenter.m; sourceTree = "<group>"; };
+		CD7A020B17329902003A2E2D /* libCKRefreshControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCKRefreshControl.a; sourceTree = "<group>"; };
+		CD7A021017329980003A2E2D /* CKParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKParagraphStyle.h; sourceTree = "<group>"; };
+		CD7A021117329980003A2E2D /* CKParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKParagraphStyle.m; sourceTree = "<group>"; };
+		CD7A021217329980003A2E2D /* CKRefreshArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshArrowView.h; sourceTree = "<group>"; };
+		CD7A021317329980003A2E2D /* CKRefreshArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRefreshArrowView.m; sourceTree = "<group>"; };
+		CD7A021417329980003A2E2D /* CKRefreshControl-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKRefreshControl-Prefix.pch"; sourceTree = "<group>"; };
+		CD7A021517329980003A2E2D /* CKRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CKRefreshControl.h; sourceTree = "<group>"; };
+		CD7A021617329980003A2E2D /* CKRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CKRefreshControl.m; sourceTree = "<group>"; };
+		CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CKRefreshControl.xcodeproj; sourceTree = "<group>"; };
+		CD7A0222173299AF003A2E2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CD7A02501732B33B003A2E2D /* GRSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSplashViewController.h; sourceTree = "<group>"; };
+		CD7A02511732B33B003A2E2D /* GRSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSplashViewController.m; sourceTree = "<group>"; };
+		CD7A02521732B33B003A2E2D /* GRSplashViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSplashViewController.xib; sourceTree = "<group>"; };
+		CD7A02571732B77D003A2E2D /* GRAddIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddIcon.png; sourceTree = "<group>"; };
+		CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddIcon@2x.png"; sourceTree = "<group>"; };
+		CD7A025C1732BB26003A2E2D /* GRAddStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAddStationViewController.h; sourceTree = "<group>"; };
+		CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAddStationViewController.m; sourceTree = "<group>"; };
+		CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRAddStationViewController.xib; sourceTree = "<group>"; };
+		CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPaperBackground.png; sourceTree = "<group>"; };
+		CD7A02621732BDD1003A2E2D /* GRPaperBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPaperBackground@2x.png"; sourceTree = "<group>"; };
+		CD7A02661732C177003A2E2D /* BlockActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockActionSheet.h; sourceTree = "<group>"; };
+		CD7A02671732C177003A2E2D /* BlockActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockActionSheet.m; sourceTree = "<group>"; };
+		CD7A02681732C177003A2E2D /* BlockAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockAlertView.h; sourceTree = "<group>"; };
+		CD7A02691732C177003A2E2D /* BlockAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockAlertView.m; sourceTree = "<group>"; };
+		CD7A026A1732C177003A2E2D /* BlockBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockBackground.h; sourceTree = "<group>"; };
+		CD7A026B1732C177003A2E2D /* BlockBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockBackground.m; sourceTree = "<group>"; };
+		CD7A026C1732C177003A2E2D /* BlockTableAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockTableAlertView.h; sourceTree = "<group>"; };
+		CD7A026D1732C177003A2E2D /* BlockTableAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTableAlertView.m; sourceTree = "<group>"; };
+		CD7A026E1732C177003A2E2D /* BlockTextPromptAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockTextPromptAlertView.h; sourceTree = "<group>"; };
+		CD7A026F1732C177003A2E2D /* BlockTextPromptAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTextPromptAlertView.m; sourceTree = "<group>"; };
+		CD7A02701732C177003A2E2D /* BlockUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUI.h; sourceTree = "<group>"; };
+		CD7A02771732C1E6003A2E2D /* action-black-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected.png"; sourceTree = "<group>"; };
+		CD7A02781732C1E6003A2E2D /* action-black-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button-selected@2x.png"; sourceTree = "<group>"; };
+		CD7A02791732C1E6003A2E2D /* action-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button.png"; sourceTree = "<group>"; };
+		CD7A027A1732C1E6003A2E2D /* action-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-black-button@2x.png"; sourceTree = "<group>"; };
+		CD7A027B1732C1E6003A2E2D /* action-gray-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected.png"; sourceTree = "<group>"; };
+		CD7A027C1732C1E6003A2E2D /* action-gray-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button-selected@2x.png"; sourceTree = "<group>"; };
+		CD7A027D1732C1E6003A2E2D /* action-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button.png"; sourceTree = "<group>"; };
+		CD7A027E1732C1E6003A2E2D /* action-gray-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-gray-button@2x.png"; sourceTree = "<group>"; };
+		CD7A027F1732C1E6003A2E2D /* action-red-button-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected.png"; sourceTree = "<group>"; };
+		CD7A02801732C1E6003A2E2D /* action-red-button-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button-selected@2x.png"; sourceTree = "<group>"; };
+		CD7A02811732C1E6003A2E2D /* action-red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button.png"; sourceTree = "<group>"; };
+		CD7A02821732C1E6003A2E2D /* action-red-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-red-button@2x.png"; sourceTree = "<group>"; };
+		CD7A02831732C1E6003A2E2D /* action-sheet-panel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel.png"; sourceTree = "<group>"; };
+		CD7A02841732C1E6003A2E2D /* action-sheet-panel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "action-sheet-panel@2x.png"; sourceTree = "<group>"; };
+		CD7A02861732C1E6003A2E2D /* alert-black-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-black-button.png"; sourceTree = "<group>"; };
+		CD7A02871732C1E6003A2E2D /* alert-black-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-black-button@2x.png"; sourceTree = "<group>"; };
+		CD7A02881732C1E6003A2E2D /* alert-gray-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-gray-button.png"; sourceTree = "<group>"; };
+		CD7A02891732C1E6003A2E2D /* alert-gray-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-gray-button@2x.png"; sourceTree = "<group>"; };
+		CD7A028A1732C1E6003A2E2D /* alert-red-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-red-button.png"; sourceTree = "<group>"; };
+		CD7A028B1732C1E7003A2E2D /* alert-red-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-red-button@2x.png"; sourceTree = "<group>"; };
+		CD7A028E1732C1E7003A2E2D /* alert-window.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window.png"; sourceTree = "<group>"; };
+		CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-window@2x.png"; sourceTree = "<group>"; };
+		CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoverPlaceholder.png; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -93,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
 				CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */,
 				CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */,
 				CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */,
@@ -101,6 +225,7 @@
 				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
 				CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */,
 				CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */,
+				CD7A020C17329902003A2E2D /* libCKRefreshControl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +262,12 @@
 		CD7A018117327799003A2E2D /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A02571732B77D003A2E2D /* GRAddIcon.png */,
+				CD7A02581732B77D003A2E2D /* GRAddIcon@2x.png */,
 				CD7A018217327799003A2E2D /* GRWoodHeader.png */,
 				CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */,
+				CD7A02611732BDD0003A2E2D /* GRPaperBackground.png */,
+				CD7A02621732BDD1003A2E2D /* GRPaperBackground@2x.png */,
 			);
 			path = Toolbar;
 			sourceTree = "<group>";
@@ -156,11 +285,127 @@
 		CD7A018717327ADD003A2E2D /* Station List */ = {
 			isa = PBXGroup;
 			children = (
-				CD7A018817327ADD003A2E2D /* GRViewController.h */,
-				CD7A018917327ADD003A2E2D /* GRViewController.m */,
-				CD7A018A17327ADD003A2E2D /* GRViewController.xib */,
+				CD7A018817327ADD003A2E2D /* GRListTableViewController.h */,
+				CD7A018917327ADD003A2E2D /* GRListTableViewController.m */,
+				CD7A018A17327ADD003A2E2D /* GRListTableViewController.xib */,
 			);
 			path = "Station List";
+			sourceTree = "<group>";
+		};
+		CD7A019617328DC1003A2E2D /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A019B17328E74003A2E2D /* GRSeparatorBottom@2x.png */,
+				CD7A019C17328E74003A2E2D /* GRSeparatorBottom.png */,
+				CD7A019717328DC2003A2E2D /* GRMicrophone.png */,
+				CD7A019817328DC2003A2E2D /* GRMicrophone@2x.png */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		CD7A02071732939F003A2E2D /* Notification Center */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A0208173293D2003A2E2D /* GRNotificationCenter.h */,
+				CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */,
+			);
+			path = "Notification Center";
+			sourceTree = "<group>";
+		};
+		CD7A020F17329980003A2E2D /* CKRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A021017329980003A2E2D /* CKParagraphStyle.h */,
+				CD7A021117329980003A2E2D /* CKParagraphStyle.m */,
+				CD7A021217329980003A2E2D /* CKRefreshArrowView.h */,
+				CD7A021317329980003A2E2D /* CKRefreshArrowView.m */,
+				CD7A021417329980003A2E2D /* CKRefreshControl-Prefix.pch */,
+				CD7A021517329980003A2E2D /* CKRefreshControl.h */,
+				CD7A021617329980003A2E2D /* CKRefreshControl.m */,
+			);
+			path = CKRefreshControl;
+			sourceTree = "<group>";
+		};
+		CD7A021817329980003A2E2D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A021F17329981003A2E2D /* libCKRefreshControl.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD7A024F1732B2CE003A2E2D /* Splash Screen */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02501732B33B003A2E2D /* GRSplashViewController.h */,
+				CD7A02511732B33B003A2E2D /* GRSplashViewController.m */,
+				CD7A02521732B33B003A2E2D /* GRSplashViewController.xib */,
+			);
+			path = "Splash Screen";
+			sourceTree = "<group>";
+		};
+		CD7A025B1732BB14003A2E2D /* Add Station */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A025C1732BB26003A2E2D /* GRAddStationViewController.h */,
+				CD7A025D1732BB26003A2E2D /* GRAddStationViewController.m */,
+				CD7A025E1732BB26003A2E2D /* GRAddStationViewController.xib */,
+			);
+			path = "Add Station";
+			sourceTree = "<group>";
+		};
+		CD7A02651732C176003A2E2D /* Block Alert */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02661732C177003A2E2D /* BlockActionSheet.h */,
+				CD7A02671732C177003A2E2D /* BlockActionSheet.m */,
+				CD7A02681732C177003A2E2D /* BlockAlertView.h */,
+				CD7A02691732C177003A2E2D /* BlockAlertView.m */,
+				CD7A026A1732C177003A2E2D /* BlockBackground.h */,
+				CD7A026B1732C177003A2E2D /* BlockBackground.m */,
+				CD7A026C1732C177003A2E2D /* BlockTableAlertView.h */,
+				CD7A026D1732C177003A2E2D /* BlockTableAlertView.m */,
+				CD7A026E1732C177003A2E2D /* BlockTextPromptAlertView.h */,
+				CD7A026F1732C177003A2E2D /* BlockTextPromptAlertView.m */,
+				CD7A02701732C177003A2E2D /* BlockUI.h */,
+			);
+			path = "Block Alert";
+			sourceTree = "<group>";
+		};
+		CD7A02761732C1E5003A2E2D /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02771732C1E6003A2E2D /* action-black-button-selected.png */,
+				CD7A02781732C1E6003A2E2D /* action-black-button-selected@2x.png */,
+				CD7A02791732C1E6003A2E2D /* action-black-button.png */,
+				CD7A027A1732C1E6003A2E2D /* action-black-button@2x.png */,
+				CD7A027B1732C1E6003A2E2D /* action-gray-button-selected.png */,
+				CD7A027C1732C1E6003A2E2D /* action-gray-button-selected@2x.png */,
+				CD7A027D1732C1E6003A2E2D /* action-gray-button.png */,
+				CD7A027E1732C1E6003A2E2D /* action-gray-button@2x.png */,
+				CD7A027F1732C1E6003A2E2D /* action-red-button-selected.png */,
+				CD7A02801732C1E6003A2E2D /* action-red-button-selected@2x.png */,
+				CD7A02811732C1E6003A2E2D /* action-red-button.png */,
+				CD7A02821732C1E6003A2E2D /* action-red-button@2x.png */,
+				CD7A02831732C1E6003A2E2D /* action-sheet-panel.png */,
+				CD7A02841732C1E6003A2E2D /* action-sheet-panel@2x.png */,
+			);
+			path = ActionSheet;
+			sourceTree = "<group>";
+		};
+		CD7A02851732C1E6003A2E2D /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A02861732C1E6003A2E2D /* alert-black-button.png */,
+				CD7A02871732C1E6003A2E2D /* alert-black-button@2x.png */,
+				CD7A02881732C1E6003A2E2D /* alert-gray-button.png */,
+				CD7A02891732C1E6003A2E2D /* alert-gray-button@2x.png */,
+				CD7A028A1732C1E6003A2E2D /* alert-red-button.png */,
+				CD7A028B1732C1E7003A2E2D /* alert-red-button@2x.png */,
+				CD7A028E1732C1E7003A2E2D /* alert-window.png */,
+				CD7A028F1732C1E7003A2E2D /* alert-window@2x.png */,
+			);
+			path = AlertView;
 			sourceTree = "<group>";
 		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
@@ -251,6 +496,10 @@
 		CDE43AA317303F5B004C0698 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */,
+				CD7A02761732C1E5003A2E2D /* ActionSheet */,
+				CD7A02851732C1E6003A2E2D /* AlertView */,
+				CD7A019617328DC1003A2E2D /* Cell */,
 				CDE43AA417303F5B004C0698 /* Defaults */,
 				CD7A018117327799003A2E2D /* Toolbar */,
 			);
@@ -271,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
+				CD7A02071732939F003A2E2D /* Notification Center */,
 				CDA752EC17305471005B25EC /* Core Data */,
 				CDA752E5173049A0005B25EC /* Web Service */,
 			);
@@ -289,9 +539,11 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A025B1732BB14003A2E2D /* Add Station */,
 				CD7A017D1732774F003A2E2D /* Helpers */,
 				CDA7534E17306A56005B25EC /* Cells */,
 				CD7A018717327ADD003A2E2D /* Station List */,
+				CD7A024F1732B2CE003A2E2D /* Splash Screen */,
 				CD7A018617327AC7003A2E2D /* Player */,
 			);
 			path = Views;
@@ -300,6 +552,11 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A02651732C176003A2E2D /* Block Alert */,
+				CD7A020F17329980003A2E2D /* CKRefreshControl */,
+				CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */,
+				CD7A020B17329902003A2E2D /* libCKRefreshControl.a */,
+				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
 				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
@@ -324,6 +581,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CD7A022117329988003A2E2D /* PBXTargetDependency */,
 			);
 			name = "Greek Radio";
 			productName = "Greek Radio";
@@ -350,12 +608,28 @@
 			mainGroup = CDE43A7217303DD4004C0698;
 			productRefGroup = CDE43A7C17303DD5004C0698 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CD7A021817329980003A2E2D /* Products */;
+					ProjectRef = CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CDE43A7A17303DD5004C0698 /* Greek Radio */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CD7A021F17329981003A2E2D /* libCKRefreshControl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCKRefreshControl.a;
+			remoteRef = CD7A021E17329981003A2E2D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CDE43A7917303DD5004C0698 /* Resources */ = {
@@ -371,8 +645,41 @@
 				CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */,
 				CD7A018417327799003A2E2D /* GRWoodHeader.png in Resources */,
 				CD7A018517327799003A2E2D /* GRWoodHeader@2x.png in Resources */,
-				CD7A018C17327ADD003A2E2D /* GRViewController.xib in Resources */,
+				CD7A018C17327ADD003A2E2D /* GRListTableViewController.xib in Resources */,
 				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
+				CD7A019917328DC2003A2E2D /* GRMicrophone.png in Resources */,
+				CD7A019A17328DC2003A2E2D /* GRMicrophone@2x.png in Resources */,
+				CD7A019D17328E74003A2E2D /* GRSeparatorBottom@2x.png in Resources */,
+				CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */,
+				CD7A02541732B33B003A2E2D /* GRSplashViewController.xib in Resources */,
+				CD7A02591732B77D003A2E2D /* GRAddIcon.png in Resources */,
+				CD7A025A1732B77D003A2E2D /* GRAddIcon@2x.png in Resources */,
+				CD7A02601732BB26003A2E2D /* GRAddStationViewController.xib in Resources */,
+				CD7A02631732BDD1003A2E2D /* GRPaperBackground.png in Resources */,
+				CD7A02641732BDD1003A2E2D /* GRPaperBackground@2x.png in Resources */,
+				CD7A02901732C1E7003A2E2D /* action-black-button-selected.png in Resources */,
+				CD7A02911732C1E7003A2E2D /* action-black-button-selected@2x.png in Resources */,
+				CD7A02921732C1E7003A2E2D /* action-black-button.png in Resources */,
+				CD7A02931732C1E7003A2E2D /* action-black-button@2x.png in Resources */,
+				CD7A02941732C1E7003A2E2D /* action-gray-button-selected.png in Resources */,
+				CD7A02951732C1E7003A2E2D /* action-gray-button-selected@2x.png in Resources */,
+				CD7A02961732C1E7003A2E2D /* action-gray-button.png in Resources */,
+				CD7A02971732C1E7003A2E2D /* action-gray-button@2x.png in Resources */,
+				CD7A02981732C1E7003A2E2D /* action-red-button-selected.png in Resources */,
+				CD7A02991732C1E7003A2E2D /* action-red-button-selected@2x.png in Resources */,
+				CD7A029A1732C1E7003A2E2D /* action-red-button.png in Resources */,
+				CD7A029B1732C1E7003A2E2D /* action-red-button@2x.png in Resources */,
+				CD7A029C1732C1E7003A2E2D /* action-sheet-panel.png in Resources */,
+				CD7A029D1732C1E7003A2E2D /* action-sheet-panel@2x.png in Resources */,
+				CD7A029E1732C1E7003A2E2D /* alert-black-button.png in Resources */,
+				CD7A029F1732C1E7003A2E2D /* alert-black-button@2x.png in Resources */,
+				CD7A02A01732C1E7003A2E2D /* alert-gray-button.png in Resources */,
+				CD7A02A11732C1E7003A2E2D /* alert-gray-button@2x.png in Resources */,
+				CD7A02A21732C1E7003A2E2D /* alert-red-button.png in Resources */,
+				CD7A02A31732C1E7003A2E2D /* alert-red-button@2x.png in Resources */,
+				CD7A02A61732C1E7003A2E2D /* alert-window.png in Resources */,
+				CD7A02A71732C1E7003A2E2D /* alert-window@2x.png in Resources */,
+				CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,12 +700,31 @@
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */,
 				CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */,
-				CD7A018B17327ADD003A2E2D /* GRViewController.m in Sources */,
+				CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */,
 				CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */,
+				CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */,
+				CD7A021A17329980003A2E2D /* CKParagraphStyle.m in Sources */,
+				CD7A021B17329980003A2E2D /* CKRefreshArrowView.m in Sources */,
+				CD7A021C17329980003A2E2D /* CKRefreshControl.m in Sources */,
+				CD7A02531732B33B003A2E2D /* GRSplashViewController.m in Sources */,
+				CD7A025F1732BB26003A2E2D /* GRAddStationViewController.m in Sources */,
+				CD7A02711732C177003A2E2D /* BlockActionSheet.m in Sources */,
+				CD7A02721732C177003A2E2D /* BlockAlertView.m in Sources */,
+				CD7A02731732C177003A2E2D /* BlockBackground.m in Sources */,
+				CD7A02741732C177003A2E2D /* BlockTableAlertView.m in Sources */,
+				CD7A02751732C177003A2E2D /* BlockTextPromptAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD7A022117329988003A2E2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CKRefreshControl;
+			targetProxy = CD7A022017329988003A2E2D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CDE43A9C17303DD5004C0698 /* Development */ = {

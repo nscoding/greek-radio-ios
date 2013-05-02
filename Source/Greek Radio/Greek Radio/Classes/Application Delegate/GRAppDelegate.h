@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@class GRViewController;
+@class GRSplashViewController;
+@class GRListTableViewController;
 
 @interface GRAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) GRViewController *viewController;
+@property (strong, nonatomic) GRListTableViewController *listTableViewController;
+@property (strong, nonatomic) GRSplashViewController *splashViewController;
 @property (strong, nonatomic) UINavigationController *menuNavigationController;
 
 @end

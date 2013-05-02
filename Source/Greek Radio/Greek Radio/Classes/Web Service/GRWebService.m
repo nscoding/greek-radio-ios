@@ -80,6 +80,7 @@
 // ------------------------------------------------------------------------------------------
 - (void)parseXML
 {
+    [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
 }
 
@@ -166,7 +167,8 @@ didStartElement:(NSString *)elementName
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     NSLog(@"all done!");
-    
+    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+
     parser = nil;
 }
 

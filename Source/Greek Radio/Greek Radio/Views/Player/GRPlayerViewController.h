@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "GRStation.h"
 
 @interface GRPlayerViewController : UIViewController
+
+- (id)initWithStation:(GRStation *)station;
 
 @end
