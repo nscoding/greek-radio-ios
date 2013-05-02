@@ -28,7 +28,8 @@
     
     if (newStation == nil)
     {
-        newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation" inManagedObjectContext:managedObjectContext];
+        newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation"
+                                                                inManagedObjectContext:managedObjectContext];
     }
     
     newStation.title = title;

@@ -141,11 +141,15 @@ didStartElement:(NSString *)elementName
 {
 	if ([elementName isEqualToString:kTopElement])
     {
-        [self.stationsDAO createStationWithTitle:self.currentTitle
-                                         siteURL:self.currentStationURL
-                                       streamURL:self.currentStreamURL
-                                           genre:self.currentGenre
-                                        location:self.currentLocation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.stationsDAO createStationWithTitle:self.currentTitle
+                                             siteURL:self.currentStationURL
+                                           streamURL:self.currentStreamURL
+                                               genre:self.currentGenre
+                                            location:self.currentLocation];
+        });
+
 	}
 }
 

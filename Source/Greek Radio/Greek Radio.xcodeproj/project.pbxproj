@@ -11,6 +11,14 @@
 		CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36317312F5D0009A106 /* libTestFlight.a */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
 		CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36917312F8B0009A106 /* AudioToolbox.framework */; };
+		CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A017B17327591003A2E2D /* GRStationCellView.xib */; };
+		CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */; };
+		CD7A018417327799003A2E2D /* GRWoodHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018217327799003A2E2D /* GRWoodHeader.png */; };
+		CD7A018517327799003A2E2D /* GRWoodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */; };
+		CD7A018B17327ADD003A2E2D /* GRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018917327ADD003A2E2D /* GRViewController.m */; };
+		CD7A018C17327ADD003A2E2D /* GRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018A17327ADD003A2E2D /* GRViewController.xib */; };
+		CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */; };
+		CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -21,7 +29,6 @@
 		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
 		CDA7531017305B52005B25EC /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA7530F17305B52005B25EC /* GRStation.m */; };
 		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
-		CDA75353173070B0005B25EC /* GRStationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDA75352173070B0005B25EC /* GRStationCellView.xib */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -31,8 +38,6 @@
 		CDE43AB217303F5B004C0698 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA617303F5B004C0698 /* Default.png */; };
 		CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA717303F5B004C0698 /* Default@2x.png */; };
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
-		CDE43AB517303F5B004C0698 /* GRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAF17303F5B004C0698 /* GRViewController.m */; };
-		CDE43AB617303F5B004C0698 /* GRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AB017303F5B004C0698 /* GRViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +47,17 @@
 		CD6AD36417312F5D0009A106 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		CD6AD36717312F7E0009A106 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CD6AD36917312F8B0009A106 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CD7A017B17327591003A2E2D /* GRStationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GRStationCellView.xib; path = Cells/GRStationCellView.xib; sourceTree = "<group>"; };
+		CD7A017E17327764003A2E2D /* GRWoodNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRWoodNavigationBar.h; sourceTree = "<group>"; };
+		CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRWoodNavigationBar.m; sourceTree = "<group>"; };
+		CD7A018217327799003A2E2D /* GRWoodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader.png; sourceTree = "<group>"; };
+		CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader@2x.png"; sourceTree = "<group>"; };
+		CD7A018817327ADD003A2E2D /* GRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewController.h; sourceTree = "<group>"; };
+		CD7A018917327ADD003A2E2D /* GRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRViewController.m; sourceTree = "<group>"; };
+		CD7A018A17327ADD003A2E2D /* GRViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRViewController.xib; sourceTree = "<group>"; };
+		CD7A018D17327AF4003A2E2D /* GRPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPlayerViewController.h; sourceTree = "<group>"; };
+		CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPlayerViewController.m; sourceTree = "<group>"; };
+		CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRPlayerViewController.xib; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -57,7 +73,6 @@
 		CDA7530F17305B52005B25EC /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
 		CDA7534F173070A6005B25EC /* GRStationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStationCellView.h; path = Cells/GRStationCellView.h; sourceTree = "<group>"; };
 		CDA75350173070A6005B25EC /* GRStationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStationCellView.m; path = Cells/GRStationCellView.m; sourceTree = "<group>"; };
-		CDA75352173070B0005B25EC /* GRStationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRStationCellView.xib; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -71,9 +86,6 @@
 		CDE43AA717303F5B004C0698 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
 		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
-		CDE43AAE17303F5B004C0698 /* GRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRViewController.h; sourceTree = "<group>"; };
-		CDE43AAF17303F5B004C0698 /* GRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRViewController.m; sourceTree = "<group>"; };
-		CDE43AB017303F5B004C0698 /* GRViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +125,44 @@
 			path = TestFlight;
 			sourceTree = "<group>";
 		};
+		CD7A017D1732774F003A2E2D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A017E17327764003A2E2D /* GRWoodNavigationBar.h */,
+				CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		CD7A018117327799003A2E2D /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A018217327799003A2E2D /* GRWoodHeader.png */,
+				CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */,
+			);
+			path = Toolbar;
+			sourceTree = "<group>";
+		};
+		CD7A018617327AC7003A2E2D /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A018D17327AF4003A2E2D /* GRPlayerViewController.h */,
+				CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */,
+				CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */,
+			);
+			path = Player;
+			sourceTree = "<group>";
+		};
+		CD7A018717327ADD003A2E2D /* Station List */ = {
+			isa = PBXGroup;
+			children = (
+				CD7A018817327ADD003A2E2D /* GRViewController.h */,
+				CD7A018917327ADD003A2E2D /* GRViewController.m */,
+				CD7A018A17327ADD003A2E2D /* GRViewController.xib */,
+			);
+			path = "Station List";
+			sourceTree = "<group>";
+		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +189,7 @@
 		CDA7534E17306A56005B25EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CDA75352173070B0005B25EC /* GRStationCellView.xib */,
+				CD7A017B17327591003A2E2D /* GRStationCellView.xib */,
 				CDA7534F173070A6005B25EC /* GRStationCellView.h */,
 				CDA75350173070A6005B25EC /* GRStationCellView.m */,
 			);
@@ -149,10 +199,10 @@
 		CDE43A7217303DD4004C0698 = {
 			isa = PBXGroup;
 			children = (
-				CDA752DB173044EE005B25EC /* icon57x57.png */,
-				CDA752DC173044EE005B25EC /* icon114x114.png */,
 				CDE43A8417303DD5004C0698 /* Greek Radio */,
 				CDE43A7D17303DD5004C0698 /* Frameworks */,
+				CDA752DC173044EE005B25EC /* icon114x114.png */,
+				CDA752DB173044EE005B25EC /* icon57x57.png */,
 				CDE43A7C17303DD5004C0698 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -202,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				CDE43AA417303F5B004C0698 /* Defaults */,
+				CD7A018117327799003A2E2D /* Toolbar */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -238,21 +289,12 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A017D1732774F003A2E2D /* Helpers */,
 				CDA7534E17306A56005B25EC /* Cells */,
-				CDE43AAD17303F5B004C0698 /* Station List */,
+				CD7A018717327ADD003A2E2D /* Station List */,
+				CD7A018617327AC7003A2E2D /* Player */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		CDE43AAD17303F5B004C0698 /* Station List */ = {
-			isa = PBXGroup;
-			children = (
-				CDE43AAE17303F5B004C0698 /* GRViewController.h */,
-				CDE43AAF17303F5B004C0698 /* GRViewController.m */,
-				CDE43AB017303F5B004C0698 /* GRViewController.xib */,
-			);
-			name = "Station List";
-			path = Main;
 			sourceTree = "<group>";
 		};
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
@@ -324,10 +366,13 @@
 				CDE43AB117303F5B004C0698 /* Default-568h@2x.png in Resources */,
 				CDE43AB217303F5B004C0698 /* Default.png in Resources */,
 				CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */,
-				CDE43AB617303F5B004C0698 /* GRViewController.xib in Resources */,
 				CDA752DD173044EE005B25EC /* icon57x57.png in Resources */,
 				CDA752DE173044EE005B25EC /* icon114x114.png in Resources */,
-				CDA75353173070B0005B25EC /* GRStationCellView.xib in Resources */,
+				CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */,
+				CD7A018417327799003A2E2D /* GRWoodHeader.png in Resources */,
+				CD7A018517327799003A2E2D /* GRWoodHeader@2x.png in Resources */,
+				CD7A018C17327ADD003A2E2D /* GRViewController.xib in Resources */,
+				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,7 +385,6 @@
 			files = (
 				CDE43A8B17303DD5004C0698 /* main.m in Sources */,
 				CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */,
-				CDE43AB517303F5B004C0698 /* GRViewController.m in Sources */,
 				CDA752E8173049A0005B25EC /* GRWebService.m in Sources */,
 				CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */,
 				CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */,
@@ -348,6 +392,9 @@
 				CDA7531017305B52005B25EC /* GRStation.m in Sources */,
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */,
+				CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */,
+				CD7A018B17327ADD003A2E2D /* GRViewController.m in Sources */,
+				CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +463,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -427,6 +475,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Development;
@@ -435,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -446,6 +497,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = "App Store";
@@ -480,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
@@ -491,6 +545,8 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "AF21A1D3-89D9-4D57-A578-889919129726";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AF21A1D3-89D9-4D57-A578-889919129726";
+				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Adhoc;

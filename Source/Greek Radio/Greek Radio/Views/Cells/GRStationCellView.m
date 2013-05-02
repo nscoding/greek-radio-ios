@@ -1,3 +1,4 @@
+
 //
 //  GRStationCellView.m
 //  Greek Radio
@@ -18,18 +19,14 @@
         [self addSubview:self.backgroundView];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        self.backgroundView.backgroundColor = [self.superview backgroundColor];
-        self.title.backgroundColor = [self.superview backgroundColor];
-        self.subtitle.backgroundColor = [self.superview backgroundColor];
-
-        self.title.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-        self.title.shadowColor = [UIColor colorWithWhite:0.3 alpha:1.0];
+        self.title.textColor = [UIColor colorWithRed:0.153f green:0.075f blue:0.024f alpha:1.00f];
+        self.title.shadowColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         self.title.shadowOffset = CGSizeMake(0, 1);
         self.title.textAlignment = NSTextAlignmentLeft;
         self.title.numberOfLines = 1;
 
-        self.subtitle.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-        self.subtitle.shadowColor = [UIColor colorWithWhite:0.3 alpha:1.0];
+        self.subtitle.textColor = [UIColor colorWithRed:0.153f green:0.075f blue:0.024f alpha:1.00f];
+        self.subtitle.shadowColor = [UIColor colorWithWhite:0.9 alpha:1.0];
         self.subtitle.shadowOffset = CGSizeMake(0, 1);
         self.subtitle.textAlignment = NSTextAlignmentLeft;
         self.subtitle.numberOfLines = 1;

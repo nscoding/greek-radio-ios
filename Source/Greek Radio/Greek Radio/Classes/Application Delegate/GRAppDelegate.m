@@ -9,6 +9,7 @@
 #import "GRAppDelegate.h"
 #import "GRViewController.h"
 #import "GRWebService.h"
+#import "GRWoodNavigationBar.h"
 
 #import "TestFlight.h"
 
@@ -47,8 +48,17 @@
     
     self.menuNavigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:self.viewController];
-    self.menuNavigationController.navigationBarHidden = YES;
+    self.menuNavigationController.navigationBarHidden = NO;
     self.window.rootViewController = self.menuNavigationController;
+    self.viewController.navigationController = self.menuNavigationController;
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"GRWoodHeader"]
+                                       forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:6
+                                       forBarMetrics:UIBarMetricsDefault];
+
+    self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
+    
 
     [self.window makeKeyAndVisible];
 }

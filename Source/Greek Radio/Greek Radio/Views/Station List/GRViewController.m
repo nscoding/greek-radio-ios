@@ -9,7 +9,7 @@
 #import "GRViewController.h"
 #import "GRStationsDAO.h"
 #import "GRStationCellView.h"
-
+#import "GRPlayerViewController.h"
 
 // ------------------------------------------------------------------------------------------
 
@@ -94,6 +94,16 @@
     
     return cell;
 }
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    GRPlayerViewController *playController = [[GRPlayerViewController alloc]
+                                              initWithNibName:@"GRPlayerViewController" bundle:nil];
+    [self.navigationController pushViewController:playController animated:YES];
+}
+
 
 
 // ------------------------------------------------------------------------------------------
