@@ -65,4 +65,6 @@ typedef enum {
  */
 - (id)initWithParentView:(UIView *)parentView alignment:(JSBadgeViewAlignment)alignment;
 
+- (CGSize)sizeOfTextForCurrentSettings;
+
 @end

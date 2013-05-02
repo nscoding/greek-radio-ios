@@ -56,6 +56,7 @@
     return self;
 }
 
+
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     [super setHighlighted:highlighted animated:animated];
@@ -76,6 +77,26 @@
             [self.selectionColor removeFromSuperview];
         }];
     }
+}
+
+
+- (void)setBadgeText:(NSString *)badgeText
+{
+    self.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", badgeText];
+    
+    CGRect titleFrame = self.title.frame;
+    self.title.frame = CGRectMake(titleFrame.origin.x,
+                                  titleFrame.origin.y,
+                                  self.frame.size.width - self.genreBadgeView.sizeOfTextForCurrentSettings.width
+                                  - titleFrame.origin.x - 20,
+                                  titleFrame.size.height);
+    
+    CGRect subtitleFrame = self.subtitle.frame;
+    self.subtitle.frame = CGRectMake(subtitleFrame.origin.x,
+                                     subtitleFrame.origin.y,
+                                     self.frame.size.width - self.genreBadgeView.sizeOfTextForCurrentSettings.width
+                                     - titleFrame.origin.x - 20,
+                                  subtitleFrame.size.height);
 }
 
 

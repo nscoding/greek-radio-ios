@@ -18,7 +18,7 @@
 #define kTopElement @"station"
     #define kElementTitle @"title"
     #define kElementStreamURL @"streamURL"
-    #define kElementStationURL @"stationURL"
+    #define kElementStationURL @"siteURL"
     #define kElementGenre @"genre"
     #define kElemenLocation @"location"
 
@@ -102,7 +102,7 @@
 	NSString * errorString = [NSString stringWithFormat:
                               @"Unable to download stations from nscoding (Error code %i )", [parseError code]];
 	
-    NSLog(@"Error parsing XML: %@", errorString);
+    NSLog(@"Error parsing XML: %@", [parseError debugDescription]);
 	
 	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
                                                           message:errorString

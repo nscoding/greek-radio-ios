@@ -65,6 +65,8 @@
 		CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */; };
 		CD7A02C31732FE89003A2E2D /* GRMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C11732FE89003A2E2D /* GRMore@2x.png */; };
 		CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C21732FE89003A2E2D /* GRMore.png */; };
+		CD7A02CE173315AF003A2E2D /* GRList.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CC173315AE003A2E2D /* GRList.png */; };
+		CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CD173315AE003A2E2D /* GRList@2x.png */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -175,6 +177,8 @@
 		CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GRAppearance‎Helper.m"; sourceTree = "<group>"; };
 		CD7A02C11732FE89003A2E2D /* GRMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRMore@2x.png"; sourceTree = "<group>"; };
 		CD7A02C21732FE89003A2E2D /* GRMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRMore.png; sourceTree = "<group>"; };
+		CD7A02CC173315AE003A2E2D /* GRList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRList.png; sourceTree = "<group>"; };
+		CD7A02CD173315AE003A2E2D /* GRList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRList@2x.png"; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -256,6 +260,8 @@
 		CD7A018117327799003A2E2D /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				CD7A02CC173315AE003A2E2D /* GRList.png */,
+				CD7A02CD173315AE003A2E2D /* GRList@2x.png */,
 				CD7A02C21732FE89003A2E2D /* GRMore.png */,
 				CD7A02C11732FE89003A2E2D /* GRMore@2x.png */,
 				CD7A018217327799003A2E2D /* GRWoodHeader.png */,
@@ -681,6 +687,8 @@
 				CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */,
 				CD7A02C31732FE89003A2E2D /* GRMore@2x.png in Resources */,
 				CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */,
+				CD7A02CE173315AF003A2E2D /* GRList.png in Resources */,
+				CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

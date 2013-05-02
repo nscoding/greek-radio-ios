@@ -64,9 +64,10 @@
     
     // add the pull to refresh view
     [self buildAndConfigurePullToRefresh];
-
+    [self buildAndConfigureMadeWithLove];
+    
     [super viewDidLoad];
-        
+    
     // create the DAO object
     self.stationsDAO = [[GRStationsDAO alloc] init];
     
@@ -126,6 +127,23 @@
     [self.refreshControl endRefreshing];
 }
 
+
+- (void)buildAndConfigureMadeWithLove
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+    label.textColor = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:1.00f];
+    label.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+    label.shadowOffset = CGSizeMake(0, 1);
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text =  @"Made in Berlin with Love\n❝Patrick - Vasileia❞";
+    label.numberOfLines = 0;
+    label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
+
+    
+    self.tableView.tableFooterView = label;
+}
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Pull to refresh
@@ -212,7 +230,7 @@
 
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
-    cell.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", station.genre];
+    [cell setBadgeText:[NSString stringWithFormat:@"%@", station.genre]];
 
     [cell setNeedsDisplay];
     
@@ -251,9 +269,13 @@
     GRStation *station = nil;
     if (indexPath.section == 0)
     {
-        station = [self.localStations objectAtIndex:indexPath.row];
+        station = [self.favoriteStations objectAtIndex:indexPath.row];
     }
     else if (indexPath.section == 1)
+    {
+        station = [self.localStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 2)
     {
         station = [self.serverStations objectAtIndex:indexPath.row];
     }

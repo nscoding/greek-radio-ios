@@ -14,6 +14,7 @@
 @property (nonatomic, assign) IBOutlet UILabel *subtitle;
 @property (nonatomic, strong) JSBadgeView *genreBadgeView;
 
+- (void)setBadgeText:(NSString *)badgeText;
 + (NSString *)reusableIdentifier;
 
 @end

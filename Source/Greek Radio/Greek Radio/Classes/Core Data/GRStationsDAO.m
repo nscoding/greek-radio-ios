@@ -24,7 +24,7 @@
                       location:(NSString *)location
                    serverBased:(BOOL)server
 {
-    if (title.length == 0 || stationURL.length == 0 || streamURL.length == 0 ||
+    if (title.length == 0 || streamURL.length == 0 ||
         genre.length == 0 || location.length == 0)
     {
         return NO;

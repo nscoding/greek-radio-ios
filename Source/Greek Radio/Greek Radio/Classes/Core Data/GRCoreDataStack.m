@@ -211,13 +211,16 @@
 	
     NSError *error = nil;
     NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
-    
+
     if (error != nil)
     {
         [NSException raise:NSGenericException format:@"Error: %@",[error description]];
     }
 	else
 	{
+        results = [results sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc]
+                                                          initWithKey:@"title" ascending:YES]]];
+
 		return results;
 	}
 	
