@@ -24,6 +24,12 @@
                       location:(NSString *)location
                    serverBased:(BOOL)server
 {
+    title = [title stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    stationURL = [stationURL stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    streamURL = [streamURL stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    genre = [genre stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    location = [location stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
     if (title.length == 0 || streamURL.length == 0 ||
         genre.length == 0 || location.length == 0)
     {

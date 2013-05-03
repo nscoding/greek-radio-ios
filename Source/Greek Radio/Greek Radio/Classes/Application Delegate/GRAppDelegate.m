@@ -9,7 +9,6 @@
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
 #import "GRWebService.h"
-#import "GRWoodNavigationBar.h"
 #import "GRSplashViewController.h"
 #import "TestFlight.h"
 #import "GRAppearance‎Helper.h"

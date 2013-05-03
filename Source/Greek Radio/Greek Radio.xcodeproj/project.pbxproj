@@ -12,7 +12,6 @@
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
 		CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36917312F8B0009A106 /* AudioToolbox.framework */; };
 		CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A017B17327591003A2E2D /* GRStationCellView.xib */; };
-		CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */; };
 		CD7A018417327799003A2E2D /* GRWoodHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018217327799003A2E2D /* GRWoodHeader.png */; };
 		CD7A018517327799003A2E2D /* GRWoodHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */; };
 		CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018917327ADD003A2E2D /* GRListTableViewController.m */; };
@@ -120,8 +119,6 @@
 		CD6AD36717312F7E0009A106 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CD6AD36917312F8B0009A106 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CD7A017B17327591003A2E2D /* GRStationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GRStationCellView.xib; path = Cells/GRStationCellView.xib; sourceTree = "<group>"; };
-		CD7A017E17327764003A2E2D /* GRWoodNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRWoodNavigationBar.h; sourceTree = "<group>"; };
-		CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRWoodNavigationBar.m; sourceTree = "<group>"; };
 		CD7A018217327799003A2E2D /* GRWoodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader.png; sourceTree = "<group>"; };
 		CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader@2x.png"; sourceTree = "<group>"; };
 		CD7A018817327ADD003A2E2D /* GRListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRListTableViewController.h; sourceTree = "<group>"; };
@@ -285,8 +282,6 @@
 		CD7A017D1732774F003A2E2D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				CD7A017E17327764003A2E2D /* GRWoodNavigationBar.h */,
-				CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */,
 				CD92B4FF173400B600771F26 /* GRShareHelper.h */,
 				CD92B500173400B600771F26 /* GRShareHelper.m */,
 			);
@@ -800,7 +795,6 @@
 				CDA7531017305B52005B25EC /* GRStation.m in Sources */,
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */,
-				CD7A018017327764003A2E2D /* GRWoodNavigationBar.m in Sources */,
 				CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */,
 				CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */,
 				CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */,
