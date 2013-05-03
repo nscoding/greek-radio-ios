@@ -21,8 +21,8 @@
 - (NSArray *)retrieveAll;
 - (GRStation *)retrieveByTitle:(NSString *)title;
 
-- (NSArray *)retrieveAllFavorites;
-- (NSArray *)retrieveAllServerBased;
-- (NSArray *)retrieveAllLocalBased;
+- (NSArray *)retrieveAllServerBased:(NSString *)filter;
+- (NSArray *)retrieveAllLocalBased:(NSString *)filter;
+- (NSArray *)retrieveAllFavourites:(NSString *)filter;
 
 @end

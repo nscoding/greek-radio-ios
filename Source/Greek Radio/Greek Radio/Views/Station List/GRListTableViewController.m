@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
-@property (nonatomic, strong) NSMutableArray *favoriteStations;
+@property (nonatomic, strong) NSMutableArray *favouriteStations;
 
 @end
 
@@ -42,6 +42,7 @@
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
     {
+        self.searchBar.delegate = self;
         [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
                                             [UIImage imageNamed:@"GRPaperBackground"]]];
     }
@@ -61,6 +62,8 @@
     [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
     [alert show];
 
+    /* https://gist.github.com/jeksys/1070394 */
+    [self configureTrackClearButton];
     
     // add the pull to refresh view
     [self buildAndConfigurePullToRefresh];
@@ -72,7 +75,8 @@
     self.stationsDAO = [[GRStationsDAO alloc] init];
     
     // get the stations
-    [self configureStations];
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:NO];
     
     [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
     
@@ -101,18 +105,42 @@
 }
 
 
-- (void)configureStations
+// ------------------------------------------------------------------------------------------
+#pragma mark - Build and Configure
+// ------------------------------------------------------------------------------------------
+- (void)configureTrackClearButton
+{
+    for (UIView *view in self.searchBar.subviews)
+    {
+        if ([view isKindOfClass: [UITextField class]])
+        {
+            UITextField *tf = (UITextField *)view;
+            tf.delegate = self;
+            break;
+        }
+    }
+}
+
+
+- (void)configureStationsWithFilter:(NSString *)filter
+                            animate:(BOOL)animate
 {
     [self.serverStations removeAllObjects];
-    self.serverStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllServerBased]];
-
+    self.serverStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllServerBased:filter]];
     [self.localStations removeAllObjects];
-    self.localStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllLocalBased]];
-
-    [self.favoriteStations removeAllObjects];
-    self.favoriteStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllFavorites]];
+    self.localStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllLocalBased:filter]];
+    [self.favouriteStations removeAllObjects];
+    self.favouriteStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllFavourites:filter]];
     
-    [self.tableView reloadData];
+    if (animate)
+    {
+        NSIndexSet *indexesReload = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 2)];
+        [self.tableView reloadSections:indexesReload withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else
+    {
+        [self.tableView reloadData];
+    }
 }
 
 
@@ -169,7 +197,9 @@
 
 - (void)syncDidEnd:(NSNotification *)notification
 {
-    [self configureStations];
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
+    
     [self.refreshControl performSelector:@selector(endRefreshing)];
 }
 
@@ -181,7 +211,7 @@
 {
     if (section == 0)
     {
-        return self.favoriteStations.count;
+        return self.favouriteStations.count;
     }
     else if (section == 1)
     {
@@ -217,7 +247,7 @@
     GRStation *station = nil;
     if (indexPath.section == 0)
     {
-        station = [self.favoriteStations objectAtIndex:indexPath.row];
+        station = [self.favouriteStations objectAtIndex:indexPath.row];
     }
     else if (indexPath.section == 1)
     {
@@ -244,16 +274,16 @@
     switch (section)
     {
         case 0:
-            sectionName = (self.favoriteStations.count > 0) ?
-            NSLocalizedString(@"Favorites", @"") : @"";
+            sectionName = (self.favouriteStations.count > 0) ?
+            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"favourites", @""), self.favouriteStations.count] : @"";
             break;
         case 1:
             sectionName = (self.localStations.count > 0) ?
-            NSLocalizedString(@"Local Stations", @"") : @"";
+            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Local Stations", @""), self.localStations.count] : @"";
             break;
         case 2:
             sectionName = (self.serverStations.count > 0) ?
-            NSLocalizedString(@"Stations", @"") : @"";
+            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Stations", @""), self.serverStations.count] : @"";
             break;
         default:
             sectionName = @"";
@@ -269,7 +299,7 @@
     GRStation *station = nil;
     if (indexPath.section == 0)
     {
-        station = [self.favoriteStations objectAtIndex:indexPath.row];
+        station = [self.favouriteStations objectAtIndex:indexPath.row];
     }
     else if (indexPath.section == 1)
     {
@@ -323,6 +353,41 @@
     [controller dismissModalViewControllerAnimated:YES];
 }
 
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Search Delegate
+// ------------------------------------------------------------------------------------------
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
+    
+    [searchBar resignFirstResponder];
+}
+
+
+- (void)searchBar:(UISearchBar *)searchBar
+    textDidChange:(NSString *)searchText
+{
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
+}
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
+{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    //if we only try and resignFirstResponder on textField or searchBar,
+    //the keyboard will not dissapear (at least not on iPad)!
+    [self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.searchBar afterDelay: 0.1];
+    return YES;
+}
 
 
 // ------------------------------------------------------------------------------------------

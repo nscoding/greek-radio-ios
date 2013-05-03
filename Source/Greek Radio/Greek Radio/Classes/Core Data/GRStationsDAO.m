@@ -81,7 +81,7 @@
 
 - (GRStation *)retrieveByTitle:(NSString *)title
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@", title];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", title];
     NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
                                                               withPredicate:predicate];
     
@@ -103,9 +103,17 @@
 }
 
 
-- (NSArray *)retrieveAllServerBased
+- (NSArray *)retrieveAllServerBased:(NSString *)filter
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES"];
+    
+    if (filter.length > 0)
+    {
+       predicate = [NSPredicate predicateWithFormat:@"server == YES AND (title CONTAINS[cd] %@ "
+                                                     "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
+                                                        filter, filter, filter];
+    }
+    
     NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
                                                               withPredicate:predicate];
     
@@ -113,9 +121,17 @@
 }
 
 
-- (NSArray *)retrieveAllLocalBased
+- (NSArray *)retrieveAllLocalBased:(NSString *)filter
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == NO"];
+
+    if (filter.length > 0)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"server == NO AND (title CONTAINS[cd] %@ "
+                     "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
+                     filter, filter, filter];
+    }
+
     NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
                                                               withPredicate:predicate];
     
@@ -123,9 +139,17 @@
 }
 
 
-- (NSArray *)retrieveAllFavorites
+- (NSArray *)retrieveAllFavourites:(NSString *)filter
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"favourite == NO"];
+    
+    if (filter.length > 0)
+    {
+        predicate = [NSPredicate predicateWithFormat:@"favourite == NO AND (title CONTAINS[cd] %@ "
+                     "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
+                     filter, filter, filter];
+    }
+
     NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
                                                               withPredicate:predicate];
     
