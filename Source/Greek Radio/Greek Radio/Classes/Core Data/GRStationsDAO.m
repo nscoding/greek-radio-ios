@@ -141,11 +141,11 @@
 
 - (NSArray *)retrieveAllFavourites:(NSString *)filter
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"favourite == NO"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"favourite == YES"];
     
     if (filter.length > 0)
     {
-        predicate = [NSPredicate predicateWithFormat:@"favourite == NO AND (title CONTAINS[cd] %@ "
+        predicate = [NSPredicate predicateWithFormat:@"favourite == YES AND (title CONTAINS[cd] %@ "
                      "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
                      filter, filter, filter];
     }

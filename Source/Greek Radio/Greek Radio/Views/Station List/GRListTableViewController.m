@@ -101,6 +101,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self configureStationsWithFilter:self.searchBar.text animate:YES];
+    
     [self.searchBar resignFirstResponder];
 }
 
@@ -131,16 +133,19 @@
     self.localStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllLocalBased:filter]];
     [self.favouriteStations removeAllObjects];
     self.favouriteStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllFavourites:filter]];
-    
+    [self.tableView reloadData];
+
     if (animate)
     {
-        NSIndexSet *indexesReload = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(1, 2)];
+        NSIndexSet *indexesReload = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)];
         [self.tableView reloadSections:indexesReload withRowAnimation:UITableViewRowAnimationFade];
     }
     else
     {
         [self.tableView reloadData];
     }
+    
+
 }
 
 
@@ -275,7 +280,7 @@
     {
         case 0:
             sectionName = (self.favouriteStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"favourites", @""), self.favouriteStations.count] : @"";
+            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Favourites", @""), self.favouriteStations.count] : @"";
             break;
         case 1:
             sectionName = (self.localStations.count > 0) ?
@@ -385,7 +390,10 @@
 {
     //if we only try and resignFirstResponder on textField or searchBar,
     //the keyboard will not dissapear (at least not on iPad)!
-    [self performSelector:@selector(searchBarCancelButtonClicked:) withObject:self.searchBar afterDelay: 0.1];
+    [self performSelector:@selector(searchBarCancelButtonClicked:)
+               withObject:self.searchBar
+               afterDelay:0.1];
+    
     return YES;
 }
 

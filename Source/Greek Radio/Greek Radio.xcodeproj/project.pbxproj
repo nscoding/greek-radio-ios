@@ -77,6 +77,14 @@
 		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
 		CDA7531017305B52005B25EC /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA7530F17305B52005B25EC /* GRStation.m */; };
 		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
+		CDD7EBE21733B66100225F5A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE11733B66100225F5A /* Reachability.m */; };
+		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
+		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
+		CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */; };
+		CDD7EC041733CA8900225F5A /* GRAddToFaves.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC001733CA8900225F5A /* GRAddToFaves.png */; };
+		CDD7EC051733CA8900225F5A /* GRAddToFaves@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */; };
+		CDD7EC061733CA8900225F5A /* GRAddToFavesDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */; };
+		CDD7EC071733CA8900225F5A /* GRAddToFavesDown.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -194,6 +202,17 @@
 		CDA7530F17305B52005B25EC /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
 		CDA7534F173070A6005B25EC /* GRStationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStationCellView.h; path = Cells/GRStationCellView.h; sourceTree = "<group>"; };
 		CDA75350173070A6005B25EC /* GRStationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStationCellView.m; path = Cells/GRStationCellView.m; sourceTree = "<group>"; };
+		CDD7EBE01733B66100225F5A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		CDD7EBE11733B66100225F5A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		CDD7EBE51733B6A900225F5A /* NSInternetDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInternetDoctor.h; sourceTree = "<group>"; };
+		CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSInternetDoctor.m; sourceTree = "<group>"; };
+		CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRadioPlayer.h; sourceTree = "<group>"; };
+		CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRadioPlayer.m; sourceTree = "<group>"; };
+		CDD7EC001733CA8900225F5A /* GRAddToFaves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddToFaves.png; sourceTree = "<group>"; };
+		CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddToFaves@2x.png"; sourceTree = "<group>"; };
+		CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddToFavesDown@2x.png"; sourceTree = "<group>"; };
+		CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddToFavesDown.png; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -214,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
 				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
 				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
 				CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */,
@@ -449,6 +469,44 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		CDD7EBDF1733B66100225F5A /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				CDD7EBE01733B66100225F5A /* Reachability.h */,
+				CDD7EBE11733B66100225F5A /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		CDD7EBE41733B69500225F5A /* Internet Doctor */ = {
+			isa = PBXGroup;
+			children = (
+				CDD7EBE51733B6A900225F5A /* NSInternetDoctor.h */,
+				CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */,
+			);
+			path = "Internet Doctor";
+			sourceTree = "<group>";
+		};
+		CDD7EBEA1733BC5D00225F5A /* Radio Player */ = {
+			isa = PBXGroup;
+			children = (
+				CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */,
+				CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */,
+			);
+			path = "Radio Player";
+			sourceTree = "<group>";
+		};
+		CDD7EBFF1733CA8200225F5A /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				CDD7EC001733CA8900225F5A /* GRAddToFaves.png */,
+				CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */,
+				CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */,
+				CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		CDE43A7217303DD4004C0698 = {
 			isa = PBXGroup;
 			children = (
@@ -471,9 +529,15 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CDE43A7E17303DD5004C0698 /* UIKit.framework */,
-				CDE43A8017303DD5004C0698 /* Foundation.framework */,
+				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
+				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
+				CDA752F0173055DA005B25EC /* CoreData.framework */,
 				CDE43A8217303DD5004C0698 /* CoreGraphics.framework */,
+				CDE43A8017303DD5004C0698 /* Foundation.framework */,
+				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
+				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
+				CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */,
+				CDE43A7E17303DD5004C0698 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -505,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */,
+				CDD7EBFF1733CA8200225F5A /* Buttons */,
 				CD7A02761732C1E5003A2E2D /* ActionSheet */,
 				CD7A02851732C1E6003A2E2D /* AlertView */,
 				CD7A019617328DC1003A2E2D /* Cell */,
@@ -529,8 +594,10 @@
 			children = (
 				CD7A02BC1732E9AF003A2E2D /* Appearance */,
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
-				CD7A02071732939F003A2E2D /* Notification Center */,
 				CDA752EC17305471005B25EC /* Core Data */,
+				CDD7EBE41733B69500225F5A /* Internet Doctor */,
+				CD7A02071732939F003A2E2D /* Notification Center */,
+				CDD7EBEA1733BC5D00225F5A /* Radio Player */,
 				CDA752E5173049A0005B25EC /* Web Service */,
 			);
 			path = Classes;
@@ -561,16 +628,12 @@
 			isa = PBXGroup;
 			children = (
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
-				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD7A02651732C176003A2E2D /* Block Alert */,
-				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
 				CD7A020F17329980003A2E2D /* CKRefreshControl */,
 				CD7A021717329980003A2E2D /* CKRefreshControl.xcodeproj */,
-				CDA752F0173055DA005B25EC /* CoreData.framework */,
 				CD7A02B21732D852003A2E2D /* JSBadgeView */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
-				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
-				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
+				CDD7EBDF1733B66100225F5A /* Reachability */,
 				CD6AD36217312F5D0009A106 /* TestFlight */,
 			);
 			path = Libraries;
@@ -689,6 +752,10 @@
 				CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */,
 				CD7A02CE173315AF003A2E2D /* GRList.png in Resources */,
 				CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */,
+				CDD7EC041733CA8900225F5A /* GRAddToFaves.png in Resources */,
+				CDD7EC051733CA8900225F5A /* GRAddToFaves@2x.png in Resources */,
+				CDD7EC061733CA8900225F5A /* GRAddToFavesDown@2x.png in Resources */,
+				CDD7EC071733CA8900225F5A /* GRAddToFavesDown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +790,9 @@
 				CD7A02751732C177003A2E2D /* BlockTextPromptAlertView.m in Sources */,
 				CD7A02B51732D852003A2E2D /* JSBadgeView.m in Sources */,
 				CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */,
+				CDD7EBE21733B66100225F5A /* Reachability.m in Sources */,
+				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,
+				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

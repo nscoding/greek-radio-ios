@@ -11,6 +11,9 @@
 NSString *const GRNotificationSyncManagerDidStart = @"GRNotificationSyncManagerDidStart";
 NSString *const GRNotificationSyncManagerDidEnd = @"GRNotificationSyncManagerDidEnd";
 
+NSString *const GRNotificationStreamDidStart = @"GRNotificationStreamDidStart";
+NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
+
 
 @implementation GRNotificationCenter
 
@@ -43,6 +46,30 @@ NSString *const GRNotificationSyncManagerDidEnd = @"GRNotificationSyncManagerDid
 + (void)postSyncManagerDidEndNotificationWithSender:(id)sender
 {
     NSNotification *notification = [NSNotification notificationWithName:GRNotificationSyncManagerDidEnd
+                                                                 object:sender
+                                                               userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:)
+                                                           withObject:notification
+                                                        waitUntilDone:NO];
+}
+
+
++ (void)postPlayerDidStartNotificationWithSender:(id)sender
+{
+    NSNotification *notification = [NSNotification notificationWithName:GRNotificationStreamDidStart
+                                                                 object:sender
+                                                               userInfo:nil];
+    
+    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:)
+                                                           withObject:notification
+                                                        waitUntilDone:NO];
+}
+
+
++ (void)postPlayerDidEndNotificationWithSender:(id)sender
+{
+    NSNotification *notification = [NSNotification notificationWithName:GRNotificationStreamDidEnd
                                                                  object:sender
                                                                userInfo:nil];
     

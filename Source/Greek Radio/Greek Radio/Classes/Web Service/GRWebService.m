@@ -10,6 +10,9 @@
 #import "GRStationsDAO.h"
 #import "BlockAlertView.h"
 
+#import "NSInternetDoctor.h"
+
+
 // ------------------------------------------------------------------------------------------
 
 
@@ -36,6 +39,7 @@
 @property (nonatomic, strong) NSMutableString *currentStreamURL;
 @property (nonatomic, strong) NSMutableString *currentLocation;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
+@property (nonatomic, assign) BOOL isParsing;
 
 @end
 
@@ -80,6 +84,13 @@
 // ------------------------------------------------------------------------------------------
 - (void)parseXML
 {
+    if (self.isParsing)
+    {
+        return;
+    }
+    
+    self.isParsing = YES;
+    
     [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
 }
@@ -99,10 +110,25 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-	NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
-	[BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
+    if ([[NSInternetDoctor shared] connected])
+    {
+        NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
+        [BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
+    }
+    else
+    {
+        [[NSInternetDoctor shared] showNoInternetAlert];
+    }
     
     [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+    
+    self.isParsing = NO;
+}
+
+
+- (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError;
+{
+
 }
 
 
@@ -112,7 +138,7 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    NSLog(@"found this element: %@", elementName);
+    //    NSLog(@"found this element: %@", elementName);
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
@@ -151,17 +177,17 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-	NSLog(@"found characters: %@", string);
+    //	NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    NSLog(@"all done!");
     [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-
     parser = nil;
+    
+    self.isParsing = NO;
 }
 
 // ------------------------------------------------------------------------------------------

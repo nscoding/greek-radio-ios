@@ -7,10 +7,21 @@
 //
 
 #import "GRPlayerViewController.h"
-#
+#import "GRRadioPlayer.h"
+
+
+// ------------------------------------------------------------------------------------------
+
+
 @interface GRPlayerViewController ()
 
+@property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
+
 @end
+
+
+// ------------------------------------------------------------------------------------------
+
 
 @implementation GRPlayerViewController
 
@@ -21,9 +32,19 @@
 {
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
+        [[GRRadioPlayer shared] playStationWithStreamURL:station.streamURL];
+        
+        self.currentStation = station;
+        
         [self.view setBackgroundColor:[UIColor blackColor]];
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureListButton];
+        [self buildAndConfigureLoadingView];
+        [self registerObservers];
+        
+        CGRect frame = self.favouriteButton.frame;
+        frame.origin.y = self.view.frame.size.height + frame.size.height;
+        [self.favouriteButton setFrame:frame];
     }
     
     return self;
@@ -35,6 +56,86 @@
     self.navigationItem.title = @"Now Playing";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (self.currentStation.favourite.boolValue == NO)
+    {
+        [UIView animateWithDuration:0.4
+                              delay:0.4
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+        {
+            CGRect frame = self.favouriteButton.frame;
+            frame.origin.y = self.view.frame.size.height - 43;
+            [self.favouriteButton setFrame:frame];
+        }
+        completion:nil];
+    }
+}
+
+
+- (void)animateFavouriteButton
+{
+    if (self.currentStation.favourite.boolValue == NO)
+    {
+        [UIView animateWithDuration:0.4
+                              delay:0.4
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             CGRect frame = self.favouriteButton.frame;
+             frame.origin.y = self.view.frame.size.height - 43;
+             [self.favouriteButton setFrame:frame];
+         }
+                         completion:nil];
+    }
+    else
+    {
+        [UIView animateWithDuration:0.4
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^
+         {
+             CGRect frame = self.favouriteButton.frame;
+             frame.origin.y = self.view.frame.size.height;
+             [self.favouriteButton setFrame:frame];
+         }
+        completion:nil];
+    }
+
+}
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerDidStart:)
+                                                 name:GRNotificationStreamDidStart
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerDidEnd:)
+                                                 name:GRNotificationStreamDidEnd
+                                               object:nil];
+}
+
+
+- (void)playerDidStart:(NSNotification *)notification
+{
+    [self.loadingIndicator startAnimating];
+}
+
+
+- (void)playerDidEnd:(NSNotification *)notification
+{
+    [self.loadingIndicator stopAnimating];
 }
 
 
@@ -76,6 +177,19 @@
 }
 
 
+- (void)buildAndConfigureLoadingView
+{
+    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator];
+    [self navigationItem].rightBarButtonItem = barButton;
+    
+    if ([[GRRadioPlayer shared] isPlaying])
+    {
+        [self.loadingIndicator startAnimating];
+    }
+}
+
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
@@ -91,4 +205,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)markStationAsFavourite:(id)sender
+{
+    self.currentStation.favourite = [NSNumber numberWithBool:YES];
+    [self.currentStation.managedObjectContext save:nil];
+    
+    [self animateFavouriteButton];
+}
+
+
 @end
+
