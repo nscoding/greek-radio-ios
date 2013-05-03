@@ -8,7 +8,7 @@
 
 #import "GRWebService.h"
 #import "GRStationsDAO.h"
-
+#import "BlockAlertView.h"
 
 // ------------------------------------------------------------------------------------------
 
@@ -99,17 +99,10 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-	NSString * errorString = [NSString stringWithFormat:
-                              @"Unable to download stations from nscoding (Error code %i )", [parseError code]];
-	
-    NSLog(@"Error parsing XML: %@", [parseError debugDescription]);
-	
-	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
-                                                          message:errorString
-                                                         delegate:self
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-	[errorAlert show];
+	NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
+	[BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
+    
+    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
 }
 
 

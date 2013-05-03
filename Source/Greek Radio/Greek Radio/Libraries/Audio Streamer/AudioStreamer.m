@@ -22,6 +22,7 @@
 //
 
 #import "AudioStreamer.h"
+#import "BlockAlertView.h"
 #if TARGET_OS_IPHONE			
 #import <CFNetwork/CFNetwork.h>
 #endif
@@ -352,19 +353,7 @@ static void ASReadStreamCallBack
 - (void)presentAlertWithTitle:(NSString*)title message:(NSString*)message
 {
 #if TARGET_OS_IPHONE
-	UIAlertView *alert = [
-		[[UIAlertView alloc]
-			initWithTitle:title
-			message:message
-			delegate:self
-			cancelButtonTitle:NSLocalizedString(@"OK", @"")
-			otherButtonTitles: nil]
-		autorelease];
-	[alert
-		performSelector:@selector(show)
-		onThread:[NSThread mainThread]
-		withObject:nil
-		waitUntilDone:NO];
+    [BlockAlertView showInfoAlertWithTitle:title message:message];
 #else
 	NSAlert *alert =
 		[NSAlert
