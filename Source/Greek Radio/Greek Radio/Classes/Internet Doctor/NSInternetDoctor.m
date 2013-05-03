@@ -108,7 +108,7 @@
 - (void)showNoInternetAlert
 {
 #warning localize
-    [BlockAlertView showInfoAlertWithTitle:@"No internet connection" message:@"You need internets"];
+    [BlockAlertView showInfoAlertWithTitle:@"No internet connection" message:@"You need internet"];
 
     
     [self.nscodingReachability stopNotifier];

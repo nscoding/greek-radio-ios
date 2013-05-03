@@ -127,6 +127,10 @@
 - (void)configureStationsWithFilter:(NSString *)filter
                             animate:(BOOL)animate
 {
+    NSUInteger serverCount = self.serverStations.count;
+    NSUInteger favouriteCount = self.favouriteStations.count;
+    NSUInteger localCount = self.localStations.count;
+    
     [self.serverStations removeAllObjects];
     self.serverStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllServerBased:filter]];
     [self.localStations removeAllObjects];
@@ -135,6 +139,13 @@
     self.favouriteStations = [NSMutableArray arrayWithArray:[self.stationsDAO retrieveAllFavourites:filter]];
     [self.tableView reloadData];
 
+    if (serverCount == self.serverStations.count &&
+        favouriteCount == self.favouriteStations.count &&
+        localCount == self.localStations.count)
+    {
+        animate = NO;
+    }
+    
     if (animate)
     {
         NSIndexSet *indexesReload = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 1)];

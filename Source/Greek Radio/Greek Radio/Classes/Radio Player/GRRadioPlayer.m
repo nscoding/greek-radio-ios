@@ -22,6 +22,16 @@
     dispatch_once(&pred, ^()
                   {
                       shared = [[GRRadioPlayer alloc] init];
+                      
+                      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                                               selector:@selector(applicationDidEnterBackground:)
+                                                                   name:UIApplicationDidEnterBackgroundNotification
+                                                                 object:nil];
+                      
+                      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                                               selector:@selector(applicationDidBecomeActive:)
+                                                                   name:UIApplicationDidBecomeActiveNotification
+                                                                 object:nil];
                   });
     
     return shared;
@@ -94,6 +104,59 @@
     
     return NO;
 }
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Multitasking
+// ------------------------------------------------------------------------------------------
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    // Request permission to run in the background. Provide an
+    // expiration handler in case the task runs long.
+    
+    UIApplication *application = [notification object];
+    
+    NSLog(@"Application entered background state.");
+    
+	NSAssert(backgroundOperation == UIBackgroundTaskInvalid, nil);
+	backgroundOperation = [application beginBackgroundTaskWithExpirationHandler:^{
+        // Synchronize the cleanup call on the main thread in case
+        // the task actually finishes at around the same time.
+		dispatch_async(dispatch_get_main_queue(), ^{
+			if (backgroundOperation != UIBackgroundTaskInvalid)
+			{
+				
+				[application endBackgroundTask:backgroundOperation];
+				backgroundOperation = UIBackgroundTaskInvalid;
+			}
+		});
+	}];
+	
+		
+    // Start the long-running task and return immediately.
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+	    
+        // Do the work associated with the task.
+        // Synchronize the cleanup call on the main thread in case
+        // the expiration handler is fired at the same time.
+		dispatch_async(dispatch_get_main_queue(), ^{
+			
+            if (audioStreamer != nil)
+            {
+                [audioStreamer addObserver:self forKeyPath:@"isPlaying" options:0 context:nil];
+                [audioStreamer start];
+            }            
+        });
+	});
+}
+
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    UIApplication *application = [notification object];
+	[application endBackgroundTask:self->backgroundOperation];
+	self->backgroundOperation = UIBackgroundTaskInvalid;
+}
+
 
 
 @end

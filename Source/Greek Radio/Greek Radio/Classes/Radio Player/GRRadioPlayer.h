@@ -12,6 +12,7 @@
 {
     NSString *currentStreamURL;
     AudioStreamer *audioStreamer;
+    UIBackgroundTaskIdentifier backgroundOperation;
 }
 
 + (GRRadioPlayer *)shared;
