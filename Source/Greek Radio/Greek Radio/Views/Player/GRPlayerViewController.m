@@ -33,8 +33,6 @@
 {
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
-        [self configurePlayButton];
-
         self.currentStation = station;
         [[GRRadioPlayer shared] playStation:self.currentStation.title
                               withStreamURL:self.currentStation.streamURL];
@@ -59,6 +57,8 @@
 {
     self.navigationItem.title = @"Now Playing";
     [super viewDidLoad];
+    
+    [self configurePlayButton];
 }
 
 

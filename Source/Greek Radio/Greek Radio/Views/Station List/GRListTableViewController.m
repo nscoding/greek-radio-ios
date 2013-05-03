@@ -284,7 +284,7 @@
     {
         case 0:
             sectionName = (self.favouriteStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Favourites", @""), self.favouriteStations.count] : @"";
+            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Favorites", @""), self.favouriteStations.count] : @"";
             break;
         case 1:
             sectionName = (self.localStations.count > 0) ?
