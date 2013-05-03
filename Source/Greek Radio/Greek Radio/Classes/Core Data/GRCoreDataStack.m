@@ -195,15 +195,16 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:newEntityName inManagedObjectContext:[self managedObjectContext]];
 	
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entity];
-    
-	if(predicate)
+    request.entity = entity;
+        
+	if (predicate)
     {
-        [request setPredicate:predicate];
+        request.predicate = predicate;
     }
 	
     NSError *error = nil;
-    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request
+                                                                  error:&error];
 
     if (error != nil)
     {
@@ -220,12 +221,12 @@
 	return nil;
 }
 
+
 - (NSURL *)applicationDocumentsDirectoryURL
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
-
 
 
 @end

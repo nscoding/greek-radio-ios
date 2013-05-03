@@ -66,12 +66,15 @@
 		CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C21732FE89003A2E2D /* GRMore.png */; };
 		CD7A02CE173315AF003A2E2D /* GRList.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CC173315AE003A2E2D /* GRList.png */; };
 		CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CD173315AE003A2E2D /* GRList@2x.png */; };
-		CD92B4F41733E7BC00771F26 /* GRPauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F01733E7BC00771F26 /* GRPauseButton.png */; };
-		CD92B4F51733E7BC00771F26 /* GRPauseButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */; };
-		CD92B4F61733E7BC00771F26 /* GRPlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F21733E7BC00771F26 /* GRPlayButton.png */; };
-		CD92B4F71733E7BC00771F26 /* GRPlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */; };
 		CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CD92B501173400B600771F26 /* GRShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B500173400B600771F26 /* GRShareHelper.m */; };
+		CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B5021734272800771F26 /* MediaPlayer.framework */; };
+		CD92B50517344C4300771F26 /* GRBottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50417344C4200771F26 /* GRBottom@2x.png */; };
+		CD92B510173455EA00771F26 /* GRNetwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50C173455E900771F26 /* GRNetwork@2x.png */; };
+		CD92B511173455EA00771F26 /* GRPause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50D173455E900771F26 /* GRPause@2x.png */; };
+		CD92B512173455EA00771F26 /* GRPlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50E173455EA00771F26 /* GRPlay@2x.png */; };
+		CD92B513173455EA00771F26 /* GRHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50F173455EA00771F26 /* GRHeart@2x.png */; };
+		CD92B51517345B2600771F26 /* GRHeartSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B51417345B2600771F26 /* GRHeartSelected@2x.png */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -86,10 +89,6 @@
 		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
 		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
 		CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */; };
-		CDD7EC041733CA8900225F5A /* GRAddToFaves.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC001733CA8900225F5A /* GRAddToFaves.png */; };
-		CDD7EC051733CA8900225F5A /* GRAddToFaves@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */; };
-		CDD7EC061733CA8900225F5A /* GRAddToFavesDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */; };
-		CDD7EC071733CA8900225F5A /* GRAddToFavesDown.png in Resources */ = {isa = PBXBuildFile; fileRef = CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -190,13 +189,16 @@
 		CD7A02C21732FE89003A2E2D /* GRMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRMore.png; sourceTree = "<group>"; };
 		CD7A02CC173315AE003A2E2D /* GRList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRList.png; sourceTree = "<group>"; };
 		CD7A02CD173315AE003A2E2D /* GRList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRList@2x.png"; sourceTree = "<group>"; };
-		CD92B4F01733E7BC00771F26 /* GRPauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPauseButton.png; sourceTree = "<group>"; };
-		CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPauseButton@2x.png"; sourceTree = "<group>"; };
-		CD92B4F21733E7BC00771F26 /* GRPlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPlayButton.png; sourceTree = "<group>"; };
-		CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPlayButton@2x.png"; sourceTree = "<group>"; };
 		CD92B4F91733EF7000771F26 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CD92B4FF173400B600771F26 /* GRShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShareHelper.h; sourceTree = "<group>"; };
 		CD92B500173400B600771F26 /* GRShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShareHelper.m; sourceTree = "<group>"; };
+		CD92B5021734272800771F26 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		CD92B50417344C4200771F26 /* GRBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRBottom@2x.png"; sourceTree = "<group>"; };
+		CD92B50C173455E900771F26 /* GRNetwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRNetwork@2x.png"; sourceTree = "<group>"; };
+		CD92B50D173455E900771F26 /* GRPause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPause@2x.png"; sourceTree = "<group>"; };
+		CD92B50E173455EA00771F26 /* GRPlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPlay@2x.png"; sourceTree = "<group>"; };
+		CD92B50F173455EA00771F26 /* GRHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRHeart@2x.png"; sourceTree = "<group>"; };
+		CD92B51417345B2600771F26 /* GRHeartSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRHeartSelected@2x.png"; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -219,10 +221,6 @@
 		CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRadioPlayer.h; sourceTree = "<group>"; };
 		CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRadioPlayer.m; sourceTree = "<group>"; };
-		CDD7EC001733CA8900225F5A /* GRAddToFaves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddToFaves.png; sourceTree = "<group>"; };
-		CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddToFaves@2x.png"; sourceTree = "<group>"; };
-		CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRAddToFavesDown@2x.png"; sourceTree = "<group>"; };
-		CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRAddToFavesDown.png; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -243,6 +241,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
 				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
@@ -291,6 +290,7 @@
 		CD7A018117327799003A2E2D /* Toolbar */ = {
 			isa = PBXGroup;
 			children = (
+				CD92B50417344C4200771F26 /* GRBottom@2x.png */,
 				CD7A02CC173315AE003A2E2D /* GRList.png */,
 				CD7A02CD173315AE003A2E2D /* GRList@2x.png */,
 				CD7A02C21732FE89003A2E2D /* GRMore.png */,
@@ -510,14 +510,11 @@
 		CDD7EBFF1733CA8200225F5A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				CD92B4F01733E7BC00771F26 /* GRPauseButton.png */,
-				CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */,
-				CD92B4F21733E7BC00771F26 /* GRPlayButton.png */,
-				CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */,
-				CDD7EC001733CA8900225F5A /* GRAddToFaves.png */,
-				CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */,
-				CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */,
-				CDD7EC031733CA8900225F5A /* GRAddToFavesDown.png */,
+				CD92B50C173455E900771F26 /* GRNetwork@2x.png */,
+				CD92B50D173455E900771F26 /* GRPause@2x.png */,
+				CD92B50E173455EA00771F26 /* GRPlay@2x.png */,
+				CD92B50F173455EA00771F26 /* GRHeart@2x.png */,
+				CD92B51417345B2600771F26 /* GRHeartSelected@2x.png */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -544,6 +541,7 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD92B5021734272800771F26 /* MediaPlayer.framework */,
 				CD92B4F91733EF7000771F26 /* Social.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
@@ -564,8 +562,8 @@
 				CDE43AA317303F5B004C0698 /* Assets */,
 				CDE43AA817303F5B004C0698 /* Classes */,
 				CDE43AB9173041B8004C0698 /* Libraries */,
-				CDE43AAC17303F5B004C0698 /* Views */,
 				CDE43A8517303DD5004C0698 /* Supporting Files */,
+				CDE43AAC17303F5B004C0698 /* Views */,
 			);
 			path = "Greek Radio";
 			sourceTree = "<group>";
@@ -768,14 +766,12 @@
 				CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */,
 				CD7A02CE173315AF003A2E2D /* GRList.png in Resources */,
 				CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */,
-				CDD7EC041733CA8900225F5A /* GRAddToFaves.png in Resources */,
-				CDD7EC051733CA8900225F5A /* GRAddToFaves@2x.png in Resources */,
-				CDD7EC061733CA8900225F5A /* GRAddToFavesDown@2x.png in Resources */,
-				CDD7EC071733CA8900225F5A /* GRAddToFavesDown.png in Resources */,
-				CD92B4F41733E7BC00771F26 /* GRPauseButton.png in Resources */,
-				CD92B4F51733E7BC00771F26 /* GRPauseButton@2x.png in Resources */,
-				CD92B4F61733E7BC00771F26 /* GRPlayButton.png in Resources */,
-				CD92B4F71733E7BC00771F26 /* GRPlayButton@2x.png in Resources */,
+				CD92B50517344C4300771F26 /* GRBottom@2x.png in Resources */,
+				CD92B510173455EA00771F26 /* GRNetwork@2x.png in Resources */,
+				CD92B511173455EA00771F26 /* GRPause@2x.png in Resources */,
+				CD92B512173455EA00771F26 /* GRPlay@2x.png in Resources */,
+				CD92B513173455EA00771F26 /* GRHeart@2x.png in Resources */,
+				CD92B51517345B2600771F26 /* GRHeartSelected@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

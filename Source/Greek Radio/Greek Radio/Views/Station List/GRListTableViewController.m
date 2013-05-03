@@ -13,7 +13,6 @@
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
 #import "GRWebService.h"
-#import "GRShareHelper.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -22,7 +21,6 @@
 @interface GRListTableViewController ()
 
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
-
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
 @property (nonatomic, strong) NSMutableArray *favouriteStations;
@@ -79,7 +77,7 @@
     
     
     UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    moreButton.frame = CGRectMake(0, 0, 30, 12);
+    moreButton.frame = CGRectMake(0, 0, 40, 12);
     
     [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(moreButtonPressed:)
@@ -319,7 +317,9 @@
         station = [self.serverStations objectAtIndex:indexPath.row];
     }
 
-    GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station];
+    GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
+                                                                                previousView:self.view];
+
     [self.navigationController pushViewController:playController animated:YES];
 }
 
@@ -382,20 +382,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
-    
-    if ([SLComposeViewController class])
-    {
-        [sheet addButtonWithTitle:@"Share with Twitter" block:^{
-            [GRShareHelper tweetTappedOnController:self];
-        }];
-    }
-    
-    if ([SLComposeViewController class])
-    {
-        [sheet addButtonWithTitle:@"Share with Facebook" block:^{
-            [GRShareHelper facebookTappedOnController:self];
-        }];
-    }
     
     [sheet showInView:self.view];
 }

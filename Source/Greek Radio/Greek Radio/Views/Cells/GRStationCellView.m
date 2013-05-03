@@ -8,6 +8,7 @@
 //
 
 #import "GRStationCellView.h"
+#import "GRRadioPlayer.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -82,7 +83,17 @@
 
 - (void)setBadgeText:(NSString *)badgeText
 {
-    self.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", badgeText];
+    if ([[[GRRadioPlayer shared] stationName] isEqualToString:self.title.text])
+    {        
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.866f green:0.128f blue:0.115f alpha:1.00f];
+        self.genreBadgeView.badgeText = [NSString stringWithFormat:@"Now Playing"];
+    }
+    else
+    {
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f green:0.522f blue:0.482f alpha:1.00f];
+        self.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", badgeText];
+    }
+    
     
     CGRect titleFrame = self.title.frame;
     self.title.frame = CGRectMake(titleFrame.origin.x,
@@ -107,6 +118,11 @@
     }];
     
     [super setEditing:editing animated:animated];
+}
+
+
+- (void)setStatus:(BOOL)isPlaying
+{
 }
 
 

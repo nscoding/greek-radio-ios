@@ -43,6 +43,8 @@
     {
         newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation"
                                                                 inManagedObjectContext:managedObjectContext];
+        
+        newStation.favourite = [NSNumber numberWithBool:NO];
     }
     
     newStation.title = title;
@@ -51,7 +53,7 @@
     newStation.genre = genre;
     newStation.location = location;
     newStation.server = [NSNumber numberWithBool:server];
-    
+
     NSError *error = nil;
     
     if ([managedObjectContext save:&error] == NO)
@@ -111,11 +113,11 @@
 
 - (NSArray *)retrieveAllServerBased:(NSString *)filter
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES AND favourite == NO"];
     
     if (filter.length > 0)
     {
-       predicate = [NSPredicate predicateWithFormat:@"server == YES AND (title CONTAINS[cd] %@ "
+       predicate = [NSPredicate predicateWithFormat:@"server == YES AND favourite == NO AND (title CONTAINS[cd] %@ "
                                                      "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
                                                         filter, filter, filter];
     }
@@ -129,11 +131,11 @@
 
 - (NSArray *)retrieveAllLocalBased:(NSString *)filter
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == NO"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == NO AND favourite == NO"];
 
     if (filter.length > 0)
     {
-        predicate = [NSPredicate predicateWithFormat:@"server == NO AND (title CONTAINS[cd] %@ "
+        predicate = [NSPredicate predicateWithFormat:@"server == NO AND favourite == NO AND (title CONTAINS[cd] %@ "
                      "|| location CONTAINS[cd] %@ || genre CONTAINS[cd] %@)",
                      filter, filter, filter];
     }

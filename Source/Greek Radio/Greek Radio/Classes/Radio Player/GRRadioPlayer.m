@@ -142,23 +142,6 @@
 			}
 		});
 	}];
-	
-		
-    // Start the long-running task and return immediately.
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-	    
-        // Do the work associated with the task.
-        // Synchronize the cleanup call on the main thread in case
-        // the expiration handler is fired at the same time.
-		dispatch_async(dispatch_get_main_queue(), ^{
-			
-            if (audioStreamer != nil)
-            {
-                [audioStreamer addObserver:self forKeyPath:@"isPlaying" options:0 context:nil];
-                [audioStreamer start];
-            }            
-        });
-	});
 }
 
 
@@ -168,7 +151,6 @@
 	[application endBackgroundTask:self->backgroundOperation];
 	self->backgroundOperation = UIBackgroundTaskInvalid;
 }
-
 
 
 @end
