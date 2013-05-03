@@ -8,6 +8,9 @@
 
 #import "GRPlayerViewController.h"
 #import "GRRadioPlayer.h"
+#import "BlockAlertView.h"
+
+#import <Social/Social.h>
 
 
 // ------------------------------------------------------------------------------------------
@@ -33,7 +36,8 @@
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
         [[GRRadioPlayer shared] playStationWithStreamURL:station.streamURL];
-        
+        [self configurePlayButton];
+
         self.currentStation = station;
         
         [self.view setBackgroundColor:[UIColor blackColor]];
@@ -55,14 +59,12 @@
 {
     self.navigationItem.title = @"Now Playing";
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     [self animateFavouriteButton];
 }
 
@@ -117,12 +119,14 @@
 
 - (void)playerDidStart:(NSNotification *)notification
 {
+    [self configurePlayButton];
     [self.loadingIndicator startAnimating];
 }
 
 
 - (void)playerDidEnd:(NSNotification *)notification
 {
+    [self configurePlayButton];
     [self.loadingIndicator stopAnimating];
 }
 
@@ -136,14 +140,14 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:19];
     label.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    label.shadowColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    label.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
     label.shadowOffset = CGSizeMake(0, 1);
     label.textAlignment = NSTextAlignmentCenter;
     label.text =  [name copy];
     label.numberOfLines = 0;
     
     [label sizeToFit];
-    [label setCenter:CGPointMake(self.view.center.x, 280)];
+    [label setCenter:CGPointMake(self.view.center.x, 260)];
     
     [self.view addSubview:label];
 }
@@ -178,6 +182,19 @@
 }
 
 
+- (void)configurePlayButton
+{
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        [self.playButton setImage:[UIImage imageNamed:@"GRPauseButton"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.playButton setImage:[UIImage imageNamed:@"GRPlayButton"] forState:UIControlStateNormal];
+    }
+}
+
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
@@ -187,10 +204,18 @@
 }
 
 
-- (void)didReceiveMemoryWarning
+- (IBAction)playOrPause:(id)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
+        [[GRRadioPlayer shared] stopPlayingStation];
+    }
+    else
+    {
+        [[GRRadioPlayer shared] playStationWithStreamURL:self.currentStation.streamURL];
+        [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
+    }
 }
 
 
@@ -200,6 +225,62 @@
     [self.currentStation.managedObjectContext save:nil];
     
     [self animateFavouriteButton];
+}
+
+
+- (IBAction)tweetTapped:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
+        
+        [tweetSheet setInitialText:[NSString stringWithFormat:@"Listeing to %@ using Greek Radio", self.currentStation.title]];
+        [tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id321094050?ls=1&mt=8"]];
+        
+        [self presentViewController:tweetSheet
+                           animated:YES
+                         completion:nil];
+    }
+    else
+    {
+        [BlockAlertView alertWithTitle:@"Sorry"
+                               message:@"You can't send a tweet right now, make sure your device has an"
+                                       @" internet connection and you have at least one Twitter account setup"];
+    }
+}
+
+
+- (IBAction)facebookTapped:(id)sender
+{
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewController *facebookSheet = [SLComposeViewController
+                                               composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        [facebookSheet setInitialText:[NSString stringWithFormat:@"Listeing to %@ using Greek Radio", self.currentStation.title]];
+        [facebookSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id321094050?ls=1&mt=8"]];
+        
+        [self presentViewController:facebookSheet
+                           animated:YES
+                         completion:nil];
+    }
+    else
+    {
+        [BlockAlertView alertWithTitle:@"Sorry"
+                               message:@"You update your status right now, make sure your device has an"
+         @" internet connection and you have at least one Facebook account setup"];
+    }
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Memory
+// ------------------------------------------------------------------------------------------
+- (void)didReceiveMemoryWarning
+{
+#warning stop the player, show an alert
+    [super didReceiveMemoryWarning];
 }
 
 

@@ -325,6 +325,31 @@
 }
 
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0)
+    {
+        return YES;
+    }
+
+    return NO;
+}
+
+
+-  (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+ forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        GRStation *station = [self.favouriteStations objectAtIndex:indexPath.row];
+        station.favourite = [NSNumber numberWithBool:NO];
+        [station.managedObjectContext save:nil];
+        [self configureStationsWithFilter:self.searchBar.text animate:YES];
+    }
+}
+
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------

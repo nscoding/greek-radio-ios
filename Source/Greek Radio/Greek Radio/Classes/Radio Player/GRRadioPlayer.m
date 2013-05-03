@@ -90,8 +90,9 @@
 
 - (void)stopPlayingStation
 {
-    [audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
     [audioStreamer stop];
+    [audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
+    audioStreamer = nil;
 }
 
 

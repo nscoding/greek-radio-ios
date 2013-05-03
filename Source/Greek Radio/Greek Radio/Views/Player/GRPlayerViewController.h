@@ -11,10 +11,14 @@
 @interface GRPlayerViewController : UIViewController
 
 @property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, assign) IBOutlet UIButton *playButton;
 @property (nonatomic, weak) GRStation *currentStation;
 
 - (id)initWithStation:(GRStation *)station;
 - (IBAction)markStationAsFavourite:(id)sender;
+- (IBAction)playOrPause:(id)sender;
 
+- (IBAction)tweetTapped:(id)sender;
+- (IBAction)facebookTapped:(id)sender;
 
 @end

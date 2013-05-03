@@ -67,6 +67,11 @@
 		CD7A02C41732FE89003A2E2D /* GRMore.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C21732FE89003A2E2D /* GRMore.png */; };
 		CD7A02CE173315AF003A2E2D /* GRList.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CC173315AE003A2E2D /* GRList.png */; };
 		CD7A02CF173315AF003A2E2D /* GRList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02CD173315AE003A2E2D /* GRList@2x.png */; };
+		CD92B4F41733E7BC00771F26 /* GRPauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F01733E7BC00771F26 /* GRPauseButton.png */; };
+		CD92B4F51733E7BC00771F26 /* GRPauseButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */; };
+		CD92B4F61733E7BC00771F26 /* GRPlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F21733E7BC00771F26 /* GRPlayButton.png */; };
+		CD92B4F71733E7BC00771F26 /* GRPlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */; };
+		CD92B4FA1733EF7000771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -187,6 +192,11 @@
 		CD7A02C21732FE89003A2E2D /* GRMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRMore.png; sourceTree = "<group>"; };
 		CD7A02CC173315AE003A2E2D /* GRList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRList.png; sourceTree = "<group>"; };
 		CD7A02CD173315AE003A2E2D /* GRList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRList@2x.png"; sourceTree = "<group>"; };
+		CD92B4F01733E7BC00771F26 /* GRPauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPauseButton.png; sourceTree = "<group>"; };
+		CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPauseButton@2x.png"; sourceTree = "<group>"; };
+		CD92B4F21733E7BC00771F26 /* GRPlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPlayButton.png; sourceTree = "<group>"; };
+		CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPlayButton@2x.png"; sourceTree = "<group>"; };
+		CD92B4F91733EF7000771F26 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -233,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD92B4FA1733EF7000771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
 				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
 				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
@@ -499,6 +510,10 @@
 		CDD7EBFF1733CA8200225F5A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				CD92B4F01733E7BC00771F26 /* GRPauseButton.png */,
+				CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */,
+				CD92B4F21733E7BC00771F26 /* GRPlayButton.png */,
+				CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */,
 				CDD7EC001733CA8900225F5A /* GRAddToFaves.png */,
 				CDD7EC011733CA8900225F5A /* GRAddToFaves@2x.png */,
 				CDD7EC021733CA8900225F5A /* GRAddToFavesDown@2x.png */,
@@ -529,6 +544,7 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD92B4F91733EF7000771F26 /* Social.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
@@ -756,6 +772,10 @@
 				CDD7EC051733CA8900225F5A /* GRAddToFaves@2x.png in Resources */,
 				CDD7EC061733CA8900225F5A /* GRAddToFavesDown@2x.png in Resources */,
 				CDD7EC071733CA8900225F5A /* GRAddToFavesDown.png in Resources */,
+				CD92B4F41733E7BC00771F26 /* GRPauseButton.png in Resources */,
+				CD92B4F51733E7BC00771F26 /* GRPauseButton@2x.png in Resources */,
+				CD92B4F61733E7BC00771F26 /* GRPlayButton.png in Resources */,
+				CD92B4F71733E7BC00771F26 /* GRPlayButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
