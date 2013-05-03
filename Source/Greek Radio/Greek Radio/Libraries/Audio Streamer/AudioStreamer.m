@@ -478,7 +478,22 @@ void ReadStreamCallBack
 
 @implementation AudioStreamer
 
-@synthesize isPlaying;
+@synthesize isPlaying = _isPlaying;
+@synthesize delegate = _delegate;
+
+
+- (void)setIsPlaying:(BOOL)status
+{
+    if (_isPlaying != status)
+    {
+        _isPlaying = status;
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(streamerStatusDidChange)])
+        {
+            [self.delegate streamerStatusDidChange];
+        }
+    }
+}
 
 //
 // initWithURL
@@ -504,6 +519,8 @@ void ReadStreamCallBack
 //
 - (void)dealloc
 {
+    self.delegate = nil;
+    
 	[url release];
 	[super dealloc];
 }

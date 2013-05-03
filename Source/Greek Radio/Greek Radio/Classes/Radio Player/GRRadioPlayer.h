@@ -8,7 +8,7 @@
 
 #import "AudioStreamer.h"
 
-@interface GRRadioPlayer : NSObject
+@interface GRRadioPlayer : NSObject <AudioStreamerDelegate>
 {
     AudioStreamer *audioStreamer;
     UIBackgroundTaskIdentifier backgroundOperation;

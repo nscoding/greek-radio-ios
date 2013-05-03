@@ -60,7 +60,7 @@
     
     NSURL *url = [NSURL URLWithString:aStreamURL];
     audioStreamer = [[AudioStreamer alloc] initWithURL:url];
-    [audioStreamer addObserver:self forKeyPath:@"isPlaying" options:0 context:nil];
+    audioStreamer.delegate = self;
     [audioStreamer start];
     
     self.streamURL = [NSString stringWithFormat:@"%@",aStreamURL];
@@ -68,41 +68,24 @@
 }
 
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context
+- (void)streamerStatusDidChange
 {
-	if ([keyPath isEqual:@"isPlaying"])
-	{
-		if ([(AudioStreamer *)object isPlaying])
-		{
-            [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
-		}
-		else
-		{
-            [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
-
-			[audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
-			audioStreamer = nil;
-		}
-        
-        return;
-	}
-	
-	[super observeValueForKeyPath:keyPath
-                         ofObject:object
-                           change:change
-						  context:context];
+    if ([audioStreamer isPlaying])
+    {
+        [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
+    }
+    else
+    {
+        [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
+        audioStreamer = nil;
+    }
 }
 
 
 - (void)stopPlayingStation
 {
     self.stationName = @"";
-
     [audioStreamer stop];
-    [audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
     audioStreamer = nil;
 }
 

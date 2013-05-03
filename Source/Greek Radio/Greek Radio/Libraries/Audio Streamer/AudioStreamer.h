@@ -9,6 +9,13 @@
 #define kAQBufSize 32 * 1024		// number of bytes in each audio queue buffer
 #define kAQMaxPacketDescs 512		// number of packet descriptions in our array
 
+@protocol AudioStreamerDelegate <NSObject>
+
+- (void)streamerStatusDidChange;
+
+@end
+
+
 @interface AudioStreamer : NSObject
 {
 	NSURL *url;
@@ -41,7 +48,8 @@
 	CFReadStreamRef stream;
 }
 
-@property BOOL isPlaying;
+@property (nonatomic, assign, setter = setIsPlaying:) BOOL isPlaying;
+@property (nonatomic, assign) id<AudioStreamerDelegate> delegate;
 
 - (id)initWithURL:(NSURL *)newURL;
 - (void)start;
