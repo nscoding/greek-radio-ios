@@ -10,14 +10,18 @@
 
 @interface GRRadioPlayer : NSObject
 {
-    NSString *currentStreamURL;
     AudioStreamer *audioStreamer;
     UIBackgroundTaskIdentifier backgroundOperation;
 }
 
+@property (nonatomic, strong) NSString *stationName;
+@property (nonatomic, strong) NSString *streamURL;
+
 + (GRRadioPlayer *)shared;
 
-- (void)playStationWithStreamURL:(NSString *)streamURL;
+- (void)playStation:(NSString *)aStationName
+      withStreamURL:(NSString *)aStreamURL;
+
 - (void)stopPlayingStation;
 - (BOOL)isPlaying;
 

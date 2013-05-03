@@ -12,8 +12,8 @@
 #import "GRPlayerViewController.h"
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
-
 #import "GRWebService.h"
+#import "GRShareHelper.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -170,16 +170,15 @@
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
     label.textColor = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:1.00f];
     label.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
     label.shadowOffset = CGSizeMake(0, 1);
     label.textAlignment = NSTextAlignmentCenter;
-    label.text =  @"Made in Berlin with Love\n❝Patrick - Vasileia❞";
+    label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
     label.numberOfLines = 0;
     label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
 
-    
     self.tableView.tableFooterView = label;
 }
 
@@ -350,6 +349,12 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return @"Remove";
+}
+
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
@@ -357,6 +362,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 {
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
     [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
+    
     [sheet addButtonWithTitle:@"Suggest a station" block:^{
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
@@ -366,6 +372,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
+    
     [sheet setDestructiveButtonWithTitle:@"Report a problem" block:^{
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
@@ -375,6 +382,21 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
+    
+    if ([SLComposeViewController class])
+    {
+        [sheet addButtonWithTitle:@"Share with Twitter" block:^{
+            [GRShareHelper tweetTappedOnController:self];
+        }];
+    }
+    
+    if ([SLComposeViewController class])
+    {
+        [sheet addButtonWithTitle:@"Share with Facebook" block:^{
+            [GRShareHelper facebookTappedOnController:self];
+        }];
+    }
+    
     [sheet showInView:self.view];
 }
 

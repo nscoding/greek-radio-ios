@@ -41,21 +41,30 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
-- (void)playStationWithStreamURL:(NSString *)streamURL
+- (void)playStation:(NSString *)aStationName
+      withStreamURL:(NSString *)aStreamURL
 {
-    if ([currentStreamURL isEqualToString:streamURL] == NO)
+    if ([self.streamURL isEqualToString:aStreamURL] == NO)
     {
-        [audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
-        [audioStreamer stop];
-        audioStreamer = nil;
+        [self stopPlayingStation];
     }
     
-    NSURL *url = [NSURL URLWithString:streamURL];
+    if (audioStreamer.isPlaying)
+    {
+        return;
+    }
+    else
+    {
+        [self stopPlayingStation];
+    }
+    
+    NSURL *url = [NSURL URLWithString:aStreamURL];
     audioStreamer = [[AudioStreamer alloc] initWithURL:url];
     [audioStreamer addObserver:self forKeyPath:@"isPlaying" options:0 context:nil];
     [audioStreamer start];
     
-    currentStreamURL = [NSString stringWithFormat:@"%@",streamURL];
+    self.streamURL = [NSString stringWithFormat:@"%@",aStreamURL];
+    self.stationName = [NSString stringWithFormat:@"%@",aStationName];
 }
 
 
@@ -90,6 +99,8 @@
 
 - (void)stopPlayingStation
 {
+    self.stationName = @"";
+
     [audioStreamer stop];
     [audioStreamer removeObserver:self forKeyPath:@"isPlaying"];
     audioStreamer = nil;

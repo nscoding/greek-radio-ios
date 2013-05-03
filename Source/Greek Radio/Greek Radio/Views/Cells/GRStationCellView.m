@@ -100,6 +100,16 @@
 }
 
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.genreBadgeView.alpha = editing ? 0.0f : 1.0f;
+    }];
+    
+    [super setEditing:editing animated:animated];
+}
+
+
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];

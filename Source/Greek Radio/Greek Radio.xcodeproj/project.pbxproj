@@ -71,7 +71,8 @@
 		CD92B4F51733E7BC00771F26 /* GRPauseButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F11733E7BC00771F26 /* GRPauseButton@2x.png */; };
 		CD92B4F61733E7BC00771F26 /* GRPlayButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F21733E7BC00771F26 /* GRPlayButton.png */; };
 		CD92B4F71733E7BC00771F26 /* GRPlayButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */; };
-		CD92B4FA1733EF7000771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; };
+		CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CD92B501173400B600771F26 /* GRShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B500173400B600771F26 /* GRShareHelper.m */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -197,6 +198,8 @@
 		CD92B4F21733E7BC00771F26 /* GRPlayButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRPlayButton.png; sourceTree = "<group>"; };
 		CD92B4F31733E7BC00771F26 /* GRPlayButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPlayButton@2x.png"; sourceTree = "<group>"; };
 		CD92B4F91733EF7000771F26 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		CD92B4FF173400B600771F26 /* GRShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShareHelper.h; sourceTree = "<group>"; };
+		CD92B500173400B600771F26 /* GRShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShareHelper.m; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -243,7 +246,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD92B4FA1733EF7000771F26 /* Social.framework in Frameworks */,
+				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
 				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
 				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
@@ -284,6 +287,8 @@
 			children = (
 				CD7A017E17327764003A2E2D /* GRWoodNavigationBar.h */,
 				CD7A017F17327764003A2E2D /* GRWoodNavigationBar.m */,
+				CD92B4FF173400B600771F26 /* GRShareHelper.h */,
+				CD92B500173400B600771F26 /* GRShareHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -813,6 +818,7 @@
 				CDD7EBE21733B66100225F5A /* Reachability.m in Sources */,
 				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,
 				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
+				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

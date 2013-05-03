@@ -657,8 +657,6 @@ void ReadStreamCallBack
             
 			if ([[NSInternetDoctor shared] connected])
             {
-				[self stop];
-                
                 BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:@"Something is wrong..."
                                                                           message:@"Incompatible or offline audio stream, try again."];
                 [alertView setCancelButtonWithTitle:@"Dismiss" block:nil];

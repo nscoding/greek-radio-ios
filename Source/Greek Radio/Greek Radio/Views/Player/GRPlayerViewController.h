@@ -18,7 +18,4 @@
 - (IBAction)markStationAsFavourite:(id)sender;
 - (IBAction)playOrPause:(id)sender;
 
-- (IBAction)tweetTapped:(id)sender;
-- (IBAction)facebookTapped:(id)sender;
-
 @end

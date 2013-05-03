@@ -10,8 +10,6 @@
 #import "GRRadioPlayer.h"
 #import "BlockAlertView.h"
 
-#import <Social/Social.h>
-
 
 // ------------------------------------------------------------------------------------------
 
@@ -35,11 +33,13 @@
 {
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
-        [[GRRadioPlayer shared] playStationWithStreamURL:station.streamURL];
         [self configurePlayButton];
 
         self.currentStation = station;
+        [[GRRadioPlayer shared] playStation:self.currentStation.title
+                              withStreamURL:self.currentStation.streamURL];
         
+
         [self.view setBackgroundColor:[UIColor blackColor]];
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureListButton];
@@ -213,7 +213,9 @@
     }
     else
     {
-        [[GRRadioPlayer shared] playStationWithStreamURL:self.currentStation.streamURL];
+        [[GRRadioPlayer shared] playStation:self.currentStation.title
+                              withStreamURL:self.currentStation.streamURL];
+        
         [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
     }
 }
@@ -225,52 +227,6 @@
     [self.currentStation.managedObjectContext save:nil];
     
     [self animateFavouriteButton];
-}
-
-
-- (IBAction)tweetTapped:(id)sender
-{
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
-    {
-        SLComposeViewController *tweetSheet = [SLComposeViewController
-                                               composeViewControllerForServiceType:SLServiceTypeTwitter];
-        
-        [tweetSheet setInitialText:[NSString stringWithFormat:@"Listeing to %@ using Greek Radio", self.currentStation.title]];
-        [tweetSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id321094050?ls=1&mt=8"]];
-        
-        [self presentViewController:tweetSheet
-                           animated:YES
-                         completion:nil];
-    }
-    else
-    {
-        [BlockAlertView alertWithTitle:@"Sorry"
-                               message:@"You can't send a tweet right now, make sure your device has an"
-                                       @" internet connection and you have at least one Twitter account setup"];
-    }
-}
-
-
-- (IBAction)facebookTapped:(id)sender
-{
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
-    {
-        SLComposeViewController *facebookSheet = [SLComposeViewController
-                                               composeViewControllerForServiceType:SLServiceTypeFacebook];
-        
-        [facebookSheet setInitialText:[NSString stringWithFormat:@"Listeing to %@ using Greek Radio", self.currentStation.title]];
-        [facebookSheet addURL:[NSURL URLWithString:@"https://itunes.apple.com/app/id321094050?ls=1&mt=8"]];
-        
-        [self presentViewController:facebookSheet
-                           animated:YES
-                         completion:nil];
-    }
-    else
-    {
-        [BlockAlertView alertWithTitle:@"Sorry"
-                               message:@"You update your status right now, make sure your device has an"
-         @" internet connection and you have at least one Facebook account setup"];
-    }
 }
 
 
