@@ -13,7 +13,7 @@
 #import "GRSplashViewController.h"
 #import "TestFlight.h"
 #import "GRAppearance‎Helper.h"
-
+#import "BlockAlertView.h"
 
 // ------------------------------------------------------------------------------------------
 
@@ -31,6 +31,13 @@
 
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
+    
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
+                                                   message:@"Feel. Listen. Share."];
+    
+    [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
+    [alert show];
+
     
 //    [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
 //    [self buildAndConfigureSplashViewController];

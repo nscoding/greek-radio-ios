@@ -56,12 +56,6 @@
 // ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
-                                                   message:@"This is a very long message, designed just to show you how smart this class is"];
-    
-    [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
-    [alert show];
-
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
     

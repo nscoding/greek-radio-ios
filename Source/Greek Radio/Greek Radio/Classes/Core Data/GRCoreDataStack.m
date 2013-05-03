@@ -115,17 +115,10 @@
     @synchronized(kManagedObjectContextKey)
     {
         managedObjectContext = [[[NSThread currentThread] threadDictionary] objectForKey:kManagedObjectContextKey];
-        
-#ifdef DEBUG
-        NSLog(@"access %@",[NSThread currentThread]);
-#endif
         if (managedObjectContext == nil)
         {
             NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
             
-#ifdef DEBUG
-            NSLog(@"create %@",[NSThread currentThread]);
-#endif
             
             if (coordinator != nil)
             {

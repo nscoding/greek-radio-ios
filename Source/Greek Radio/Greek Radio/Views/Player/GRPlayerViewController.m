@@ -62,20 +62,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    if (self.currentStation.favourite.boolValue == NO)
-    {
-        [UIView animateWithDuration:0.4
-                              delay:0.4
-                            options:UIViewAnimationOptionCurveEaseInOut
-                         animations:^
-        {
-            CGRect frame = self.favouriteButton.frame;
-            frame.origin.y = self.view.frame.size.height - 43;
-            [self.favouriteButton setFrame:frame];
-        }
-        completion:nil];
-    }
+
+    [self animateFavouriteButton];
 }
 
 
@@ -89,7 +77,7 @@
                          animations:^
          {
              CGRect frame = self.favouriteButton.frame;
-             frame.origin.y = self.view.frame.size.height - 43;
+             frame.origin.y = self.view.frame.size.height - 41;
              [self.favouriteButton setFrame:frame];
          }
                          completion:nil];

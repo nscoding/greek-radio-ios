@@ -103,7 +103,11 @@
 {
     NSURL *xmlURL = [NSURL URLWithString:URL];
     self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
-    [self.rssParser setDelegate:self];
+    self.rssParser.delegate = self;
+    [self.rssParser setShouldProcessNamespaces:NO];
+    [self.rssParser setShouldReportNamespacePrefixes:NO];
+    [self.rssParser setShouldResolveExternalEntities:NO];
+
     [self.rssParser parse];
 }
 
@@ -138,7 +142,7 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    //    NSLog(@"found this element: %@", elementName);
+    NSLog(@"found this element: %@", elementName);
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
@@ -163,11 +167,11 @@ didStartElement:(NSString *)elementName
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self.stationsDAO createStationWithTitle:self.currentTitle
-                                             siteURL:self.currentStationURL
-                                           streamURL:self.currentStreamURL
-                                               genre:self.currentGenre
-                                            location:self.currentLocation
+            [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
+                                             siteURL:[self.currentStationURL copy]
+                                           streamURL:[self.currentStreamURL copy]
+                                               genre:[self.currentGenre copy]
+                                            location:[self.currentLocation copy]
                                          serverBased:YES];
         });
 
@@ -177,7 +181,7 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    //	NSLog(@"found characters: %@", string);
+    NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
