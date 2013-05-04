@@ -75,6 +75,7 @@
 		CD92B512173455EA00771F26 /* GRPlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50E173455EA00771F26 /* GRPlay@2x.png */; };
 		CD92B513173455EA00771F26 /* GRHeart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B50F173455EA00771F26 /* GRHeart@2x.png */; };
 		CD92B51517345B2600771F26 /* GRHeartSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B51417345B2600771F26 /* GRHeartSelected@2x.png */; };
+		CD92B519173572C100771F26 /* GRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B518173572C100771F26 /* GRConstants.m */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -199,6 +200,8 @@
 		CD92B50E173455EA00771F26 /* GRPlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRPlay@2x.png"; sourceTree = "<group>"; };
 		CD92B50F173455EA00771F26 /* GRHeart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRHeart@2x.png"; sourceTree = "<group>"; };
 		CD92B51417345B2600771F26 /* GRHeartSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRHeartSelected@2x.png"; sourceTree = "<group>"; };
+		CD92B517173572C100771F26 /* GRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRConstants.h; sourceTree = "<group>"; };
+		CD92B518173572C100771F26 /* GRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRConstants.m; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -447,6 +450,15 @@
 			path = Appearance;
 			sourceTree = "<group>";
 		};
+		CD92B5161735729E00771F26 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CD92B517173572C100771F26 /* GRConstants.h */,
+				CD92B518173572C100771F26 /* GRConstants.m */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -609,6 +621,7 @@
 				CD7A02BC1732E9AF003A2E2D /* Appearance */,
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
 				CDA752EC17305471005B25EC /* Core Data */,
+				CD92B5161735729E00771F26 /* Constants */,
 				CDD7EBE41733B69500225F5A /* Internet Doctor */,
 				CD7A02071732939F003A2E2D /* Notification Center */,
 				CDD7EBEA1733BC5D00225F5A /* Radio Player */,
@@ -809,6 +822,7 @@
 				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,
 				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
 				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
+				CD92B519173572C100771F26 /* GRConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

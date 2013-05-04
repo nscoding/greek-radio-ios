@@ -36,19 +36,22 @@
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
                                                        message:@"Listen. Feel. Share."];
         
-        [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
+        [alert setCancelButtonWithTitle:@"Enjoy!" block:nil];
         [alert show];
     }
     
     [self registerObservers];
     
-//    [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
-//    [self buildAndConfigureSplashViewController];
+    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
+    // [self buildAndConfigureSplashViewController];
     
     return YES;
 }
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notfications
+// ------------------------------------------------------------------------------------------
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -137,35 +140,6 @@
         [[GRWebService shared] parseXML];
     });
 }
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Application notifications
-// ------------------------------------------------------------------------------------------
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-}
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-}
-
 
 
 @end
