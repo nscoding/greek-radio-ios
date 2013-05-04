@@ -44,6 +44,15 @@
 - (void)playStation:(NSString *)aStationName
       withStreamURL:(NSString *)aStreamURL
 {
+    if ([[NSInternetDoctor shared] connected] == NO)
+    {
+        [self stopPlayingStation];
+        [[NSInternetDoctor shared] showNoInternetAlert];
+        [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
+        
+        return;
+    }
+
     if ([self.streamURL isEqualToString:aStreamURL] == NO)
     {
         [self stopPlayingStation];
@@ -63,6 +72,8 @@
     audioStreamer.delegate = self;
     [audioStreamer start];
     
+    [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
+
     self.streamURL = [NSString stringWithFormat:@"%@",aStreamURL];
     self.stationName = [NSString stringWithFormat:@"%@",aStationName];
 }
@@ -76,15 +87,18 @@
     }
     else
     {
-        [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
-        audioStreamer = nil;
+        [self stopPlayingStation];
     }
 }
 
 
 - (void)stopPlayingStation
 {
+    [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
+
     self.stationName = @"";
+    self.streamURL = @"";
+
     [audioStreamer stop];
     audioStreamer = nil;
 }

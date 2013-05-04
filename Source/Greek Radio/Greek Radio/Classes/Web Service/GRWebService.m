@@ -8,9 +8,6 @@
 
 #import "GRWebService.h"
 #import "GRStationsDAO.h"
-#import "BlockAlertView.h"
-
-#import "NSInternetDoctor.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -89,7 +86,16 @@
         return;
     }
     
-    self.isParsing = YES;
+    if ([[NSInternetDoctor shared] connected] == NO)
+    {
+        self.isParsing = NO;
+        [[NSInternetDoctor shared] showNoInternetAlert];
+        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        
+        return;
+    }
+
+    self.isParsing = YES;    
     
     [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
@@ -118,10 +124,6 @@
     {
         NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
         [BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
-    }
-    else
-    {
-        [[NSInternetDoctor shared] showNoInternetAlert];
     }
     
     [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];

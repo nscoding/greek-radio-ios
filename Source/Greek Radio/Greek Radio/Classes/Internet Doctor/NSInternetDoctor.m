@@ -7,7 +7,6 @@
 //
 
 #import "NSInternetDoctor.h"
-#import "BlockAlertView.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -110,7 +109,6 @@
 #warning localize
     [BlockAlertView showInfoAlertWithTitle:@"No internet connection" message:@"You need internet"];
 
-    
     [self.nscodingReachability stopNotifier];
     [self.nscodingReachability startNotifier];
 }

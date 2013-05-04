@@ -10,9 +10,6 @@
 #import "GRStationsDAO.h"
 #import "GRStationCellView.h"
 #import "GRPlayerViewController.h"
-#import "BlockAlertView.h"
-#import "BlockActionSheet.h"
-#import "GRWebService.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -185,7 +182,7 @@
 // ------------------------------------------------------------------------------------------
 - (void)updateStations
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];
     });
 }

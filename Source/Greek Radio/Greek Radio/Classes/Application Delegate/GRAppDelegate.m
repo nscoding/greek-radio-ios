@@ -8,11 +8,10 @@
 
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
-#import "GRWebService.h"
 #import "GRSplashViewController.h"
+
 #import "TestFlight.h"
-#import "GRAppearance‎Helper.h"
-#import "BlockAlertView.h"
+
 
 // ------------------------------------------------------------------------------------------
 
@@ -27,21 +26,65 @@
 #endif
     
     [GRAppearanceHelper setUpGreekRadioAppearance];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
     
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
-                                                   message:@"Feel. Listen. Share."];
+    if ([NSInternetDoctor shared].connected)
+    {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
+                                                       message:@"Feel. Listen. Share."];
+        
+        [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
+        [alert show];
+    }
     
-    [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
-    [alert show];
-
+    [self registerObservers];
     
 //    [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
 //    [self buildAndConfigureSplashViewController];
     
     return YES;
+}
+
+
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidStart:)
+                                                 name:GRNotificationSyncManagerDidStart
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidStart:)
+                                                 name:GRNotificationStreamDidStart
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidEnd:)
+                                                 name:GRNotificationSyncManagerDidEnd
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidEnd:)
+                                                 name:GRNotificationStreamDidEnd
+                                               object:nil];
+}
+
+
+- (void)activityDidStart:(NSNotification *)notification
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+
+- (void)activityDidEnd:(NSNotification *)notification
+{
+    if ([GRRadioPlayer shared].isPlaying == NO)
+    {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
 }
 
 
@@ -90,7 +133,7 @@
     self.listTableViewController.navigationController = self.menuNavigationController;
     self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];
     });
 }

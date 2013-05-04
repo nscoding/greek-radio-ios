@@ -7,9 +7,6 @@
 //
 
 #import "GRPlayerViewController.h"
-#import "GRRadioPlayer.h"
-#import "BlockAlertView.h"
-#import "BlockActionSheet.h"
 #import "GRShareHelper.h"
 
 #import <MediaPlayer/MediaPlayer.h>
@@ -30,6 +27,7 @@
 
 @implementation GRPlayerViewController
 
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
 // ------------------------------------------------------------------------------------------
@@ -46,9 +44,7 @@
         [self buildAndConfigureListButton];
         [self buildAndConfigureLoadingView];
         [self registerObservers];
-        
-        [self configurePlayButton];
-        
+            
         
         CGRect bottomFrame = self.bottomBar.frame;
         bottomFrame.origin.y = self.view.frame.size.height - bottomFrame.size.height;
@@ -64,6 +60,8 @@
         
         [[GRRadioPlayer shared] playStation:self.currentStation.title
                               withStreamURL:self.currentStation.streamURL];
+        
+        [self configurePlayButton];
     }
     
     return self;
@@ -230,15 +228,12 @@
 {
     if ([GRRadioPlayer shared].isPlaying)
     {
-        [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
         [[GRRadioPlayer shared] stopPlayingStation];
     }
     else
     {
         [[GRRadioPlayer shared] playStation:self.currentStation.title
                               withStreamURL:self.currentStation.streamURL];
-        
-        [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
     }
 }
 
@@ -249,6 +244,18 @@
     [self.currentStation.managedObjectContext save:nil];
     
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Mail Delegate
+// ------------------------------------------------------------------------------------------
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    [GRAppearanceHelper setUpGreekRadioAppearance];    
+    [controller dismissModalViewControllerAnimated:YES];
 }
 
 
