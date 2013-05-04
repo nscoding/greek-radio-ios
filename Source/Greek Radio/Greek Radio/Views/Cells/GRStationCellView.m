@@ -50,7 +50,11 @@
         self.genreBadgeView = [[JSBadgeView alloc] initWithParentView:self
                                                             alignment:JSBadgeViewAlignmentCenterRight];
 
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f green:0.522f blue:0.482f alpha:1.00f];
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f
+                                                                   green:0.522f
+                                                                    blue:0.482f
+                                                                   alpha:1.00f];
+        
         self.genreBadgeView.badgeText = [NSString stringWithFormat:@"..."];
     }
 
@@ -118,17 +122,6 @@
     }];
     
     [super setEditing:editing animated:animated];
-}
-
-
-- (void)setStatus:(BOOL)isPlaying
-{
-}
-
-
-- (void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
 }
 
 

@@ -34,7 +34,7 @@
     if ([NSInternetDoctor shared].connected)
     {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
-                                                       message:@"Feel. Listen. Share."];
+                                                       message:@"Listen. Feel. Share."];
         
         [alert setCancelButtonWithTitle:@"Dismiss" block:nil];
         [alert show];
@@ -165,6 +165,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 }
+
 
 
 @end

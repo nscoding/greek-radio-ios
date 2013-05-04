@@ -248,20 +248,7 @@
                                       reuseIdentifier:identifier];
     }
     
-    GRStation *station = nil;
-    if (indexPath.section == 0)
-    {
-        station = [self.favouriteStations objectAtIndex:indexPath.row];
-    }
-    else if (indexPath.section == 1)
-    {
-        station = [self.localStations objectAtIndex:indexPath.row];
-    }
-    else if (indexPath.section == 2)
-    {
-        station = [self.serverStations objectAtIndex:indexPath.row];
-    }
-
+    GRStation *station = [self stationForIndexPath:indexPath];
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
     [cell setBadgeText:[NSString stringWithFormat:@"%@", station.genre]];
@@ -274,23 +261,29 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionName;
+    NSString *sectionName = @"";
     switch (section)
     {
         case 0:
+        {
             sectionName = (self.favouriteStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Favorites", @""), self.favouriteStations.count] : @"";
+            [NSString stringWithFormat:@"%@ (%i)",
+             NSLocalizedString(@"Favorites", @""), self.favouriteStations.count] : @"";
+        }
             break;
         case 1:
+        {
             sectionName = (self.localStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Local Stations", @""), self.localStations.count] : @"";
+            [NSString stringWithFormat:@"%@ (%i)",
+             NSLocalizedString(@"Local Stations", @""), self.localStations.count] : @"";
+        }
             break;
         case 2:
+        {
             sectionName = (self.serverStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)", NSLocalizedString(@"Stations", @""), self.serverStations.count] : @"";
-            break;
-        default:
-            sectionName = @"";
+            [NSString stringWithFormat:@"%@ (%i)",
+             NSLocalizedString(@"Stations", @""), self.serverStations.count] : @"";
+        }
             break;
     }
     
@@ -300,20 +293,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GRStation *station = nil;
-    if (indexPath.section == 0)
-    {
-        station = [self.favouriteStations objectAtIndex:indexPath.row];
-    }
-    else if (indexPath.section == 1)
-    {
-        station = [self.localStations objectAtIndex:indexPath.row];
-    }
-    else if (indexPath.section == 2)
-    {
-        station = [self.serverStations objectAtIndex:indexPath.row];
-    }
-
+    GRStation *station = [self stationForIndexPath:indexPath];
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
                                                                                 previousView:self.view];
 
@@ -338,10 +318,12 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        GRStation *station = [self.favouriteStations objectAtIndex:indexPath.row];
+        GRStation *station = [self stationForIndexPath:indexPath];
         station.favourite = [NSNumber numberWithBool:NO];
         [station.managedObjectContext save:nil];
-        [self configureStationsWithFilter:self.searchBar.text animate:YES];
+        
+        [self configureStationsWithFilter:self.searchBar.text
+                                  animate:YES];
     }
 }
 
@@ -353,29 +335,58 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 
 
 // ------------------------------------------------------------------------------------------
+#pragma mark - Table View Helpers
+// ------------------------------------------------------------------------------------------
+- (GRStation *)stationForIndexPath:(NSIndexPath *)indexPath
+{
+    GRStation *station = nil;
+    
+    if (indexPath.section == 0)
+    {
+        station = [self.favouriteStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 1)
+    {
+        station = [self.localStations objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 2)
+    {
+        station = [self.serverStations objectAtIndex:indexPath.row];
+    }
+
+    return station;
+}
+
+
+// ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
 - (void)moreButtonPressed:(UIButton *)sender
 {
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
+    [sheet setCancelButtonWithTitle:@"Dismiss"
+                              block:nil];
     
-    [sheet addButtonWithTitle:@"Suggest a station" block:^{
+    [sheet addButtonWithTitle:@"Suggest a station"
+                        block:^
+    {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
-        [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
         mailController.subject = @"New station proposal";
-        
+        [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
     
-    [sheet setDestructiveButtonWithTitle:@"Report a problem" block:^{
+    [sheet setDestructiveButtonWithTitle:@"Report a problem"
+                                   block:^
+    {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
+        mailController.subject = @"Something is wrong...";        
         [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-        mailController.subject = @"Something is wrong...";
-        
+
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
@@ -389,7 +400,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    
     [controller dismissModalViewControllerAnimated:YES];
 }
 
@@ -438,6 +448,14 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 // ------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning
 {
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        [[GRRadioPlayer shared] stopPlayingStation];
+        [BlockAlertView showInfoAlertWithTitle:@"Low Memory"
+                                       message:@"The amount of available memory on your device is low, "
+                                               @"Greek Radio stopped playing to avoid crashing."];
+    }
+  
     [super didReceiveMemoryWarning];
 }
 

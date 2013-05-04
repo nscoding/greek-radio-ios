@@ -122,7 +122,7 @@
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:24];
+    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
     label.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
     label.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
     label.shadowOffset = CGSizeMake(0, 1);
@@ -130,7 +130,8 @@
     label.text =  [name copy];
     label.numberOfLines = 0;
     
-    [label sizeToFit];
+    CGSize size = [label sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    label.frame = CGRectMake(0, 0, size.width, size.height);
     [label setCenter:CGPointMake(self.view.center.x, 260)];
     
     [self.view addSubview:label];
@@ -254,18 +255,8 @@
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
 {
-    [GRAppearanceHelper setUpGreekRadioAppearance];    
+    [GRAppearanceHelper setUpGreekRadioAppearance];
     [controller dismissModalViewControllerAnimated:YES];
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Memory
-// ------------------------------------------------------------------------------------------
-- (void)didReceiveMemoryWarning
-{
-#warning stop the player, show an alert
-    [super didReceiveMemoryWarning];
 }
 
 
