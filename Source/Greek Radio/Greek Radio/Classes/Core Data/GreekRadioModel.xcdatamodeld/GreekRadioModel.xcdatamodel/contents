@@ -4,11 +4,12 @@
         <attribute name="favourite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="genre" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="server" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="stationURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="streamURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GRStation" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="GRStation" positionX="160" positionY="192" width="128" height="150"/>
     </elements>
 </model>

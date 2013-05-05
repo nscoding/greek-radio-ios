@@ -33,13 +33,48 @@
 }
 
 
+- (id)init
+{
+    if ((self = [super init]))
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contextDidSave:)
+                                                     name:NSManagedObjectContextDidSaveNotification
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contextDidSave:)
+                                                     name:NSManagedObjectContextObjectsDidChangeNotification
+                                                   object:nil];
+    }
+    
+    return self;
+}
+
+
 // ------------------------------------------------------------------------------------------
-#pragma mark - Save
+#pragma mark - Notifications
 // ------------------------------------------------------------------------------------------
+- (void)contextDidSave:(NSNotification *)notification
+{
+    [self performSelectorOnMainThread:@selector(mergeChangesWithNotification:)
+                           withObject:notification
+                        waitUntilDone:NO];
+}
+
+
+- (void)mergeChangesWithNotification:(NSNotification *)notification
+{
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+}
+
+
 - (void)saveChanges
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    [managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+    
     
     if (managedObjectContext != nil)
     {
@@ -49,8 +84,12 @@
             /*
              Replace this implementation with code to handle the error appropriately.
              
-             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             abort() causes the application to generate a crash log and terminate. You should not use this 
+             function in a shipping application, although it may be useful during development. If it is not 
+             possible to recover from the error, display an alert panel that instructs the user to quit the
+             application by pressing the Home button.
              */
+            
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
@@ -73,15 +112,21 @@
 {
     NSManagedObjectContext *managedObjectContext = nil;
     
-    
-    if (managedObjectContext == nil)
+    @synchronized(kManagedObjectContextKey)
     {
-        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-        
-        if (coordinator != nil)
+        managedObjectContext = [[[NSThread currentThread] threadDictionary] objectForKey:kManagedObjectContextKey];
+        if (managedObjectContext == nil)
         {
-            managedObjectContext = [[NSManagedObjectContext alloc] init];
-            [managedObjectContext setPersistentStoreCoordinator:coordinator];
+            NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+            
+            
+            if (coordinator != nil)
+            {
+                managedObjectContext = [[NSManagedObjectContext alloc] init];
+                [managedObjectContext setPersistentStoreCoordinator:coordinator];
+                
+                [[[NSThread currentThread] threadDictionary] setObject:managedObjectContext forKey:kManagedObjectContextKey];
+            }
         }
     }
     
@@ -123,7 +168,15 @@
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:dbURL options:nil error:&error])
+    NSDictionary *optionsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
+                                       NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES],
+                                       NSInferMappingModelAutomaticallyOption, nil];
+    
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                   configuration:nil
+                                                             URL:dbURL
+                                                         options:optionsDictionary
+                                                           error:&error])
     {
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
@@ -131,6 +184,7 @@
     
     return _persistentStoreCoordinator;
 }
+
 
 
 // ------------------------------------------------------------------------------------------
@@ -141,25 +195,26 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:newEntityName inManagedObjectContext:[self managedObjectContext]];
 	
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entity];
-    request.returnsObjectsAsFaults = NO;
-    request.includesPropertyValues = YES;
-    request.includesSubentities = YES;
-    
+    request.entity = entity;
+        
 	if (predicate)
     {
-        [request setPredicate:predicate];
+        request.predicate = predicate;
     }
 	
     NSError *error = nil;
-    NSArray *results = [[self managedObjectContext] executeFetchRequest:request error:&error];
-    
+    NSArray *results = [[self managedObjectContext] executeFetchRequest:request
+                                                                  error:&error];
+
     if (error != nil)
     {
         [NSException raise:NSGenericException format:@"Error: %@",[error description]];
     }
 	else
 	{
+        results = [results sortedArrayUsingDescriptors:@[[[NSSortDescriptor alloc]
+                                                          initWithKey:@"title" ascending:YES]]];
+
 		return results;
 	}
 	
@@ -172,7 +227,6 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
-
 
 
 @end
