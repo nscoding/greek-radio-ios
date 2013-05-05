@@ -13,6 +13,7 @@
 @interface GRStation : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * favourite;
+@property (nonatomic, retain) NSNumber * server;
 @property (nonatomic, retain) NSString * genre;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * stationURL;

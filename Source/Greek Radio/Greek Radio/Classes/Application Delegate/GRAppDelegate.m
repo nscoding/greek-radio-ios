@@ -7,8 +7,8 @@
 //
 
 #import "GRAppDelegate.h"
-#import "GRViewController.h"
-#import "GRWebService.h"
+#import "GRListTableViewController.h"
+#import "GRSplashViewController.h"
 
 #import "TestFlight.h"
 
@@ -25,13 +25,69 @@
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
 #endif
     
-    [self buildAndConfigureMainWindow];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[GRWebService shared] parseXML];
-    });
+    [GRAppearanceHelper setUpGreekRadioAppearance];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
+    [self buildAndConfigureMainWindow];
+    [self buildAndConfigureStationsViewController];
+    
+    if ([NSInternetDoctor shared].connected)
+    {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
+                                                       message:@"Listen. Feel. Share."];
+        
+        [alert setCancelButtonWithTitle:@"Enjoy!" block:nil];
+        [alert show];
+    }
+    
+    [self registerObservers];
+    
+    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
+    // [self buildAndConfigureSplashViewController];
+    
     return YES;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notfications
+// ------------------------------------------------------------------------------------------
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidStart:)
+                                                 name:GRNotificationSyncManagerDidStart
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidStart:)
+                                                 name:GRNotificationStreamDidStart
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidEnd:)
+                                                 name:GRNotificationSyncManagerDidEnd
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(activityDidEnd:)
+                                                 name:GRNotificationStreamDidEnd
+                                               object:nil];
+}
+
+
+- (void)activityDidStart:(NSNotification *)notification
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+
+- (void)activityDidEnd:(NSNotification *)notification
+{
+    if ([GRRadioPlayer shared].isPlaying == NO)
+    {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    }
 }
 
 
@@ -41,44 +97,48 @@
 - (void)buildAndConfigureMainWindow
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    // Override point for customization after application launch.
-    self.viewController = [[GRViewController alloc] initWithNibName:@"GRViewController" bundle:nil];
-    
-    self.menuNavigationController = [[UINavigationController alloc]
-                                                    initWithRootViewController:self.viewController];
-    self.menuNavigationController.navigationBarHidden = YES;
-    self.window.rootViewController = self.menuNavigationController;
-
     [self.window makeKeyAndVisible];
 }
 
 
-// ------------------------------------------------------------------------------------------
-#pragma mark - Application notifications
-// ------------------------------------------------------------------------------------------
-- (void)applicationWillResignActive:(UIApplication *)application
+- (void)buildAndConfigureSplashViewController
 {
+    // Add the splash view
+	self.splashViewController = [[GRSplashViewController alloc] init];
+    [self.splashViewController.view setFrame:self.window.frame];
+    [self.window addSubview:self.splashViewController.view];
 }
 
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+- (void)flipSplashScreen
 {
+    // Page flip transition
+	[UIView beginAnimations:@"pageFlipTransition" context:nil];
+	[UIView setAnimationDelay:0.0];
+	[UIView setAnimationBeginsFromCurrentState:YES];
+	[UIView setAnimationDuration:0.8];
+	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.window cache:YES];
+	[UIView commitAnimations];
+    
+    [self.splashViewController.view removeFromSuperview];
 }
 
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
+- (void)buildAndConfigureStationsViewController
 {
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+    // Override point for customization after application launch.
+    self.listTableViewController = [[GRListTableViewController alloc] init];
+    
+    self.menuNavigationController = [[UINavigationController alloc]
+                                                    initWithRootViewController:self.listTableViewController];
+    self.menuNavigationController.navigationBarHidden = NO;
+    self.window.rootViewController = self.menuNavigationController;
+    self.listTableViewController.navigationController = self.menuNavigationController;
+    self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [[GRWebService shared] parseXML];
+    });
 }
 
 

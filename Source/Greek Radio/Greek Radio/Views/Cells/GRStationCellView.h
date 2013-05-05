@@ -6,12 +6,15 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
+#import "JSBadgeView.h"
 
 @interface GRStationCellView : UITableViewCell
 
 @property (nonatomic, assign) IBOutlet UILabel *title;
 @property (nonatomic, assign) IBOutlet UILabel *subtitle;
+@property (nonatomic, strong) JSBadgeView *genreBadgeView;
 
+- (void)setBadgeText:(NSString *)badgeText;
 + (NSString *)reusableIdentifier;
 
 @end

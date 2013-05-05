@@ -12,6 +12,7 @@
 @implementation GRStation
 
 @dynamic favourite;
+@dynamic server;
 @dynamic genre;
 @dynamic location;
 @dynamic stationURL;

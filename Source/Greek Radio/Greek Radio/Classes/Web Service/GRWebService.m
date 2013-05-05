@@ -18,7 +18,7 @@
 #define kTopElement @"station"
     #define kElementTitle @"title"
     #define kElementStreamURL @"streamURL"
-    #define kElementStationURL @"stationURL"
+    #define kElementStationURL @"siteURL"
     #define kElementGenre @"genre"
     #define kElemenLocation @"location"
 
@@ -36,6 +36,7 @@
 @property (nonatomic, strong) NSMutableString *currentStreamURL;
 @property (nonatomic, strong) NSMutableString *currentLocation;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
+@property (nonatomic, assign) BOOL isParsing;
 
 @end
 
@@ -80,6 +81,23 @@
 // ------------------------------------------------------------------------------------------
 - (void)parseXML
 {
+    if (self.isParsing)
+    {
+        return;
+    }
+    
+    if ([[NSInternetDoctor shared] connected] == NO)
+    {
+        self.isParsing = NO;
+        [[NSInternetDoctor shared] showNoInternetAlert];
+        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        
+        return;
+    }
+
+    self.isParsing = YES;    
+    
+    [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
 }
 
@@ -91,24 +109,32 @@
 {
     NSURL *xmlURL = [NSURL URLWithString:URL];
     self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
-    [self.rssParser setDelegate:self];
+    self.rssParser.delegate = self;
+    [self.rssParser setShouldProcessNamespaces:NO];
+    [self.rssParser setShouldReportNamespacePrefixes:NO];
+    [self.rssParser setShouldResolveExternalEntities:NO];
+
     [self.rssParser parse];
 }
 
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-	NSString * errorString = [NSString stringWithFormat:
-                              @"Unable to download stations from nscoding (Error code %i )", [parseError code]];
-	
-    NSLog(@"Error parsing XML: %@", errorString);
-	
-	UIAlertView * errorAlert = [[UIAlertView alloc] initWithTitle:@"Something went wrong"
-                                                          message:errorString
-                                                         delegate:self
-                                                cancelButtonTitle:@"OK"
-                                                otherButtonTitles:nil];
-	[errorAlert show];
+    if ([[NSInternetDoctor shared] connected])
+    {
+        NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
+        [BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
+    }
+    
+    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+    
+    self.isParsing = NO;
+}
+
+
+- (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError;
+{
+
 }
 
 
@@ -141,29 +167,33 @@ didStartElement:(NSString *)elementName
 {
 	if ([elementName isEqualToString:kTopElement])
     {
-        [self.stationsDAO createStationWithTitle:self.currentTitle
-                                         siteURL:self.currentStationURL
-                                       streamURL:self.currentStreamURL
-                                           genre:self.currentGenre
-                                        location:self.currentLocation];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
+                                             siteURL:[self.currentStationURL copy]
+                                           streamURL:[self.currentStreamURL copy]
+                                               genre:[self.currentGenre copy]
+                                            location:[self.currentLocation copy]
+                                         serverBased:YES];
+        });
+
 	}
 }
 
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-	NSLog(@"found characters: %@", string);
-
-    
+    NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    NSLog(@"all done!");
-    
+    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
     parser = nil;
+    
+    self.isParsing = NO;
 }
 
 // ------------------------------------------------------------------------------------------

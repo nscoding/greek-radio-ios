@@ -7,19 +7,22 @@
 //
 
 
-@interface GRCoreDataStack : NSObject
+#define kManagedObjectContextKey @"ManagedObjectContextKey"
 
-@property (nonatomic, strong, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@interface GRCoreDataStack : NSObject
+{
+@private
+	NSManagedObjectModel *_managedObjectModel;
+	NSPersistentStoreCoordinator *_persistentStoreCoordinator;
+}
+
+@property(nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property(nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property(nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (GRCoreDataStack *)shared;
-
 - (void)saveChanges;
-
 - (NSURL *)applicationDocumentsDirectoryURL;
-
-- (NSArray *)fetchObjectsForEntityName:(NSString *)newEntityName
-                         withPredicate:(NSPredicate *)predicate;
+- (NSArray *)fetchObjectsForEntityName:(NSString *)newEntityName withPredicate:(NSPredicate *)predicate;
 
 @end
