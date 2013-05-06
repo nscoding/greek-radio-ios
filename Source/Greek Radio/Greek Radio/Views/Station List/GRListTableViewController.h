@@ -12,6 +12,5 @@
                                             UISearchBarDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
 
 @end

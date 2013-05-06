@@ -17,6 +17,7 @@
 @interface GRStationCellView()
 
 @property (nonatomic, strong) UIView *selectionColor;
+@property (nonatomic, strong) JSBadgeView *genreBadgeView;
 
 @end
 

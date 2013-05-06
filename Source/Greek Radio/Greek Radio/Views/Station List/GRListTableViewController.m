@@ -17,6 +17,7 @@
 
 @interface GRListTableViewController ()
 
+@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;

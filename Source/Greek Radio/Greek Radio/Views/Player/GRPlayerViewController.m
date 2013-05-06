@@ -17,7 +17,10 @@
 
 @interface GRPlayerViewController ()
 
-@property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
+@property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, assign) IBOutlet UIButton *playButton;
+@property (nonatomic, assign) IBOutlet UIView *bottomBar;
+@property (nonatomic, weak) GRStation *currentStation;
 
 @end
 
@@ -42,7 +45,6 @@
         
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureListButton];
-        [self buildAndConfigureLoadingView];
         [self registerObservers];
             
         
@@ -104,14 +106,12 @@
 - (void)playerDidStart:(NSNotification *)notification
 {
     [self configurePlayButton];
-    [self.loadingIndicator startAnimating];
 }
 
 
 - (void)playerDidEnd:(NSNotification *)notification
 {
     [self configurePlayButton];
-    [self.loadingIndicator stopAnimating];
 }
 
 
@@ -154,28 +154,18 @@
 }
 
 
-- (void)buildAndConfigureLoadingView
-{
-    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator];
-    [self navigationItem].rightBarButtonItem = barButton;
-    
-    if ([[GRRadioPlayer shared] isPlaying])
-    {
-        [self.loadingIndicator startAnimating];
-    }
-}
-
 
 - (void)configurePlayButton
 {
     if ([GRRadioPlayer shared].isPlaying)
     {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPause"] forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageNamed:@"GRPause"]
+                         forState:UIControlStateNormal];
     }
     else
     {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPlay"] forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageNamed:@"GRPlay"]
+                         forState:UIControlStateNormal];
     }
 }
 
