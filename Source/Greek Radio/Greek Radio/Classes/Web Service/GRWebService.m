@@ -28,6 +28,7 @@
 
 @interface GRWebService ()
 
+@property (nonatomic, strong) NSDate *dateLastSynced;
 @property (nonatomic, strong) NSXMLParser *rssParser;
 @property (nonatomic, strong) NSString *currentElement;
 @property (nonatomic, strong) NSMutableString *currentTitle;
@@ -96,6 +97,7 @@
     }
 
     self.isParsing = YES;    
+    self.dateLastSynced = [NSDate date];
     
     [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
@@ -113,13 +115,15 @@
     [self.rssParser setShouldProcessNamespaces:NO];
     [self.rssParser setShouldReportNamespacePrefixes:NO];
     [self.rssParser setShouldResolveExternalEntities:NO];
-
+    
     [self.rssParser parse];
 }
 
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
+    self.dateLastSynced = nil;
+    
     if ([[NSInternetDoctor shared] connected])
     {
         NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
@@ -144,7 +148,8 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    NSLog(@"found this element: %@", elementName);
+    
+//    NSLog(@"found this element: %@", elementName);
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
@@ -165,36 +170,40 @@ didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
+//    NSLog(@"end this element: %@", elementName);
+
 	if ([elementName isEqualToString:kTopElement])
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
-                                             siteURL:[self.currentStationURL copy]
-                                           streamURL:[self.currentStreamURL copy]
-                                               genre:[self.currentGenre copy]
-                                            location:[self.currentLocation copy]
-                                         serverBased:YES];
-        });
-
+        [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
+                                         siteURL:[self.currentStationURL copy]
+                                       streamURL:[self.currentStreamURL copy]
+                                           genre:[self.currentGenre copy]
+                                        location:[self.currentLocation copy]
+                                     serverBased:YES];
 	}
 }
 
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    NSLog(@"found characters: %@", string);
+//    NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
     parser = nil;
     
     self.isParsing = NO;
+    if (self.dateLastSynced)
+    {
+        [self.stationsDAO removeAllStationsBeforeDate:self.dateLastSynced];
+    }
+    
+    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
 }
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark -

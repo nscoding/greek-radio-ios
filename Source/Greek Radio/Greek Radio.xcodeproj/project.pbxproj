@@ -96,8 +96,8 @@
 		CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752F0173055DA005B25EC /* CoreData.framework */; };
 		CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752FD1730573C005B25EC /* GRStationsDAO.m */; };
 		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
-		CDA7531017305B52005B25EC /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA7530F17305B52005B25EC /* GRStation.m */; };
 		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
+		CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB6D1991737D5B900E9D842 /* GRStation.m */; };
 		CDD7EBE21733B66100225F5A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE11733B66100225F5A /* Reachability.m */; };
 		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
 		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
@@ -240,10 +240,10 @@
 		CDA752FC1730573C005B25EC /* GRStationsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsDAO.h; sourceTree = "<group>"; };
 		CDA752FD1730573C005B25EC /* GRStationsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsDAO.m; sourceTree = "<group>"; };
 		CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreekRadioModel.xcdatamodel; sourceTree = "<group>"; };
-		CDA7530E17305B52005B25EC /* GRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStation.h; sourceTree = "<group>"; };
-		CDA7530F17305B52005B25EC /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
 		CDA7534F173070A6005B25EC /* GRStationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStationCellView.h; path = Cells/GRStationCellView.h; sourceTree = "<group>"; };
 		CDA75350173070A6005B25EC /* GRStationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStationCellView.m; path = Cells/GRStationCellView.m; sourceTree = "<group>"; };
+		CDB6D1981737D5B900E9D842 /* GRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStation.h; sourceTree = "<group>"; };
+		CDB6D1991737D5B900E9D842 /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
 		CDD7EBE01733B66100225F5A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		CDD7EBE11733B66100225F5A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		CDD7EBE51733B6A900225F5A /* NSInternetDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInternetDoctor.h; sourceTree = "<group>"; };
@@ -522,9 +522,9 @@
 				CDA752EE1730548F005B25EC /* GRCoreDataStack.m */,
 				CDA752FC1730573C005B25EC /* GRStationsDAO.h */,
 				CDA752FD1730573C005B25EC /* GRStationsDAO.m */,
+				CDB6D1981737D5B900E9D842 /* GRStation.h */,
+				CDB6D1991737D5B900E9D842 /* GRStation.m */,
 				CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */,
-				CDA7530E17305B52005B25EC /* GRStation.h */,
-				CDA7530F17305B52005B25EC /* GRStation.m */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -862,7 +862,6 @@
 				CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */,
 				CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */,
 				CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */,
-				CDA7531017305B52005B25EC /* GRStation.m in Sources */,
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */,
 				CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */,
@@ -885,6 +884,7 @@
 				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
 				CD92B519173572C100771F26 /* GRConstants.m in Sources */,
 				CD53C95E1737B0D400264230 /* Appirater.m in Sources */,
+				CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

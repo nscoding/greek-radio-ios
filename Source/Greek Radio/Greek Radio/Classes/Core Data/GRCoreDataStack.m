@@ -178,8 +178,25 @@
                                                          options:optionsDictionary
                                                            error:&error])
     {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+        NSLog(@"Add persistent store failed with error %@, %@", error, [error userInfo]);
+        [self deleteDatabase];
+
+        NSLog(@"Trying to delete and recreate database...");
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
+                                                       configuration:nil
+                                                                 URL:dbURL
+                                                             options:optionsDictionary
+                                                               error:&error])
+        {
+            NSLog(@"Add persistent store after delete and recreated failed with error %@, %@",
+                 error,
+                 [error userInfo]);
+            
+            _persistentStoreCoordinator = nil;
+
+            abort();
+        }
+
     }
     
     return _persistentStoreCoordinator;
@@ -226,6 +243,37 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Operations
+// ------------------------------------------------------------------------------------------
+// Delete our local SQLite db
+- (void)deleteDatabase
+{
+    // Do not delete anything if we are using a in-memory persistent store.
+    BOOL isInMemory = NO;
+    
+    for (NSPersistentStore *store in [_persistentStoreCoordinator persistentStores])
+    {
+        if ([[store type] isEqualToString:NSInMemoryStoreType])
+        {
+            isInMemory = YES;
+        }
+    }
+    
+    if (isInMemory) return;
+    
+    NSError *error = nil;
+    NSURL *dbURL = [[self applicationDocumentsDirectoryURL] URLByAppendingPathComponent:@"GreekRadioModel.sqlite"];
+    
+    // [NSFileManager defaultManager] is not thread-safe.
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    if ([fileManager removeItemAtURL:dbURL error:&error] == NO)
+    {
+        NSLog(@"Persistent store deletion failed with error %@, %@", error, [error userInfo]);
+    }
 }
 
 
