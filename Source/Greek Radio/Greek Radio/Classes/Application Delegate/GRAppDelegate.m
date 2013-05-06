@@ -40,11 +40,10 @@
     // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
     // [self buildAndConfigureSplashViewController];
     
-
     [Appirater setAppId:@"321094050"];
-    [Appirater setDaysUntilPrompt:6];
+    [Appirater setDaysUntilPrompt:3];
     [Appirater setUsesUntilPrompt:3];
-    [Appirater setSignificantEventsUntilPrompt:0];
+    [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:3];
     [Appirater setUsesAnimation:YES];
     
