@@ -10,8 +10,8 @@
 
 @interface GRWebService : NSObject <NSXMLParserDelegate>
 
-+ (GRWebService *)shared;
 
++ (GRWebService *)shared;
 - (void)parseXML;
 
 @end
