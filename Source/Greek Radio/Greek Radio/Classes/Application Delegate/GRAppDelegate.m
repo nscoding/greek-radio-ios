@@ -59,8 +59,19 @@
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
                                                        message:@"Listen. Feel. Share."];
         
-        [alert setCancelButtonWithTitle:@"Enjoy!" block:^{
-            [Appirater appLaunched:YES];
+        [alert setCancelButtonWithTitle:@"Enjoy!"
+                                  block:^{
+                                
+          double delayInSeconds = 1.0;
+          dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
+                                                  (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                                      
+          dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+
+              [Appirater appLaunched:YES];
+          
+          });
+                                      
         }];
         
         [alert show];
