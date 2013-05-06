@@ -2,7 +2,7 @@
 //  GRStation.m
 //  Greek Radio
 //
-//  Created by Patrick on 4/30/13.
+//  Created by Patrick on 5/6/13.
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
@@ -12,11 +12,13 @@
 @implementation GRStation
 
 @dynamic favourite;
-@dynamic server;
 @dynamic genre;
 @dynamic location;
+@dynamic server;
 @dynamic stationURL;
 @dynamic streamURL;
 @dynamic title;
+@dynamic dateUpdated;
+@dynamic dateCreated;
 
 @end

@@ -39,12 +39,14 @@
     NSManagedObjectContext *managedObjectContext = [[GRCoreDataStack shared] managedObjectContext];
     GRStation *newStation = [self retrieveByTitle:title];
     
+    NSDate *date = [NSDate date];
     if (newStation == nil)
     {
         newStation = (GRStation *)[NSEntityDescription insertNewObjectForEntityForName:@"GRStation"
                                                                 inManagedObjectContext:managedObjectContext];
         
         newStation.favourite = [NSNumber numberWithBool:NO];
+        newStation.dateCreated = date;
     }
     
     newStation.title = title;
@@ -53,6 +55,7 @@
     newStation.genre = genre;
     newStation.location = location;
     newStation.server = [NSNumber numberWithBool:server];
+    newStation.dateUpdated = date;
 
     NSError *error = nil;
     
@@ -69,6 +72,29 @@
 - (BOOL)removeAll
 {
     NSArray *stations = [self retrieveAll];
+    NSManagedObjectContext *managedObjectContext = [[GRCoreDataStack shared] managedObjectContext];
+    
+    for (GRStation *station in stations)
+    {
+        [managedObjectContext deleteObject:station];
+    }
+    
+    NSError *error = nil;
+    
+    if (![managedObjectContext save:&error] == NO)
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+
+- (BOOL)removeAllStationsBeforeDate:(NSDate *)date
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateUpdated < %@", date];
+    NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
+                                                              withPredicate:predicate];
     NSManagedObjectContext *managedObjectContext = [[GRCoreDataStack shared] managedObjectContext];
     
     for (GRStation *station in stations)

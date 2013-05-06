@@ -18,6 +18,8 @@
                    serverBased:(BOOL)server;
 
 - (BOOL)removeAll;
+- (BOOL)removeAllStationsBeforeDate:(NSDate *)date;
+
 - (NSArray *)retrieveAll;
 - (GRStation *)retrieveByTitle:(NSString *)title;
 
