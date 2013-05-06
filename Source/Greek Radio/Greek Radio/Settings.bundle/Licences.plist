@@ -10,6 +10,14 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
+			<string>Appirater</string>
+			<key>File</key>
+			<string>Licence-Appirater</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
 			<string>Audio Streamer</string>
 			<key>File</key>
 			<string>Licence-Audio Streamer</string>

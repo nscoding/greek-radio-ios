@@ -10,6 +10,7 @@
 #import "GRListTableViewController.h"
 #import "GRSplashViewController.h"
 
+#import "Appirater.h"
 #import "TestFlight.h"
 
 
@@ -34,19 +35,36 @@
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
     
+    [self registerObservers];
+    
+    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
+    // [self buildAndConfigureSplashViewController];
+    
+
+    [Appirater setAppId:@"321094050"];
+    [Appirater setDaysUntilPrompt:6];
+    [Appirater setUsesUntilPrompt:3];
+    [Appirater setSignificantEventsUntilPrompt:0];
+    [Appirater setTimeBeforeReminding:3];
+    [Appirater setUsesAnimation:YES];
+    
+#if !APPSTORE
+    [Appirater setDebug:YES];
+#else
+    [Appirater setDebug:NO];
+#endif
+    
     if ([NSInternetDoctor shared].connected)
     {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
                                                        message:@"Listen. Feel. Share."];
         
-        [alert setCancelButtonWithTitle:@"Enjoy!" block:nil];
+        [alert setCancelButtonWithTitle:@"Enjoy!" block:^{
+            [Appirater appLaunched:YES];
+        }];
+        
         [alert show];
     }
-    
-    [self registerObservers];
-    
-    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
-    // [self buildAndConfigureSplashViewController];
     
     return YES;
 }

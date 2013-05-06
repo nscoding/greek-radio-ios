@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		CD53C9521737A97900264230 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9511737A97800264230 /* Settings.bundle */; };
+		CD53C95D1737B0D400264230 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9551737B0D400264230 /* .gitignore */; };
+		CD53C95E1737B0D400264230 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53C9571737B0D400264230 /* Appirater.m */; };
+		CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */; };
+		CD53C9601737B0D400264230 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD53C95C1737B0D400264230 /* README.md */; };
+		CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD53C9621737B15800264230 /* StoreKit.framework */; };
 		CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6AD36117312F5D0009A106 /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36317312F5D0009A106 /* libTestFlight.a */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
@@ -120,6 +125,14 @@
 
 /* Begin PBXFileReference section */
 		CD53C9511737A97800264230 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		CD53C9551737B0D400264230 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		CD53C9561737B0D400264230 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		CD53C9571737B0D400264230 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		CD53C9581737B0D400264230 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		CD53C95A1737B0D400264230 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		CD53C95B1737B0D400264230 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		CD53C95C1737B0D400264230 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		CD53C9621737B15800264230 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CD6AD36017312F5D0009A106 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		CD6AD36117312F5D0009A106 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		CD6AD36317312F5D0009A106 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -258,6 +271,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
@@ -277,6 +291,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD53C9541737B0D400264230 /* Appirater */ = {
+			isa = PBXGroup;
+			children = (
+				CD53C9551737B0D400264230 /* .gitignore */,
+				CD53C9561737B0D400264230 /* Appirater.h */,
+				CD53C9571737B0D400264230 /* Appirater.m */,
+				CD53C9581737B0D400264230 /* AppiraterDelegate.h */,
+				CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */,
+				CD53C95C1737B0D400264230 /* README.md */,
+			);
+			path = Appirater;
+			sourceTree = "<group>";
+		};
 		CD6AD35F17312F5D0009A106 /* Audio Streamer */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,15 +600,16 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CD92B5021734272800771F26 /* MediaPlayer.framework */,
-				CD92B4F91733EF7000771F26 /* Social.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
 				CDE43A8217303DD5004C0698 /* CoreGraphics.framework */,
 				CDE43A8017303DD5004C0698 /* Foundation.framework */,
+				CD92B5021734272800771F26 /* MediaPlayer.framework */,
 				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
 				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
+				CD92B4F91733EF7000771F26 /* Social.framework */,
+				CD53C9621737B15800264230 /* StoreKit.framework */,
 				CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */,
 				CDE43A7E17303DD5004C0698 /* UIKit.framework */,
 			);
@@ -675,6 +703,7 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD53C9541737B0D400264230 /* Appirater */,
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
 				CD7A02651732C176003A2E2D /* Block Alert */,
 				CD7A020F17329980003A2E2D /* CKRefreshControl */,
@@ -723,6 +752,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				el,
 			);
 			mainGroup = CDE43A7217303DD4004C0698;
 			productRefGroup = CDE43A7C17303DD5004C0698 /* Products */;
@@ -813,6 +843,9 @@
 				CD92B5301735882F00771F26 /* GRKnobBase.png in Resources */,
 				CD92B5311735882F00771F26 /* GRKnobBase@2x.png in Resources */,
 				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
+				CD53C95D1737B0D400264230 /* .gitignore in Resources */,
+				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,
+				CD53C9601737B0D400264230 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,10 +884,23 @@
 				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
 				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
 				CD92B519173572C100771F26 /* GRConstants.m in Sources */,
+				CD53C95E1737B0D400264230 /* Appirater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD53C95A1737B0D400264230 /* el */,
+				CD53C95B1737B0D400264230 /* en */,
+			);
+			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CDE43A9C17303DD5004C0698 /* Development */ = {
