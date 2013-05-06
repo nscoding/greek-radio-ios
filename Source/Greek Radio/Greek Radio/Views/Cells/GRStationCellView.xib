@@ -45,6 +45,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{42, 7}, {200, 23}}</string>
 						<reference key="NSSuperview" ref="181568436"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="833777218"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="684364084">
 							<int key="NSColorSpace">3</int>
@@ -83,6 +84,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{42, 30}, {200, 23}}</string>
 						<reference key="NSSuperview" ref="181568436"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="144690379"/>
 						<reference key="IBUIBackgroundColor" ref="684364084"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -115,6 +117,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{10, 18}, {24, 24}}</string>
 						<reference key="NSSuperview" ref="181568436"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="23876015"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -129,6 +132,8 @@
 						<int key="NSvFlags">256</int>
 						<string key="NSFrame">{{0, 58}, {320, 2}}</string>
 						<reference key="NSSuperview" ref="181568436"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">4</int>
@@ -142,6 +147,7 @@
 				</object>
 				<string key="NSFrameSize">{320, 60}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="561578523"/>
 				<reference key="IBUIBackgroundColor" ref="684364084"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -215,11 +221,6 @@
 						<reference key="parent" ref="181568436"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">64</int>
-						<reference key="object" ref="833777218"/>
-						<reference key="parent" ref="181568436"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">68</int>
 						<reference key="object" ref="561578523"/>
 						<reference key="parent" ref="181568436"/>
@@ -227,6 +228,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
 						<reference key="object" ref="144690379"/>
+						<reference key="parent" ref="181568436"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="833777218"/>
 						<reference key="parent" ref="181568436"/>
 					</object>
 				</object>
@@ -270,7 +276,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">69</int>
+			<int key="maxID">72</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
