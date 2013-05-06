@@ -24,7 +24,10 @@
 #if !APPSTORE
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
 #endif
-    
+
+    NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+    [[NSUserDefaults standardUserDefaults] setObject:appVersionString forKey:@"currentVersionKey"];
+
     [GRAppearanceHelper setUpGreekRadioAppearance];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
