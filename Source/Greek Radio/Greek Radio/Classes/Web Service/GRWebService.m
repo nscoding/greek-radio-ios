@@ -13,7 +13,7 @@
 // ------------------------------------------------------------------------------------------
 
 
-#define kWebServiceURL @"http://nscoding.co.uk/xml/radioStations.xml"
+#define kWebServiceURL @"http://nscoding.co.uk/xml/RadioStations.xml"
 
 #define kTopElement @"station"
     #define kElementTitle @"title"
