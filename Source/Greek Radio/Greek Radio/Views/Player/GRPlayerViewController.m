@@ -194,7 +194,6 @@
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
     [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
     
-    
     [sheet addButtonWithTitle:@"Share via Email" block:^{
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;

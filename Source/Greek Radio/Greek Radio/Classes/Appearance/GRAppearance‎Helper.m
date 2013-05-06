@@ -7,7 +7,7 @@
 //
 
 #import "GRAppearanceHelper.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 
 // ------------------------------------------------------------------------------------------
 
@@ -27,6 +27,21 @@
                                                            [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8], UITextAttributeTextShadowColor,
                                                            [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                            [UIFont fontWithName:@"HelveticaNeue-Bold" size:21.0], UITextAttributeFont, nil]];
+    
+    // Set the slider track images
+	[[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
+                    setMinimumTrackImage:[[UIImage imageNamed:@"GRTrackFill"]
+             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 0)]
+                                forState:UIControlStateNormal];
+	
+	[[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
+                    setMaximumTrackImage:[[UIImage imageNamed:@"GRTrackEmpty"]
+             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 6)]
+                                forState:UIControlStateNormal];
+    
+    [[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
+                           setThumbImage:[UIImage imageNamed:@"GRKnobBase"]
+                                forState:UIControlStateNormal];
 }
 
 
