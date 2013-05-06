@@ -589,38 +589,42 @@ void ReadStreamCallBack
 	// If you have a fixed file-type, you may want to hardcode this.
 	//
 	AudioFileTypeID fileTypeHint = kAudioFileMP3Type;
-	NSString *fileExtension = [[url path] pathExtension];
-	if ([fileExtension isEqual:@"mp3"])
+	NSString *fileExtension = [[url path] lastPathComponent];
+	if ([fileExtension isEqualToString:@"mp3"])
 	{
 		fileTypeHint = kAudioFileMP3Type;
 	}
-	else if ([fileExtension isEqual:@"wav"])
+	else if ([fileExtension rangeOfString:@"wav"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileWAVEType;
 	}
-	else if ([fileExtension isEqual:@"aifc"])
+    else if ([fileExtension rangeOfString:@"aifc"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileAIFCType;
 	}
-	else if ([fileExtension isEqual:@"aiff"])
+    else if ([fileExtension rangeOfString:@"aiff"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileAIFFType;
 	}
-	else if ([fileExtension isEqual:@"m4a"])
+    else if ([fileExtension rangeOfString:@"m4a"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileM4AType;
 	}
-	else if ([fileExtension isEqual:@"mp4"])
+    else if ([fileExtension rangeOfString:@"mp4"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileMPEG4Type;
 	}
-	else if ([fileExtension isEqual:@"caf"])
+    else if ([fileExtension rangeOfString:@"caf"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileCAFType;
 	}
-	else if ([fileExtension isEqual:@"aac"])
+    else if ([fileExtension rangeOfString:@"aac"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileAAC_ADTSType;
+	}
+    else if ([fileExtension rangeOfString:@"m3u"].location != NSNotFound)
+	{
+		fileTypeHint = kAudioFileMP3Type;
 	}
     
 	// initialize a mutex and condition so that we can block on buffers in use.
@@ -670,7 +674,6 @@ void ReadStreamCallBack
 		if (failed)
 		{
 			[self stop];
-#ifdef TARGET_OS_IPHONE
             
 			if ([[NSInternetDoctor shared] connected])
             {
@@ -683,8 +686,6 @@ void ReadStreamCallBack
             {
 				[[NSInternetDoctor shared] showNoInternetAlert];
 			}
-            
-#endif
 			
 			break;
 		}
