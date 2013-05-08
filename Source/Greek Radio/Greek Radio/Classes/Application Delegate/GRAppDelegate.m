@@ -55,10 +55,10 @@
     
     if ([NSInternetDoctor shared].connected)
     {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
-                                                       message:@"Listen. Feel. Share."];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"app_welcome_title", @"")
+                                                       message:NSLocalizedString(@"app_welcome_subtitle", @"")];
         
-        [alert setCancelButtonWithTitle:@"Enjoy!"
+        [alert setCancelButtonWithTitle:NSLocalizedString(@"button_enjoy", @"")
                                   block:^{
                                 
           double delayInSeconds = 1.0;
@@ -66,9 +66,7 @@
                                                   (int64_t)(delayInSeconds * NSEC_PER_SEC));
                                       
           dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-              [Appirater appLaunched:YES];
-          
+              [Appirater appLaunched:YES];          
           });
                                       
         }];

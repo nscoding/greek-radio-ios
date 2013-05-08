@@ -88,6 +88,8 @@
 		CD92B52D173587C400771F26 /* GRTrackFill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B529173587C300771F26 /* GRTrackFill@2x.png */; };
 		CD92B5301735882F00771F26 /* GRKnobBase.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B52E1735882F00771F26 /* GRKnobBase.png */; };
 		CD92B5311735882F00771F26 /* GRKnobBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B52F1735882F00771F26 /* GRKnobBase@2x.png */; };
+		CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF357173A8227006AD8C3 /* Localizable.strings */; };
+		CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF35A173A8227006AD8C3 /* Localizable.strings */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -229,6 +231,8 @@
 		CD92B529173587C300771F26 /* GRTrackFill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRTrackFill@2x.png"; sourceTree = "<group>"; };
 		CD92B52E1735882F00771F26 /* GRKnobBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRKnobBase.png; sourceTree = "<group>"; };
 		CD92B52F1735882F00771F26 /* GRKnobBase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRKnobBase@2x.png"; sourceTree = "<group>"; };
+		CD9EF358173A8227006AD8C3 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
+		CD9EF35B173A8227006AD8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -506,6 +510,31 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		CD9EF34D173A8211006AD8C3 /* Application Localization */ = {
+			isa = PBXGroup;
+			children = (
+				CD9EF359173A8227006AD8C3 /* en.lproj */,
+				CD9EF356173A8227006AD8C3 /* el.lproj */,
+			);
+			path = "Application Localization";
+			sourceTree = "<group>";
+		};
+		CD9EF356173A8227006AD8C3 /* el.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				CD9EF357173A8227006AD8C3 /* Localizable.strings */,
+			);
+			path = el.lproj;
+			sourceTree = "<group>";
+		};
+		CD9EF359173A8227006AD8C3 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				CD9EF35A173A8227006AD8C3 /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -668,6 +697,7 @@
 			isa = PBXGroup;
 			children = (
 				CD7A02BC1732E9AF003A2E2D /* Appearance */,
+				CD9EF34D173A8211006AD8C3 /* Application Localization */,
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
 				CDA752EC17305471005B25EC /* Core Data */,
 				CD92B5161735729E00771F26 /* Constants */,
@@ -846,6 +876,8 @@
 				CD53C95D1737B0D400264230 /* .gitignore in Resources */,
 				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,
 				CD53C9601737B0D400264230 /* README.md in Resources */,
+				CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */,
+				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -898,6 +930,22 @@
 				CD53C95B1737B0D400264230 /* en */,
 			);
 			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
+		CD9EF357173A8227006AD8C3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9EF358173A8227006AD8C3 /* el */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CD9EF35A173A8227006AD8C3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD9EF35B173A8227006AD8C3 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1046,8 +1094,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "21194C0D-9B25-4552-BD18-9A46EB118E09";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "21194C0D-9B25-4552-BD18-9A46EB118E09";
+				PROVISIONING_PROFILE = "FEF30D23-A39C-4488-ADA9-C70432CA27CB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEF30D23-A39C-4488-ADA9-C70432CA27CB";
 				SDKROOT = iphoneos6.1;
 				WRAPPER_EXTENSION = app;
 			};

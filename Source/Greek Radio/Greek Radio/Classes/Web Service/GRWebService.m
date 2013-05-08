@@ -126,8 +126,9 @@
     
     if ([[NSInternetDoctor shared] connected])
     {
-        NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
-        [BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
+        NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
+        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                       message:errorString];
     }
     
     [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];

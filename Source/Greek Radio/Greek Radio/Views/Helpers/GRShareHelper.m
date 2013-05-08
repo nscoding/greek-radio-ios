@@ -29,12 +29,12 @@
         
         if ([GRRadioPlayer shared].stationName.length > 0)
         {
-            [tweetSheet setInitialText:[NSString stringWithFormat:kTextWithStation,
+            [tweetSheet setInitialText:[NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
                                         [GRRadioPlayer shared].stationName]];
         }
         else
         {
-            [tweetSheet setInitialText:[NSString stringWithFormat:kTextNoStation]];
+            [tweetSheet setInitialText:NSLocalizedString(@"share_generic_text", @"")];
         }
         
         [tweetSheet addURL:[NSURL URLWithString:kAppiTunesURL]];
@@ -44,8 +44,8 @@
     }
     else
     {
-        [BlockAlertView showInfoAlertWithTitle:kSorryTitle
-                                       message:kErrorTwitter];
+        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_sorry", @"")
+                                       message:NSLocalizedString(@"share_twitter_error", @"")];
     }
 }
 
@@ -65,12 +65,12 @@
         
         if ([GRRadioPlayer shared].stationName.length > 0)
         {
-            [facebookSheet setInitialText:[NSString stringWithFormat:kTextWithStation,
+            [facebookSheet setInitialText:[NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
                                         [GRRadioPlayer shared].stationName]];
         }
         else
         {
-            [facebookSheet setInitialText:[NSString stringWithFormat:kTextNoStation]];
+            [facebookSheet setInitialText:NSLocalizedString(@"share_generic_text", @"")];
         }
         
         [facebookSheet addURL:[NSURL URLWithString:kAppiTunesURL]];
@@ -80,8 +80,8 @@
     }
     else
     {
-        [BlockAlertView showInfoAlertWithTitle:kSorryTitle
-                                       message:kErrorFacebook];
+        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_sorry", @"")
+                                       message:NSLocalizedString(@"share_facebook_error", @"")];
     }
 }
 

@@ -153,7 +153,8 @@
 - (void)buildAndConfigurePullToRefresh
 {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh Stations"];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:
+                                           NSLocalizedString(@"label_refresh_stations", @"")];
     [self.refreshControl addTarget:self
                             action:@selector(updateStations)
                   forControlEvents:UIControlEventValueChanged];
@@ -269,21 +270,21 @@
         {
             sectionName = (self.favouriteStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Favorites", @""), self.favouriteStations.count] : @"";
+             NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
         }
             break;
         case 1:
         {
             sectionName = (self.localStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Local Stations", @""), self.localStations.count] : @"";
+             NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
         }
             break;
         case 2:
         {
             sectionName = (self.serverStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Stations", @""), self.serverStations.count] : @"";
+             NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
         }
             break;
     }
@@ -332,7 +333,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 - (NSString *)tableView:(UITableView *)tableView
 titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return @"Remove";
+    return NSLocalizedString(@"button_remove", @"");
 }
 
 
@@ -366,27 +367,27 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)moreButtonPressed:(UIButton *)sender
 {
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:@"Dismiss"
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"")
                               block:nil];
     
-    [sheet addButtonWithTitle:@"Suggest a station"
+    [sheet addButtonWithTitle:NSLocalizedString(@"button_sugggest", @"")
                         block:^
     {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
-        mailController.subject = @"New station proposal";
+        mailController.subject = NSLocalizedString(@"label_new_stations", @"");
         [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
     }];
     
-    [sheet setDestructiveButtonWithTitle:@"Report a problem"
+    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
                                    block:^
     {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
-        mailController.subject = @"Something is wrong...";        
+        mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
         [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
@@ -453,9 +454,9 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     if ([GRRadioPlayer shared].isPlaying)
     {
         [[GRRadioPlayer shared] stopPlayingStation];
-        [BlockAlertView showInfoAlertWithTitle:@"Low Memory"
-                                       message:@"The amount of available memory on your device is low, "
-                                               @"Greek Radio stopped playing to avoid crashing."];
+        
+        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
+                                       message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")];
     }
   
     [super didReceiveMemoryWarning];

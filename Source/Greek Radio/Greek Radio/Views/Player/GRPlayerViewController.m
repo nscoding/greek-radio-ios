@@ -72,7 +72,7 @@
 
 - (void)viewDidLoad
 {
-    self.navigationItem.title = @"Now Playing";
+    self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
     [super viewDidLoad];
 }
 
@@ -182,15 +182,23 @@
 - (IBAction)shareButtonPressed:(UIButton *)sender
 {
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
     
-    [sheet addButtonWithTitle:@"Share via Email" block:^{
+    [sheet addButtonWithTitle:NSLocalizedString(@"share_via_email", @"")
+                        block:^
+    {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
         mailController.subject = @"Greek Radio";
-        [mailController setMessageBody:
-         [NSString stringWithFormat:@"%@.\n\nYou can check it out at %@",kTextNoStation, kAppiTunesURL]
-                                isHTML:NO];
+
+        NSString *listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                                            [GRRadioPlayer shared].stationName];
+
+        NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
+                           kAppiTunesURL];
+                           
+        [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
+                                isHTML:YES];
         
         [GRAppearanceHelper setUpDefaultAppearance];
         [self.navigationController presentModalViewController:mailController animated:YES];
@@ -198,14 +206,14 @@
     
     if ([SLComposeViewController class])
     {
-        [sheet addButtonWithTitle:@"Share via Twitter" block:^{
+        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_twitter", @"") block:^{
             [GRShareHelper tweetTappedOnController:self];
         }];
     }
     
     if ([SLComposeViewController class])
     {
-        [sheet addButtonWithTitle:@"Share via Facebook" block:^{
+        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_facebook", @"") block:^{
             [GRShareHelper facebookTappedOnController:self];
         }];
     }
