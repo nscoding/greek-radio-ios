@@ -37,8 +37,7 @@
 - (id)init
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
-    {
-        self.searchBar.delegate = self;
+    {        
         [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
                                             [UIImage imageNamed:@"GRPaperBackground"]]];
     }
@@ -52,6 +51,9 @@
 // ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
     

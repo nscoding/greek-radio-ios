@@ -27,10 +27,15 @@
                                                                selector:@selector(applicationDidEnterBackground:)
                                                                    name:UIApplicationDidEnterBackgroundNotification
                                                                  object:nil];
-                      
+
                       [[NSNotificationCenter defaultCenter] addObserver:shared
                                                                selector:@selector(applicationDidBecomeActive:)
                                                                    name:UIApplicationDidBecomeActiveNotification
+                                                                 object:nil];
+                      
+                      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                                               selector:@selector(applicationWillResignActive:)
+                                                                   name:UIApplicationWillResignActiveNotification
                                                                  object:nil];
                   });
     
@@ -114,6 +119,7 @@
     return NO;
 }
 
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Multitasking
 // ------------------------------------------------------------------------------------------
@@ -123,6 +129,7 @@
     // expiration handler in case the task runs long.
     
     UIApplication *application = [notification object];
+    wentBackground = YES;
     
     NSLog(@"Application entered background state.");
     
@@ -133,7 +140,6 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			if (backgroundOperation != UIBackgroundTaskInvalid)
 			{
-				
 				[application endBackgroundTask:backgroundOperation];
 				backgroundOperation = UIBackgroundTaskInvalid;
 			}
@@ -147,6 +153,24 @@
     UIApplication *application = [notification object];
 	[application endBackgroundTask:self->backgroundOperation];
 	self->backgroundOperation = UIBackgroundTaskInvalid;
+    
+    if (wasPlaying && wentBackground == NO)
+    {
+        NSString *stationName = [self.stationName copy];
+        NSString *streamURL = [self.streamURL copy];
+        
+        [self stopPlayingStation];
+        [self playStation:stationName
+            withStreamURL:streamURL];
+    }
+    
+    wentBackground = NO;
+}
+
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    wasPlaying = audioStreamer.isPlaying;
 }
 
 

@@ -15,6 +15,7 @@
 "label_local_stations" = "Τοπικοί Σταθμοί";
 "label_stations" = "Σταθμοί";
 "label_new_stations" = "Πρόταση νέου σταθμού";
+"label_search" = "Αναζήτηση";
 
 "app_no_internet_title" = "Δεν υπάρχει σύνδεση με το Ίντερνετ";
 "app_no_internet_subtitle" = "Απαιτείται σύνδεση με Ίντερνετ μέσω WiFi ή 3g για να λειτουργήσει η εφαρμογή";
@@ -24,7 +25,7 @@
 "app_fetch_stations_error" = "We were unable to download stations from the server";
 
 "share_generic_text" = "Ακούω μουσική στο iPhone μου, μέσω του Greek Radio!";
-"share_station_$_text" = "Ακούω %@ , μέσω του Greek Radio";
+"share_station_$_text" = "Ακούω %@, μέσω του Greek Radio";
 
 "share_facebook_error" = "Δε μπορείτε να ανανεώσετε την κατάσταση σας τώρα , παρακαλώ σιγουρευτείτε οτι στη συσκευή σας υπάρχει ένας τουλάχιστον εγκατεστημένος λογαριασμός του Facebook";
 "share_twitter_error" = "Δε μπορείτε να στείλετε Tουί τώρα , παρακαλώ σιγουρευτείτε οτι στη συσκευή σας υπάρχει ένας τουλάχιστον εγκατεστημένος λογαριασμός του Twitter";

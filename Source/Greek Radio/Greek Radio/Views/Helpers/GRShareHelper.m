@@ -29,12 +29,14 @@
         
         if ([GRRadioPlayer shared].stationName.length > 0)
         {
-            [tweetSheet setInitialText:[NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                                        [GRRadioPlayer shared].stationName]];
+            [tweetSheet setInitialText:[[NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                         [GRRadioPlayer shared].stationName]
+                                        stringByAppendingString:@" cc: @nscodingStudio"]];
         }
         else
         {
-            [tweetSheet setInitialText:NSLocalizedString(@"share_generic_text", @"")];
+            [tweetSheet setInitialText:[NSLocalizedString(@"share_generic_text", @"")
+               stringByAppendingString:@" cc: @nscodingStudio"]];
         }
         
         [tweetSheet addURL:[NSURL URLWithString:kAppiTunesURL]];
