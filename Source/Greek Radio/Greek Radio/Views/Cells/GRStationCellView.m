@@ -32,6 +32,19 @@
 {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
     {
+        UIMenuItem *markAsFavorite = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
+                                                                action:@selector(markAsFavorite:)];
+        
+        UIMenuItem *visitStation = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
+                                                                action:@selector(visitStation:)];
+
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, visitStation, nil];
+
+        UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                  action:@selector(onShowMenu:)];
+        [self addGestureRecognizer: longGesture];
+
         [[NSBundle mainBundle] loadNibNamed:@"GRStationCellView" owner:self options:nil];
         [self addSubview:self.backgroundView];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -64,6 +77,12 @@
     }
 
     return self;
+}
+
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
 }
 
 
@@ -133,6 +152,60 @@
 + (NSString *)reusableIdentifier
 {
     return @"GRStationCellView";
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Menu
+// ------------------------------------------------------------------------------------------
+- (void)onShowMenu:(UIGestureRecognizer *)sender
+{
+    [sender.view becomeFirstResponder];
+    
+    UIMenuController *mc = [UIMenuController sharedMenuController];
+        
+    [mc setTargetRect:sender.view.frame
+               inView:sender.view.superview];
+    
+    [mc setMenuVisible:YES animated:YES];
+}
+
+
+- (void)markAsFavorite:(UIMenuController*)sender
+{
+    [self.station setFavourite:[NSNumber numberWithBool:YES]];
+    [self.station.managedObjectContext save:nil];
+
+    // inform about the change
+    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
+}
+
+
+- (void)visitStation:(UIMenuController*)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.station.stationURL]];
+}
+
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if (action == @selector(markAsFavorite:))
+    {
+        BOOL favorite = self.station.favourite.boolValue;
+        return !favorite;
+    }
+    
+    if (action == @selector(visitStation:))
+    {
+        if ([self.station.stationURL rangeOfString:@"www"].location != NSNotFound)
+        {
+            return YES;
+        }
+        
+        return NO;
+    }
+    
+    return [super canPerformAction:action withSender:sender];
 }
 
 

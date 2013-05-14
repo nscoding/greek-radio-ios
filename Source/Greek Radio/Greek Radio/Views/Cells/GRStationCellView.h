@@ -7,11 +7,13 @@
 //
 
 #import "JSBadgeView.h"
+#import "GRStation.h"
 
 @interface GRStationCellView : UITableViewCell
 
 @property (nonatomic, assign) IBOutlet UILabel *title;
 @property (nonatomic, assign) IBOutlet UILabel *subtitle;
+@property (nonatomic, weak) GRStation *station;
 
 - (void)setBadgeText:(NSString *)badgeText;
 + (NSString *)reusableIdentifier;

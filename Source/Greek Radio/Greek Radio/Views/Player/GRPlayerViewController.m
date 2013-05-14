@@ -248,11 +248,17 @@
 
 - (IBAction)markStationAsFavourite:(id)sender
 {
+    // inform test flight
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
-
+    
+    // set the value and save
     self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
     [self.currentStation.managedObjectContext save:nil];
     
+    // inform about the change
+    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
+    
+    // adjust the button state
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
 }
 

@@ -40,9 +40,25 @@
     {        
         [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
                                             [UIImage imageNamed:@"GRPaperBackground"]]];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTriggeredByUser:)
+                                                     name:GRNotificationChangeTriggeredByUser
+                                                   object:nil];
     }
     
     return self;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)changeTriggeredByUser:(NSNotification *)notification
+{
+    // get the stations
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
 }
 
 
@@ -203,6 +219,7 @@
                                                object:nil];
 }
 
+
 - (void)syncDidEnd:(NSNotification *)notification
 {
     [self configureStationsWithFilter:self.searchBar.text
@@ -255,6 +272,7 @@
     GRStation *station = [self stationForIndexPath:indexPath];
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
+    cell.station = station;
     [cell setBadgeText:[NSString stringWithFormat:@"%@", station.genre]];
 
     [cell setNeedsDisplay];
@@ -336,24 +354,6 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return NSLocalizedString(@"button_remove", @"");
-}
-
-
-
--(BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
-{
-    return (action == @selector(copy:));
-}
-
-- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
-{
-    if (action == @selector(copy:))
-        NSLog(@"in real life, we'd now copy somehow");
 }
 
 
@@ -464,6 +464,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     
     return YES;
 }
+
 
 
 // ------------------------------------------------------------------------------------------
