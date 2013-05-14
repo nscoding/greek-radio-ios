@@ -8,6 +8,7 @@
 
 #import "GRPlayerViewController.h"
 #import "GRShareHelper.h"
+#import "TestFlight.h"
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -191,9 +192,18 @@
         mailController.mailComposeDelegate = self;
         mailController.subject = @"Greek Radio";
 
-        NSString *listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                                                            [GRRadioPlayer shared].stationName];
-
+        NSString *listeningTo;
+        if ([GRRadioPlayer shared].stationName.length > 0)
+        {
+            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                           [GRRadioPlayer shared].stationName];
+        }
+        else
+        {
+            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                          [NSLocalizedString(@"label_music", @"") lowercaseString]];
+        }
+        
         NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
                            kAppiTunesURL];
                            
@@ -238,6 +248,8 @@
 
 - (IBAction)markStationAsFavourite:(id)sender
 {
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
+
     self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
     [self.currentStation.managedObjectContext save:nil];
     

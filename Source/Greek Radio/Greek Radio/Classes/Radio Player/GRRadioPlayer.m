@@ -8,6 +8,8 @@
 
 #import "GRRadioPlayer.h"
 
+#import "TestFlight.h"
+
 
 // ------------------------------------------------------------------------------------------
 
@@ -77,6 +79,7 @@
     audioStreamer.delegate = self;
     [audioStreamer start];
     
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Playing)", aStationName]];
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 
     self.streamURL = [NSString stringWithFormat:@"%@",aStreamURL];

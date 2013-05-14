@@ -22,9 +22,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if !APPSTORE
+    
+//#if !APPSTORE
+//
+//#endif
+
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
-#endif
 
     NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:appVersionString forKey:@"currentVersionKey"];
@@ -34,11 +37,7 @@
 
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
-    
     [self registerObservers];
-    
-    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
-    // [self buildAndConfigureSplashViewController];
     
     [Appirater setAppId:@"321094050"];
     [Appirater setDaysUntilPrompt:3];

@@ -16,6 +16,7 @@
 "label_stations" = "Stations";
 "label_new_stations" = "New station proposal";
 "label_search" = "Search";
+"label_music" = "Music";
 
 "app_no_internet_title" = "No internet connection";
 "app_no_internet_subtitle" = "You require an internet connection via WiFi or cellular network for this application to work";
