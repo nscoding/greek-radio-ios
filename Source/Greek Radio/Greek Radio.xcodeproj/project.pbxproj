@@ -13,6 +13,10 @@
 		CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */; };
 		CD53C9601737B0D400264230 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD53C95C1737B0D400264230 /* README.md */; };
 		CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD53C9621737B15800264230 /* StoreKit.framework */; };
+		CD55C0CD17441E4A000BFFE5 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0CA17441E4A000BFFE5 /* JASidePanelController.m */; };
+		CD55C0CE17441E4A000BFFE5 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0CC17441E4A000BFFE5 /* UIViewController+JASidePanel.m */; };
+		CD55C0D5174424F6000BFFE5 /* GRSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0D3174424F6000BFFE5 /* GRSidebarViewController.m */; };
+		CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD55C0D4174424F6000BFFE5 /* GRSidebarViewController.xib */; };
 		CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6AD36117312F5D0009A106 /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36317312F5D0009A106 /* libTestFlight.a */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
@@ -135,6 +139,13 @@
 		CD53C95B1737B0D400264230 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		CD53C95C1737B0D400264230 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CD53C9621737B15800264230 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CD55C0C917441E4A000BFFE5 /* JASidePanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JASidePanelController.h; sourceTree = "<group>"; };
+		CD55C0CA17441E4A000BFFE5 /* JASidePanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JASidePanelController.m; sourceTree = "<group>"; };
+		CD55C0CB17441E4A000BFFE5 /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
+		CD55C0CC17441E4A000BFFE5 /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
+		CD55C0D2174424F6000BFFE5 /* GRSidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSidebarViewController.h; sourceTree = "<group>"; };
+		CD55C0D3174424F6000BFFE5 /* GRSidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSidebarViewController.m; sourceTree = "<group>"; };
+		CD55C0D4174424F6000BFFE5 /* GRSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSidebarViewController.xib; sourceTree = "<group>"; };
 		CD6AD36017312F5D0009A106 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		CD6AD36117312F5D0009A106 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
 		CD6AD36317312F5D0009A106 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -306,6 +317,27 @@
 				CD53C95C1737B0D400264230 /* README.md */,
 			);
 			path = Appirater;
+			sourceTree = "<group>";
+		};
+		CD55C0C817441E4A000BFFE5 /* JASidePanels */ = {
+			isa = PBXGroup;
+			children = (
+				CD55C0C917441E4A000BFFE5 /* JASidePanelController.h */,
+				CD55C0CA17441E4A000BFFE5 /* JASidePanelController.m */,
+				CD55C0CB17441E4A000BFFE5 /* UIViewController+JASidePanel.h */,
+				CD55C0CC17441E4A000BFFE5 /* UIViewController+JASidePanel.m */,
+			);
+			path = JASidePanels;
+			sourceTree = "<group>";
+		};
+		CD55C0D117442493000BFFE5 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				CD55C0D2174424F6000BFFE5 /* GRSidebarViewController.h */,
+				CD55C0D3174424F6000BFFE5 /* GRSidebarViewController.m */,
+				CD55C0D4174424F6000BFFE5 /* GRSidebarViewController.xib */,
+			);
+			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		CD6AD35F17312F5D0009A106 /* Audio Streamer */ = {
@@ -721,6 +753,7 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CD55C0D117442493000BFFE5 /* Sidebar */,
 				CD7A017D1732774F003A2E2D /* Helpers */,
 				CDA7534E17306A56005B25EC /* Cells */,
 				CD7A018717327ADD003A2E2D /* Station List */,
@@ -733,6 +766,7 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD55C0C817441E4A000BFFE5 /* JASidePanels */,
 				CD53C9541737B0D400264230 /* Appirater */,
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
 				CD7A02651732C176003A2E2D /* Block Alert */,
@@ -878,6 +912,7 @@
 				CD53C9601737B0D400264230 /* README.md in Resources */,
 				CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
+				CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +952,9 @@
 				CD92B519173572C100771F26 /* GRConstants.m in Sources */,
 				CD53C95E1737B0D400264230 /* Appirater.m in Sources */,
 				CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */,
+				CD55C0CD17441E4A000BFFE5 /* JASidePanelController.m in Sources */,
+				CD55C0CE17441E4A000BFFE5 /* UIViewController+JASidePanel.m in Sources */,
+				CD55C0D5174424F6000BFFE5 /* GRSidebarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

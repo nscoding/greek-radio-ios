@@ -20,6 +20,12 @@
 "label_search" = "Search";
 "label_music" = "Music";
 
+"label_auto_lock_header" = "Disable Auto-Lock";
+"label_auto_lock_text" = "Prevents your phone from locking when the app is running.";
+"label_shake_music_header" = "Shake to shuffle";
+"label_shake_music_text" = "Shake your phone to select a random station.";
+"label_settings" = "Settings";
+
 "app_no_internet_title" = "No internet connection";
 "app_no_internet_subtitle" = "You require an internet connection via WiFi or cellular network for this application to work";
 "app_low_memory_error_title" = "Low Memory";

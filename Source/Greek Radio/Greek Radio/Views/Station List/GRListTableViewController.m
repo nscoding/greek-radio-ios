@@ -15,7 +15,11 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRListTableViewController () <GRStationCellViewDelegate>
+@interface GRListTableViewController () <GRStationCellViewDelegate, UIAccelerometerDelegate>
+{
+	CFTimeInterval		lastTime;
+	UIAccelerationValue	shakeAccelerometer[3];
+}
 
 @property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
@@ -24,6 +28,15 @@
 @property (nonatomic, strong) NSMutableArray *favouriteStations;
 
 @end
+
+
+// ------------------------------------------------------------------------------------------
+
+
+#define kAccelerometerFrequency			105
+#define kFilteringFactor				0.1
+#define kMinEraseInterval				0.5
+#define kEraseAccelerationThreshold		4.0
 
 
 // ------------------------------------------------------------------------------------------
@@ -41,6 +54,10 @@
         [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
                                             [UIImage imageNamed:@"GRPaperBackground"]]];
         
+        
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeTriggeredByUser:)
                                                      name:GRNotificationChangeTriggeredByUser
@@ -94,7 +111,6 @@
     
     UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     moreButton.frame = CGRectMake(0, 0, 40, 12);
-    
     [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(moreButtonPressed:)
         forControlEvents:UIControlEventTouchUpInside];
@@ -112,6 +128,7 @@
     [self configureStationsWithFilter:self.searchBar.text animate:YES];
     
     [self.searchBar resignFirstResponder];
+    [self becomeFirstResponder];
 }
 
 
@@ -230,6 +247,49 @@
 
 
 // ------------------------------------------------------------------------------------------
+#pragma mark - Accelerometer delegate
+// ------------------------------------------------------------------------------------------
+- (void)accelerometer:(UIAccelerometer*)accelerometer
+        didAccelerate:(UIAcceleration*)acceleration
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
+    {
+        UIAccelerationValue length,	x, y, z;
+        
+        //Use a basic high-pass filter to remove the influence of the gravity
+        shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
+        shakeAccelerometer[0] * (1.0 - kFilteringFactor);
+        shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
+        shakeAccelerometer[1] * (1.0 - kFilteringFactor);
+        shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
+        shakeAccelerometer[2] * (1.0 - kFilteringFactor);
+        
+        // Compute values for the three axes of the acceleromater
+        x = acceleration.x - shakeAccelerometer[0];
+        y = acceleration.y - shakeAccelerometer[0];
+        z = acceleration.z - shakeAccelerometer[0];
+        
+        // Compute the intensity of the current acceleration
+        length = sqrt(x * x + y * y + z * z);
+        // If above a given threshold, play the erase sounds and erase the drawing view
+        if((length >= kEraseAccelerationThreshold) &&
+           (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
+        {
+            lastTime = CFAbsoluteTimeGetCurrent();
+            
+                int random = arc4random() % (self.serverStations.count - 1);
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
+                [self.tableView selectRowAtIndexPath:indexPath
+                                            animated:YES
+                                      scrollPosition:UITableViewScrollPositionMiddle];
+            
+                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+        }
+    }
+}
+
+
+// ------------------------------------------------------------------------------------------
 #pragma mark - Table View delegate
 // ------------------------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -319,8 +379,17 @@
     GRStation *station = [self stationForIndexPath:indexPath];
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
                                                                                 previousView:self.view];
+    
 
-    [self.navigationController pushViewController:playController animated:YES];
+    if (self.navigationController.visibleViewController == self)
+    {
+        [self.navigationController pushViewController:playController animated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:playController animated:NO];
+    }
 }
 
 
