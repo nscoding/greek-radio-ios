@@ -12,6 +12,9 @@
 
 @interface GRPlayerViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
+@property (nonatomic, strong) UILabel *stationLabel;
+@property (nonatomic, strong) UILabel *genreLabel;
+
 - (id)initWithStation:(GRStation *)station
          previousView:(UIView *)preView;
 

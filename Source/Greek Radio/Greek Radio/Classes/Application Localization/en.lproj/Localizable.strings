@@ -6,6 +6,8 @@
 "button_remove" = "Remove";
 "button_sugggest" = "Suggest a station";
 "button_report" = "Report a problem";
+"button_mark_as_favorite" = "Mark as favorite";
+"button_visit_station" = "Visit station";
 
 "label_now_playing" = "Now Playing";
 "label_something_wrong" = "Something went wrong...";
@@ -35,3 +37,4 @@
 "share_via_twitter" = "Share via Twitter";
 "share_via_facebook" = "Share via Facebook";
 "share_via_email_check_it_$" = "You can check it out at <a href='%@'>here</a>";
+

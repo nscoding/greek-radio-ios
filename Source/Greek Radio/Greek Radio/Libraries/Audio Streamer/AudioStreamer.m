@@ -328,8 +328,9 @@ void MyAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, AudioQu
 	
 	if (myData.isPlaying)
 	{
-		myData->finished = true;
-		myData.isPlaying = false;
+// TODO: had to disable the following logic
+//		myData->finished = true;
+//		myData.isPlaying = false;
         
 #ifdef TARGET_OS_IPHONE
 		AudioSessionSetActive(false);
@@ -791,7 +792,6 @@ cleanup:
 		else
 		{
 			finished = true;
-			self.isPlaying = YES;
 			self.isPlaying = NO;
 		}
 	}

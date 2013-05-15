@@ -65,19 +65,19 @@
         [self stopPlayingStation];
     }
     
-    if (audioStreamer.isPlaying)
+    if (audioStreamer)
     {
         return;
     }
-    else
-    {
-        [self stopPlayingStation];
-    }
+
+    [audioStreamer stop];
+    audioStreamer = nil;
     
     NSURL *url = [NSURL URLWithString:aStreamURL];
     audioStreamer = [[AudioStreamer alloc] initWithURL:url];
     audioStreamer.delegate = self;
     [audioStreamer start];
+    audioStreamer.isPlaying = YES;
     
     [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Playing)", aStationName]];
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];

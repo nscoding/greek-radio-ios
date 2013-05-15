@@ -65,6 +65,13 @@
         self.subtitle.textAlignment = NSTextAlignmentLeft;
         self.subtitle.numberOfLines = 1;
         
+        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(tappedOnBadge:)];
+        [doubleTap setNumberOfTapsRequired:2];
+        [doubleTap setCancelsTouchesInView:NO];
+        [doubleTap setDelegate:self];
+        [doubleTap setDelaysTouchesBegan:YES];
+        
         self.genreBadgeView = [[JSBadgeView alloc] initWithParentView:self
                                                             alignment:JSBadgeViewAlignmentCenterRight];
 
@@ -74,6 +81,9 @@
                                                                    alpha:1.00f];
         
         self.genreBadgeView.badgeText = [NSString stringWithFormat:@"..."];
+
+        self.genreBadgeView.userInteractionEnabled = YES;
+        [self.genreBadgeView addGestureRecognizer:doubleTap];
     }
 
     return self;
@@ -113,12 +123,20 @@
 {
     if ([[[GRRadioPlayer shared] stationName] isEqualToString:self.title.text])
     {        
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.866f green:0.128f blue:0.115f alpha:1.00f];
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.866f
+                                                                   green:0.128f
+                                                                    blue:0.115f
+                                                                   alpha:1.00f];
+        
         self.genreBadgeView.badgeText = [NSString stringWithFormat:NSLocalizedString(@"label_now_playing", @"")];
     }
     else
     {
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f green:0.522f blue:0.482f alpha:1.00f];
+        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f
+                                                                   green:0.522f
+                                                                    blue:0.482f
+                                                                   alpha:1.00f];
+        
         self.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", badgeText];
     }
     
@@ -183,7 +201,8 @@
 
 - (void)visitStation:(UIMenuController*)sender
 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.station.stationURL]];
+    [[UIApplication sharedApplication] openURL:
+     [NSURL URLWithString:self.station.stationURL]];
 }
 
 
@@ -206,6 +225,28 @@
     }
     
     return [super canPerformAction:action withSender:sender];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Tap Gestures
+// ------------------------------------------------------------------------------------------
+- (void)tappedOnBadge:(UITapGestureRecognizer *)gesture
+{
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(userDidDoubleTapOnGenre:)])
+    {
+        [self.delegate userDidDoubleTapOnGenre:self.station.genre];
+    }
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Dealloc
+// ------------------------------------------------------------------------------------------
+- (void)dealloc
+{
+    self.delegate = nil;
 }
 
 

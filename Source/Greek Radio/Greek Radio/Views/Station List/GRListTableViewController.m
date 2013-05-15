@@ -15,7 +15,7 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRListTableViewController ()
+@interface GRListTableViewController () <GRStationCellViewDelegate>
 
 @property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
@@ -273,8 +273,9 @@
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
     cell.station = station;
+    cell.delegate = self;
     [cell setBadgeText:[NSString stringWithFormat:@"%@", station.genre]];
-
+    
     [cell setNeedsDisplay];
     
     return cell;
@@ -465,6 +466,16 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     return YES;
 }
 
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - GRStationCellViewDelegate implementation
+// ------------------------------------------------------------------------------------------
+- (void)userDidDoubleTapOnGenre:(NSString *)genre
+{
+    self.searchBar.text = genre;
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
+}
 
 
 // ------------------------------------------------------------------------------------------

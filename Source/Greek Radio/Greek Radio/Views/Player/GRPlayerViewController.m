@@ -45,14 +45,13 @@
         [self.view setBackgroundColor:[UIColor blackColor]];
         
         [self buildAndConfigureStationName:station.title];
+        [self buildAndConfigureStationGenre:station.genre];
         [self buildAndConfigureListButton];
         [self registerObservers];
-            
         
         CGRect bottomFrame = self.bottomBar.frame;
         bottomFrame.origin.y = self.view.frame.size.height - bottomFrame.size.height;
         [self.bottomBar setFrame:bottomFrame];
-        
         
         MPVolumeView *myVolumeView =
         [[MPVolumeView alloc] initWithFrame:CGRectMake(20, self.bottomBar.frame.size.height - 34,
@@ -86,6 +85,28 @@
     [self.favouriteButton setNeedsDisplay];
 }
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [UIView animateWithDuration:0.4
+                     animations:^
+    {
+        self.stationLabel.alpha = 1.0;
+        self.stationLabel.center = CGPointMake(self.view.center.x, 255);
+    }
+    completion:^(BOOL finished)
+    {
+        [UIView animateWithDuration:0.4
+                         animations:^
+        {
+            self.genreLabel.alpha = 1.0;
+            self.genreLabel.center = CGPointMake(self.view.center.x, 290);
+        }];
+    }];
+    
+}
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
@@ -121,22 +142,47 @@
 // ------------------------------------------------------------------------------------------
 - (void)buildAndConfigureStationName:(NSString *)name
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
-    label.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    label.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    label.shadowOffset = CGSizeMake(0, 1);
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text =  [name copy];
-    label.numberOfLines = 0;
+    self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.stationLabel.backgroundColor = [UIColor clearColor];
+    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:26];
+    self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.stationLabel.shadowOffset = CGSizeMake(0, 1);
+    self.stationLabel.textAlignment = NSTextAlignmentCenter;
+    self.stationLabel.text =  [name copy];
+    self.stationLabel.numberOfLines = 1;
+    self.stationLabel.minimumFontSize = 17;
+    self.stationLabel.adjustsFontSizeToFitWidth = YES;
+
+    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+
+    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
+    self.stationLabel.alpha = 0.0;
     
-    CGSize size = [label sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
-    label.frame = CGRectMake(0, 0, size.width, size.height);
-    [label setCenter:CGPointMake(self.view.center.x, 260)];
-    
-    [self.view addSubview:label];
+    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, 255)];
+    [self.view addSubview:self.stationLabel];
 }
+
+
+- (void)buildAndConfigureStationGenre:(NSString *)genre
+{
+    self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.genreLabel.backgroundColor = [UIColor clearColor];
+    self.genreLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+    self.genreLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.genreLabel.shadowOffset = CGSizeMake(0, 1);
+    self.genreLabel.textAlignment = NSTextAlignmentCenter;
+    self.genreLabel.text =  [genre copy];
+    self.genreLabel.numberOfLines = 0;
+    self.genreLabel.alpha = 0.0;
+
+    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 290)];
+    [self.view addSubview:self.genreLabel];
+}
+
 
 
 - (void)buildAndConfigureListButton
