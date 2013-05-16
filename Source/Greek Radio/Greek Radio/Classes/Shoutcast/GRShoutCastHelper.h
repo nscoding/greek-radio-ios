@@ -16,6 +16,7 @@ typedef void (^ShoutcastFailBlock)();
 
 + (GRShoutCastHelper *)shared;
 
+- (void)cancelGet;
 - (void)getMetadataForURL:(NSString *)string
              successBlock:(ShoutcastSuccessBlock)successBlock
                 failBlock:(ShoutcastFailBlock)failBlock;

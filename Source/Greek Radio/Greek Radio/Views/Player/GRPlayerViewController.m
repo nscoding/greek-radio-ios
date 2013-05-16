@@ -138,17 +138,20 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)updateSongInformation
 {
-    __weak GRPlayerViewController *blockSelf = self;
-    [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
-                                  successBlock:^(NSString *songName, NSString *songArtist)
-                                    {
-                                      blockSelf.currentSong = [songName copy];
-                                      blockSelf.currentArtist = [songArtist copy];
-                                    }
-                                    failBlock:^{
-                                        blockSelf.currentSong = nil;
-                                        blockSelf.currentArtist = nil;
-                                    }];
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        __weak GRPlayerViewController *blockSelf = self;
+        [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
+                                         successBlock:^(NSString *songName, NSString *songArtist)
+         {
+             blockSelf.currentSong = [songName copy];
+             blockSelf.currentArtist = [songArtist copy];
+         }
+                                            failBlock:^{
+                                                blockSelf.currentSong = nil;
+                                                blockSelf.currentArtist = nil;
+                                            }];
+    }
 }
 
 
@@ -178,6 +181,11 @@ typedef enum GRInformationBarOption
         goToOption = GRInformationBarOptionGenre;
     }
     
+    if ([GRRadioPlayer shared].isPlaying == NO)
+    {
+        currentOption = GRInformationBarOptionGenre;
+        goToOption = GRInformationBarOptionGenre;
+    }
     
     if (self.informationBarOption != goToOption)
     {
@@ -199,16 +207,26 @@ typedef enum GRInformationBarOption
             CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
             self.genreLabel.numberOfLines = 1;
             self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-            self.genreLabel.center = CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 292);
+            self.genreLabel.center = CGPointMake(self.view.frame.size.width +
+                                                 (self.genreLabel.frame.size.width / 2), 292);
 
             [UIView animateWithDuration:12.0
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveLinear
                              animations:^{
                                  self.genreLabel.alpha = 1.0;
-                                 self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
-                             } completion:^(BOOL finished) {
-                                 [self animateStatus];
+                                 
+                                 if ([GRRadioPlayer shared].isPlaying == NO)
+                                 {
+                                     self.genreLabel.center = CGPointMake(self.view.center.x, 292);
+                                 }
+                                 else
+                                 {
+                                     self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
+                                 }
+                                 
+                             } completion:^(BOOL finished) {                                 
+                                     [self animateStatus];
                              }];
             
         }];
@@ -458,6 +476,7 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)dealloc
 {
+    [[GRShoutCastHelper shared] cancelGet];
     [NSThread cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(animateStatus)
                                                object:nil];

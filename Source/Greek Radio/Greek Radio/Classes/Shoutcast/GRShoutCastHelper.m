@@ -25,6 +25,17 @@
 }
 
 
+- (void)cancelGet
+{
+    [self.connection cancel];
+    self.connection = nil;
+    
+    self.failBlock();
+
+    self.failBlock = nil;
+    self.successBlock = nil;
+}
+
 - (void)getMetadataForURL:(NSString *)string
              successBlock:(ShoutcastSuccessBlock)successBlock
                 failBlock:(ShoutcastFailBlock)failBlock
@@ -35,6 +46,10 @@
     if (string.length == 0)
     {
         self.failBlock();
+
+        self.failBlock = nil;
+        self.successBlock = nil;
+        
         return;
     }
     
@@ -62,7 +77,9 @@
     {
         self.failBlock();
 
-        // silent fail
+        self.failBlock = nil;
+        self.successBlock = nil;
+
 		return;
 	}
 
@@ -83,7 +100,8 @@
 {
     self.failBlock();
 
-    // silent fail
+    self.failBlock = nil;
+    self.successBlock = nil;
 }
 
 
@@ -91,7 +109,7 @@
 - (void)connection:(NSURLConnection *)connection
 didReceiveResponse:(NSURLResponse *)response
 {
-	//Now let's create the data that will hold the response file
+	// Now let's create the data that will hold the response file
 	data = [[NSMutableData alloc]initWithLength:0];
 }
 
@@ -99,14 +117,14 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)connection:(NSURLConnection *)connection
     didReceiveData:(NSData *)receivedData
 {
-	//Let's append the data we got to the NSMutableData object we created
+	// Let's append the data we got to the NSMutableData object we created
 	[data appendData:receivedData];
 }
 
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	//Let's create a string from the data we've got from the server
+	// Let's create a string from the data we've got from the server
 	NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
     data = nil;
@@ -116,7 +134,9 @@ didReceiveResponse:(NSURLResponse *)response
     {
         self.failBlock();
 
-        // silent fail
+        self.failBlock = nil;
+        self.successBlock = nil;
+
 		return;
 	}
 
@@ -132,7 +152,9 @@ didReceiveResponse:(NSURLResponse *)response
     {
         self.failBlock();
         
-        // silent fail
+        self.failBlock = nil;
+        self.successBlock = nil;
+
         return;
 	}
     
@@ -144,10 +166,13 @@ didReceiveResponse:(NSURLResponse *)response
 	index = [metadata rangeOfString:@"</body>"].location;
 	// Removes the "</body></html>" string
 	metadata = [metadata substringToIndex:index];
+    
 	// Keep checking if there are still any "," on the string
-	while ([metadata rangeOfString:@","].length > 0) {
+    while ([metadata rangeOfString:@","].length > 0)
+    {
 		// Removes the ","s and other junk like bitrate
-		metadata = [NSString stringWithString:[metadata substringFromIndex:([metadata rangeOfString:@","].location + 1)]];
+		metadata = [NSString stringWithString:
+                    [metadata substringFromIndex:([metadata rangeOfString:@","].location + 1)]];
 	}
     
 	//Checks if the artist name is provided
@@ -159,18 +184,32 @@ didReceiveResponse:(NSURLResponse *)response
 		// Artist name comes first
 		NSString *artistName = [metadata substringToIndex:index];
 		
-        //Gets the song name
+        // Gets the song name
 		NSString *songName = [metadata substringFromIndex:(index + 3)];
 		      
         if (artistName.length > 0 && songName.length > 0)
         {
             self.successBlock(songName, artistName);
+
+            self.failBlock = nil;
+            self.successBlock = nil;
         }
 	}
 	else
     {
-        self.successBlock(metadata, nil);
-	}    
+        if (metadata)
+        {
+            self.successBlock(metadata, nil);
+        }
+        else
+        {
+            self.failBlock();
+        }
+
+	    self.failBlock = nil;
+        self.successBlock = nil;
+    }
 }
+
 
 @end
