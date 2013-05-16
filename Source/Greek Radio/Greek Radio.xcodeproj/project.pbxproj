@@ -108,6 +108,10 @@
 		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
 		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
 		CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */; };
+		CDE3409D1744CE760033A4B1 /* GRSettingsButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE340991744CE760033A4B1 /* GRSettingsButton@2x.png */; };
+		CDE3409E1744CE760033A4B1 /* GRSettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE3409A1744CE760033A4B1 /* GRSettingsButton.png */; };
+		CDE3409F1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE3409B1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png */; };
+		CDE340A01744CE760033A4B1 /* GRSettingsButtonWhite.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE3409C1744CE760033A4B1 /* GRSettingsButtonWhite.png */; };
 		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
 		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
 		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
@@ -266,6 +270,10 @@
 		CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRadioPlayer.h; sourceTree = "<group>"; };
 		CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRadioPlayer.m; sourceTree = "<group>"; };
+		CDE340991744CE760033A4B1 /* GRSettingsButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRSettingsButton@2x.png"; sourceTree = "<group>"; };
+		CDE3409A1744CE760033A4B1 /* GRSettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRSettingsButton.png; sourceTree = "<group>"; };
+		CDE3409B1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRSettingsButtonWhite@2x.png"; sourceTree = "<group>"; };
+		CDE3409C1744CE760033A4B1 /* GRSettingsButtonWhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRSettingsButtonWhite.png; sourceTree = "<group>"; };
 		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -630,6 +638,10 @@
 		CDD7EBFF1733CA8200225F5A /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				CDE340991744CE760033A4B1 /* GRSettingsButton@2x.png */,
+				CDE3409A1744CE760033A4B1 /* GRSettingsButton.png */,
+				CDE3409B1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png */,
+				CDE3409C1744CE760033A4B1 /* GRSettingsButtonWhite.png */,
 				CD92B50C173455E900771F26 /* GRNetwork@2x.png */,
 				CD92B50D173455E900771F26 /* GRPause@2x.png */,
 				CD92B50E173455EA00771F26 /* GRPlay@2x.png */,
@@ -913,6 +925,10 @@
 				CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */,
+				CDE3409D1744CE760033A4B1 /* GRSettingsButton@2x.png in Resources */,
+				CDE3409E1744CE760033A4B1 /* GRSettingsButton.png in Resources */,
+				CDE3409F1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png in Resources */,
+				CDE340A01744CE760033A4B1 /* GRSettingsButtonWhite.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -167,7 +167,7 @@
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.allowRightOverpan = NO;
     self.viewController.shouldDelegateAutorotateToVisiblePanel = NO;
-
+    self.listTableViewController.layerController = self.viewController;
     self.viewController.leftPanel = [[GRSidebarViewController alloc] init];
 	self.viewController.centerPanel = self.menuNavigationController;
     self.window.rootViewController = self.viewController;

@@ -18,9 +18,11 @@
     self.shakeText.text = NSLocalizedString(@"label_shake_music_text", @"");
     self.shakeHeader.text = NSLocalizedString(@"label_shake_music_header", @"");
     self.settingsItem.title = NSLocalizedString(@"label_settings", @"");
-  
-    [super viewDidLoad];
     
+    [super viewDidLoad];
+  
+    self.shakeHeader.font = self.autoLockHeader.font;
+
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
     [UIApplication sharedApplication].idleTimerDisabled = autoLockDisabled;

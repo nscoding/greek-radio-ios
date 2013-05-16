@@ -119,6 +119,20 @@
                                initWithCustomView:moreButton];
 
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingButton.frame = CGRectMake(0, 0, 22, 22);
+    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
+    [settingButton addTarget:self
+                      action:@selector(settingsButtonPressed:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                    initWithCustomView:settingButton];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+
 }
 
 
@@ -494,6 +508,12 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
     [controller dismissModalViewControllerAnimated:YES];
+}
+
+
+- (void)settingsButtonPressed:(UIButton *)sender
+{
+    [self.layerController showLeftPanelAnimated:YES];
 }
 
 
