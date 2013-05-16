@@ -9,8 +9,21 @@
 #import "GRPlayerViewController.h"
 #import "GRShareHelper.h"
 #import "TestFlight.h"
+#import "GRShoutCastHelper.h"
 
 #import <MediaPlayer/MediaPlayer.h>
+
+
+// ------------------------------------------------------------------------------------------
+
+
+typedef enum GRInformationBarOption
+{
+    GRInformationBarOptionGenre = 0,
+    GRInformationBarOptionSong = 1,
+    GRInformationBarOptionArtist = 2,
+} GRInformationBarOption;
+
 
 
 // ------------------------------------------------------------------------------------------
@@ -22,6 +35,9 @@
 @property (nonatomic, assign) IBOutlet UIButton *playButton;
 @property (nonatomic, assign) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) GRStation *currentStation;
+@property (nonatomic, assign) GRInformationBarOption informationBarOption;
+@property (nonatomic, copy) NSString *currentSong;
+@property (nonatomic, copy) NSString *currentArtist;
 
 @end
 
@@ -64,6 +80,14 @@
                               withStreamURL:self.currentStation.streamURL];
         
         [self configurePlayButton];
+        [self animateStatus];
+        
+        [[NSTimer scheduledTimerWithTimeInterval:60.0
+                                          target:self
+                                        selector:@selector(updateSongInformation)
+                                        userInfo:nil
+                                         repeats:YES] fire];
+
     }
     
     return self;
@@ -102,11 +126,119 @@
                          animations:^
         {
             self.genreLabel.alpha = 1.0;
-            self.genreLabel.center = CGPointMake(self.view.center.x, 290);
+            self.genreLabel.center = CGPointMake(self.view.center.x, 292);
         }];
+        
     }];
-    
 }
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Timer
+// ------------------------------------------------------------------------------------------
+- (void)updateSongInformation
+{
+    __weak GRPlayerViewController *blockSelf = self;
+    [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
+                                  successBlock:^(NSString *songName, NSString *songArtist)
+                                    {
+                                      blockSelf.currentSong = [songName copy];
+                                      blockSelf.currentArtist = [songArtist copy];
+                                    }
+                                    failBlock:^{
+                                        blockSelf.currentSong = nil;
+                                        blockSelf.currentArtist = nil;
+                                    }];
+}
+
+
+- (void)animateStatus
+{
+    GRInformationBarOption currentOption = self.informationBarOption;
+    GRInformationBarOption goToOption = self.informationBarOption;
+
+    if (currentOption == GRInformationBarOptionArtist) {
+        currentOption = GRInformationBarOptionGenre;
+        goToOption = GRInformationBarOptionGenre;
+    }
+    else
+    {
+        goToOption++;
+    }
+    
+    if (goToOption == GRInformationBarOptionSong &&
+        self.currentSong.length == 0)
+    {
+        goToOption++;
+    }
+
+    if (goToOption == GRInformationBarOptionArtist &&
+        self.currentArtist.length == 0)
+    {
+        goToOption = GRInformationBarOptionGenre;
+    }
+    
+    
+    if (self.informationBarOption != goToOption)
+    {
+        self.informationBarOption = goToOption;
+        
+        [UIView animateWithDuration:6.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             
+             self.genreLabel.alpha = 1.0;
+             self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
+                             
+        } completion:^(BOOL finished) {
+ 
+            self.genreLabel.alpha = 1.0;
+            
+            self.genreLabel.text = [self titleForBar:goToOption];
+            CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+            self.genreLabel.numberOfLines = 1;
+            self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+            self.genreLabel.center = CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 292);
+
+            [UIView animateWithDuration:12.0
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 self.genreLabel.alpha = 1.0;
+                                 self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
+                             } completion:^(BOOL finished) {
+                                 [self animateStatus];
+                             }];
+            
+        }];
+    }
+    else
+    {
+        [self performSelector:@selector(animateStatus)
+                   withObject:self
+                   afterDelay:5.0f];
+    }
+}
+
+
+- (NSString *)titleForBar:(GRInformationBarOption)option
+{
+    switch (option) {
+        case GRInformationBarOptionGenre:
+            return self.currentStation.genre;
+            break;
+        case GRInformationBarOptionArtist:
+            return self.currentArtist;
+            break;
+        case GRInformationBarOptionSong:
+            return self.currentSong;
+            break;
+    }
+    
+    return @"";
+}
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
@@ -159,7 +291,7 @@
     self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
     self.stationLabel.alpha = 0.0;
     
-    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, 255)];
+    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, 253)];
     [self.view addSubview:self.stationLabel];
 }
 
@@ -174,12 +306,12 @@
     self.genreLabel.shadowOffset = CGSizeMake(0, 1);
     self.genreLabel.textAlignment = NSTextAlignmentCenter;
     self.genreLabel.text =  [genre copy];
-    self.genreLabel.numberOfLines = 0;
+    self.genreLabel.numberOfLines = 1;
     self.genreLabel.alpha = 0.0;
 
-    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
     self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 290)];
+    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 292)];
     [self.view addSubview:self.genreLabel];
 }
 
@@ -320,6 +452,16 @@
     [controller dismissModalViewControllerAnimated:YES];
 }
 
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Dealloc
+// ------------------------------------------------------------------------------------------
+- (void)dealloc
+{
+    [NSThread cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(animateStatus)
+                                               object:nil];
+}
 
 @end
 

@@ -31,7 +31,7 @@
 "app_low_memory_error_title" = "Χαμηλή μνήμη";
 "app_low_memory_error_subtitle" = "Η ελεύθερη διαθέσιμη μνήμη στο κινητό σας είναι χαμηλή, το Greek Radio, σταματάει την αναπαραγωγή προς αποφυγή υπερφόρτωσης";
 "app_player_error_subtitle" = "Μη συμβατό ή το κανάλι μετάδοσης βρίσκεται εκτός σύνδεσης, ξαναπροσπαθήστε";
-"app_fetch_stations_error" = "We were unable to download stations from the server";
+"app_fetch_stations_error" = "Αυτήν την στιγμή δεν είναι εφικτό να κατεβασούμε νέους σταθμους απο το σύστημα";
 
 "share_generic_text" = "Ακούω μουσική στο iPhone μου, μέσω του Greek Radio!";
 "share_station_$_text" = "Ακούω %@, μέσω του Greek Radio";

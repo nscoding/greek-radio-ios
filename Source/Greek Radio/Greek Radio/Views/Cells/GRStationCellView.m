@@ -109,7 +109,6 @@
     }
     else
     {
-        
         [UIView animateWithDuration:0.4 animations:^{
             self.selectionColor.alpha = 0.0f;
         } completion:^(BOOL finished) {
@@ -185,7 +184,7 @@
     [mc setTargetRect:sender.view.frame
                inView:sender.view.superview];
     
-    [mc setMenuVisible:YES animated:YES];
+    [mc setMenuVisible:YES animated:NO];
 }
 
 

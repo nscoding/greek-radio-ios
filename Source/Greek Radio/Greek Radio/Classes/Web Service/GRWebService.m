@@ -90,9 +90,12 @@
     
     if ([[NSInternetDoctor shared] connected] == NO)
     {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSInternetDoctor shared] showNoInternetAlert];
+            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        });
+
         self.isParsing = NO;
-        [[NSInternetDoctor shared] showNoInternetAlert];
-        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
         
         return;
     }
@@ -125,6 +128,8 @@
 {
     self.dateLastSynced = nil;
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+
     if ([[NSInternetDoctor shared] connected])
     {
         NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
@@ -132,7 +137,9 @@
                                        message:errorString];
     }
     
-    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+
+    });
     
     self.isParsing = NO;
 }
