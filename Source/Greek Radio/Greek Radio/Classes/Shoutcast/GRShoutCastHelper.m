@@ -27,14 +27,15 @@
 
 - (void)cancelGet
 {
+    if (self.failBlock)
+    {
+        self.failBlock();
+    }
+
     [self.connection cancel];
     self.connection = nil;
-    
-    self.failBlock();
-
-    self.failBlock = nil;
-    self.successBlock = nil;
 }
+
 
 - (void)getMetadataForURL:(NSString *)string
              successBlock:(ShoutcastSuccessBlock)successBlock
@@ -44,11 +45,11 @@
     self.failBlock = failBlock;
 
     if (string.length == 0)
-    {
-        self.failBlock();
-
-        self.failBlock = nil;
-        self.successBlock = nil;
+    {        
+        if (self.failBlock)
+        {
+            self.failBlock();
+        }
         
         return;
     }
@@ -75,10 +76,10 @@
 	//Check if the URL is valid
 	if (URL == nil)
     {
-        self.failBlock();
-
-        self.failBlock = nil;
-        self.successBlock = nil;
+        if (self.failBlock)
+        {
+            self.failBlock();
+        }
 
 		return;
 	}
@@ -98,10 +99,10 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    self.failBlock();
-
-    self.failBlock = nil;
-    self.successBlock = nil;
+    if (self.failBlock)
+    {
+        self.failBlock();
+    }
 }
 
 
@@ -132,10 +133,10 @@ didReceiveResponse:(NSURLResponse *)response
     // Let's check if it's a valid string
 	if (string == nil)
     {
-        self.failBlock();
-
-        self.failBlock = nil;
-        self.successBlock = nil;
+        if (self.failBlock)
+        {
+            self.failBlock();
+        }
 
 		return;
 	}
@@ -189,25 +190,28 @@ didReceiveResponse:(NSURLResponse *)response
 		      
         if (artistName.length > 0 && songName.length > 0)
         {
-            self.successBlock(songName, artistName);
-
-            self.failBlock = nil;
-            self.successBlock = nil;
+            if (self.successBlock)
+            {
+                self.successBlock(songName, artistName);
+            }
         }
 	}
 	else
     {
         if (metadata)
         {
-            self.successBlock(metadata, nil);
+            if (self.successBlock)
+            {
+                self.successBlock(metadata, nil);
+            }
         }
         else
         {
-            self.failBlock();
+            if (self.failBlock)
+            {
+                self.failBlock();
+            }
         }
-
-	    self.failBlock = nil;
-        self.successBlock = nil;
     }
 }
 

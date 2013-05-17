@@ -38,6 +38,7 @@ typedef enum GRInformationBarOption
 @property (nonatomic, assign) GRInformationBarOption informationBarOption;
 @property (nonatomic, copy) NSString *currentSong;
 @property (nonatomic, copy) NSString *currentArtist;
+@property (nonatomic, strong) NSTimer *informationTimer;
 
 @end
 
@@ -82,11 +83,11 @@ typedef enum GRInformationBarOption
         [self configurePlayButton];
         [self animateStatus];
         
-        [[NSTimer scheduledTimerWithTimeInterval:60.0
-                                          target:self
-                                        selector:@selector(updateSongInformation)
-                                        userInfo:nil
-                                         repeats:YES] fire];
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:4.0
+                                                                 target:self
+                                                               selector:@selector(updateSongInformation)
+                                                               userInfo:nil
+                                                                repeats:YES];
 
     }
     
@@ -138,6 +139,8 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)updateSongInformation
 {
+    NSLog(@"%s", __FUNCTION__);
+    
     if ([GRRadioPlayer shared].isPlaying)
     {
         __weak GRPlayerViewController *blockSelf = self;
@@ -147,10 +150,10 @@ typedef enum GRInformationBarOption
              blockSelf.currentSong = [songName copy];
              blockSelf.currentArtist = [songArtist copy];
          }
-                                            failBlock:^{
-                                                blockSelf.currentSong = nil;
-                                                blockSelf.currentArtist = nil;
-                                            }];
+         failBlock:^{
+                blockSelf.currentSong = nil;
+                blockSelf.currentArtist = nil;
+         }];
     }
 }
 
@@ -187,6 +190,8 @@ typedef enum GRInformationBarOption
         goToOption = GRInformationBarOptionGenre;
     }
     
+    __weak GRPlayerViewController *blockSelf = self;
+    
     if (self.informationBarOption != goToOption)
     {
         self.informationBarOption = goToOption;
@@ -196,46 +201,41 @@ typedef enum GRInformationBarOption
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              
-             self.genreLabel.alpha = 1.0;
-             self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
+             blockSelf.genreLabel.alpha = 1.0;
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), 292);
                              
         } completion:^(BOOL finished) {
  
-            self.genreLabel.alpha = 1.0;
+            blockSelf.genreLabel.alpha = 1.0;
             
-            self.genreLabel.text = [self titleForBar:goToOption];
-            CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
-            self.genreLabel.numberOfLines = 1;
-            self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-            self.genreLabel.center = CGPointMake(self.view.frame.size.width +
-                                                 (self.genreLabel.frame.size.width / 2), 292);
+            blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
+            CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+            blockSelf.genreLabel.numberOfLines = 1;
+            blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+            blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
+                                                 (blockSelf.genreLabel.frame.size.width / 2), 292);
 
             [UIView animateWithDuration:12.0
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveLinear
                              animations:^{
-                                 self.genreLabel.alpha = 1.0;
-                                 
-                                 if ([GRRadioPlayer shared].isPlaying == NO)
-                                 {
-                                     self.genreLabel.center = CGPointMake(self.view.center.x, 292);
-                                 }
-                                 else
-                                 {
-                                     self.genreLabel.center = CGPointMake(-(self.genreLabel.frame.size.width / 2), 292);
-                                 }
+                                 blockSelf.genreLabel.alpha = 1.0;
+                                 blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), 292);
+
                                  
                              } completion:^(BOOL finished) {                                 
-                                     [self animateStatus];
+                                     [blockSelf animateStatus];
                              }];
-            
         }];
     }
     else
     {
-        [self performSelector:@selector(animateStatus)
-                   withObject:self
-                   afterDelay:5.0f];
+        double delayInSeconds = 5.0f;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [blockSelf animateStatus];
+
+        });
     }
 }
 
@@ -372,6 +372,10 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)listButtonPressed:(UIButton *)sender
 {
+    [[GRShoutCastHelper shared] cancelGet];
+    [self.informationTimer invalidate];
+    self.informationTimer = nil;
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -477,9 +481,8 @@ typedef enum GRInformationBarOption
 - (void)dealloc
 {
     [[GRShoutCastHelper shared] cancelGet];
-    [NSThread cancelPreviousPerformRequestsWithTarget:self
-                                             selector:@selector(animateStatus)
-                                               object:nil];
+    [self.informationTimer invalidate];
+    self.informationTimer = nil;
 }
 
 @end
