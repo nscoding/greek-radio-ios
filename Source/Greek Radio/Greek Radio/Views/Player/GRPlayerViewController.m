@@ -83,11 +83,13 @@ typedef enum GRInformationBarOption
         [self configurePlayButton];
         [self animateStatus];
         
-        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:4.0
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:60.0
                                                                  target:self
                                                                selector:@selector(updateSongInformation)
                                                                userInfo:nil
                                                                 repeats:YES];
+        
+        [self.informationTimer fire];
 
     }
     
@@ -134,12 +136,22 @@ typedef enum GRInformationBarOption
 }
 
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[GRShoutCastHelper shared] cancelGet];
+    [self.informationTimer invalidate];
+    self.informationTimer = nil;
+}
+
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Timer
 // ------------------------------------------------------------------------------------------
 - (void)updateSongInformation
 {
-    NSLog(@"%s", __FUNCTION__);
+//    NSLog(@"%s", __FUNCTION__);
     
     if ([GRRadioPlayer shared].isPlaying)
     {
@@ -372,10 +384,6 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)listButtonPressed:(UIButton *)sender
 {
-    [[GRShoutCastHelper shared] cancelGet];
-    [self.informationTimer invalidate];
-    self.informationTimer = nil;
-
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -484,6 +492,7 @@ typedef enum GRInformationBarOption
     [self.informationTimer invalidate];
     self.informationTimer = nil;
 }
+
 
 @end
 
