@@ -171,6 +171,7 @@
     self.viewController.leftPanel = [[GRSidebarViewController alloc] init];
 	self.viewController.centerPanel = self.menuNavigationController;
     self.window.rootViewController = self.viewController;
+    self.viewController.leftFixedWidth = 260;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];
     });

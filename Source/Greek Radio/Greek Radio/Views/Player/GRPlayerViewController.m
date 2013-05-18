@@ -14,6 +14,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
+#define kGenreCenterY (self.view.frame.size.height * 0.75) - 30
+#define kStationCenterY (self.view.frame.size.height * 0.75) - 70
+
+
+
 // ------------------------------------------------------------------------------------------
 
 
@@ -121,7 +126,7 @@ typedef enum GRInformationBarOption
                      animations:^
     {
         self.stationLabel.alpha = 1.0;
-        self.stationLabel.center = CGPointMake(self.view.center.x, 255);
+        self.stationLabel.center = CGPointMake(self.view.center.x, kStationCenterY);
     }
     completion:^(BOOL finished)
     {
@@ -129,7 +134,7 @@ typedef enum GRInformationBarOption
                          animations:^
         {
             self.genreLabel.alpha = 1.0;
-            self.genreLabel.center = CGPointMake(self.view.center.x, 292);
+            self.genreLabel.center = CGPointMake(self.view.center.x, kGenreCenterY);
         }];
         
     }];
@@ -214,7 +219,7 @@ typedef enum GRInformationBarOption
                          animations:^{
                              
              blockSelf.genreLabel.alpha = 1.0;
-             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), 292);
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
                              
         } completion:^(BOOL finished) {
  
@@ -225,14 +230,15 @@ typedef enum GRInformationBarOption
             blockSelf.genreLabel.numberOfLines = 1;
             blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
             blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
-                                                 (blockSelf.genreLabel.frame.size.width / 2), 292);
+                                                 (blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
 
             [UIView animateWithDuration:12.0
                                   delay:0.0
                                 options:UIViewAnimationOptionCurveLinear
                              animations:^{
                                  blockSelf.genreLabel.alpha = 1.0;
-                                 blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), 292);
+                                 blockSelf.genreLabel.center =
+                                 CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
 
                                  
                              } completion:^(BOOL finished) {                                 
@@ -317,11 +323,10 @@ typedef enum GRInformationBarOption
     self.stationLabel.adjustsFontSizeToFitWidth = YES;
 
     CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
-
     self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
     self.stationLabel.alpha = 0.0;
     
-    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, 253)];
+    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, kStationCenterY)];
     [self.view addSubview:self.stationLabel];
 }
 
@@ -341,7 +346,8 @@ typedef enum GRInformationBarOption
 
     CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
     self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2), 292)];
+    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2),
+                                           kGenreCenterY)];
     [self.view addSubview:self.genreLabel];
 }
 
@@ -419,7 +425,7 @@ typedef enum GRInformationBarOption
                                 isHTML:YES];
         
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     if ([SLComposeViewController class])
@@ -479,7 +485,7 @@ typedef enum GRInformationBarOption
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

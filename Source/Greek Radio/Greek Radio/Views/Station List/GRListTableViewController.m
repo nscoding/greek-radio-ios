@@ -483,7 +483,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
         [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
@@ -495,7 +495,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
         [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     [sheet showInView:self.view];
@@ -507,7 +507,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 
