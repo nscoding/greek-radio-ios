@@ -81,7 +81,6 @@ typedef enum GRInformationBarOption
         myVolumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
         [self.bottomBar addSubview:myVolumeView];
         
-        
         [[GRRadioPlayer shared] playStation:self.currentStation.title
                               withStreamURL:self.currentStation.streamURL];
         
@@ -156,8 +155,6 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 - (void)updateSongInformation
 {
-//    NSLog(@"%s", __FUNCTION__);
-    
     if ([GRRadioPlayer shared].isPlaying)
     {
         __weak GRPlayerViewController *blockSelf = self;
@@ -486,6 +483,19 @@ typedef enum GRInformationBarOption
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
+    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, kStationCenterY)];
+    
+    CGSize sizeGenre = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+    self.genreLabel.frame = CGRectMake(0, 0, sizeGenre.width, sizeGenre.height);
+    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2),
+                                           kGenreCenterY)];
 }
 
 
