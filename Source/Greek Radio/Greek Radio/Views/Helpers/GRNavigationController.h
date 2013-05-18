@@ -1,13 +1,13 @@
 //
-//  GRSplashViewController.h
+//  GRNavigationController.h
 //  Greek Radio
 //
-//  Created by Patrick on 5/2/13.
+//  Created by Patrick on 5/18/13.
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface GRSplashViewController : UIViewController
+@interface GRNavigationController : UINavigationController
 
 @end

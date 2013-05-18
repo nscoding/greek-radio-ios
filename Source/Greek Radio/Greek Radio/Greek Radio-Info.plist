@@ -16,6 +16,8 @@
 			<array>
 				<string>icon57x57.png</string>
 				<string>icon114x114.png</string>
+				<string>icon144x144.png</string>
+				<string>icon72x72.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<true/>
@@ -70,8 +72,8 @@
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 </dict>
 </plist>

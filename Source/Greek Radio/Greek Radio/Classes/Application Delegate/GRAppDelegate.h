@@ -7,6 +7,7 @@
 //
 
 #import "JASidePanelController.h"
+#import "GRNavigationController.h"
 
 @class GRSplashViewController;
 @class GRListTableViewController;
@@ -16,7 +17,7 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) GRListTableViewController *listTableViewController;
 @property (strong, nonatomic) GRSplashViewController *splashViewController;
-@property (strong, nonatomic) UINavigationController *menuNavigationController;
+@property (strong, nonatomic) GRNavigationController *menuNavigationController;
 @property (strong, nonatomic) JASidePanelController *viewController;
 
 @end

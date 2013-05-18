@@ -8,7 +8,6 @@
 
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
-#import "GRSplashViewController.h"
 #import "GRSidebarViewController.h"
 
 #import "Appirater.h"
@@ -130,35 +129,13 @@
 }
 
 
-- (void)buildAndConfigureSplashViewController
-{
-    // Add the splash view
-	self.splashViewController = [[GRSplashViewController alloc] init];
-    [self.splashViewController.view setFrame:self.window.frame];
-    [self.window addSubview:self.splashViewController.view];
-}
-
-
-- (void)flipSplashScreen
-{
-    // Page flip transition
-	[UIView beginAnimations:@"pageFlipTransition" context:nil];
-	[UIView setAnimationDelay:0.0];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationDuration:0.8];
-	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.window cache:YES];
-	[UIView commitAnimations];
-    
-    [self.splashViewController.view removeFromSuperview];
-}
-
-
 - (void)buildAndConfigureStationsViewController
 {
     // Override point for customization after application launch.
     self.listTableViewController = [[GRListTableViewController alloc] init];
     
-    self.menuNavigationController = [[UINavigationController alloc]
+    
+    self.menuNavigationController = [[GRNavigationController alloc]
                                                     initWithRootViewController:self.listTableViewController];
     self.menuNavigationController.navigationBarHidden = NO;
     self.listTableViewController.navigationController = self.menuNavigationController;
@@ -166,7 +143,7 @@
     
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.allowRightOverpan = NO;
-    self.viewController.shouldDelegateAutorotateToVisiblePanel = NO;
+    self.viewController.shouldDelegateAutorotateToVisiblePanel = YES;
     self.listTableViewController.layerController = self.viewController;
     self.viewController.leftPanel = [[GRSidebarViewController alloc] init];
 	self.viewController.centerPanel = self.menuNavigationController;
