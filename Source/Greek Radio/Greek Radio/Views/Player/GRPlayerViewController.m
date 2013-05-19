@@ -10,6 +10,7 @@
 #import "GRShareHelper.h"
 #import "TestFlight.h"
 #import "GRShoutCastHelper.h"
+#import "UIDevice+Extensions.h"
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -38,6 +39,8 @@ typedef enum GRInformationBarOption
 
 @property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
 @property (nonatomic, assign) IBOutlet UIButton *playButton;
+@property (nonatomic, assign) IBOutlet UIButton *sharebutton;
+
 @property (nonatomic, assign) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) GRStation *currentStation;
 @property (nonatomic, assign) GRInformationBarOption informationBarOption;
@@ -111,6 +114,18 @@ typedef enum GRInformationBarOption
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if ([UIDevice isIPad])
+    {
+        CGFloat partWidth = (self.view.frame.size.width / 3) * 1.11;
+        self.playButton.center = CGPointMake(self.playButton.center.x, self.playButton.center.y);
+        
+        self.favouriteButton.center = CGPointMake((partWidth / 2) - (self.favouriteButton.frame.size.width / 2),
+                                                  self.favouriteButton.center.y);
+
+        self.sharebutton.center = CGPointMake((self.view.frame.size.width - (partWidth / 2)) +
+                                              (self.sharebutton.frame.size.width / 2), self.sharebutton.center.y);
+    }
     
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
     [self.favouriteButton setNeedsDisplay];

@@ -95,6 +95,7 @@
 		CD92B5311735882F00771F26 /* GRKnobBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B52F1735882F00771F26 /* GRKnobBase@2x.png */; };
 		CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF357173A8227006AD8C3 /* Localizable.strings */; };
 		CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF35A173A8227006AD8C3 /* Localizable.strings */; };
+		CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA226A5174808AF00209736 /* UIDevice+Extensions.m */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
 		CDA752DE173044EE005B25EC /* icon114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DC173044EE005B25EC /* icon114x114.png */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -251,6 +252,8 @@
 		CD92B52F1735882F00771F26 /* GRKnobBase@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRKnobBase@2x.png"; sourceTree = "<group>"; };
 		CD9EF358173A8227006AD8C3 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
 		CD9EF35B173A8227006AD8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		CDA226A4174808AF00209736 /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extensions.h"; sourceTree = "<group>"; };
+		CDA226A5174808AF00209736 /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extensions.m"; sourceTree = "<group>"; };
 		CDA752DB173044EE005B25EC /* icon57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon57x57.png; sourceTree = "<group>"; };
 		CDA752DC173044EE005B25EC /* icon114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon114x114.png; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -572,6 +575,15 @@
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
+		CDA226A31748089C00209736 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CDA226A4174808AF00209736 /* UIDevice+Extensions.h */,
+				CDA226A5174808AF00209736 /* UIDevice+Extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CDA752E5173049A0005B25EC /* Web Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,6 +765,7 @@
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
 				CDA752EC17305471005B25EC /* Core Data */,
 				CD92B5161735729E00771F26 /* Constants */,
+				CDA226A31748089C00209736 /* Extensions */,
 				CDD7EBE41733B69500225F5A /* Internet Doctor */,
 				CD7A02071732939F003A2E2D /* Notification Center */,
 				CDD7EBEA1733BC5D00225F5A /* Radio Player */,
@@ -981,6 +994,7 @@
 				CD55C0D5174424F6000BFFE5 /* GRSidebarViewController.m in Sources */,
 				CDA9AFA9174551990047C1F1 /* GRShoutCastHelper.m in Sources */,
 				CD53900217476F480044092D /* GRNavigationController.m in Sources */,
+				CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
