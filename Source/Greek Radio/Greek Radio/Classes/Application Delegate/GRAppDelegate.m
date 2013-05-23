@@ -22,11 +22,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-//#if !APPSTORE
-//
-//#endif
-
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
 
     NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
