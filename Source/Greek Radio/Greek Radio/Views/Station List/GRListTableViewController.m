@@ -397,12 +397,14 @@
 
     if (self.navigationController.visibleViewController == self)
     {
-        [self.navigationController pushViewController:playController animated:YES];
+        [self.navigationController pushViewController:playController
+                                             animated:YES];
     }
     else
     {
         [self.navigationController popViewControllerAnimated:NO];
-        [self.navigationController pushViewController:playController animated:NO];
+        [self.navigationController pushViewController:playController
+                                             animated:NO];
     }
 }
 
@@ -470,6 +472,8 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 // ------------------------------------------------------------------------------------------
 - (void)moreButtonPressed:(UIButton *)sender
 {
+    [self.searchBar resignFirstResponder];
+
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
     [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"")
                               block:nil];

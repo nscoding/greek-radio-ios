@@ -73,11 +73,26 @@
 {
     if ((self = [super init]))
     {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillEnterForeground:)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+
         self.stationsDAO = [[GRStationsDAO alloc] init];
     }
     
     return self;
 }
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [self parseXML];
+}
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
@@ -101,17 +116,28 @@
         return;
     }
 
-    self.isParsing = YES;    
-    self.dateLastSynced = [NSDate date];
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-
-        [[MTStatusBarOverlay sharedOverlay] postMessage:NSLocalizedString(@"label_syncing", @"")
-                                               animated:YES];
+        [[MTStatusBarOverlay sharedOverlay] postImmediateMessage:NSLocalizedString(@"label_syncing", @"")
+                                                        animated:YES];
+        [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     });
 
-    [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
-    [self parseXMLFileAtURL:kWebServiceURL];
+    self.isParsing = YES;
+    self.dateLastSynced = [NSDate date];
+    
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^
+    {
+        [self parseXMLFileAtURL:kWebServiceURL];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^
+        {
+
+            [[MTStatusBarOverlay sharedOverlay] hide];
+            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+
+        });
+    });
 }
 
 
@@ -138,7 +164,6 @@
     dispatch_async(dispatch_get_main_queue(), ^
     {
         [[MTStatusBarOverlay sharedOverlay] hide];
-
         if ([[NSInternetDoctor shared] connected])
         {
             NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
@@ -165,13 +190,10 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    
-//    NSLog(@"found this element: %@", elementName);
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
     {
-		// clear out our story item caches...
 		self.currentTitle = [[NSMutableString alloc] init];
         self.currentGenre = [[NSMutableString alloc] init];
 		self.currentStationURL = [[NSMutableString alloc] init];
@@ -187,8 +209,6 @@ didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
-//    NSLog(@"end this element: %@", elementName);
-
 	if ([elementName isEqualToString:kTopElement])
     {
         [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
@@ -203,7 +223,6 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-//    NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
@@ -217,12 +236,6 @@ didStartElement:(NSString *)elementName
     {
         [self.stationsDAO removeAllStationsBeforeDate:self.dateLastSynced];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[MTStatusBarOverlay sharedOverlay] hide];
-    });
- 
-    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
 }
 
 
