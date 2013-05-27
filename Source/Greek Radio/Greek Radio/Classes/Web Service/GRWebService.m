@@ -8,6 +8,7 @@
 
 #import "GRWebService.h"
 #import "GRStationsDAO.h"
+#import "MTStatusBarOverlay.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -103,6 +104,12 @@
     self.isParsing = YES;    
     self.dateLastSynced = [NSDate date];
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        [[MTStatusBarOverlay sharedOverlay] postMessage:NSLocalizedString(@"label_syncing", @"")
+                                               animated:YES];
+    });
+
     [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
     [self parseXMLFileAtURL:kWebServiceURL];
 }
@@ -127,18 +134,19 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     self.dateLastSynced = nil;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
 
-    if ([[NSInternetDoctor shared] connected])
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-        NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
-        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                       message:errorString];
-    }
+        [[MTStatusBarOverlay sharedOverlay] hide];
+
+        if ([[NSInternetDoctor shared] connected])
+        {
+            NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:errorString];
+        }
     
         [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-
     });
     
     self.isParsing = NO;
@@ -210,6 +218,10 @@ didStartElement:(NSString *)elementName
         [self.stationsDAO removeAllStationsBeforeDate:self.dateLastSynced];
     }
     
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[MTStatusBarOverlay sharedOverlay] hide];
+    });
+ 
     [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
 }
 

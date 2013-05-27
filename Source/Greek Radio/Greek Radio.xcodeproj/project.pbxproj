@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD2B84BC1753B6D500AC17AE /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B84B91753B6D500AC17AE /* MTStatusBarOverlay.m */; };
 		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
 		CD539006174777450044092D /* icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = CD539004174777450044092D /* icon144x144.png */; };
 		CD539008174777660044092D /* icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = CD539007174777660044092D /* icon72x72.png */; };
@@ -137,6 +138,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD2B84B81753B6D500AC17AE /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTStatusBarOverlay.h; sourceTree = "<group>"; };
+		CD2B84B91753B6D500AC17AE /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTStatusBarOverlay.m; sourceTree = "<group>"; };
 		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
 		CD53900117476F480044092D /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
 		CD539004174777450044092D /* icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon144x144.png; sourceTree = "<group>"; };
@@ -322,6 +325,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD2B84B51753B6D500AC17AE /* MTStatusBarOverlay */ = {
+			isa = PBXGroup;
+			children = (
+				CD2B84B81753B6D500AC17AE /* MTStatusBarOverlay.h */,
+				CD2B84B91753B6D500AC17AE /* MTStatusBarOverlay.m */,
+			);
+			path = MTStatusBarOverlay;
+			sourceTree = "<group>";
+		};
 		CD53C9541737B0D400264230 /* Appirater */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +811,7 @@
 		CDE43AB9173041B8004C0698 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CD2B84B51753B6D500AC17AE /* MTStatusBarOverlay */,
 				CD55C0C817441E4A000BFFE5 /* JASidePanels */,
 				CD53C9541737B0D400264230 /* Appirater */,
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
@@ -995,6 +1008,7 @@
 				CDA9AFA9174551990047C1F1 /* GRShoutCastHelper.m in Sources */,
 				CD53900217476F480044092D /* GRNavigationController.m in Sources */,
 				CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */,
+				CD2B84BC1753B6D500AC17AE /* MTStatusBarOverlay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,7 @@
 "label_new_stations" = "New station proposal";
 "label_search" = "Search";
 "label_music" = "Music";
+"label_syncing" = "Syncing...";
 
 "label_auto_lock_header" = "Disable device automatic locking";
 "label_auto_lock_text" = "Prevents your phone from automatically locking while the application is running.";
