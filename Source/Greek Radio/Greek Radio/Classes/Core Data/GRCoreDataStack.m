@@ -65,7 +65,7 @@
 
 - (void)mergeChangesWithNotification:(NSNotification *)notification
 {
-    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+//    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
 }
 
 
@@ -234,7 +234,8 @@
             
             [psc unlock];
         }
-        else {
+        else
+        {
             NSLog(@"iCloud is NOT working - using a local store");
             NSMutableDictionary *options = [NSMutableDictionary dictionary];
             [options setObject:[NSNumber numberWithBool:YES] forKey:NSMigratePersistentStoresAutomaticallyOption];
@@ -249,10 +250,6 @@
                                       error:nil];
             [psc unlock];
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SomethingChanged" object:self userInfo:nil];
-        });
     });
     
     return _persistentStoreCoordinator;
