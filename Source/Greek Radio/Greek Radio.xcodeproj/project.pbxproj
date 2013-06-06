@@ -1106,7 +1106,6 @@
 		CDE43A9F17303DD5004C0698 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1130,7 +1129,6 @@
 		CDE43AA017303DD5004C0698 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1180,7 +1178,6 @@
 		CDE43AB817303FA6004C0698 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
