@@ -1,0 +1,47 @@
+"app_welcome_title" = "Welcome to Greek Radio";
+"app_welcome_subtitle" = "Listen. Feel. Share.";
+
+"button_enjoy" = "Enjoy!";
+"button_dismiss" = "Dismiss";
+"button_remove" = "Remove";
+"button_sugggest" = "Suggest a station";
+"button_report" = "Report a problem";
+"button_mark_as_favorite" = "Mark as favorite";
+"button_visit_station" = "Visit station";
+
+"label_now_playing" = "Now Playing";
+"label_something_wrong" = "Something went wrong...";
+"label_sorry" = "Sorry";
+"label_refresh_stations" = "Refresh Stations";
+"label_favorites" = "Favorites";
+"label_local_stations" = "Local Stations";
+"label_stations" = "Stations";
+"label_new_stations" = "New station proposal";
+"label_search" = "Search";
+"label_music" = "Music";
+"label_syncing" = "Syncing...";
+
+"label_auto_lock_header" = "Disable device automatic locking";
+"label_auto_lock_text" = "Prevents your phone from automatically locking while the application is running.";
+"label_shake_music_header" = "Shake to shuffle for music";
+"label_shake_music_text" = "Shake your phone to listen to a random station.";
+"label_settings" = "Settings";
+
+"app_no_internet_title" = "No internet connection";
+"app_no_internet_subtitle" = "You require an internet connection via WiFi or cellular network for this application to work";
+"app_low_memory_error_title" = "Low Memory";
+"app_low_memory_error_subtitle" = "The amount of available memory on your device is low, Greek Radio stopped playing to avoid crashing";
+"app_player_error_subtitle" = "Incompatible or offline audio stream, try again";
+"app_fetch_stations_error" = "We were unable to download stations from the server";
+
+"share_generic_text" = "I am listening to Greek music on my iPhone using Greek Radio";
+"share_station_$_text" = "I am listening to %@ using Greek Radio";
+
+"share_facebook_error" = "You can't update your status right now, please make sure your device has at least one Facebook account setup";
+"share_twitter_error" = "You can't tweet right now, please make sure your device has at least one Twitter account setup";
+
+"share_via_email" = "Share via Email";
+"share_via_twitter" = "Share via Twitter";
+"share_via_facebook" = "Share via Facebook";
+"share_via_email_check_it_$" = "You can check it out at <a href='%@'>here</a>";
+

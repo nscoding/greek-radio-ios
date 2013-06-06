@@ -8,8 +8,28 @@
 
 #import "GRPlayerViewController.h"
 #import "GRShareHelper.h"
+#import "TestFlight.h"
+#import "GRShoutCastHelper.h"
+#import "UIDevice+Extensions.h"
 
 #import <MediaPlayer/MediaPlayer.h>
+
+
+#define kGenreCenterY (self.view.frame.size.height * 0.75) - 30
+#define kStationCenterY (self.view.frame.size.height * 0.75) - 70
+
+
+
+// ------------------------------------------------------------------------------------------
+
+
+typedef enum GRInformationBarOption
+{
+    GRInformationBarOptionGenre = 0,
+    GRInformationBarOptionSong = 1,
+    GRInformationBarOptionArtist = 2,
+} GRInformationBarOption;
+
 
 
 // ------------------------------------------------------------------------------------------
@@ -17,7 +37,16 @@
 
 @interface GRPlayerViewController ()
 
-@property (nonatomic, strong) UIActivityIndicatorView *loadingIndicator;
+@property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, assign) IBOutlet UIButton *playButton;
+@property (nonatomic, assign) IBOutlet UIButton *sharebutton;
+
+@property (nonatomic, assign) IBOutlet UIView *bottomBar;
+@property (nonatomic, weak) GRStation *currentStation;
+@property (nonatomic, assign) GRInformationBarOption informationBarOption;
+@property (nonatomic, copy) NSString *currentSong;
+@property (nonatomic, copy) NSString *currentArtist;
+@property (nonatomic, strong) NSTimer *informationTimer;
 
 @end
 
@@ -41,15 +70,13 @@
         [self.view setBackgroundColor:[UIColor blackColor]];
         
         [self buildAndConfigureStationName:station.title];
+        [self buildAndConfigureStationGenre:station.genre];
         [self buildAndConfigureListButton];
-        [self buildAndConfigureLoadingView];
         [self registerObservers];
-            
         
         CGRect bottomFrame = self.bottomBar.frame;
         bottomFrame.origin.y = self.view.frame.size.height - bottomFrame.size.height;
         [self.bottomBar setFrame:bottomFrame];
-        
         
         MPVolumeView *myVolumeView =
         [[MPVolumeView alloc] initWithFrame:CGRectMake(20, self.bottomBar.frame.size.height - 34,
@@ -57,11 +84,20 @@
         myVolumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
         [self.bottomBar addSubview:myVolumeView];
         
-        
         [[GRRadioPlayer shared] playStation:self.currentStation.title
                               withStreamURL:self.currentStation.streamURL];
         
         [self configurePlayButton];
+        [self animateStatus];
+        
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:60.0
+                                                                 target:self
+                                                               selector:@selector(updateSongInformation)
+                                                               userInfo:nil
+                                                                repeats:YES];
+        
+        [self.informationTimer fire];
+
     }
     
     return self;
@@ -70,7 +106,7 @@
 
 - (void)viewDidLoad
 {
-    self.navigationItem.title = @"Now Playing";
+    self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
     [super viewDidLoad];
 }
 
@@ -78,9 +114,177 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    if ([UIDevice isIPad])
+    {
+        CGFloat partWidth = (self.view.frame.size.width / 3) * 1.11;
+        self.playButton.center = CGPointMake(self.playButton.center.x, self.playButton.center.y);
+        
+        self.favouriteButton.center = CGPointMake((partWidth / 2) - (self.favouriteButton.frame.size.width / 2),
+                                                  self.favouriteButton.center.y);
+
+        self.sharebutton.center = CGPointMake((self.view.frame.size.width - (partWidth / 2)) +
+                                              (self.sharebutton.frame.size.width / 2), self.sharebutton.center.y);
+    }
     
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
     [self.favouriteButton setNeedsDisplay];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [UIView animateWithDuration:0.4
+                     animations:^
+    {
+        self.stationLabel.alpha = 1.0;
+        self.stationLabel.center = CGPointMake(self.view.center.x, kStationCenterY);
+    }
+    completion:^(BOOL finished)
+    {
+        [UIView animateWithDuration:0.4
+                         animations:^
+        {
+            self.genreLabel.alpha = 1.0;
+            self.genreLabel.center = CGPointMake(self.view.center.x, kGenreCenterY);
+        }];
+        
+    }];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[GRShoutCastHelper shared] cancelGet];
+    [self.informationTimer invalidate];
+    self.informationTimer = nil;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Timer
+// ------------------------------------------------------------------------------------------
+- (void)updateSongInformation
+{
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        __weak GRPlayerViewController *blockSelf = self;
+        [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
+                                         successBlock:^(NSString *songName, NSString *songArtist)
+         {
+             blockSelf.currentSong = [songName copy];
+             blockSelf.currentArtist = [songArtist copy];
+         }
+         failBlock:^{
+                blockSelf.currentSong = nil;
+                blockSelf.currentArtist = nil;
+         }];
+    }
+}
+
+
+- (void)animateStatus
+{
+    GRInformationBarOption currentOption = self.informationBarOption;
+    GRInformationBarOption goToOption = self.informationBarOption;
+
+    if (currentOption == GRInformationBarOptionArtist) {
+        currentOption = GRInformationBarOptionGenre;
+        goToOption = GRInformationBarOptionGenre;
+    }
+    else
+    {
+        goToOption++;
+    }
+    
+    if (goToOption == GRInformationBarOptionSong &&
+        self.currentSong.length == 0)
+    {
+        goToOption++;
+    }
+
+    if (goToOption == GRInformationBarOptionArtist &&
+        self.currentArtist.length == 0)
+    {
+        goToOption = GRInformationBarOptionGenre;
+    }
+    
+    if ([GRRadioPlayer shared].isPlaying == NO)
+    {
+        currentOption = GRInformationBarOptionGenre;
+        goToOption = GRInformationBarOptionGenre;
+    }
+    
+    __weak GRPlayerViewController *blockSelf = self;
+    
+    if (self.informationBarOption != goToOption)
+    {
+        self.informationBarOption = goToOption;
+        
+        [UIView animateWithDuration:6.0
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             
+             blockSelf.genreLabel.alpha = 1.0;
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
+                             
+        } completion:^(BOOL finished) {
+ 
+            blockSelf.genreLabel.alpha = 1.0;
+            
+            blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
+            CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+            blockSelf.genreLabel.numberOfLines = 1;
+            blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+            blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
+                                                 (blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
+
+            [UIView animateWithDuration:12.0
+                                  delay:0.0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 blockSelf.genreLabel.alpha = 1.0;
+                                 blockSelf.genreLabel.center =
+                                 CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
+
+                                 
+                             } completion:^(BOOL finished) {                                 
+                                     [blockSelf animateStatus];
+                             }];
+        }];
+    }
+    else
+    {
+        double delayInSeconds = 5.0f;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [blockSelf animateStatus];
+
+        });
+    }
+}
+
+
+- (NSString *)titleForBar:(GRInformationBarOption)option
+{
+    switch (option) {
+        case GRInformationBarOptionGenre:
+            return self.currentStation.genre;
+            break;
+        case GRInformationBarOptionArtist:
+            return self.currentArtist;
+            break;
+        case GRInformationBarOptionSong:
+            return self.currentSong;
+            break;
+    }
+    
+    return @"";
 }
 
 
@@ -104,14 +308,12 @@
 - (void)playerDidStart:(NSNotification *)notification
 {
     [self configurePlayButton];
-    [self.loadingIndicator startAnimating];
 }
 
 
 - (void)playerDidEnd:(NSNotification *)notification
 {
     [self configurePlayButton];
-    [self.loadingIndicator stopAnimating];
 }
 
 
@@ -120,22 +322,47 @@
 // ------------------------------------------------------------------------------------------
 - (void)buildAndConfigureStationName:(NSString *)name
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:27];
-    label.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    label.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    label.shadowOffset = CGSizeMake(0, 1);
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text =  [name copy];
-    label.numberOfLines = 0;
+    self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.stationLabel.backgroundColor = [UIColor clearColor];
+    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:26];
+    self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.stationLabel.shadowOffset = CGSizeMake(0, 1);
+    self.stationLabel.textAlignment = NSTextAlignmentCenter;
+    self.stationLabel.text =  [name copy];
+    self.stationLabel.numberOfLines = 1;
+    self.stationLabel.minimumFontSize = 17;
+    self.stationLabel.adjustsFontSizeToFitWidth = YES;
+
+    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
+    self.stationLabel.alpha = 0.0;
     
-    CGSize size = [label sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
-    label.frame = CGRectMake(0, 0, size.width, size.height);
-    [label setCenter:CGPointMake(self.view.center.x, 260)];
-    
-    [self.view addSubview:label];
+    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, kStationCenterY)];
+    [self.view addSubview:self.stationLabel];
 }
+
+
+- (void)buildAndConfigureStationGenre:(NSString *)genre
+{
+    self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.genreLabel.backgroundColor = [UIColor clearColor];
+    self.genreLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+    self.genreLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.genreLabel.shadowOffset = CGSizeMake(0, 1);
+    self.genreLabel.textAlignment = NSTextAlignmentCenter;
+    self.genreLabel.text =  [genre copy];
+    self.genreLabel.numberOfLines = 1;
+    self.genreLabel.alpha = 0.0;
+
+    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+    self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2),
+                                           kGenreCenterY)];
+    [self.view addSubview:self.genreLabel];
+}
+
 
 
 - (void)buildAndConfigureListButton
@@ -154,28 +381,18 @@
 }
 
 
-- (void)buildAndConfigureLoadingView
-{
-    self.loadingIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 30, 20)];
-    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:self.loadingIndicator];
-    [self navigationItem].rightBarButtonItem = barButton;
-    
-    if ([[GRRadioPlayer shared] isPlaying])
-    {
-        [self.loadingIndicator startAnimating];
-    }
-}
-
 
 - (void)configurePlayButton
 {
     if ([GRRadioPlayer shared].isPlaying)
     {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPause"] forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageNamed:@"GRPause"]
+                         forState:UIControlStateNormal];
     }
     else
     {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPlay"] forState:UIControlStateNormal];
+        [self.playButton setImage:[UIImage imageNamed:@"GRPlay"]
+                         forState:UIControlStateNormal];
     }
 }
 
@@ -192,30 +409,47 @@
 - (IBAction)shareButtonPressed:(UIButton *)sender
 {
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:@"Dismiss" block:nil];
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
     
-    [sheet addButtonWithTitle:@"Share via Email" block:^{
+    [sheet addButtonWithTitle:NSLocalizedString(@"share_via_email", @"")
+                        block:^
+    {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
         mailController.subject = @"Greek Radio";
-        [mailController setMessageBody:
-         [NSString stringWithFormat:@"%@.\n\nYou can check it out at %@",kTextNoStation, kAppiTunesURL]
-                                isHTML:NO];
+
+        NSString *listeningTo;
+        if ([GRRadioPlayer shared].stationName.length > 0)
+        {
+            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                           [GRRadioPlayer shared].stationName];
+        }
+        else
+        {
+            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                          [NSLocalizedString(@"label_music", @"") lowercaseString]];
+        }
+        
+        NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
+                           kAppiTunesURL];
+                           
+        [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
+                                isHTML:YES];
         
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     if ([SLComposeViewController class])
     {
-        [sheet addButtonWithTitle:@"Share via Twitter" block:^{
+        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_twitter", @"") block:^{
             [GRShareHelper tweetTappedOnController:self];
         }];
     }
     
     if ([SLComposeViewController class])
     {
-        [sheet addButtonWithTitle:@"Share via Facebook" block:^{
+        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_facebook", @"") block:^{
             [GRShareHelper facebookTappedOnController:self];
         }];
     }
@@ -240,9 +474,17 @@
 
 - (IBAction)markStationAsFavourite:(id)sender
 {
+    // inform test flight
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
+    
+    // set the value and save
     self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
     [self.currentStation.managedObjectContext save:nil];
     
+    // inform about the change
+    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
+    
+    // adjust the button state
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
 }
 
@@ -255,7 +497,18 @@
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Dealloc
+// ------------------------------------------------------------------------------------------
+- (void)dealloc
+{
+    [[GRShoutCastHelper shared] cancelGet];
+    [self.informationTimer invalidate];
+    self.informationTimer = nil;
 }
 
 

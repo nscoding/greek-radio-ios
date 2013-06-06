@@ -9,6 +9,7 @@
 #include <netdb.h>
 #endif
 
+#import "TestFlight.h"
 #import "NSInternetDoctor.h"
 #import "BlockAlertView.h"
 #import <MessageUI/MessageUI.h>
@@ -327,8 +328,9 @@ void MyAudioQueueIsRunningCallback(void *inUserData, AudioQueueRef inAQ, AudioQu
 	
 	if (myData.isPlaying)
 	{
-		myData->finished = true;
-		myData.isPlaying = false;
+// TODO: had to disable the following logic
+//		myData->finished = true;
+//		myData.isPlaying = false;
         
 #ifdef TARGET_OS_IPHONE
 		AudioSessionSetActive(false);
@@ -676,11 +678,17 @@ void ReadStreamCallBack
 			[self stop];
             
 			if ([[NSInternetDoctor shared] connected])
-            {
-                BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:@"Something is wrong..."
-                                                                          message:@"Incompatible or offline audio stream, try again."];
-                [alertView setCancelButtonWithTitle:@"Dismiss" block:nil];
+            {                
+                BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                                                          message:NSLocalizedString(@"app_player_error_subtitle", @"")];
+                [alertView setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
                 [alertView show];
+                
+                if (url.absoluteString.length > 0)
+                {
+                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Εrror)",
+                                                [url absoluteString]]];
+                }
 			}
 			else
             {
@@ -784,7 +792,6 @@ cleanup:
 		else
 		{
 			finished = true;
-			self.isPlaying = YES;
 			self.isPlaying = NO;
 		}
 	}

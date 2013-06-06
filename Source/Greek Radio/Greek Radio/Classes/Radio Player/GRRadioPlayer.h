@@ -12,6 +12,8 @@
 {
     AudioStreamer *audioStreamer;
     UIBackgroundTaskIdentifier backgroundOperation;
+    BOOL wasPlaying;
+    BOOL wentBackground;
 }
 
 @property (nonatomic, strong) NSString *stationName;

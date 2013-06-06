@@ -8,12 +8,14 @@
 
 #import "GRWebService.h"
 #import "GRStationsDAO.h"
+#import "MTStatusBarOverlay.h"
 
 
 // ------------------------------------------------------------------------------------------
 
 
 #define kWebServiceURL @"http://nscoding.co.uk/xml/RadioStations.xml"
+//#define kWebServiceURL @"http://nscoding.co.uk/xml/RadioStationsBeta.xml"
 
 #define kTopElement @"station"
     #define kElementTitle @"title"
@@ -71,11 +73,26 @@
 {
     if ((self = [super init]))
     {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(applicationWillEnterForeground:)
+                                                     name:UIApplicationWillEnterForegroundNotification
+                                                   object:nil];
+
         self.stationsDAO = [[GRStationsDAO alloc] init];
     }
     
     return self;
 }
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [self parseXML];
+}
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
@@ -89,18 +106,38 @@
     
     if ([[NSInternetDoctor shared] connected] == NO)
     {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSInternetDoctor shared] showNoInternetAlert];
+            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        });
+
         self.isParsing = NO;
-        [[NSInternetDoctor shared] showNoInternetAlert];
-        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
         
         return;
     }
 
-    self.isParsing = YES;    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[MTStatusBarOverlay sharedOverlay] postImmediateMessage:NSLocalizedString(@"label_syncing", @"")
+                                                        animated:YES];
+        [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
+    });
+
+    self.isParsing = YES;
     self.dateLastSynced = [NSDate date];
     
-    [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
-    [self parseXMLFileAtURL:kWebServiceURL];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_async(queue, ^
+    {
+        [self parseXMLFileAtURL:kWebServiceURL];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^
+        {
+
+            [[MTStatusBarOverlay sharedOverlay] hide];
+            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+
+        });
+    });
 }
 
 
@@ -123,14 +160,19 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     self.dateLastSynced = nil;
-    
-    if ([[NSInternetDoctor shared] connected])
+
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-        NSString * errorString = [NSString stringWithFormat:@"We were unable to download stations."];
-        [BlockAlertView showInfoAlertWithTitle:@"Something went wrong..." message:errorString];
-    }
+        [[MTStatusBarOverlay sharedOverlay] hide];
+        if ([[NSInternetDoctor shared] connected])
+        {
+            NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:errorString];
+        }
     
-    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
+    });
     
     self.isParsing = NO;
 }
@@ -148,13 +190,10 @@ didStartElement:(NSString *)elementName
  qualifiedName:(NSString *)qName
     attributes:(NSDictionary *)attributeDict
 {
-    
-//    NSLog(@"found this element: %@", elementName);
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
     {
-		// clear out our story item caches...
 		self.currentTitle = [[NSMutableString alloc] init];
         self.currentGenre = [[NSMutableString alloc] init];
 		self.currentStationURL = [[NSMutableString alloc] init];
@@ -170,8 +209,6 @@ didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
-//    NSLog(@"end this element: %@", elementName);
-
 	if ([elementName isEqualToString:kTopElement])
     {
         [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
@@ -186,7 +223,6 @@ didStartElement:(NSString *)elementName
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-//    NSLog(@"found characters: %@", string);
     [[self propertyForCurrentElement] appendString:string];
 }
 
@@ -200,8 +236,6 @@ didStartElement:(NSString *)elementName
     {
         [self.stationsDAO removeAllStationsBeforeDate:self.dateLastSynced];
     }
-    
-    [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
 }
 
 

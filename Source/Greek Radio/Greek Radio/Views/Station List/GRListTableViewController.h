@@ -7,11 +7,12 @@
 //
 
 #import <MessageUI/MessageUI.h>
+#import "JASidePanelController.h"
 
 @interface GRListTableViewController : UITableViewController <MFMailComposeViewControllerDelegate,
                                             UISearchBarDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, assign) JASidePanelController *layerController;
 
 @end

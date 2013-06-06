@@ -129,13 +129,13 @@
 					</object>
 					<object class="IBUIImageView" id="144690379">
 						<reference key="NSNextResponder" ref="181568436"/>
-						<int key="NSvFlags">256</int>
+						<int key="NSvFlags">258</int>
 						<string key="NSFrame">{{0, 58}, {320, 2}}</string>
 						<reference key="NSSuperview" ref="181568436"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -220,11 +220,6 @@
 						<reference key="parent" ref="181568436"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">64</int>
-						<reference key="object" ref="833777218"/>
-						<reference key="parent" ref="181568436"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">68</int>
 						<reference key="object" ref="561578523"/>
 						<reference key="parent" ref="181568436"/>
@@ -232,6 +227,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">69</int>
 						<reference key="object" ref="144690379"/>
+						<reference key="parent" ref="181568436"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">64</int>
+						<reference key="object" ref="833777218"/>
 						<reference key="parent" ref="181568436"/>
 					</object>
 				</object>
@@ -275,7 +275,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">69</int>
+			<int key="maxID">72</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

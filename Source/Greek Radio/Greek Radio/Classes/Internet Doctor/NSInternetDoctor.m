@@ -106,8 +106,8 @@
 // ------------------------------------------------------------------------------------------
 - (void)showNoInternetAlert
 {
-    [BlockAlertView showInfoAlertWithTitle:@"No internet connection"
-                                   message:@"You require an internet connection via WiFi or cellular network for this application to work."];
+    [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"app_no_internet_title", @"")
+                                   message:NSLocalizedString(@"app_no_internet_subtitle", @"")];
 
     [self.nscodingReachability stopNotifier];
     [self.nscodingReachability startNotifier];

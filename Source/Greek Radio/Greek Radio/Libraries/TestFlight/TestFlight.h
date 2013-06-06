@@ -6,7 +6,7 @@
 //  Copyright 2011 TestFlight. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#define TESTFLIGHT_SDK_VERSION @"1.2.4"
+#define TESTFLIGHT_SDK_VERSION @"1.2.5"
 #undef TFLog
 
 #if __cplusplus
@@ -110,5 +110,5 @@ extern NSString *const TFOptionDisableInAppUpdates; // Defaults to @NO. Setting 
 extern NSString *const TFOptionLogToConsole; // Defaults to @YES. Prints remote logs to Apple System Log.
 extern NSString *const TFOptionLogToSTDERR; // Defaults to @YES. Sends remote logs to STDERR when debugger is attached.
 extern NSString *const TFOptionReinstallCrashHandlers; // If set to @YES: Reinstalls crash handlers, to be used if a third party library installs crash handlers overtop of the TestFlight Crash Handlers.
-extern NSString *const TFOptionSenNSLogOnlyOnCrash; // Defaults to @NO. Setting to @YES stops remote logs from being sent when sessions end. They would only be sent in the event of a crash.
+extern NSString *const TFOptionSendLogOnlyOnCrash; // Defaults to @NO. Setting to @YES stops remote logs from being sent when sessions end. They would only be sent in the event of a crash.
 
