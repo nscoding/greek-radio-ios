@@ -166,6 +166,7 @@
 		CD6AD36417312F5D0009A106 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		CD6AD36717312F7E0009A106 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CD6AD36917312F8B0009A106 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		CD77D1991760B4640097F975 /* Greek Radio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Greek Radio.entitlements"; sourceTree = "<group>"; };
 		CD7A017B17327591003A2E2D /* GRStationCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = GRStationCellView.xib; path = Cells/GRStationCellView.xib; sourceTree = "<group>"; };
 		CD7A018217327799003A2E2D /* GRWoodHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader.png; sourceTree = "<group>"; };
 		CD7A018317327799003A2E2D /* GRWoodHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader@2x.png"; sourceTree = "<group>"; };
@@ -724,6 +725,7 @@
 		CDE43A8417303DD5004C0698 /* Greek Radio */ = {
 			isa = PBXGroup;
 			children = (
+				CD77D1991760B4640097F975 /* Greek Radio.entitlements */,
 				CD53C9511737A97800264230 /* Settings.bundle */,
 				CDE43AA317303F5B004C0698 /* Assets */,
 				CDE43AA817303F5B004C0698 /* Classes */,
@@ -1104,6 +1106,7 @@
 		CDE43A9F17303DD5004C0698 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1116,8 +1119,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE7558F5-9EEA-40C0-BD99-CB02C530D2B3";
+				PROVISIONING_PROFILE = "BB2F1472-CD2D-42BE-BD04-701F7C27969A";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB2F1472-CD2D-42BE-BD04-701F7C27969A";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1127,6 +1130,7 @@
 		CDE43AA017303DD5004C0698 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1139,8 +1143,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FA6C7B30-70A4-43AB-9168-2D66CC10C70A";
+				PROVISIONING_PROFILE = "E358A949-7777-4946-89B2-E4827F0075A4";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E358A949-7777-4946-89B2-E4827F0075A4";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1176,6 +1180,7 @@
 		CDE43AB817303FA6004C0698 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek Radio.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1188,8 +1193,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "FEF30D23-A39C-4488-ADA9-C70432CA27CB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEF30D23-A39C-4488-ADA9-C70432CA27CB";
+				PROVISIONING_PROFILE = "60C658F8-0262-4763-B683-BDE8EC7A609B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60C658F8-0262-4763-B683-BDE8EC7A609B";
 				SDKROOT = iphoneos6.1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
