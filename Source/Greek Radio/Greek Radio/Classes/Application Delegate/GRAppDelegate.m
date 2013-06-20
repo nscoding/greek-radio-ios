@@ -8,7 +8,7 @@
 
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
-#import "GRSplashViewController.h"
+#import "GRSidebarViewController.h"
 
 #import "Appirater.h"
 #import "TestFlight.h"
@@ -22,9 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if !APPSTORE
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
-#endif
 
     NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:appVersionString forKey:@"currentVersionKey"];
@@ -34,11 +32,7 @@
 
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
-    
     [self registerObservers];
-    
-    // [self performSelector:@selector(flipSplashScreen) withObject:nil afterDelay:1.0f];
-    // [self buildAndConfigureSplashViewController];
     
     [Appirater setAppId:@"321094050"];
     [Appirater setDaysUntilPrompt:3];
@@ -55,10 +49,10 @@
     
     if ([NSInternetDoctor shared].connected)
     {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Welcome to Greek Radio"
-                                                       message:@"Listen. Feel. Share."];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"app_welcome_title", @"")
+                                                       message:NSLocalizedString(@"app_welcome_subtitle", @"")];
         
-        [alert setCancelButtonWithTitle:@"Enjoy!"
+        [alert setCancelButtonWithTitle:NSLocalizedString(@"button_enjoy", @"")
                                   block:^{
                                 
           double delayInSeconds = 1.0;
@@ -66,9 +60,7 @@
                                                   (int64_t)(delayInSeconds * NSEC_PER_SEC));
                                       
           dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-
-              [Appirater appLaunched:YES];
-          
+              [Appirater appLaunched:YES];          
           });
                                       
         }];
@@ -132,41 +124,27 @@
 }
 
 
-- (void)buildAndConfigureSplashViewController
-{
-    // Add the splash view
-	self.splashViewController = [[GRSplashViewController alloc] init];
-    [self.splashViewController.view setFrame:self.window.frame];
-    [self.window addSubview:self.splashViewController.view];
-}
-
-
-- (void)flipSplashScreen
-{
-    // Page flip transition
-	[UIView beginAnimations:@"pageFlipTransition" context:nil];
-	[UIView setAnimationDelay:0.0];
-	[UIView setAnimationBeginsFromCurrentState:YES];
-	[UIView setAnimationDuration:0.8];
-	[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.window cache:YES];
-	[UIView commitAnimations];
-    
-    [self.splashViewController.view removeFromSuperview];
-}
-
-
 - (void)buildAndConfigureStationsViewController
 {
     // Override point for customization after application launch.
     self.listTableViewController = [[GRListTableViewController alloc] init];
     
-    self.menuNavigationController = [[UINavigationController alloc]
+    
+    self.menuNavigationController = [[GRNavigationController alloc]
                                                     initWithRootViewController:self.listTableViewController];
     self.menuNavigationController.navigationBarHidden = NO;
-    self.window.rootViewController = self.menuNavigationController;
     self.listTableViewController.navigationController = self.menuNavigationController;
     self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
     
+    self.viewController = [[JASidePanelController alloc] init];
+    self.viewController.allowRightOverpan = NO;
+    self.viewController.shouldDelegateAutorotateToVisiblePanel = YES;
+    self.listTableViewController.layerController = self.viewController;
+    self.viewController.leftPanel = [[GRSidebarViewController alloc] init];
+	self.viewController.centerPanel = self.menuNavigationController;
+    self.window.rootViewController = self.viewController;
+    self.viewController.leftFixedWidth = 260;
+
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];
     });

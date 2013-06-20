@@ -15,14 +15,28 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRListTableViewController ()
+@interface GRListTableViewController () <GRStationCellViewDelegate, UIAccelerometerDelegate>
+{
+	CFTimeInterval		lastTime;
+	UIAccelerationValue	shakeAccelerometer[3];
+}
 
+@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
 @property (nonatomic, strong) NSMutableArray *favouriteStations;
 
 @end
+
+
+// ------------------------------------------------------------------------------------------
+
+
+#define kAccelerometerFrequency			105
+#define kFilteringFactor				0.1
+#define kMinEraseInterval				0.5
+#define kEraseAccelerationThreshold		4.0
 
 
 // ------------------------------------------------------------------------------------------
@@ -36,13 +50,32 @@
 - (id)init
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
-    {
-        self.searchBar.delegate = self;
+    {        
         [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
                                             [UIImage imageNamed:@"GRPaperBackground"]]];
+        
+        
+        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
+        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(changeTriggeredByUser:)
+                                                     name:GRNotificationChangeTriggeredByUser
+                                                   object:nil];
     }
     
     return self;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)changeTriggeredByUser:(NSNotification *)notification
+{
+    // get the stations
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
 }
 
 
@@ -51,6 +84,9 @@
 // ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
     
@@ -75,7 +111,6 @@
     
     UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     moreButton.frame = CGRectMake(0, 0, 40, 12);
-    
     [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
     [moreButton addTarget:self action:@selector(moreButtonPressed:)
         forControlEvents:UIControlEventTouchUpInside];
@@ -84,6 +119,20 @@
                                initWithCustomView:moreButton];
 
     self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingButton.frame = CGRectMake(0, 0, 22, 22);
+    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
+    [settingButton addTarget:self
+                      action:@selector(settingsButtonPressed:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                    initWithCustomView:settingButton];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+
 }
 
 
@@ -93,6 +142,7 @@
     [self configureStationsWithFilter:self.searchBar.text animate:YES];
     
     [self.searchBar resignFirstResponder];
+    [self becomeFirstResponder];
 }
 
 
@@ -152,7 +202,8 @@
 - (void)buildAndConfigurePullToRefresh
 {
     self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Refresh Stations"];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:
+                                           NSLocalizedString(@"label_refresh_stations", @"")];
     [self.refreshControl addTarget:self
                             action:@selector(updateStations)
                   forControlEvents:UIControlEventValueChanged];
@@ -199,12 +250,56 @@
                                                object:nil];
 }
 
+
 - (void)syncDidEnd:(NSNotification *)notification
 {
     [self configureStationsWithFilter:self.searchBar.text
                               animate:YES];
     
     [self.refreshControl performSelector:@selector(endRefreshing)];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Accelerometer delegate
+// ------------------------------------------------------------------------------------------
+- (void)accelerometer:(UIAccelerometer*)accelerometer
+        didAccelerate:(UIAcceleration*)acceleration
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
+    {
+        UIAccelerationValue length,	x, y, z;
+        
+        //Use a basic high-pass filter to remove the influence of the gravity
+        shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
+        shakeAccelerometer[0] * (1.0 - kFilteringFactor);
+        shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
+        shakeAccelerometer[1] * (1.0 - kFilteringFactor);
+        shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
+        shakeAccelerometer[2] * (1.0 - kFilteringFactor);
+        
+        // Compute values for the three axes of the acceleromater
+        x = acceleration.x - shakeAccelerometer[0];
+        y = acceleration.y - shakeAccelerometer[0];
+        z = acceleration.z - shakeAccelerometer[0];
+        
+        // Compute the intensity of the current acceleration
+        length = sqrt(x * x + y * y + z * z);
+        // If above a given threshold, play the erase sounds and erase the drawing view
+        if((length >= kEraseAccelerationThreshold) &&
+           (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
+        {
+            lastTime = CFAbsoluteTimeGetCurrent();
+            
+                int random = arc4random() % (self.serverStations.count - 1);
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
+                [self.tableView selectRowAtIndexPath:indexPath
+                                            animated:YES
+                                      scrollPosition:UITableViewScrollPositionMiddle];
+            
+                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+        }
+    }
 }
 
 
@@ -251,8 +346,10 @@
     GRStation *station = [self stationForIndexPath:indexPath];
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@", station.location];
+    cell.station = station;
+    cell.delegate = self;
     [cell setBadgeText:[NSString stringWithFormat:@"%@", station.genre]];
-
+    
     [cell setNeedsDisplay];
     
     return cell;
@@ -268,21 +365,21 @@
         {
             sectionName = (self.favouriteStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Favorites", @""), self.favouriteStations.count] : @"";
+             NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
         }
             break;
         case 1:
         {
             sectionName = (self.localStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Local Stations", @""), self.localStations.count] : @"";
+             NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
         }
             break;
         case 2:
         {
             sectionName = (self.serverStations.count > 0) ?
             [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"Stations", @""), self.serverStations.count] : @"";
+             NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
         }
             break;
     }
@@ -296,8 +393,19 @@
     GRStation *station = [self stationForIndexPath:indexPath];
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
                                                                                 previousView:self.view];
+    
 
-    [self.navigationController pushViewController:playController animated:YES];
+    if (self.navigationController.visibleViewController == self)
+    {
+        [self.navigationController pushViewController:playController
+                                             animated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:NO];
+        [self.navigationController pushViewController:playController
+                                             animated:NO];
+    }
 }
 
 
@@ -331,7 +439,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 - (NSString *)tableView:(UITableView *)tableView
 titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return @"Remove";
+    return NSLocalizedString(@"button_remove", @"");
 }
 
 
@@ -364,32 +472,34 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 // ------------------------------------------------------------------------------------------
 - (void)moreButtonPressed:(UIButton *)sender
 {
+    [self.searchBar resignFirstResponder];
+
     BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:@"Dismiss"
+    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"")
                               block:nil];
     
-    [sheet addButtonWithTitle:@"Suggest a station"
+    [sheet addButtonWithTitle:NSLocalizedString(@"button_sugggest", @"")
                         block:^
     {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
-        mailController.subject = @"New station proposal";
+        mailController.subject = NSLocalizedString(@"label_new_stations", @"");
         [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
-    [sheet setDestructiveButtonWithTitle:@"Report a problem"
+    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
                                    block:^
     {
         MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
         mailController.mailComposeDelegate = self;
-        mailController.subject = @"Something is wrong...";        
+        mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
         [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
 
         [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentModalViewController:mailController animated:YES];
+        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     [sheet showInView:self.view];
@@ -401,7 +511,13 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (void)settingsButtonPressed:(UIButton *)sender
+{
+    [self.layerController showLeftPanelAnimated:YES];
 }
 
 
@@ -445,6 +561,17 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 // ------------------------------------------------------------------------------------------
+#pragma mark - GRStationCellViewDelegate implementation
+// ------------------------------------------------------------------------------------------
+- (void)userDidDoubleTapOnGenre:(NSString *)genre
+{
+    self.searchBar.text = genre;
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
+}
+
+
+// ------------------------------------------------------------------------------------------
 #pragma mark - Memory
 // ------------------------------------------------------------------------------------------
 - (void)didReceiveMemoryWarning
@@ -452,9 +579,9 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     if ([GRRadioPlayer shared].isPlaying)
     {
         [[GRRadioPlayer shared] stopPlayingStation];
-        [BlockAlertView showInfoAlertWithTitle:@"Low Memory"
-                                       message:@"The amount of available memory on your device is low, "
-                                               @"Greek Radio stopped playing to avoid crashing."];
+        
+        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
+                                       message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")];
     }
   
     [super didReceiveMemoryWarning];

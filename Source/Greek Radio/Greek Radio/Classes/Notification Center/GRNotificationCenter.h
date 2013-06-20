@@ -9,9 +9,9 @@
 
 extern NSString *const GRNotificationSyncManagerDidStart;
 extern NSString *const GRNotificationSyncManagerDidEnd;
-
 extern NSString *const GRNotificationStreamDidStart;
 extern NSString *const GRNotificationStreamDidEnd;
+extern NSString *const GRNotificationChangeTriggeredByUser;
 
 @interface GRNotificationCenter : NSObject
 
@@ -22,5 +22,7 @@ extern NSString *const GRNotificationStreamDidEnd;
 
 + (void)postPlayerDidStartNotificationWithSender:(id)sender;
 + (void)postPlayerDidEndNotificationWithSender:(id)sender;
+
++ (void)postChangeTriggeredByUserWithSender:(id)sender;
 
 @end
