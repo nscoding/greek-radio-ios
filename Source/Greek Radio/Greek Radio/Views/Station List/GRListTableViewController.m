@@ -481,25 +481,42 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     [sheet addButtonWithTitle:NSLocalizedString(@"button_sugggest", @"")
                         block:^
     {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.mailComposeDelegate = self;
-        mailController.subject = NSLocalizedString(@"label_new_stations", @"");
-        [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_new_stations", @"");
+            [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        }
+        else
+        {
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:NSLocalizedString(@"share_email_error", @"")];
+        }
 
-        [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
                                    block:^
     {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.mailComposeDelegate = self;
-        mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
-        [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-
-        [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
+            [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        }
+        else
+        {
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:NSLocalizedString(@"share_email_error", @"")];
+        }
     }];
     
     [sheet showInView:self.view];

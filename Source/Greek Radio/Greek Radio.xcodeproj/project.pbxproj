@@ -22,7 +22,6 @@
 		CD55C0D5174424F6000BFFE5 /* GRSidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0D3174424F6000BFFE5 /* GRSidebarViewController.m */; };
 		CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD55C0D4174424F6000BFFE5 /* GRSidebarViewController.xib */; };
 		CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6AD36117312F5D0009A106 /* AudioStreamer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36317312F5D0009A106 /* libTestFlight.a */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
 		CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36917312F8B0009A106 /* AudioToolbox.framework */; };
 		CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A017B17327591003A2E2D /* GRStationCellView.xib */; };
@@ -125,6 +124,9 @@
 		CDE43AB217303F5B004C0698 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA617303F5B004C0698 /* Default.png */; };
 		CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA717303F5B004C0698 /* Default@2x.png */; };
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
+		CDEA244D17947583002AFBCC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEA244717947583002AFBCC /* libTestFlight.a */; };
+		CDEA244E17947583002AFBCC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CDEA244817947583002AFBCC /* README.md */; };
+		CDEA244F17947583002AFBCC /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CDEA244917947583002AFBCC /* release_notes.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,8 +164,6 @@
 		CD55C0D4174424F6000BFFE5 /* GRSidebarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSidebarViewController.xib; sourceTree = "<group>"; };
 		CD6AD36017312F5D0009A106 /* AudioStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioStreamer.h; sourceTree = "<group>"; };
 		CD6AD36117312F5D0009A106 /* AudioStreamer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioStreamer.m; sourceTree = "<group>"; };
-		CD6AD36317312F5D0009A106 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		CD6AD36417312F5D0009A106 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		CD6AD36717312F7E0009A106 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		CD6AD36917312F8B0009A106 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		CD77D1991760B4640097F975 /* Greek Radio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Greek Radio.entitlements"; sourceTree = "<group>"; };
@@ -299,6 +299,12 @@
 		CDE43AA717303F5B004C0698 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
 		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
+		CDEA244717947583002AFBCC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		CDEA244817947583002AFBCC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		CDEA244917947583002AFBCC /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		CDEA244C17947583002AFBCC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,7 +325,7 @@
 				CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */,
 				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
 				CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */,
-				CD6AD36617312F5D0009A106 /* libTestFlight.a in Frameworks */,
+				CDEA244D17947583002AFBCC /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,15 +382,6 @@
 				CD6AD36117312F5D0009A106 /* AudioStreamer.m */,
 			);
 			path = "Audio Streamer";
-			sourceTree = "<group>";
-		};
-		CD6AD36217312F5D0009A106 /* TestFlight */ = {
-			isa = PBXGroup;
-			children = (
-				CD6AD36317312F5D0009A106 /* libTestFlight.a */,
-				CD6AD36417312F5D0009A106 /* TestFlight.h */,
-			);
-			path = TestFlight;
 			sourceTree = "<group>";
 		};
 		CD7A017D1732774F003A2E2D /* Helpers */ = {
@@ -823,9 +820,22 @@
 				CD7A02B21732D852003A2E2D /* JSBadgeView */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
 				CDD7EBDF1733B66100225F5A /* Reachability */,
-				CD6AD36217312F5D0009A106 /* TestFlight */,
+				CDEA244617947583002AFBCC /* TestFlightSDK */,
 			);
 			path = Libraries;
+			sourceTree = "<group>";
+		};
+		CDEA244617947583002AFBCC /* TestFlightSDK */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA244717947583002AFBCC /* libTestFlight.a */,
+				CDEA244817947583002AFBCC /* README.md */,
+				CDEA244917947583002AFBCC /* release_notes.md */,
+				CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */,
+				CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */,
+				CDEA244C17947583002AFBCC /* TestFlight.h */,
+			);
+			path = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -966,6 +976,8 @@
 				CDE340A01744CE760033A4B1 /* GRSettingsButtonWhite.png in Resources */,
 				CD539006174777450044092D /* icon144x144.png in Resources */,
 				CD539008174777660044092D /* icon72x72.png in Resources */,
+				CDEA244E17947583002AFBCC /* README.md in Resources */,
+				CDEA244F17947583002AFBCC /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1116,6 +1128,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
+					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "BB2F1472-CD2D-42BE-BD04-701F7C27969A";
@@ -1139,6 +1152,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
+					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E358A949-7777-4946-89B2-E4827F0075A4";
@@ -1188,6 +1202,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
+					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "60C658F8-0262-4763-B683-BDE8EC7A609B";
