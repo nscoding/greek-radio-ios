@@ -15,7 +15,6 @@
 		CD53C95D1737B0D400264230 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9551737B0D400264230 /* .gitignore */; };
 		CD53C95E1737B0D400264230 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53C9571737B0D400264230 /* Appirater.m */; };
 		CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */; };
-		CD53C9601737B0D400264230 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD53C95C1737B0D400264230 /* README.md */; };
 		CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD53C9621737B15800264230 /* StoreKit.framework */; };
 		CD55C0CD17441E4A000BFFE5 /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0CA17441E4A000BFFE5 /* JASidePanelController.m */; };
 		CD55C0CE17441E4A000BFFE5 /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0CC17441E4A000BFFE5 /* UIViewController+JASidePanel.m */; };
@@ -93,7 +92,6 @@
 		CD92B52D173587C400771F26 /* GRTrackFill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B529173587C300771F26 /* GRTrackFill@2x.png */; };
 		CD92B5301735882F00771F26 /* GRKnobBase.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B52E1735882F00771F26 /* GRKnobBase.png */; };
 		CD92B5311735882F00771F26 /* GRKnobBase@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD92B52F1735882F00771F26 /* GRKnobBase@2x.png */; };
-		CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF357173A8227006AD8C3 /* Localizable.strings */; };
 		CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF35A173A8227006AD8C3 /* Localizable.strings */; };
 		CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA226A5174808AF00209736 /* UIDevice+Extensions.m */; };
 		CDA752DD173044EE005B25EC /* icon57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA752DB173044EE005B25EC /* icon57x57.png */; };
@@ -124,9 +122,8 @@
 		CDE43AB217303F5B004C0698 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA617303F5B004C0698 /* Default.png */; };
 		CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA717303F5B004C0698 /* Default@2x.png */; };
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
-		CDEA244D17947583002AFBCC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEA244717947583002AFBCC /* libTestFlight.a */; };
-		CDEA244E17947583002AFBCC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CDEA244817947583002AFBCC /* README.md */; };
-		CDEA244F17947583002AFBCC /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = CDEA244917947583002AFBCC /* release_notes.md */; };
+		CDEA245017948154002AFBCC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEA244717947583002AFBCC /* libTestFlight.a */; };
+		CDEA24511794816E002AFBCC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD53C95C1737B0D400264230 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -300,7 +297,6 @@
 		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
 		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
 		CDEA244717947583002AFBCC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		CDEA244817947583002AFBCC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		CDEA244917947583002AFBCC /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
@@ -312,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDEA245017948154002AFBCC /* libTestFlight.a in Frameworks */,
 				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
@@ -325,7 +322,6 @@
 				CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */,
 				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
 				CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */,
-				CDEA244D17947583002AFBCC /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,7 +825,6 @@
 			isa = PBXGroup;
 			children = (
 				CDEA244717947583002AFBCC /* libTestFlight.a */,
-				CDEA244817947583002AFBCC /* README.md */,
 				CDEA244917947583002AFBCC /* release_notes.md */,
 				CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */,
 				CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */,
@@ -966,8 +961,6 @@
 				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
 				CD53C95D1737B0D400264230 /* .gitignore in Resources */,
 				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,
-				CD53C9601737B0D400264230 /* README.md in Resources */,
-				CD9EF35C173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */,
 				CDE3409D1744CE760033A4B1 /* GRSettingsButton@2x.png in Resources */,
@@ -975,9 +968,8 @@
 				CDE3409F1744CE760033A4B1 /* GRSettingsButtonWhite@2x.png in Resources */,
 				CDE340A01744CE760033A4B1 /* GRSettingsButtonWhite.png in Resources */,
 				CD539006174777450044092D /* icon144x144.png in Resources */,
+				CDEA24511794816E002AFBCC /* README.md in Resources */,
 				CD539008174777660044092D /* icon72x72.png in Resources */,
-				CDEA244E17947583002AFBCC /* README.md in Resources */,
-				CDEA244F17947583002AFBCC /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1127,7 +1119,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1151,7 +1142,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1201,7 +1191,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlight\"",
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
