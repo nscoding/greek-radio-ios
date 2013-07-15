@@ -19,8 +19,8 @@
 
 @interface GRStationCellView : UITableViewCell
 
-@property (nonatomic, assign) IBOutlet UILabel *title;
-@property (nonatomic, assign) IBOutlet UILabel *subtitle;
+@property (nonatomic, weak) IBOutlet UILabel *title;
+@property (nonatomic, weak) IBOutlet UILabel *subtitle;
 @property (nonatomic, weak) GRStation *station;
 @property (nonatomic, weak) id<GRStationCellViewDelegate> delegate;
 

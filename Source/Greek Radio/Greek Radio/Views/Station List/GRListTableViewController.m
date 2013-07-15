@@ -21,7 +21,7 @@
 	UIAccelerationValue	shakeAccelerometer[3];
 }
 
-@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
@@ -607,6 +607,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)dealloc
 {
+    self.refreshControl = nil;
     [[NSNotificationCenter defaultCenter] removeObject:self];
 }
 

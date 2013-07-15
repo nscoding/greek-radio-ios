@@ -37,11 +37,11 @@ typedef enum GRInformationBarOption
 
 @interface GRPlayerViewController ()
 
-@property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
-@property (nonatomic, assign) IBOutlet UIButton *playButton;
-@property (nonatomic, assign) IBOutlet UIButton *sharebutton;
+@property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *sharebutton;
+@property (nonatomic, weak) IBOutlet UIView *bottomBar;
 
-@property (nonatomic, assign) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) GRStation *currentStation;
 @property (nonatomic, assign) GRInformationBarOption informationBarOption;
 @property (nonatomic, copy) NSString *currentSong;
