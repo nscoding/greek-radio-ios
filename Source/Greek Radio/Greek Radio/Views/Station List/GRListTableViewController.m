@@ -242,6 +242,14 @@
         label.numberOfLines = 0;
         label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
         
+        UITapGestureRecognizer *tapGestureRecognizer
+            = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                      action:@selector(madeWithLovePressed)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        label.userInteractionEnabled = YES;
+
+        [label addGestureRecognizer:tapGestureRecognizer];
+
         self.tableView.tableFooterView = label;
     }
 }
@@ -547,6 +555,13 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
+- (void)madeWithLovePressed
+{
+    NSURL *url = [NSURL URLWithString:@"http://www.nscoding.co.uk"];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+
 - (void)moreButtonPressed:(UIButton *)sender
 {
     [self.searchBar resignFirstResponder];
