@@ -627,6 +627,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)settingsButtonPressed:(UIButton *)sender
 {
+    [self.searchBar resignFirstResponder];
     [self.layerController showLeftPanelAnimated:YES];
 }
 
