@@ -90,7 +90,7 @@ typedef enum GRInformationBarOption
         [self configurePlayButton];
         [self animateStatus];
         
-        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:60.0
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:30
                                                                  target:self
                                                                selector:@selector(updateSongInformation)
                                                                userInfo:nil

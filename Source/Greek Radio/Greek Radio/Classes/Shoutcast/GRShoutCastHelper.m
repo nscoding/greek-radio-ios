@@ -168,17 +168,6 @@ didReceiveResponse:(NSURLResponse *)response
     // Gets the index of the character before the <body> tag is closed
 	index = [metadata rangeOfString:@"</body>"].location;
 	
-    // #### (4 length) 3 max index
-    if (metadata.length >= index)
-    {
-        self.failBlock();
-        
-        self.failBlock = nil;
-        self.successBlock = nil;
-        
-        return;
-    }
-
     // Removes the "</body></html>" string
     metadata = [metadata substringToIndex:index];
 
