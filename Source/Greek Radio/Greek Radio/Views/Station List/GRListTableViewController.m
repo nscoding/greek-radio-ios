@@ -462,6 +462,7 @@
 
     if (self.navigationController.visibleViewController == self)
     {
+        [UIMenuController sharedMenuController].menuVisible = NO;
         [self.navigationController pushViewController:playController
                                              animated:YES];
     }
