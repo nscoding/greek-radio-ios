@@ -7,10 +7,13 @@
 //
 
 #import "GRListTableViewController.h"
-#import "GRStationsDAO.h"
-#import "GRStationCellView.h"
 #import "GRPlayerViewController.h"
+#import "GRStationCellView.h"
+#import "GRStationsDAO.h"
+
 #import "UIDevice+Extensions.h"
+
+#import <CoreMotion/CoreMotion.h>
 
 
 // ------------------------------------------------------------------------------------------
@@ -19,7 +22,7 @@
 @interface GRListTableViewController () <GRStationCellViewDelegate, UIAccelerometerDelegate>
 {
 	CFTimeInterval		lastTime;
-	UIAccelerationValue	shakeAccelerometer[3];
+	CGFloat	shakeAccelerometer[3];
 }
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
@@ -27,6 +30,7 @@
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
 @property (nonatomic, strong) NSMutableArray *favouriteStations;
+@property (nonatomic, strong) CMMotionManager *motionManager;
 
 @end
 
@@ -57,10 +61,6 @@
                                                             blue:0.161f
                                                            alpha:1.00f]];
         
-        
-        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
-        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeTriggeredByUser:)
                                                      name:GRNotificationChangeTriggeredByUser
@@ -107,31 +107,8 @@
     // register notifications
     [self registerObservers];
     
-    
-    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    moreButton.frame = CGRectMake(0, 0, 40, 12);
-    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(moreButtonPressed:)
-        forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
-                               initWithCustomView:moreButton];
-
-    self.navigationItem.rightBarButtonItem = rightButton;
-    
-    
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingButton.frame = CGRectMake(0, 0, 22, 22);
-    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
-    [settingButton addTarget:self
-                      action:@selector(settingsButtonPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
-                                    initWithCustomView:settingButton];
-    
-    self.navigationItem.leftBarButtonItem = leftButton;
-
+    [self buildAndConfigureNavigationButtons];
+    [self buildAndConfigureMotionDetector];
 }
 
 
@@ -254,6 +231,91 @@
     }
 }
 
+
+- (void)buildAndConfigureNavigationButtons
+{
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    moreButton.frame = CGRectMake(0, 0, 40, 12);
+    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(moreButtonPressed:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
+                                    initWithCustomView:moreButton];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingButton.frame = CGRectMake(0, 0, 22, 22);
+    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
+    [settingButton addTarget:self
+                      action:@selector(settingsButtonPressed:)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                   initWithCustomView:settingButton];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+}
+
+
+- (void)buildAndConfigureMotionDetector
+{
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval = 0.1;
+    
+    CMAccelerometerHandler accelerometerHandler = ^(CMAccelerometerData *accelerometerData, NSError *error)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
+            {
+                CMAcceleration acceleration = accelerometerData.acceleration;
+                CGFloat length,	x, y, z;
+                
+                //Use a basic high-pass filter to remove the influence of the gravity
+                shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
+                shakeAccelerometer[0] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
+                shakeAccelerometer[1] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
+                shakeAccelerometer[2] * (1.0 - kFilteringFactor);
+                
+                // Compute values for the three axes of the acceleromater
+                x = acceleration.x - shakeAccelerometer[0];
+                y = acceleration.y - shakeAccelerometer[0];
+                z = acceleration.z - shakeAccelerometer[0];
+                
+                // Compute the intensity of the current acceleration
+                length = sqrt(x * x + y * y + z * z);
+                
+                // If above a given threshold, play the erase sounds and erase the drawing view
+                if((length >= kEraseAccelerationThreshold) &&
+                   (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
+                {
+                    lastTime = CFAbsoluteTimeGetCurrent();
+                    
+                    int random = arc4random() % (self.serverStations.count - 1);
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^
+                    {
+                        [self.tableView selectRowAtIndexPath:indexPath
+                                                    animated:YES
+                                              scrollPosition:UITableViewScrollPositionMiddle];
+                        
+                        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+                    });
+                }
+            }
+        });
+    };
+    
+    [self.motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
+                                             withHandler:accelerometerHandler];
+}
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Pull to refresh
 // ------------------------------------------------------------------------------------------
@@ -283,49 +345,6 @@
                               animate:YES];
     
     [self.refreshControl performSelector:@selector(endRefreshing)];
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Accelerometer delegate
-// ------------------------------------------------------------------------------------------
-- (void)accelerometer:(UIAccelerometer*)accelerometer
-        didAccelerate:(UIAcceleration*)acceleration
-{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
-    {
-        UIAccelerationValue length,	x, y, z;
-        
-        //Use a basic high-pass filter to remove the influence of the gravity
-        shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
-        shakeAccelerometer[0] * (1.0 - kFilteringFactor);
-        shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
-        shakeAccelerometer[1] * (1.0 - kFilteringFactor);
-        shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
-        shakeAccelerometer[2] * (1.0 - kFilteringFactor);
-        
-        // Compute values for the three axes of the acceleromater
-        x = acceleration.x - shakeAccelerometer[0];
-        y = acceleration.y - shakeAccelerometer[0];
-        z = acceleration.z - shakeAccelerometer[0];
-        
-        // Compute the intensity of the current acceleration
-        length = sqrt(x * x + y * y + z * z);
-        // If above a given threshold, play the erase sounds and erase the drawing view
-        if((length >= kEraseAccelerationThreshold) &&
-           (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
-        {
-            lastTime = CFAbsoluteTimeGetCurrent();
-            
-                int random = arc4random() % (self.serverStations.count - 1);
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
-                [self.tableView selectRowAtIndexPath:indexPath
-                                            animated:YES
-                                      scrollPosition:UITableViewScrollPositionMiddle];
-            
-                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
-        }
-    }
 }
 
 

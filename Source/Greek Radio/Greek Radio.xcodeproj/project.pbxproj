@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132003AF17E65A2C00829AA0 /* CoreMotion.framework */; };
 		13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253E17E61AEB00716807 /* GRWoodHeader06.png */; };
 		13E4254317E61AEB00716807 /* GRWoodHeader06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */; };
 		13E4254417E61AEB00716807 /* GRWoodHeader07.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254017E61AEB00716807 /* GRWoodHeader07.png */; };
@@ -127,6 +128,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		132003AF17E65A2C00829AA0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		13E4253E17E61AEB00716807 /* GRWoodHeader06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader06.png; sourceTree = "<group>"; };
 		13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader06@2x.png"; sourceTree = "<group>"; };
 		13E4254017E61AEB00716807 /* GRWoodHeader07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader07.png; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
 				CDEA245017948154002AFBCC /* libTestFlight.a in Frameworks */,
 				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
@@ -665,6 +668,7 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				132003AF17E65A2C00829AA0 /* CoreMotion.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
 				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
 				CDA752F0173055DA005B25EC /* CoreData.framework */,
