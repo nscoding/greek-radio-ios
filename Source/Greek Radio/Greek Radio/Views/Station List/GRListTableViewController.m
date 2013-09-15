@@ -10,6 +10,7 @@
 #import "GRStationsDAO.h"
 #import "GRStationCellView.h"
 #import "GRPlayerViewController.h"
+#import "UIDevice+Extensions.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -51,8 +52,10 @@
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
     {        
-        [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
-                                            [UIImage imageNamed:@"GRPaperBackground"]]];
+        [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
+                                                           green:0.180f
+                                                            blue:0.161f
+                                                           alpha:1.00f]];
         
         
         [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
@@ -90,12 +93,8 @@
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
     
-    // add the pull to refresh view
-    [self buildAndConfigurePullToRefresh];
-    [self buildAndConfigureMadeWithLove];
-    
     [super viewDidLoad];
-    
+
     // create the DAO object
     self.stationsDAO = [[GRStationsDAO alloc] init];
     
@@ -143,6 +142,10 @@
     
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
+    
+    // add the pull to refresh view
+    [self buildAndConfigurePullToRefresh];
+    [self buildAndConfigureMadeWithLove];
 }
 
 
@@ -201,31 +204,46 @@
 
 - (void)buildAndConfigurePullToRefresh
 {
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:
-                                           NSLocalizedString(@"label_refresh_stations", @"")];
-    [self.refreshControl addTarget:self
-                            action:@selector(updateStations)
-                  forControlEvents:UIControlEventValueChanged];
-    
-    [self.refreshControl endRefreshing];
+    if (self.refreshControl == nil)
+    {
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        
+        NSMutableAttributedString *refreshTitleString
+            = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"label_refresh_stations", @"")];
+        
+        [refreshTitleString addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor colorWithRed:0.471f green:0.471f blue:0.471f alpha:1.00f]
+                                   range:NSMakeRange(0, refreshTitleString.string.length)];
+
+        self.refreshControl.attributedTitle = refreshTitleString;
+        self.refreshControl.tintColor = [UIColor colorWithRed:0.671f green:0.671f blue:0.671f alpha:1.00f];
+
+        [self.refreshControl addTarget:self
+                                action:@selector(updateStations)
+                      forControlEvents:UIControlEventValueChanged];
+        
+        [self.refreshControl endRefreshing];
+    }
 }
 
 
 - (void)buildAndConfigureMadeWithLove
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
-    label.textColor = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:1.00f];
-    label.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    label.shadowOffset = CGSizeMake(0, 1);
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
-    label.numberOfLines = 0;
-    label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
-
-    self.tableView.tableFooterView = label;
+    if (self.tableView.tableFooterView == nil)
+    {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
+        label.textColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.00f];
+        label.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
+        label.shadowOffset = CGSizeMake(0, 1);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
+        label.numberOfLines = 0;
+        label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
+        
+        self.tableView.tableFooterView = label;
+    }
 }
 
 // ------------------------------------------------------------------------------------------
@@ -356,35 +374,74 @@
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionName = @"";
-    switch (section)
+    if ([self shouldShowHeaderForSection:section] == NO)
     {
-        case 0:
-        {
-            sectionName = (self.favouriteStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
-        }
-            break;
-        case 1:
-        {
-            sectionName = (self.localStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
-        }
-            break;
-        case 2:
-        {
-            sectionName = (self.serverStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
-        }
-            break;
+        return nil;
     }
     
-    return sectionName;
+    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
+    sectionHeader.autoresizingMask = UIViewAutoresizingNone;
+    
+    if ([UIDevice isFlatUI])
+    {
+        sectionHeader.backgroundColor = self.tableView.backgroundColor;
+    }
+    else
+    {
+        sectionHeader.backgroundColor = [UIColor colorWithRed:0.604f
+                                                        green:0.651f
+                                                         blue:0.690f
+                                                        alpha:1.00f];
+    }
+
+    sectionHeader.textAlignment = NSTextAlignmentCenter;
+    sectionHeader.font = [UIFont boldSystemFontOfSize:13];
+    sectionHeader.textColor = [UIColor whiteColor];
+
+    if (section == 0)
+    {
+        sectionHeader.text = (self.favouriteStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
+    }
+    else if (section == 1)
+    {
+        sectionHeader.text = (self.localStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
+    }
+    else
+    {
+        sectionHeader.text = (self.serverStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
+    }
+
+    return sectionHeader;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([self shouldShowHeaderForSection:section] == NO)
+    {
+        return 0.0f;
+    }
+
+    return 20.0f;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    if ([self shouldShowHeaderForSection:section] == NO)
+    {
+        return 0.0f;
+    }
+    
+    return 20.0f;
 }
 
 
@@ -417,6 +474,26 @@
     }
 
     return NO;
+}
+
+
+- (BOOL)shouldShowHeaderForSection:(NSUInteger)section
+{
+    NSUInteger count = 0;
+    if (section == 0)
+    {
+        count = self.favouriteStations.count;
+    }
+    else if (section == 1)
+    {
+        count = self.localStations.count;
+    }
+    else if (section == 2)
+    {
+        count = self.serverStations.count;
+    }
+    
+    return (count > 0);
 }
 
 
@@ -608,7 +685,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 - (void)dealloc
 {
     self.refreshControl = nil;
-    [[NSNotificationCenter defaultCenter] removeObject:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

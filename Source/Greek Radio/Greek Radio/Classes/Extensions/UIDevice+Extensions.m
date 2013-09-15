@@ -38,4 +38,15 @@
 }
 
 
++ (BOOL)isFlatUI
+{
+    if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
 @end

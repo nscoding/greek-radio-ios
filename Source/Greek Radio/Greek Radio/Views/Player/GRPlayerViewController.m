@@ -331,7 +331,7 @@ typedef enum GRInformationBarOption
     self.stationLabel.textAlignment = NSTextAlignmentCenter;
     self.stationLabel.text =  [name copy];
     self.stationLabel.numberOfLines = 1;
-    self.stationLabel.minimumFontSize = 17;
+    self.stationLabel.minimumScaleFactor = 0.3f;
     self.stationLabel.adjustsFontSizeToFitWidth = YES;
 
     CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];

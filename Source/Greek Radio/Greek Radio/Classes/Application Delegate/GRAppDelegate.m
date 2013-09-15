@@ -129,22 +129,30 @@
     // Override point for customization after application launch.
     self.listTableViewController = [[GRListTableViewController alloc] init];
     
+    self.menuNavigationController
+        = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];
     
-    self.menuNavigationController = [[GRNavigationController alloc]
-                                                    initWithRootViewController:self.listTableViewController];
+    self.menuNavigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.menuNavigationController.navigationBar.translucent = NO;
     self.menuNavigationController.navigationBarHidden = NO;
-    self.listTableViewController.navigationController = self.menuNavigationController;
     self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
     
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.allowRightOverpan = NO;
     self.viewController.shouldDelegateAutorotateToVisiblePanel = YES;
+
+    self.listTableViewController.navigationController = self.menuNavigationController;
     self.listTableViewController.layerController = self.viewController;
-    self.viewController.leftPanel = [[GRSidebarViewController alloc] init];
+    
+    GRNavigationController *settingsNavigationController
+        = [[GRNavigationController alloc] initWithRootViewController:[[GRSidebarViewController alloc] init]];
+
+    self.viewController.leftPanel = settingsNavigationController;
 	self.viewController.centerPanel = self.menuNavigationController;
-    self.window.rootViewController = self.viewController;
     self.viewController.leftFixedWidth = 260;
 
+    self.window.rootViewController = self.viewController;
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];
     });
