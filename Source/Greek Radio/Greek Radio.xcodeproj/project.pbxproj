@@ -1063,7 +1063,7 @@
 		CDE43A9F17303DD5004C0698 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
@@ -1075,8 +1075,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BB2F1472-CD2D-42BE-BD04-701F7C27969A";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB2F1472-CD2D-42BE-BD04-701F7C27969A";
+				PROVISIONING_PROFILE = "AA3209B0-AA67-4AEE-91E1-433AB39D2CAA";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AA3209B0-AA67-4AEE-91E1-433AB39D2CAA";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -1086,7 +1086,7 @@
 		CDE43AA017303DD5004C0698 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
@@ -1135,7 +1135,7 @@
 		CDE43AB817303FA6004C0698 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
@@ -1147,8 +1147,8 @@
 					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "60C658F8-0262-4763-B683-BDE8EC7A609B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "60C658F8-0262-4763-B683-BDE8EC7A609B";
+				PROVISIONING_PROFILE = "7A52FAC6-9108-472C-9C76-22A4123AF4A9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7A52FAC6-9108-472C-9C76-22A4123AF4A9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
