@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132003AF17E65A2C00829AA0 /* CoreMotion.framework */; };
+		132003B117E7174600829AA0 /* icon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254C17E6287900716807 /* icon120x120.png */; };
 		13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253E17E61AEB00716807 /* GRWoodHeader06.png */; };
 		13E4254317E61AEB00716807 /* GRWoodHeader06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */; };
 		13E4254417E61AEB00716807 /* GRWoodHeader07.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254017E61AEB00716807 /* GRWoodHeader07.png */; };
@@ -876,6 +877,7 @@
 				CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */,
 				CD7A02901732C1E7003A2E2D /* action-black-button-selected.png in Resources */,
 				CD7A02911732C1E7003A2E2D /* action-black-button-selected@2x.png in Resources */,
+				132003B117E7174600829AA0 /* icon120x120.png in Resources */,
 				CD7A02921732C1E7003A2E2D /* action-black-button.png in Resources */,
 				13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */,
 				CD7A02931732C1E7003A2E2D /* action-black-button@2x.png in Resources */,
