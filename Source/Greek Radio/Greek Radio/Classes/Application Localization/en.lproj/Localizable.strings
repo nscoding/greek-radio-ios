@@ -38,6 +38,8 @@
 "share_station_$_text" = "I am listening to %@ using Greek Radio";
 
 "share_facebook_error" = "You can't update your status right now, please make sure your device has at least one Facebook account setup";
+"share_email_error" = "You can't send an Email right now, please make sure your device has at least one Email account setup";
+
 "share_twitter_error" = "You can't tweet right now, please make sure your device has at least one Twitter account setup";
 
 "share_via_email" = "Share via Email";

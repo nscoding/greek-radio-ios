@@ -12,7 +12,7 @@
 @interface GRListTableViewController : UITableViewController <MFMailComposeViewControllerDelegate,
                                             UISearchBarDelegate, UITextFieldDelegate>
 
-@property (nonatomic, assign) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, weak) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, assign) JASidePanelController *layerController;
 
 @end

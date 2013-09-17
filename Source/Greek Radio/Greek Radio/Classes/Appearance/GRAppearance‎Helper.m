@@ -7,6 +7,8 @@
 //
 
 #import "GRAppearanceHelper.h"
+#import "UIDevice+Extensions.h"
+
 #import <MediaPlayer/MediaPlayer.h>
 
 // ------------------------------------------------------------------------------------------
@@ -17,8 +19,17 @@
 
 + (void)setUpGreekRadioAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"GRWoodHeader"]
-                                       forBarMetrics:UIBarMetricsDefault];
+    if ([UIDevice isFlatUI])
+    {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"GRWoodHeader07"]
+                                           forBarMetrics:UIBarMetricsDefault];
+    }
+    else
+    {
+        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"GRWoodHeader06"]
+                                           forBarMetrics:UIBarMetricsDefault];
+    }
+    
     [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:-1
                                                        forBarMetrics:UIBarMetricsDefault];
     

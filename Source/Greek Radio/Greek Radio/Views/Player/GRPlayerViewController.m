@@ -37,11 +37,11 @@ typedef enum GRInformationBarOption
 
 @interface GRPlayerViewController ()
 
-@property (nonatomic, assign) IBOutlet UIButton *favouriteButton;
-@property (nonatomic, assign) IBOutlet UIButton *playButton;
-@property (nonatomic, assign) IBOutlet UIButton *sharebutton;
+@property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
+@property (nonatomic, weak) IBOutlet UIButton *playButton;
+@property (nonatomic, weak) IBOutlet UIButton *sharebutton;
+@property (nonatomic, weak) IBOutlet UIView *bottomBar;
 
-@property (nonatomic, assign) IBOutlet UIView *bottomBar;
 @property (nonatomic, weak) GRStation *currentStation;
 @property (nonatomic, assign) GRInformationBarOption informationBarOption;
 @property (nonatomic, copy) NSString *currentSong;
@@ -90,7 +90,7 @@ typedef enum GRInformationBarOption
         [self configurePlayButton];
         [self animateStatus];
         
-        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:60.0
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:30
                                                                  target:self
                                                                selector:@selector(updateSongInformation)
                                                                userInfo:nil
@@ -331,7 +331,7 @@ typedef enum GRInformationBarOption
     self.stationLabel.textAlignment = NSTextAlignmentCenter;
     self.stationLabel.text =  [name copy];
     self.stationLabel.numberOfLines = 1;
-    self.stationLabel.minimumFontSize = 17;
+    self.stationLabel.minimumScaleFactor = 0.3f;
     self.stationLabel.adjustsFontSizeToFitWidth = YES;
 
     CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
@@ -414,30 +414,38 @@ typedef enum GRInformationBarOption
     [sheet addButtonWithTitle:NSLocalizedString(@"share_via_email", @"")
                         block:^
     {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.mailComposeDelegate = self;
-        mailController.subject = @"Greek Radio";
-
-        NSString *listeningTo;
-        if ([GRRadioPlayer shared].stationName.length > 0)
+        if ([MFMailComposeViewController canSendMail])
         {
-            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                           [GRRadioPlayer shared].stationName];
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = @"Greek Radio";
+            
+            NSString *listeningTo;
+            if ([GRRadioPlayer shared].stationName.length > 0)
+            {
+                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                               [GRRadioPlayer shared].stationName];
+            }
+            else
+            {
+                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                               [NSLocalizedString(@"label_music", @"") lowercaseString]];
+            }
+            
+            NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
+                                       kAppiTunesURL];
+            
+            [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
+                                    isHTML:YES];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController animated:YES completion:nil];
         }
         else
         {
-            listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                          [NSLocalizedString(@"label_music", @"") lowercaseString]];
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:NSLocalizedString(@"share_email_error", @"")];
         }
-        
-        NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
-                           kAppiTunesURL];
-                           
-        [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
-                                isHTML:YES];
-        
-        [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     if ([SLComposeViewController class])

@@ -21,13 +21,13 @@
     self.autoLockText.text = NSLocalizedString(@"label_auto_lock_text", @"");
     self.shakeText.text = NSLocalizedString(@"label_shake_music_text", @"");
     self.shakeHeader.text = NSLocalizedString(@"label_shake_music_header", @"");
-    self.settingsItem.title = NSLocalizedString(@"label_settings", @"");
+    self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
     
     if ([UIDevice isIPad])
     {
-        self.settingsItem.title = @"";
+        self.navigationController.navigationBar.topItem.title = @"";
     }
-    
+        
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
     [UIApplication sharedApplication].idleTimerDisabled = autoLockDisabled;
@@ -57,7 +57,8 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
