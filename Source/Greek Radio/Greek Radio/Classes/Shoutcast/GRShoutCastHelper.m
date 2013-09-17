@@ -149,7 +149,7 @@ didReceiveResponse:(NSURLResponse *)response
 - (void)parseMetadata:(NSString *)metadata
 {
 	// Checks if the returned file contains the <body> tag
-	if([metadata rangeOfString:@"<body>"].length == 0)
+	if ([metadata rangeOfString:@"<body>"].length == 0)
     {
         self.failBlock();
         
@@ -161,13 +161,16 @@ didReceiveResponse:(NSURLResponse *)response
     
 	// Gets the index of the character after the body tag
 	int index = ([metadata rangeOfString:@"<body>"].location + 1);
+    
 	// Removes the <html> and the <body> tag
 	metadata = [metadata substringFromIndex:index];
-	// Gets the index of the character before the <body> tag is closed
+	
+    // Gets the index of the character before the <body> tag is closed
 	index = [metadata rangeOfString:@"</body>"].location;
-	// Removes the "</body></html>" string
-	metadata = [metadata substringToIndex:index];
-    
+	
+    // Removes the "</body></html>" string
+    metadata = [metadata substringToIndex:index];
+
 	// Keep checking if there are still any "," on the string
     while ([metadata rangeOfString:@","].length > 0)
     {
@@ -176,12 +179,12 @@ didReceiveResponse:(NSURLResponse *)response
                     [metadata substringFromIndex:([metadata rangeOfString:@","].location + 1)]];
 	}
     
-	//Checks if the artist name is provided
-	if ([metadata rangeOfString:@"-"].length > 0)
+	// Checks if the artist name is provided
+	if ([metadata rangeOfString:@" - "].length > 0)
     {
 		// Gets the index of the "-"
 		index = [metadata rangeOfString:@" - "].location;
-        
+
 		// Artist name comes first
 		NSString *artistName = [metadata substringToIndex:index];
 		

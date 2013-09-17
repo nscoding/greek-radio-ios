@@ -32,6 +32,8 @@
 {
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
     {
+        self.backgroundColor = [UIColor whiteColor];
+        
         UIMenuItem *markAsFavorite = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
                                                                 action:@selector(markAsFavorite:)];
         

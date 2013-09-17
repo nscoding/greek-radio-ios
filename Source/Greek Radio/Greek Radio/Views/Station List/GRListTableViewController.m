@@ -7,9 +7,13 @@
 //
 
 #import "GRListTableViewController.h"
-#import "GRStationsDAO.h"
-#import "GRStationCellView.h"
 #import "GRPlayerViewController.h"
+#import "GRStationCellView.h"
+#import "GRStationsDAO.h"
+
+#import "UIDevice+Extensions.h"
+
+#import <CoreMotion/CoreMotion.h>
 
 
 // ------------------------------------------------------------------------------------------
@@ -18,14 +22,15 @@
 @interface GRListTableViewController () <GRStationCellViewDelegate, UIAccelerometerDelegate>
 {
 	CFTimeInterval		lastTime;
-	UIAccelerationValue	shakeAccelerometer[3];
+	CGFloat	shakeAccelerometer[3];
 }
 
-@property (nonatomic, assign) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
 @property (nonatomic, strong) NSMutableArray *serverStations;
 @property (nonatomic, strong) NSMutableArray *localStations;
 @property (nonatomic, strong) NSMutableArray *favouriteStations;
+@property (nonatomic, strong) CMMotionManager *motionManager;
 
 @end
 
@@ -51,13 +56,11 @@
 {
     if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
     {        
-        [self.tableView setBackgroundColor:[UIColor colorWithPatternImage:
-                                            [UIImage imageNamed:@"GRPaperBackground"]]];
+        [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
+                                                           green:0.180f
+                                                            blue:0.161f
+                                                           alpha:1.00f]];
         
-        
-        [[UIAccelerometer sharedAccelerometer] setUpdateInterval:(1.0 / kAccelerometerFrequency)];
-        [[UIAccelerometer sharedAccelerometer] setDelegate:self];
-
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(changeTriggeredByUser:)
                                                      name:GRNotificationChangeTriggeredByUser
@@ -90,12 +93,8 @@
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
     
-    // add the pull to refresh view
-    [self buildAndConfigurePullToRefresh];
-    [self buildAndConfigureMadeWithLove];
-    
     [super viewDidLoad];
-    
+
     // create the DAO object
     self.stationsDAO = [[GRStationsDAO alloc] init];
     
@@ -108,31 +107,8 @@
     // register notifications
     [self registerObservers];
     
-    
-    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    moreButton.frame = CGRectMake(0, 0, 40, 12);
-    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(moreButtonPressed:)
-        forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
-                               initWithCustomView:moreButton];
-
-    self.navigationItem.rightBarButtonItem = rightButton;
-    
-    
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingButton.frame = CGRectMake(0, 0, 22, 22);
-    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
-    [settingButton addTarget:self
-                      action:@selector(settingsButtonPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
-                                    initWithCustomView:settingButton];
-    
-    self.navigationItem.leftBarButtonItem = leftButton;
-
+    [self buildAndConfigureNavigationButtons];
+    [self buildAndConfigureMotionDetector];
 }
 
 
@@ -143,6 +119,10 @@
     
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
+    
+    // add the pull to refresh view
+    [self buildAndConfigurePullToRefresh];
+    [self buildAndConfigureMadeWithLove];
 }
 
 
@@ -201,31 +181,139 @@
 
 - (void)buildAndConfigurePullToRefresh
 {
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:
-                                           NSLocalizedString(@"label_refresh_stations", @"")];
-    [self.refreshControl addTarget:self
-                            action:@selector(updateStations)
-                  forControlEvents:UIControlEventValueChanged];
-    
-    [self.refreshControl endRefreshing];
+    if (self.refreshControl == nil)
+    {
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        
+        NSMutableAttributedString *refreshTitleString
+            = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"label_refresh_stations", @"")];
+        
+        [refreshTitleString addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor colorWithRed:0.471f green:0.471f blue:0.471f alpha:1.00f]
+                                   range:NSMakeRange(0, refreshTitleString.string.length)];
+
+        self.refreshControl.attributedTitle = refreshTitleString;
+        self.refreshControl.tintColor = [UIColor colorWithRed:0.671f green:0.671f blue:0.671f alpha:1.00f];
+
+        [self.refreshControl addTarget:self
+                                action:@selector(updateStations)
+                      forControlEvents:UIControlEventValueChanged];
+        
+        [self.refreshControl endRefreshing];
+    }
 }
 
 
 - (void)buildAndConfigureMadeWithLove
 {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
-    label.textColor = [UIColor colorWithRed:0.000f green:0.000f blue:0.000f alpha:1.00f];
-    label.shadowColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-    label.shadowOffset = CGSizeMake(0, 1);
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
-    label.numberOfLines = 0;
-    label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
+    if (self.tableView.tableFooterView == nil)
+    {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
+        label.textColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.00f];
+        label.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
+        label.shadowOffset = CGSizeMake(0, 1);
+        label.textAlignment = NSTextAlignmentCenter;
+        label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
+        label.numberOfLines = 0;
+        label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
+        
+        UITapGestureRecognizer *tapGestureRecognizer
+            = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                      action:@selector(madeWithLovePressed)];
+        tapGestureRecognizer.numberOfTapsRequired = 1;
+        label.userInteractionEnabled = YES;
 
-    self.tableView.tableFooterView = label;
+        [label addGestureRecognizer:tapGestureRecognizer];
+
+        self.tableView.tableFooterView = label;
+    }
+}
+
+
+- (void)buildAndConfigureNavigationButtons
+{
+    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    moreButton.frame = CGRectMake(0, 0, 40, 12);
+    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(moreButtonPressed:)
+         forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
+                                    initWithCustomView:moreButton];
+    
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
+    
+    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingButton.frame = CGRectMake(0, 0, 22, 22);
+    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
+    [settingButton addTarget:self
+                      action:@selector(settingsButtonPressed:)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
+                                   initWithCustomView:settingButton];
+    
+    self.navigationItem.leftBarButtonItem = leftButton;
+}
+
+
+- (void)buildAndConfigureMotionDetector
+{
+    self.motionManager = [[CMMotionManager alloc] init];
+    self.motionManager.accelerometerUpdateInterval = 0.1;
+    
+    CMAccelerometerHandler accelerometerHandler = ^(CMAccelerometerData *accelerometerData, NSError *error)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+        {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
+            {
+                CMAcceleration acceleration = accelerometerData.acceleration;
+                CGFloat length,	x, y, z;
+                
+                //Use a basic high-pass filter to remove the influence of the gravity
+                shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
+                shakeAccelerometer[0] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
+                shakeAccelerometer[1] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
+                shakeAccelerometer[2] * (1.0 - kFilteringFactor);
+                
+                // Compute values for the three axes of the acceleromater
+                x = acceleration.x - shakeAccelerometer[0];
+                y = acceleration.y - shakeAccelerometer[0];
+                z = acceleration.z - shakeAccelerometer[0];
+                
+                // Compute the intensity of the current acceleration
+                length = sqrt(x * x + y * y + z * z);
+                
+                // If above a given threshold, play the erase sounds and erase the drawing view
+                if((length >= kEraseAccelerationThreshold) &&
+                   (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
+                {
+                    lastTime = CFAbsoluteTimeGetCurrent();
+                    
+                    int random = arc4random() % (self.serverStations.count - 1);
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^
+                    {
+                        [self.tableView selectRowAtIndexPath:indexPath
+                                                    animated:YES
+                                              scrollPosition:UITableViewScrollPositionMiddle];
+                        
+                        [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+                    });
+                }
+            }
+        });
+    };
+    
+    [self.motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
+                                             withHandler:accelerometerHandler];
 }
 
 // ------------------------------------------------------------------------------------------
@@ -257,49 +345,6 @@
                               animate:YES];
     
     [self.refreshControl performSelector:@selector(endRefreshing)];
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Accelerometer delegate
-// ------------------------------------------------------------------------------------------
-- (void)accelerometer:(UIAccelerometer*)accelerometer
-        didAccelerate:(UIAcceleration*)acceleration
-{
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
-    {
-        UIAccelerationValue length,	x, y, z;
-        
-        //Use a basic high-pass filter to remove the influence of the gravity
-        shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
-        shakeAccelerometer[0] * (1.0 - kFilteringFactor);
-        shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
-        shakeAccelerometer[1] * (1.0 - kFilteringFactor);
-        shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
-        shakeAccelerometer[2] * (1.0 - kFilteringFactor);
-        
-        // Compute values for the three axes of the acceleromater
-        x = acceleration.x - shakeAccelerometer[0];
-        y = acceleration.y - shakeAccelerometer[0];
-        z = acceleration.z - shakeAccelerometer[0];
-        
-        // Compute the intensity of the current acceleration
-        length = sqrt(x * x + y * y + z * z);
-        // If above a given threshold, play the erase sounds and erase the drawing view
-        if((length >= kEraseAccelerationThreshold) &&
-           (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
-        {
-            lastTime = CFAbsoluteTimeGetCurrent();
-            
-                int random = arc4random() % (self.serverStations.count - 1);
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
-                [self.tableView selectRowAtIndexPath:indexPath
-                                            animated:YES
-                                      scrollPosition:UITableViewScrollPositionMiddle];
-            
-                [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
-        }
-    }
 }
 
 
@@ -356,35 +401,74 @@
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSString *sectionName = @"";
-    switch (section)
+    if ([self shouldShowHeaderForSection:section] == NO)
     {
-        case 0:
-        {
-            sectionName = (self.favouriteStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
-        }
-            break;
-        case 1:
-        {
-            sectionName = (self.localStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
-        }
-            break;
-        case 2:
-        {
-            sectionName = (self.serverStations.count > 0) ?
-            [NSString stringWithFormat:@"%@ (%i)",
-             NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
-        }
-            break;
+        return nil;
     }
     
-    return sectionName;
+    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
+    sectionHeader.autoresizingMask = UIViewAutoresizingNone;
+    
+    if ([UIDevice isFlatUI])
+    {
+        sectionHeader.backgroundColor = self.tableView.backgroundColor;
+    }
+    else
+    {
+        sectionHeader.backgroundColor = [UIColor colorWithRed:0.604f
+                                                        green:0.651f
+                                                         blue:0.690f
+                                                        alpha:1.00f];
+    }
+
+    sectionHeader.textAlignment = NSTextAlignmentCenter;
+    sectionHeader.font = [UIFont boldSystemFontOfSize:13];
+    sectionHeader.textColor = [UIColor whiteColor];
+
+    if (section == 0)
+    {
+        sectionHeader.text = (self.favouriteStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_favorites", @""), self.favouriteStations.count] : @"";
+    }
+    else if (section == 1)
+    {
+        sectionHeader.text = (self.localStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_local_stations", @""), self.localStations.count] : @"";
+    }
+    else
+    {
+        sectionHeader.text = (self.serverStations.count > 0) ?
+        [NSString stringWithFormat:@"%@ (%i)",
+         NSLocalizedString(@"label_stations", @""), self.serverStations.count] : @"";
+    }
+
+    return sectionHeader;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if ([self shouldShowHeaderForSection:section] == NO)
+    {
+        return 0.0f;
+    }
+
+    return 20.0f;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    if ([self shouldShowHeaderForSection:section] == NO)
+    {
+        return 0.0f;
+    }
+    
+    return 20.0f;
 }
 
 
@@ -397,6 +481,7 @@
 
     if (self.navigationController.visibleViewController == self)
     {
+        [UIMenuController sharedMenuController].menuVisible = NO;
         [self.navigationController pushViewController:playController
                                              animated:YES];
     }
@@ -417,6 +502,26 @@
     }
 
     return NO;
+}
+
+
+- (BOOL)shouldShowHeaderForSection:(NSUInteger)section
+{
+    NSUInteger count = 0;
+    if (section == 0)
+    {
+        count = self.favouriteStations.count;
+    }
+    else if (section == 1)
+    {
+        count = self.localStations.count;
+    }
+    else if (section == 2)
+    {
+        count = self.serverStations.count;
+    }
+    
+    return (count > 0);
 }
 
 
@@ -470,6 +575,13 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
+- (void)madeWithLovePressed
+{
+    NSURL *url = [NSURL URLWithString:@"http://www.nscoding.co.uk"];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+
 - (void)moreButtonPressed:(UIButton *)sender
 {
     [self.searchBar resignFirstResponder];
@@ -481,25 +593,42 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     [sheet addButtonWithTitle:NSLocalizedString(@"button_sugggest", @"")
                         block:^
     {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.mailComposeDelegate = self;
-        mailController.subject = NSLocalizedString(@"label_new_stations", @"");
-        [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_new_stations", @"");
+            [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        }
+        else
+        {
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:NSLocalizedString(@"share_email_error", @"")];
+        }
 
-        [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
     }];
     
     [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
                                    block:^
     {
-        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-        mailController.mailComposeDelegate = self;
-        mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
-        [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-
-        [GRAppearanceHelper setUpDefaultAppearance];
-        [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
+            [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+        }
+        else
+        {
+            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                           message:NSLocalizedString(@"share_email_error", @"")];
+        }
     }];
     
     [sheet showInView:self.view];
@@ -517,6 +646,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)settingsButtonPressed:(UIButton *)sender
 {
+    [self.searchBar resignFirstResponder];
     [self.layerController showLeftPanelAnimated:YES];
 }
 
@@ -590,7 +720,8 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObject:self];
+    self.refreshControl = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

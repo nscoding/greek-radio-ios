@@ -11,5 +11,6 @@
 
 + (BOOL)isIPad;
 + (BOOL)isTallIphone;
++ (BOOL)isFlatUI;
 
 @end

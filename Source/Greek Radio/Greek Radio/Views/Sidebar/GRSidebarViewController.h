@@ -9,14 +9,13 @@
 
 @interface GRSidebarViewController : UIViewController
 
-@property (nonatomic, assign) IBOutlet UILabel *autoLockHeader;
-@property (nonatomic, assign) IBOutlet UILabel *autoLockText;
-@property (nonatomic, assign) IBOutlet UILabel *shakeText;
-@property (nonatomic, assign) IBOutlet UILabel *shakeHeader;
-@property (nonatomic, assign) IBOutlet UINavigationItem *settingsItem;
-
-@property (nonatomic, assign) IBOutlet UISwitch *lockSwitch;
-@property (nonatomic, assign) IBOutlet UISwitch *shakeSwitch;
+@property (nonatomic, weak) IBOutlet UILabel *autoLockHeader;
+@property (nonatomic, weak) IBOutlet UILabel *autoLockText;
+@property (nonatomic, weak) IBOutlet UILabel *shakeText;
+@property (nonatomic, weak) IBOutlet UILabel *shakeHeader;
+@property (nonatomic, weak) IBOutlet UINavigationItem *settingsItem;
+@property (nonatomic, weak) IBOutlet UISwitch *lockSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *shakeSwitch;
 
 - (IBAction)shakeSwitchDidChange:(id)sender;
 - (IBAction)lockSwitchDidChange:(id)sender;

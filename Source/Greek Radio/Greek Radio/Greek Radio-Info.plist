@@ -14,6 +14,25 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>icon120x120</string>
+				<string>icon57x57.png</string>
+				<string>icon114x114.png</string>
+				<string>icon144x144.png</string>
+				<string>icon72x72.png</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<true/>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>icon152x152</string>
+				<string>icon76x76</string>
+				<string>icon120x120</string>
 				<string>icon57x57.png</string>
 				<string>icon114x114.png</string>
 				<string>icon144x144.png</string>
@@ -32,11 +51,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.15</string>
+	<string>2.20</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2.15</string>
+	<string>2.20</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIBackgroundModes</key>
@@ -52,7 +71,7 @@
 	<key>UIStatusBarHidden</key>
 	<false/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDefault</string>
+	<string>UIStatusBarStyleBlackTranslucent</string>
 	<key>UIStatusBarTintParameters</key>
 	<dict>
 		<key>UINavigationBar</key>
