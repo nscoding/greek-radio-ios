@@ -107,6 +107,8 @@ typedef enum GRInformationBarOption
 - (void)viewDidLoad
 {
     self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     [super viewDidLoad];
 }
 

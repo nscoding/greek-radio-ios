@@ -33,11 +33,7 @@
 @property (nonatomic, strong) NSDate *dateLastSynced;
 @property (nonatomic, strong) NSXMLParser *rssParser;
 @property (nonatomic, strong) NSString *currentElement;
-@property (nonatomic, strong) NSMutableString *currentTitle;
-@property (nonatomic, strong) NSMutableString *currentGenre;
-@property (nonatomic, strong) NSMutableString *currentStationURL;
-@property (nonatomic, strong) NSMutableString *currentStreamURL;
-@property (nonatomic, strong) NSMutableString *currentLocation;
+@property (nonatomic, strong) NSMutableDictionary *dataDictionary;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
 @property (nonatomic, assign) BOOL isParsing;
 
@@ -184,23 +180,18 @@
 }
 
 
-- (void)parser:(NSXMLParser *)parser
+-  (void)parser:(NSXMLParser *)parser
 didStartElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName
-    attributes:(NSDictionary *)attributeDict
+   namespaceURI:(NSString *)namespaceURI
+  qualifiedName:(NSString *)qName
+     attributes:(NSDictionary *)attributeDict
 {
 	self.currentElement = [elementName copy];
 	
     if ([elementName isEqualToString:kTopElement])
     {
-		self.currentTitle = [[NSMutableString alloc] init];
-        self.currentGenre = [[NSMutableString alloc] init];
-		self.currentStationURL = [[NSMutableString alloc] init];
-		self.currentStreamURL = [[NSMutableString alloc] init];
-		self.currentLocation = [[NSMutableString alloc] init];
+        self.dataDictionary = [NSMutableDictionary dictionary];
 	}
-	
 }
 
 
@@ -211,19 +202,26 @@ didStartElement:(NSString *)elementName
 {
 	if ([elementName isEqualToString:kTopElement])
     {
-        [self.stationsDAO createStationWithTitle:[self.currentTitle copy]
-                                         siteURL:[self.currentStationURL copy]
-                                       streamURL:[self.currentStreamURL copy]
-                                           genre:[self.currentGenre copy]
-                                        location:[self.currentLocation copy]
+        [self.stationsDAO createStationWithTitle:[[self.dataDictionary objectForKey:kElementTitle] copy]
+                                         siteURL:[[self.dataDictionary objectForKey:kElementStationURL] copy]
+                                       streamURL:[[self.dataDictionary objectForKey:kElementStreamURL] copy]
+                                           genre:[[self.dataDictionary objectForKey:kElementGenre] copy]
+                                        location:[[self.dataDictionary objectForKey:kElemenLocation] copy]
                                      serverBased:YES];
+        
+        [self.dataDictionary removeAllObjects];
+        self.dataDictionary = nil;
 	}
 }
 
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
-    [[self propertyForCurrentElement] appendString:string];
+    NSMutableString *currentValue = [self valueForCurrentElement];
+    [currentValue appendString:string];
+    
+    [self.dataDictionary setObject:currentValue
+                            forKey:self.currentElement];
 }
 
 
@@ -242,30 +240,17 @@ didStartElement:(NSString *)elementName
 // ------------------------------------------------------------------------------------------
 #pragma mark -
 // ------------------------------------------------------------------------------------------
-- (NSMutableString *)propertyForCurrentElement
+- (NSMutableString *)valueForCurrentElement
 {
-	if ([self.currentElement isEqualToString:kElementTitle])
+    NSMutableString *property = [self.dataDictionary objectForKey:self.currentElement];
+    
+    if (property == nil)
     {
-        return self.currentTitle;
-	}
-    else if ([self.currentElement isEqualToString:kElementStreamURL])
-    {
-        return self.currentStreamURL;
-	}
-    else if ([self.currentElement isEqualToString:kElementStationURL])
-    {
-        return self.currentStationURL;
-	}
-    else if ([self.currentElement isEqualToString:kElementGenre])
-    {
-        return self.currentGenre;
-	}
-    else if ([self.currentElement isEqualToString:kElemenLocation])
-    {
-        return self.currentLocation;
-	}
-
-    return nil;
+        property = [[NSMutableString alloc] init];
+        [self.dataDictionary setObject:property forKey:self.currentElement];
+    }
+    
+    return property;
 }
 
 
