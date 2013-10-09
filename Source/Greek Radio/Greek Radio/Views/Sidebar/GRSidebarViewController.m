@@ -22,12 +22,13 @@
     self.shakeText.text = NSLocalizedString(@"label_shake_music_text", @"");
     self.shakeHeader.text = NSLocalizedString(@"label_shake_music_header", @"");
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     if ([UIDevice isIPad])
     {
         self.navigationController.navigationBar.topItem.title = @"";
     }
-        
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
     [UIApplication sharedApplication].idleTimerDisabled = autoLockDisabled;
