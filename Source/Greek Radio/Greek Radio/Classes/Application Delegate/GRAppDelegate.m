@@ -132,11 +132,10 @@
     self.menuNavigationController
         = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];
     
-    self.menuNavigationController.navigationBar.barStyle = UIBarStyleBlack;
     self.menuNavigationController.navigationBar.translucent = NO;
     self.menuNavigationController.navigationBarHidden = NO;
     self.menuNavigationController.navigationBar.topItem.title = @"Greek Radio";
-    
+
     self.viewController = [[JASidePanelController alloc] init];
     self.viewController.allowRightOverpan = NO;
     self.viewController.shouldDelegateAutorotateToVisiblePanel = YES;

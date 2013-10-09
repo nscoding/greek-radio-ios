@@ -89,6 +89,7 @@
 {
     self.searchBar.delegate = self;
     self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     /* https://gist.github.com/jeksys/1070394 */
     [self configureTrackClearButton];
@@ -174,8 +175,6 @@
     {
         [self.tableView reloadData];
     }
-    
-
 }
 
 
