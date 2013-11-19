@@ -8,13 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132003AF17E65A2C00829AA0 /* CoreMotion.framework */; };
-		132003B117E7174600829AA0 /* icon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254C17E6287900716807 /* icon120x120.png */; };
+		1330038E183B930800AA5AFF /* icon29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 13300386183B930800AA5AFF /* icon29x29.png */; };
+		1330038F183B930800AA5AFF /* icon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 13300387183B930800AA5AFF /* icon40x40.png */; };
+		13300390183B930800AA5AFF /* icon58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 13300388183B930800AA5AFF /* icon58x58.png */; };
+		13300391183B930800AA5AFF /* icon60x60.png in Resources */ = {isa = PBXBuildFile; fileRef = 13300389183B930800AA5AFF /* icon60x60.png */; };
+		13300392183B930800AA5AFF /* icon76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 1330038A183B930800AA5AFF /* icon76x76.png */; };
+		13300393183B930800AA5AFF /* icon80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 1330038B183B930800AA5AFF /* icon80x80.png */; };
+		13300394183B930800AA5AFF /* icon120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 1330038C183B930800AA5AFF /* icon120x120.png */; };
+		13300395183B930800AA5AFF /* icon152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 1330038D183B930800AA5AFF /* icon152x152.png */; };
+		1330039D183B97ED00AA5AFF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13300397183B97ED00AA5AFF /* libTestFlight.a */; };
+		1330039E183B97ED00AA5AFF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 13300398183B97ED00AA5AFF /* README.md */; };
+		1330039F183B97ED00AA5AFF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 13300399183B97ED00AA5AFF /* release_notes.md */; };
 		13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253E17E61AEB00716807 /* GRWoodHeader06.png */; };
 		13E4254317E61AEB00716807 /* GRWoodHeader06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */; };
 		13E4254417E61AEB00716807 /* GRWoodHeader07.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254017E61AEB00716807 /* GRWoodHeader07.png */; };
 		13E4254517E61AEB00716807 /* GRWoodHeader07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254117E61AEB00716807 /* GRWoodHeader07@2x.png */; };
-		13E4254F17E6289100716807 /* icon76x76.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254D17E6289100716807 /* icon76x76.png */; };
-		13E4255017E6289100716807 /* icon152x152.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254E17E6289100716807 /* icon152x152.png */; };
 		CD2B84BC1753B6D500AC17AE /* MTStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2B84B91753B6D500AC17AE /* MTStatusBarOverlay.m */; };
 		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
 		CD539006174777450044092D /* icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = CD539004174777450044092D /* icon144x144.png */; };
@@ -124,19 +132,29 @@
 		CDE43AB217303F5B004C0698 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA617303F5B004C0698 /* Default.png */; };
 		CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA717303F5B004C0698 /* Default@2x.png */; };
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
-		CDEA245017948154002AFBCC /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDEA244717947583002AFBCC /* libTestFlight.a */; };
 		CDEA24511794816E002AFBCC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CD53C95C1737B0D400264230 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		132003AF17E65A2C00829AA0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		13300386183B930800AA5AFF /* icon29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon29x29.png; sourceTree = "<group>"; };
+		13300387183B930800AA5AFF /* icon40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon40x40.png; sourceTree = "<group>"; };
+		13300388183B930800AA5AFF /* icon58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon58x58.png; sourceTree = "<group>"; };
+		13300389183B930800AA5AFF /* icon60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon60x60.png; sourceTree = "<group>"; };
+		1330038A183B930800AA5AFF /* icon76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon76x76.png; sourceTree = "<group>"; };
+		1330038B183B930800AA5AFF /* icon80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon80x80.png; sourceTree = "<group>"; };
+		1330038C183B930800AA5AFF /* icon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120x120.png; sourceTree = "<group>"; };
+		1330038D183B930800AA5AFF /* icon152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon152x152.png; sourceTree = "<group>"; };
+		13300397183B97ED00AA5AFF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		13300398183B97ED00AA5AFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		13300399183B97ED00AA5AFF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		1330039A183B97ED00AA5AFF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		1330039B183B97ED00AA5AFF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		1330039C183B97ED00AA5AFF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		13E4253E17E61AEB00716807 /* GRWoodHeader06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader06.png; sourceTree = "<group>"; };
 		13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader06@2x.png"; sourceTree = "<group>"; };
 		13E4254017E61AEB00716807 /* GRWoodHeader07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader07.png; sourceTree = "<group>"; };
 		13E4254117E61AEB00716807 /* GRWoodHeader07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader07@2x.png"; sourceTree = "<group>"; };
-		13E4254C17E6287900716807 /* icon120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon120x120.png; sourceTree = "<group>"; };
-		13E4254D17E6289100716807 /* icon76x76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon76x76.png; sourceTree = "<group>"; };
-		13E4254E17E6289100716807 /* icon152x152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon152x152.png; sourceTree = "<group>"; };
 		CD2B84B81753B6D500AC17AE /* MTStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTStatusBarOverlay.h; sourceTree = "<group>"; };
 		CD2B84B91753B6D500AC17AE /* MTStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTStatusBarOverlay.m; sourceTree = "<group>"; };
 		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
@@ -284,11 +302,6 @@
 		CDE43AA717303F5B004C0698 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
 		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
-		CDEA244717947583002AFBCC /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		CDEA244917947583002AFBCC /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		CDEA244C17947583002AFBCC /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,8 +310,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
-				CDEA245017948154002AFBCC /* libTestFlight.a in Frameworks */,
 				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
+				1330039D183B97ED00AA5AFF /* libTestFlight.a in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
@@ -317,6 +330,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13300396183B97ED00AA5AFF /* TestFlightSDK2 */ = {
+			isa = PBXGroup;
+			children = (
+				13300397183B97ED00AA5AFF /* libTestFlight.a */,
+				13300398183B97ED00AA5AFF /* README.md */,
+				13300399183B97ED00AA5AFF /* release_notes.md */,
+				1330039A183B97ED00AA5AFF /* TestFlight+AsyncLogging.h */,
+				1330039B183B97ED00AA5AFF /* TestFlight+ManualSessions.h */,
+				1330039C183B97ED00AA5AFF /* TestFlight.h */,
+			);
+			path = TestFlightSDK2;
+			sourceTree = "<group>";
+		};
 		CD2B84B51753B6D500AC17AE /* MTStatusBarOverlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,9 +677,14 @@
 				CDA752DB173044EE005B25EC /* icon57x57.png */,
 				CD539007174777660044092D /* icon72x72.png */,
 				CD539004174777450044092D /* icon144x144.png */,
-				13E4254D17E6289100716807 /* icon76x76.png */,
-				13E4254E17E6289100716807 /* icon152x152.png */,
-				13E4254C17E6287900716807 /* icon120x120.png */,
+				13300386183B930800AA5AFF /* icon29x29.png */,
+				13300387183B930800AA5AFF /* icon40x40.png */,
+				13300388183B930800AA5AFF /* icon58x58.png */,
+				13300389183B930800AA5AFF /* icon60x60.png */,
+				1330038A183B930800AA5AFF /* icon76x76.png */,
+				1330038B183B930800AA5AFF /* icon80x80.png */,
+				1330038C183B930800AA5AFF /* icon120x120.png */,
+				1330038D183B930800AA5AFF /* icon152x152.png */,
 				CDE43A7C17303DD5004C0698 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -785,21 +816,9 @@
 				CD7A02B21732D852003A2E2D /* JSBadgeView */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
 				CDD7EBDF1733B66100225F5A /* Reachability */,
-				CDEA244617947583002AFBCC /* TestFlightSDK */,
+				13300396183B97ED00AA5AFF /* TestFlightSDK2 */,
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		CDEA244617947583002AFBCC /* TestFlightSDK */ = {
-			isa = PBXGroup;
-			children = (
-				CDEA244717947583002AFBCC /* libTestFlight.a */,
-				CDEA244917947583002AFBCC /* release_notes.md */,
-				CDEA244A17947583002AFBCC /* TestFlight+AsyncLogging.h */,
-				CDEA244B17947583002AFBCC /* TestFlight+ManualSessions.h */,
-				CDEA244C17947583002AFBCC /* TestFlight.h */,
-			);
-			path = TestFlightSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -863,12 +882,13 @@
 				CDE43AA217303F54004C0698 /* InfoPlist.strings in Resources */,
 				13E4254417E61AEB00716807 /* GRWoodHeader07.png in Resources */,
 				CDE43AB117303F5B004C0698 /* Default-568h@2x.png in Resources */,
-				13E4255017E6289100716807 /* icon152x152.png in Resources */,
+				13300392183B930800AA5AFF /* icon76x76.png in Resources */,
 				CDE43AB217303F5B004C0698 /* Default.png in Resources */,
 				CDE43AB317303F5B004C0698 /* Default@2x.png in Resources */,
 				CDA752DD173044EE005B25EC /* icon57x57.png in Resources */,
 				CDA752DE173044EE005B25EC /* icon114x114.png in Resources */,
 				CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */,
+				13300394183B930800AA5AFF /* icon120x120.png in Resources */,
 				CD7A018C17327ADD003A2E2D /* GRListTableViewController.xib in Resources */,
 				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
 				CD7A019917328DC2003A2E2D /* GRMicrophone.png in Resources */,
@@ -877,18 +897,20 @@
 				CD7A019E17328E74003A2E2D /* GRSeparatorBottom.png in Resources */,
 				CD7A02901732C1E7003A2E2D /* action-black-button-selected.png in Resources */,
 				CD7A02911732C1E7003A2E2D /* action-black-button-selected@2x.png in Resources */,
-				132003B117E7174600829AA0 /* icon120x120.png in Resources */,
 				CD7A02921732C1E7003A2E2D /* action-black-button.png in Resources */,
 				13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */,
+				13300395183B930800AA5AFF /* icon152x152.png in Resources */,
 				CD7A02931732C1E7003A2E2D /* action-black-button@2x.png in Resources */,
+				1330038E183B930800AA5AFF /* icon29x29.png in Resources */,
 				CD7A02941732C1E7003A2E2D /* action-gray-button-selected.png in Resources */,
 				CD7A02951732C1E7003A2E2D /* action-gray-button-selected@2x.png in Resources */,
 				CD7A02961732C1E7003A2E2D /* action-gray-button.png in Resources */,
 				CD7A02971732C1E7003A2E2D /* action-gray-button@2x.png in Resources */,
-				13E4254F17E6289100716807 /* icon76x76.png in Resources */,
 				CD7A02981732C1E7003A2E2D /* action-red-button-selected.png in Resources */,
 				CD7A02991732C1E7003A2E2D /* action-red-button-selected@2x.png in Resources */,
 				CD7A029A1732C1E7003A2E2D /* action-red-button.png in Resources */,
+				1330039E183B97ED00AA5AFF /* README.md in Resources */,
+				13300390183B930800AA5AFF /* icon58x58.png in Resources */,
 				CD7A029B1732C1E7003A2E2D /* action-red-button@2x.png in Resources */,
 				CD7A029C1732C1E7003A2E2D /* action-sheet-panel.png in Resources */,
 				CD7A029D1732C1E7003A2E2D /* action-sheet-panel@2x.png in Resources */,
@@ -916,11 +938,14 @@
 				CD92B52C173587C400771F26 /* GRTrackFill.png in Resources */,
 				CD92B52D173587C400771F26 /* GRTrackFill@2x.png in Resources */,
 				CD92B5301735882F00771F26 /* GRKnobBase.png in Resources */,
+				1330039F183B97ED00AA5AFF /* release_notes.md in Resources */,
+				1330038F183B930800AA5AFF /* icon40x40.png in Resources */,
 				CD92B5311735882F00771F26 /* GRKnobBase@2x.png in Resources */,
 				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
 				CD53C95D1737B0D400264230 /* .gitignore in Resources */,
 				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,
 				13E4254517E61AEB00716807 /* GRWoodHeader07@2x.png in Resources */,
+				13300393183B930800AA5AFF /* icon80x80.png in Resources */,
 				13E4254317E61AEB00716807 /* GRWoodHeader06@2x.png in Resources */,
 				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
 				CD55C0D6174424F6000BFFE5 /* GRSidebarViewController.xib in Resources */,
@@ -930,6 +955,7 @@
 				CDE340A01744CE760033A4B1 /* GRSettingsButtonWhite.png in Resources */,
 				CD539006174777450044092D /* icon144x144.png in Resources */,
 				CDEA24511794816E002AFBCC /* README.md in Resources */,
+				13300391183B930800AA5AFF /* icon60x60.png in Resources */,
 				CD539008174777660044092D /* icon72x72.png in Resources */,
 				CDD39C4C17A2BB0B002B0F57 /* Localizable.strings in Resources */,
 			);
@@ -1077,8 +1103,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
+					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "AA3209B0-AA67-4AEE-91E1-433AB39D2CAA";
@@ -1100,8 +1127,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
+					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "E358A949-7777-4946-89B2-E4827F0075A4";
@@ -1149,8 +1177,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Greek Radio/Libraries\"",
-					"\"$(SRCROOT)/Greek Radio/Libraries/TestFlightSDK\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
+					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
+					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7A52FAC6-9108-472C-9C76-22A4123AF4A9";
