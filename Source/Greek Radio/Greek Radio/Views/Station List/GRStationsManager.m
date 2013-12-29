@@ -210,19 +210,7 @@ static const NSUInteger kLazyLoadSection = 2;
 {
     UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
     sectionHeader.autoresizingMask = UIViewAutoresizingNone;
-    
-    if ([UIDevice isFlatUI])
-    {
-        sectionHeader.backgroundColor = self.tableView.backgroundColor;
-    }
-    else
-    {
-        sectionHeader.backgroundColor = [UIColor colorWithRed:0.604f
-                                                        green:0.651f
-                                                         blue:0.690f
-                                                        alpha:1.00f];
-    }
-    
+    sectionHeader.backgroundColor = self.tableView.backgroundColor;
     sectionHeader.textAlignment = NSTextAlignmentCenter;
     sectionHeader.font = [UIFont boldSystemFontOfSize:13];
     sectionHeader.textColor = [UIColor whiteColor];

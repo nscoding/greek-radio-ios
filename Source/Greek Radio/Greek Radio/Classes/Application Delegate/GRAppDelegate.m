@@ -8,8 +8,6 @@
 
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
-#import "GRSidebarViewController.h"
-#import "UIAlertView+Blocks.h"
 
 #import "Appirater.h"
 #import "TestFlight.h"
@@ -127,22 +125,8 @@
     
     self.menuNavigationController.navigationBar.translucent = NO;
     self.menuNavigationController.navigationBarHidden = NO;
-
-    self.viewController = [[JASidePanelController alloc] init];
-    self.viewController.allowRightOverpan = NO;
-    self.viewController.shouldDelegateAutorotateToVisiblePanel = YES;
-
     self.listTableViewController.navigationController = self.menuNavigationController;
-    self.listTableViewController.layerController = self.viewController;
-    
-    GRNavigationController *settingsNavigationController
-        = [[GRNavigationController alloc] initWithRootViewController:[[GRSidebarViewController alloc] init]];
-
-    self.viewController.leftPanel = settingsNavigationController;
-	self.viewController.centerPanel = self.menuNavigationController;
-    self.viewController.leftFixedWidth = 260;
-
-    self.window.rootViewController = self.viewController;
+    self.window.rootViewController = self.menuNavigationController;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [[GRWebService shared] parseXML];

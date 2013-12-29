@@ -8,6 +8,9 @@
 
 #import "GRListTableViewController.h"
 #import "GRPlayerViewController.h"
+#import "GRSettingsViewController.h"
+#import "GRNavigationController.h"
+
 #import "GRStationsManager.h"
 
 #import "UIDevice+Extensions.h"
@@ -95,8 +98,6 @@
 // ------------------------------------------------------------------------------------------
 - (void)configureTableViewAndSearchBar
 {
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     self.tableView.separatorColor = [UIColor blackColor];
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
                                                        green:0.180f
@@ -396,7 +397,15 @@
 - (void)settingsButtonPressed:(UIButton *)sender
 {
     [self.searchBar resignFirstResponder];
-    [self.layerController showLeftPanelAnimated:YES];
+
+    GRSettingsViewController *settingsNavigationController = [[GRSettingsViewController alloc] init];
+    UINavigationController *navigationController =
+        [[UINavigationController alloc] initWithRootViewController:settingsNavigationController];
+    navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+
+    [self presentViewController:navigationController
+                       animated:YES
+                     completion:nil];
 }
 
 

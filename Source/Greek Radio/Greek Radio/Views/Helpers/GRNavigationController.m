@@ -21,32 +21,5 @@
     self.navigationBar.tintColor = [UIColor whiteColor];
 }
 
-// ------------------------------------------------------------------------------------------
-#pragma mark - Orientations
-// ------------------------------------------------------------------------------------------
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return self.topViewController.supportedInterfaceOrientations;
-}
-
-
-- (BOOL)shouldAutorotate
-{
-    return self.topViewController.shouldAutorotate;
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait) ||
-           (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
-}
-
 
 @end

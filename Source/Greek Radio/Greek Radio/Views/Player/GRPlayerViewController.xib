@@ -19,10 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="CoverPlaceholder.png" id="4">
-                    <rect key="frame" x="-1" y="-8" width="323" height="324"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                </imageView>
                 <view contentMode="scaleToFill" id="23">
                     <rect key="frame" x="0.0" y="405" width="320" height="96"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -81,12 +77,11 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.18039216101169586" green="0.18039216101169586" blue="0.16078431904315948" alpha="1" colorSpace="deviceRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
-        <image name="CoverPlaceholder.png" width="600" height="600"/>
         <image name="GRBottom.png" width="320" height="96"/>
         <image name="GRHeart.png" width="26" height="26"/>
         <image name="GRHeartSelected.png" width="26" height="26"/>

@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import "JASidePanelController.h"
 #import "GRNavigationController.h"
 
 @class GRSplashViewController;
@@ -18,6 +17,5 @@
 @property (strong, nonatomic) GRListTableViewController *listTableViewController;
 @property (strong, nonatomic) GRSplashViewController *splashViewController;
 @property (strong, nonatomic) GRNavigationController *menuNavigationController;
-@property (strong, nonatomic) JASidePanelController *viewController;
 
 @end

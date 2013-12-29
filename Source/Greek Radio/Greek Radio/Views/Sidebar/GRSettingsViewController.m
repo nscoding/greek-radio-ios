@@ -6,28 +6,25 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import "GRSidebarViewController.h"
+#import "GRSettingsViewController.h"
 #import "UIDevice+Extensions.h"
 
 
 // ------------------------------------------------------------------------------------------
 
 
-@implementation GRSidebarViewController
+@implementation GRSettingsViewController
+
 
 - (void)viewDidLoad
 {
+    [self setupCloseButton];
+
     self.autoLockHeader.text = NSLocalizedString(@"label_auto_lock_header", @"");
     self.autoLockText.text = NSLocalizedString(@"label_auto_lock_text", @"");
     self.shakeText.text = NSLocalizedString(@"label_shake_music_text", @"");
     self.shakeHeader.text = NSLocalizedString(@"label_shake_music_header", @"");
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-
-    if ([UIDevice isIPad])
-    {
-        self.navigationController.navigationBar.topItem.title = @"";
-    }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
@@ -37,6 +34,22 @@
     BOOL shakeEnabled = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
     [self.shakeSwitch setOn:shakeEnabled animated:NO];
 }
+
+
+- (void)setupCloseButton
+{
+    NSDictionary *titleTextAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:17.0],
+                                           NSForegroundColorAttributeName : [UIColor whiteColor] };
+    
+    UIBarButtonItem *doneItem =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                  target:self
+                                                  action:@selector(closeSettingsViewController)];
+    
+    [doneItem setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = doneItem;
+}
+
 
 
 // ------------------------------------------------------------------------------------------
@@ -58,9 +71,9 @@
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)closeSettingsViewController
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

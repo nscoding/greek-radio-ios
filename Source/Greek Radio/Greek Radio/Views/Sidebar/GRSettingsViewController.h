@@ -7,7 +7,7 @@
 //
 
 
-@interface GRSidebarViewController : UIViewController
+@interface GRSettingsViewController : UIViewController
 
 @property (nonatomic, weak) IBOutlet UILabel *autoLockHeader;
 @property (nonatomic, weak) IBOutlet UILabel *autoLockText;
