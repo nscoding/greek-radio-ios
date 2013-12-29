@@ -25,6 +25,15 @@
                                                                       green:0.533f
                                                                        blue:0.286f
                                                                       alpha:1.00f]];
+        
+        [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                [UIColor whiteColor], UITextAttributeTextColor,
+                                [UIFont boldSystemFontOfSize:16.0f], UITextAttributeFont,
+                                [UIColor darkGrayColor], UITextAttributeTextShadowColor,
+                                [NSValue valueWithCGSize:CGSizeMake(0.0, -1.0)], UITextAttributeTextShadowOffset,
+                                                  nil]
+                                                    forState:UIControlStateNormal];
+
     }
     else
     {
@@ -32,7 +41,7 @@
                                            forBarMetrics:UIBarMetricsDefault];
     }
     
-    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:-1
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2
                                                        forBarMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:

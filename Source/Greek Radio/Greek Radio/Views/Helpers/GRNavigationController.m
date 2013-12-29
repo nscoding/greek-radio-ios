@@ -14,6 +14,12 @@
 
 @implementation GRNavigationController
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.navigationBar.tintColor = [UIColor whiteColor];
+}
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Orientations
@@ -26,14 +32,13 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    UIViewController *top = self.topViewController;
-    return top.supportedInterfaceOrientations;
+    return self.topViewController.supportedInterfaceOrientations;
 }
+
 
 - (BOOL)shouldAutorotate
 {
-    UIViewController *top = self.topViewController;
-    return [top shouldAutorotate];
+    return self.topViewController.shouldAutorotate;
 }
 
 

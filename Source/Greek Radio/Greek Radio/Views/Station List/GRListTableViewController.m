@@ -21,7 +21,7 @@
 
 @interface GRListTableViewController () <GRStationCellViewDelegate, UIAccelerometerDelegate>
 {
-	CFTimeInterval		lastTime;
+	CFTimeInterval lastTime;
 	CGFloat	shakeAccelerometer[3];
 }
 
@@ -54,31 +54,7 @@
 // ------------------------------------------------------------------------------------------
 - (id)init
 {
-    if ((self = [super initWithNibName:@"GRListTableViewController" bundle:nil]))
-    {        
-        [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
-                                                           green:0.180f
-                                                            blue:0.161f
-                                                           alpha:1.00f]];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(changeTriggeredByUser:)
-                                                     name:GRNotificationChangeTriggeredByUser
-                                                   object:nil];
-    }
-    
-    return self;
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
-- (void)changeTriggeredByUser:(NSNotification *)notification
-{
-    // get the stations
-    [self configureStationsWithFilter:self.searchBar.text
-                              animate:YES];
+    return [super initWithNibName:@"GRListTableViewController" bundle:nil];
 }
 
 
@@ -87,54 +63,68 @@
 // ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
-    self.searchBar.delegate = self;
-    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-
-    /* https://gist.github.com/jeksys/1070394 */
-    [self configureTrackClearButton];
-    
     [super viewDidLoad];
 
-    // create the DAO object
-    self.stationsDAO = [[GRStationsDAO alloc] init];
-    
-    // get the stations
-    [self configureStationsWithFilter:self.searchBar.text
-                              animate:NO];
-    
-    [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
-    
-    // register notifications
+    [self configureDataSource];
+    [self configureTableViewAndSearchBar];
+    [self configureTrackClearButton];
     [self registerObservers];
-    
     [self buildAndConfigureNavigationButtons];
     [self buildAndConfigureMotionDetector];
+    [self buildAndConfigurePullToRefresh];
+    [self buildAndConfigureMadeWithLove];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self configureStationsWithFilter:self.searchBar.text animate:YES];
     
+    self.navigationItem.title = @"Greek Radio";
+    [self configureStationsWithFilter:self.searchBar.text animate:YES];
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
-    
-    // add the pull to refresh view
-    [self buildAndConfigurePullToRefresh];
-    [self buildAndConfigureMadeWithLove];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationItem.title = @"";
 }
 
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
+- (void)configureTableViewAndSearchBar
+{
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
+                                                       green:0.180f
+                                                        blue:0.161f
+                                                       alpha:1.00f]];
+    [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
+    
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+}
+
+
+- (void)configureDataSource
+{
+    self.stationsDAO = [[GRStationsDAO alloc] init];
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:NO];
+}
+
+
 - (void)configureTrackClearButton
 {
+    /* https://gist.github.com/jeksys/1070394 */
     for (UIView *view in self.searchBar.subviews)
     {
-        if ([view isKindOfClass: [UITextField class]])
+        if ([view isKindOfClass:[UITextField class]])
         {
             UITextField *tf = (UITextField *)view;
             tf.delegate = self;
@@ -315,16 +305,6 @@
                                              withHandler:accelerometerHandler];
 }
 
-// ------------------------------------------------------------------------------------------
-#pragma mark - Pull to refresh
-// ------------------------------------------------------------------------------------------
-- (void)updateStations
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[GRWebService shared] parseXML];
-    });
-}
-
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
@@ -332,9 +312,25 @@
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(changeTriggeredByUser:)
+                                                 name:GRNotificationChangeTriggeredByUser
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(syncDidEnd:)
                                                  name:GRNotificationSyncManagerDidEnd
                                                object:nil];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Notifications
+// ------------------------------------------------------------------------------------------
+- (void)changeTriggeredByUser:(NSNotification *)notification
+{
+    // get the stations
+    [self configureStationsWithFilter:self.searchBar.text
+                              animate:YES];
 }
 
 
@@ -375,8 +371,7 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *identifier = [GRStationCellView reusableIdentifier];
     GRStationCellView *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -477,10 +472,10 @@
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
                                                                                 previousView:self.view];
     
-
     if (self.navigationController.visibleViewController == self)
     {
         [UIMenuController sharedMenuController].menuVisible = NO;
+        
         [self.navigationController pushViewController:playController
                                              animated:YES];
     }
@@ -524,9 +519,7 @@
 }
 
 
--  (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
- forRowAtIndexPath:(NSIndexPath *)indexPath
+-  (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
@@ -540,8 +533,7 @@ commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
 }
 
 
-- (NSString *)tableView:(UITableView *)tableView
-titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return NSLocalizedString(@"button_remove", @"");
 }
@@ -556,15 +548,15 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     
     if (indexPath.section == 0)
     {
-        station = [self.favouriteStations objectAtIndex:indexPath.row];
+        station = self.favouriteStations[indexPath.row];
     }
     else if (indexPath.section == 1)
     {
-        station = [self.localStations objectAtIndex:indexPath.row];
+        station = self.localStations[indexPath.row];
     }
     else if (indexPath.section == 2)
     {
-        station = [self.serverStations objectAtIndex:indexPath.row];
+        station = self.serverStations[indexPath.row];
     }
 
     return station;
@@ -574,10 +566,18 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
+- (void)updateStations
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^
+    {
+        [[GRWebService shared] parseXML];
+    });
+}
+
+
 - (void)madeWithLovePressed
 {
-    NSURL *url = [NSURL URLWithString:@"http://www.nscoding.co.uk"];
-    [[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nscoding.co.uk"]];
 }
 
 
@@ -602,7 +602,9 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
                 [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
                 
                 [GRAppearanceHelper setUpDefaultAppearance];
-                [self.navigationController presentViewController:mailController animated:YES completion:nil];
+                [self.navigationController presentViewController:mailController
+                                                        animated:YES
+                                                      completion:nil];
             }
             else
             {
@@ -623,7 +625,9 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
                 [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
                 
                 [GRAppearanceHelper setUpDefaultAppearance];
-                [self.navigationController presentViewController:mailController animated:YES completion:nil];
+                [self.navigationController presentViewController:mailController
+                                                        animated:YES
+                                                      completion:nil];
             }
             else
             {
@@ -638,19 +642,22 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 
+- (void)settingsButtonPressed:(UIButton *)sender
+{
+    [self.searchBar resignFirstResponder];
+    [self.layerController showLeftPanelAnimated:YES];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Mail Composer delegate
+// ------------------------------------------------------------------------------------------
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
 {
     [GRAppearanceHelper setUpGreekRadioAppearance];
     [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-- (void)settingsButtonPressed:(UIButton *)sender
-{
-    [self.searchBar resignFirstResponder];
-    [self.layerController showLeftPanelAnimated:YES];
 }
 
 
@@ -666,8 +673,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 
-- (void)searchBar:(UISearchBar *)searchBar
-    textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     [self configureStationsWithFilter:self.searchBar.text
                               animate:YES];
@@ -694,7 +700,7 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - GRStationCellViewDelegate implementation
+#pragma mark - GRStationCellView Delegate implementation
 // ------------------------------------------------------------------------------------------
 - (void)userDidDoubleTapOnGenre:(NSString *)genre
 {
@@ -711,8 +717,6 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([GRRadioPlayer shared].isPlaying)
     {
-        [[GRRadioPlayer shared] stopPlayingStation];
-
         [UIAlertView showWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
                            message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")
                  cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
@@ -726,7 +730,6 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)dealloc
 {
-    self.refreshControl = nil;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

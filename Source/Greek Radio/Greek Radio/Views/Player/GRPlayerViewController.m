@@ -71,7 +71,6 @@ typedef enum GRInformationBarOption
         
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureStationGenre:station.genre];
-        [self buildAndConfigureListButton];
         [self registerObservers];
         
         CGRect bottomFrame = self.bottomBar.frame;
@@ -264,9 +263,9 @@ typedef enum GRInformationBarOption
     {
         double delayInSeconds = 5.0f;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+        {
             [blockSelf animateStatus];
-
         });
     }
 }
@@ -366,24 +365,6 @@ typedef enum GRInformationBarOption
 }
 
 
-
-- (void)buildAndConfigureListButton
-{
-    UIButton *listButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    listButton.frame = CGRectMake(0, 0, 30, 30);
-    
-    [listButton setImage:[UIImage imageNamed:@"GRList"] forState:UIControlStateNormal];
-    [listButton addTarget:self action:@selector(listButtonPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithCustomView:listButton];
-    
-    self.navigationItem.leftBarButtonItem = backButton;
-}
-
-
-
 - (void)configurePlayButton
 {
     if ([GRRadioPlayer shared].isPlaying)
@@ -402,12 +383,6 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
-- (void)listButtonPressed:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
 - (IBAction)shareButtonPressed:(UIButton *)sender
 {
     [UIActionSheet showInView:self.view

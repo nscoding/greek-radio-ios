@@ -975,20 +975,15 @@
 		CDE43A9F17303DD5004C0698 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
-					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "F21E8A93-1D79-44FC-8D6F-78F626816735";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AD79ABF5-11F8-440A-A4C9-6F5E4EBD7941";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -999,20 +994,15 @@
 		CDE43AA017303DD5004C0698 /* App Store */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
-					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E358A949-7777-4946-89B2-E4827F0075A4";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E358A949-7777-4946-89B2-E4827F0075A4";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1049,20 +1039,15 @@
 		CDE43AB817303FA6004C0698 /* Adhoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries\\\"",
-					"\\\"$(SRCROOT)/Greek\\ Radio/Libraries/TestFlightSDK\\\"",
-					"/Users/nscoding/nscoding/greek-radio-ios/Source/Greek\\ Radio/Greek\\ Radio/Libraries/TestFlightSDK2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6C8034DD-17D4-4DD8-97B1-25AB2C1BCE4E";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6C8034DD-17D4-4DD8-97B1-25AB2C1BCE4E";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
