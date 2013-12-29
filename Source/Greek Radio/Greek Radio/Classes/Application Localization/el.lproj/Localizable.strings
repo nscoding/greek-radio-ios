@@ -45,3 +45,7 @@
 "share_via_twitter" = "Μοιράσου το μέσω Twitter";
 "share_via_facebook" = "Μοιράσου το μέσω Facebook";
 "share_via_email_check_it_$" = "Μπορείς να το δεις <a href='%@'>εδω</a>";
+
+"label_genre" = "Είδος";
+"label_location" = "Περιοχή";
+"label_AZ" = "Α-Ω";

@@ -47,3 +47,7 @@
 "share_via_facebook" = "Share via Facebook";
 "share_via_email_check_it_$" = "You can check it out at <a href='%@'>here</a>";
 
+"label_genre" = "Genre";
+"label_location" = "Location";
+"label_AZ" = "A-Z";
+

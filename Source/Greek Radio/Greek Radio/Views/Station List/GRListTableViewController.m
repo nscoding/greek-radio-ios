@@ -103,9 +103,11 @@
                                                         blue:0.161f
                                                        alpha:1.00f]];
     [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
-    
+
     self.searchBar.delegate = self;
-    self.searchBar.scopeButtonTitles = @[@"Genre", @"Cities", @"A-Z"];
+    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
+                                         NSLocalizedString(@"label_location", @""),
+                                         NSLocalizedString(@"label_AZ", @"")];
     self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
 }
 
@@ -447,6 +449,8 @@
 
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
     self.stationManager.stationsLayout = selectedScope;
 }
 
