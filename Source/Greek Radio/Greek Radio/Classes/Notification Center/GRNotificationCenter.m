@@ -12,7 +12,6 @@ NSString *const GRNotificationSyncManagerDidStart = @"GRNotificationSyncManagerD
 NSString *const GRNotificationSyncManagerDidEnd = @"GRNotificationSyncManagerDidEnd";
 NSString *const GRNotificationStreamDidStart = @"GRNotificationStreamDidStart";
 NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
-NSString *const GRNotificationChangeTriggeredByUser = @"GRNotificationChangeTriggeredByUser";
 
 
 @implementation GRNotificationCenter
@@ -70,18 +69,6 @@ NSString *const GRNotificationChangeTriggeredByUser = @"GRNotificationChangeTrig
 + (void)postPlayerDidEndNotificationWithSender:(id)sender
 {
     NSNotification *notification = [NSNotification notificationWithName:GRNotificationStreamDidEnd
-                                                                 object:sender
-                                                               userInfo:nil];
-    
-    [[NSNotificationCenter defaultCenter] performSelectorOnMainThread:@selector(postNotification:)
-                                                           withObject:notification
-                                                        waitUntilDone:NO];
-}
-
-
-+ (void)postChangeTriggeredByUserWithSender:(id)sender
-{
-    NSNotification *notification = [NSNotification notificationWithName:GRNotificationChangeTriggeredByUser
                                                                  object:sender
                                                                userInfo:nil];
     

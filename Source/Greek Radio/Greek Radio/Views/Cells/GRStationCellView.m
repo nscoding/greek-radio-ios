@@ -17,7 +17,6 @@
 @interface GRStationCellView()
 
 @property (nonatomic, strong) UIView *selectionColor;
-@property (nonatomic, strong) JSBadgeView *genreBadgeView;
 
 @end
 
@@ -73,19 +72,6 @@
         [doubleTap setCancelsTouchesInView:NO];
         [doubleTap setDelegate:self];
         [doubleTap setDelaysTouchesBegan:YES];
-        
-        self.genreBadgeView = [[JSBadgeView alloc] initWithParentView:self
-                                                            alignment:JSBadgeViewAlignmentCenterRight];
-
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f
-                                                                   green:0.522f
-                                                                    blue:0.482f
-                                                                   alpha:1.00f];
-        
-        self.genreBadgeView.badgeText = [NSString stringWithFormat:@"..."];
-
-        self.genreBadgeView.userInteractionEnabled = YES;
-        [self.genreBadgeView addGestureRecognizer:doubleTap];
     }
 
     return self;
@@ -120,54 +106,6 @@
 }
 
 
-- (void)setBadgeText:(NSString *)badgeText
-{
-    if ([[[GRRadioPlayer shared] stationName] isEqualToString:self.title.text])
-    {        
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.866f
-                                                                   green:0.128f
-                                                                    blue:0.115f
-                                                                   alpha:1.00f];
-        
-        self.genreBadgeView.badgeText = [NSString stringWithFormat:NSLocalizedString(@"label_now_playing", @"")];
-    }
-    else
-    {
-        self.genreBadgeView.badgeBackgroundColor = [UIColor colorWithRed:0.529f
-                                                                   green:0.522f
-                                                                    blue:0.482f
-                                                                   alpha:1.00f];
-        
-        self.genreBadgeView.badgeText = [NSString stringWithFormat:@"%@", badgeText];
-    }
-    
-    
-    CGRect titleFrame = self.title.frame;
-    self.title.frame = CGRectMake(titleFrame.origin.x,
-                                  titleFrame.origin.y,
-                                  self.frame.size.width - self.genreBadgeView.sizeOfTextForCurrentSettings.width
-                                  - titleFrame.origin.x - 20,
-                                  titleFrame.size.height);
-    
-    CGRect subtitleFrame = self.subtitle.frame;
-    self.subtitle.frame = CGRectMake(subtitleFrame.origin.x,
-                                     subtitleFrame.origin.y,
-                                     self.frame.size.width - self.genreBadgeView.sizeOfTextForCurrentSettings.width
-                                     - titleFrame.origin.x - 20,
-                                  subtitleFrame.size.height);
-}
-
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.genreBadgeView.alpha = editing ? 0.0f : 1.0f;
-    }];
-    
-    [super setEditing:editing animated:animated];
-}
-
-
 + (NSString *)reusableIdentifier
 {
     return @"GRStationCellView";
@@ -194,16 +132,12 @@
 {
     [self.station setFavourite:[NSNumber numberWithBool:YES]];
     [self.station.managedObjectContext save:nil];
-
-    // inform about the change
-    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
 }
 
 
 - (void)visitStation:(UIMenuController*)sender
 {
-    [[UIApplication sharedApplication] openURL:
-     [NSURL URLWithString:self.station.stationURL]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.station.stationURL]];
 }
 
 
@@ -226,28 +160,6 @@
     }
     
     return [super canPerformAction:action withSender:sender];
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Tap Gestures
-// ------------------------------------------------------------------------------------------
-- (void)tappedOnBadge:(UITapGestureRecognizer *)gesture
-{
-    if (self.delegate &&
-        [self.delegate respondsToSelector:@selector(userDidDoubleTapOnGenre:)])
-    {
-        [self.delegate userDidDoubleTapOnGenre:self.station.genre];
-    }
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Dealloc
-// ------------------------------------------------------------------------------------------
-- (void)dealloc
-{
-    self.delegate = nil;
 }
 
 

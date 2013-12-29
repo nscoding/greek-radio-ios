@@ -9,14 +9,15 @@
 
 #import "GRNotificationCenter.h"
 #import "GRWebService.h"
-#import "NSInternetDoctor.h"
 #import "GRRadioPlayer.h"
 #import "GRAppearance‎Helper.h"
 
+#import "NSInternetDoctor.h"
+
+#import "UIDevice+Extensions.h"
 #import "UIAlertView+Blocks.h"
 #import "UIActionSheet+Blocks.h"
 
-#import "GRRadioPlayer.h"
 
 #ifndef __IPHONE_4_0
 #warning "This project uses features only available in iOS SDK 4.0 and later."

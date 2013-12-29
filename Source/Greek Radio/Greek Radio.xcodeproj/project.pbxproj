@@ -20,6 +20,7 @@
 		1330039F183B97ED00AA5AFF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 13300399183B97ED00AA5AFF /* release_notes.md */; };
 		1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */; };
 		1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */; };
+		13CDC161187062970041FED4 /* GRStationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC160187062970041FED4 /* GRStationsManager.m */; };
 		13E4254217E61AEB00716807 /* GRWoodHeader06.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253E17E61AEB00716807 /* GRWoodHeader06.png */; };
 		13E4254317E61AEB00716807 /* GRWoodHeader06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */; };
 		13E4254417E61AEB00716807 /* GRWoodHeader07.png in Resources */ = {isa = PBXBuildFile; fileRef = 13E4254017E61AEB00716807 /* GRWoodHeader07.png */; };
@@ -52,7 +53,6 @@
 		CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */; };
 		CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A0222173299AF003A2E2D /* QuartzCore.framework */; };
 		CD7A02A91732C5A3003A2E2D /* CoverPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */; };
-		CD7A02B51732D852003A2E2D /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02B41732D852003A2E2D /* JSBadgeView.m */; };
 		CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */; };
 		CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */; };
 		CD7A02C31732FE89003A2E2D /* GRMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CD7A02C11732FE89003A2E2D /* GRMore@2x.png */; };
@@ -128,6 +128,8 @@
 		1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		1374C15C1870439B006B2A15 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		13CDC15F187062970041FED4 /* GRStationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsManager.h; sourceTree = "<group>"; };
+		13CDC160187062970041FED4 /* GRStationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsManager.m; sourceTree = "<group>"; };
 		13E4253E17E61AEB00716807 /* GRWoodHeader06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader06.png; sourceTree = "<group>"; };
 		13E4253F17E61AEB00716807 /* GRWoodHeader06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GRWoodHeader06@2x.png"; sourceTree = "<group>"; };
 		13E4254017E61AEB00716807 /* GRWoodHeader07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GRWoodHeader07.png; sourceTree = "<group>"; };
@@ -174,8 +176,6 @@
 		CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationCenter.m; sourceTree = "<group>"; };
 		CD7A0222173299AF003A2E2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CD7A02A81732C5A3003A2E2D /* CoverPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoverPlaceholder.png; sourceTree = "<group>"; };
-		CD7A02B31732D852003A2E2D /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
-		CD7A02B41732D852003A2E2D /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		CD7A02BD1732E9C8003A2E2D /* GRAppearance‎Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GRAppearance‎Helper.h"; sourceTree = "<group>"; };
 		CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GRAppearance‎Helper.m"; sourceTree = "<group>"; };
@@ -406,6 +406,8 @@
 				CD7A018817327ADD003A2E2D /* GRListTableViewController.h */,
 				CD7A018917327ADD003A2E2D /* GRListTableViewController.m */,
 				CD7A018A17327ADD003A2E2D /* GRListTableViewController.xib */,
+				13CDC15F187062970041FED4 /* GRStationsManager.h */,
+				13CDC160187062970041FED4 /* GRStationsManager.m */,
 			);
 			path = "Station List";
 			sourceTree = "<group>";
@@ -428,15 +430,6 @@
 				CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */,
 			);
 			path = "Notification Center";
-			sourceTree = "<group>";
-		};
-		CD7A02B21732D852003A2E2D /* JSBadgeView */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A02B31732D852003A2E2D /* JSBadgeView.h */,
-				CD7A02B41732D852003A2E2D /* JSBadgeView.m */,
-			);
-			path = JSBadgeView;
 			sourceTree = "<group>";
 		};
 		CD7A02BC1732E9AF003A2E2D /* Appearance */ = {
@@ -720,7 +713,6 @@
 				CD55C0C817441E4A000BFFE5 /* JASidePanels */,
 				CD53C9541737B0D400264230 /* Appirater */,
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
-				CD7A02B21732D852003A2E2D /* JSBadgeView */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
 				CDD7EBDF1733B66100225F5A /* Reachability */,
 				13300396183B97ED00AA5AFF /* TestFlightSDK2 */,
@@ -860,11 +852,11 @@
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */,
 				CD6AD36517312F5D0009A106 /* AudioStreamer.m in Sources */,
+				13CDC161187062970041FED4 /* GRStationsManager.m in Sources */,
 				CD7A018B17327ADD003A2E2D /* GRListTableViewController.m in Sources */,
 				CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */,
 				CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */,
 				1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */,
-				CD7A02B51732D852003A2E2D /* JSBadgeView.m in Sources */,
 				CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */,
 				CDD7EBE21733B66100225F5A /* Reachability.m in Sources */,
 				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,

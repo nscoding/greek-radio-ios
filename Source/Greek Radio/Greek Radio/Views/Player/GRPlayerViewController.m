@@ -473,9 +473,6 @@ typedef enum GRInformationBarOption
     self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
     [self.currentStation.managedObjectContext save:nil];
     
-    // inform about the change
-    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
-    
     // adjust the button state
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
 }
