@@ -33,5 +33,7 @@ typedef NS_ENUM(NSUInteger, GRStationsLayout)
 
 - (id)initWithTableView:(UITableView *)tableView stationsLayout:(GRStationsLayout)layout;
 - (void)setupFetchedResultsControllersWithString:(NSString *)filter;
+- (NSUInteger)numberOfStations;
+
 
 @end

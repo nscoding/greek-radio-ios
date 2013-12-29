@@ -25,11 +25,8 @@
 }
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) GRStationsManager *stationManager;
-@property (nonatomic, strong) NSMutableArray *serverStations;
-@property (nonatomic, strong) NSMutableArray *localStations;
-@property (nonatomic, strong) NSMutableArray *favouriteStations;
 @property (nonatomic, strong) CMMotionManager *motionManager;
+@property (nonatomic, strong) GRStationsManager *stationManager;
 
 @end
 
@@ -119,7 +116,6 @@
                                                         stationsLayout:GRStationsLayoutGenre];
     
     self.stationManager.delegate = self;
-    self.stationManager.stationsLayout = GRStationsLayoutGenre;
 }
 
 
@@ -253,9 +249,8 @@
                 if((length >= kEraseAccelerationThreshold) &&
                    (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
                 {
-                    lastTime = CFAbsoluteTimeGetCurrent();
-                    
-                    int random = arc4random() % (self.serverStations.count - 1);
+                    lastTime = CFAbsoluteTimeGetCurrent();                    
+                    int random = arc4random() % (self.stationManager.numberOfStations - 1);
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
                     
                     dispatch_async(dispatch_get_main_queue(), ^

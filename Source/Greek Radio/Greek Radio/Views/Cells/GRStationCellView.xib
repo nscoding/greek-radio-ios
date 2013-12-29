@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
             <subviews>
                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Ονομα Σταθμου" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="7">
-                    <rect key="frame" x="42" y="7" width="200" height="23"/>
+                    <rect key="frame" x="42" y="7" width="263" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
@@ -26,7 +26,7 @@
                     <color key="highlightedColor" red="0.94117653369999998" green="0.93725496529999996" blue="0.92549026010000002" alpha="1" colorSpace="deviceRGB"/>
                 </label>
                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Περιοχη" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" id="64">
-                    <rect key="frame" x="42" y="30" width="200" height="23"/>
+                    <rect key="frame" x="42" y="30" width="263" height="23"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>

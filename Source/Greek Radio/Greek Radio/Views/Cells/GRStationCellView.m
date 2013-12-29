@@ -33,18 +33,20 @@
     {
         self.backgroundColor = [UIColor whiteColor];
         
-        UIMenuItem *markAsFavorite = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
-                                                                action:@selector(markAsFavorite:)];
-        
-        UIMenuItem *visitStation = [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
-                                                                action:@selector(visitStation:)];
+        UIMenuItem *markAsFavorite =
+            [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
+                                       action:@selector(markAsFavorite:)];
+        UIMenuItem *visitStation =
+            [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
+                                       action:@selector(visitStation:)];
 
         UIMenuController *menuController = [UIMenuController sharedMenuController];
         menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, visitStation, nil];
 
-        UILongPressGestureRecognizer *longGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                  action:@selector(onShowMenu:)];
-        [self addGestureRecognizer: longGesture];
+        UILongPressGestureRecognizer *longGesture
+            = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                            action:@selector(onShowMenu:)];
+        [self addGestureRecognizer:longGesture];
 
         [[NSBundle mainBundle] loadNibNamed:@"GRStationCellView" owner:self options:nil];
         [self addSubview:self.backgroundView];
@@ -65,13 +67,6 @@
         self.subtitle.shadowOffset = CGSizeMake(0, 1);
         self.subtitle.textAlignment = NSTextAlignmentLeft;
         self.subtitle.numberOfLines = 1;
-        
-        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                    action:@selector(tappedOnBadge:)];
-        [doubleTap setNumberOfTapsRequired:2];
-        [doubleTap setCancelsTouchesInView:NO];
-        [doubleTap setDelegate:self];
-        [doubleTap setDelaysTouchesBegan:YES];
     }
 
     return self;
@@ -97,9 +92,13 @@
     }
     else
     {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.4
+                         animations:^
+        {
             self.selectionColor.alpha = 0.0f;
-        } completion:^(BOOL finished) {
+        }
+        completion:^(BOOL finished)
+         {
             [self.selectionColor removeFromSuperview];
         }];
     }
@@ -119,12 +118,10 @@
 {
     [sender.view becomeFirstResponder];
     
-    UIMenuController *mc = [UIMenuController sharedMenuController];
-        
-    [mc setTargetRect:sender.view.frame
-               inView:sender.view.superview];
-    
-    [mc setMenuVisible:YES animated:NO];
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    [menuController setTargetRect:sender.view.frame
+                           inView:sender.view.superview];
+    [menuController setMenuVisible:YES animated:NO];
 }
 
 

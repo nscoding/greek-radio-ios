@@ -40,13 +40,8 @@
     [Appirater setUsesUntilPrompt:3];
     [Appirater setSignificantEventsUntilPrompt:-1];
     [Appirater setTimeBeforeReminding:3];
-    [Appirater setUsesAnimation:YES];
-    
-#if !APPSTORE
-    [Appirater setDebug:YES];
-#else
+    [Appirater setUsesAnimation:YES];    
     [Appirater setDebug:NO];
-#endif
     
     if ([NSInternetDoctor shared].connected)
     {

@@ -65,6 +65,10 @@ static const NSUInteger kLazyLoadSection = 2;
 // ------------------------------------------------------------------------------------------
 - (void)setupFetchedResultsControllers
 {
+    self.stationsFetchRequest = nil;
+    self.stationsFetchedResultsController.delegate = nil;
+    self.stationsFetchedResultsController = nil;
+
     NSManagedObjectContext *moc = [GRCoreDataStack shared].managedObjectContext;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES"];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"GRStation"
@@ -73,55 +77,53 @@ static const NSUInteger kLazyLoadSection = 2;
     self.stationsFetchRequest = [[NSFetchRequest alloc] init];
     self.stationsFetchRequest.entity = entity;
     self.stationsFetchRequest.predicate = predicate;
-    self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"favourite"
-                                                                              ascending:NO],
-                                                  [[NSSortDescriptor alloc] initWithKey:@"title"
-                                                                              ascending:YES
-                                                                               selector:@selector(caseInsensitiveCompare:)],
-                                                  [[NSSortDescriptor alloc] initWithKey:@"location"
-                                                                              ascending:YES
-                                                                               selector:@selector(caseInsensitiveCompare:)],
-                                                  [[NSSortDescriptor alloc] initWithKey:@"genre"
-                                                                              ascending:YES
-                                                                               selector:@selector(caseInsensitiveCompare:)]];
     
-
-    self.stationsFetchedResultsController.delegate = nil;
-    self.stationsFetchedResultsController = nil;
-    
+    NSString *sectionKeyPath = @"";
     switch (self.stationsLayout)
     {
         case GRStationsLayoutGenre:
         {
-            self.stationsFetchedResultsController
-            = [[NSFetchedResultsController alloc] initWithFetchRequest:self.stationsFetchRequest
-                                                  managedObjectContext:moc
-                                                    sectionNameKeyPath:@"genre"
-                                                             cacheName:nil];
+            self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"genre"
+                                                                                      ascending:YES
+                                                                                       selector:@selector(caseInsensitiveCompare:)],
+                                                          [[NSSortDescriptor alloc] initWithKey:@"title"
+                                                                                      ascending:YES
+                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+            sectionKeyPath = @"genre";
             break;
         }
         case GRStationsLayoutCity:
         {
-            self.stationsFetchedResultsController
-            = [[NSFetchedResultsController alloc] initWithFetchRequest:self.stationsFetchRequest
-                                                  managedObjectContext:moc
-                                                    sectionNameKeyPath:@"location"
-                                                             cacheName:nil];
+            self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"location"
+                                                                                      ascending:YES
+                                                                                       selector:@selector(caseInsensitiveCompare:)],
+                                                          [[NSSortDescriptor alloc] initWithKey:@"title"
+                                                                                      ascending:YES
+                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+
+            sectionKeyPath = @"location";
             break;
         }
         case GRStationsLayoutAlphabetical:
         {
-            self.stationsFetchedResultsController
-            = [[NSFetchedResultsController alloc] initWithFetchRequest:self.stationsFetchRequest
-                                                  managedObjectContext:moc
-                                                    sectionNameKeyPath:@"favourite"
-                                                             cacheName:nil];
+            self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"favourite"
+                                                                                      ascending:NO],
+                                                          [[NSSortDescriptor alloc] initWithKey:@"title"
+                                                                                      ascending:YES
+                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+
+            sectionKeyPath = @"favourite";
             break;
         }
     }
     
-    NSError *error;
+    self.stationsFetchedResultsController
+        = [[NSFetchedResultsController alloc] initWithFetchRequest:self.stationsFetchRequest
+                                              managedObjectContext:moc
+                                                sectionNameKeyPath:sectionKeyPath
+                                                         cacheName:nil];
     
+    NSError *error;    
     self.stationsFetchedResultsController.delegate = self;
     if ([self.stationsFetchedResultsController performFetch:&error] == NO)
     {
@@ -155,8 +157,10 @@ static const NSUInteger kLazyLoadSection = 2;
     {
         _stationsLayout = stationsLayout;
         [self setupFetchedResultsControllers];
+        [self.tableView reloadData];
     }
 }
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Table delegate and Data source
@@ -338,6 +342,12 @@ static const NSUInteger kLazyLoadSection = 2;
 - (GRStation *)stationForIndexPath:(NSIndexPath *)indexPath
 {
     return [self.stationsFetchedResultsController objectAtIndexPath:indexPath];
+}
+
+
+- (NSUInteger)numberOfStations
+{
+    return self.stationsFetchedResultsController.fetchedObjects.count;
 }
 
 
