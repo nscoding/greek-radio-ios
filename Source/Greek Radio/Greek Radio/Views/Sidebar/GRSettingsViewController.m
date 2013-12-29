@@ -18,21 +18,10 @@
 
 - (void)viewDidLoad
 {
-    [self setupCloseButton];
-
-    self.autoLockHeader.text = NSLocalizedString(@"label_auto_lock_header", @"");
-    self.autoLockText.text = NSLocalizedString(@"label_auto_lock_text", @"");
-    self.shakeText.text = NSLocalizedString(@"label_shake_music_text", @"");
-    self.shakeHeader.text = NSLocalizedString(@"label_shake_music_header", @"");
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
-    [UIApplication sharedApplication].idleTimerDisabled = autoLockDisabled;
-    [self.lockSwitch setOn:autoLockDisabled animated:NO];
+    self.navigationController.navigationBar.translucent = NO;
 
-    BOOL shakeEnabled = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
-    [self.shakeSwitch setOn:shakeEnabled animated:NO];
+    [self setupCloseButton];
 }
 
 
@@ -51,23 +40,88 @@
 }
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - Table View
+// ------------------------------------------------------------------------------------------
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *tableViewCell =
+        [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                               reuseIdentifier:@"SettingsCell"];
+    
+    UISwitch *stateSwitch = [[UISwitch alloc] init];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
+    if (indexPath.section == 0)
+    {
+        [stateSwitch addTarget:self
+                        action:@selector(lockSwitchDidChange:)
+              forControlEvents:UIControlEventValueChanged];
+        
+        stateSwitch.on = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
+        tableViewCell.textLabel.text = NSLocalizedString(@"label_auto_lock_header", @"");
+    }
+    else if (indexPath.section == 1)
+    {
+        [stateSwitch addTarget:self
+                        action:@selector(shakeSwitchDidChange:)
+              forControlEvents:UIControlEventValueChanged];
+
+        stateSwitch.on = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
+        tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
+    }
+    
+    
+    tableViewCell.accessoryView = stateSwitch;
+    
+    return tableViewCell;
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return NSLocalizedString(@"label_auto_lock_text", @"");
+    }
+    else if (section == 1)
+    {
+        return NSLocalizedString(@"label_shake_music_text", @"");
+    }
+    
+    return @"";
+}
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Actions
 // ------------------------------------------------------------------------------------------
-- (IBAction)shakeSwitchDidChange:(id)sender
+- (void)shakeSwitchDidChange:(UISwitch *)sender
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:self.shakeSwitch.isOn forKey:@"GreekRadioShakeRandom"];
+    [userDefaults setBool:sender.isOn forKey:@"GreekRadioShakeRandom"];
     [userDefaults synchronize];
 }
 
 
-- (IBAction)lockSwitchDidChange:(id)sender
+- (void)lockSwitchDidChange:(UISwitch *)sender
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:self.lockSwitch.isOn forKey:@"GreekRadioAutoLockDisabled"];
+    [userDefaults setBool:sender.isOn forKey:@"GreekRadioAutoLockDisabled"];
     [userDefaults synchronize];
+    [UIApplication sharedApplication].idleTimerDisabled = sender.selected;
 }
 
 
