@@ -106,8 +106,11 @@
 // ------------------------------------------------------------------------------------------
 - (void)showNoInternetAlert
 {
-    [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"app_no_internet_title", @"")
-                                   message:NSLocalizedString(@"app_no_internet_subtitle", @"")];
+    [UIAlertView showWithTitle:NSLocalizedString(@"app_no_internet_title", @"")
+                       message:NSLocalizedString(@"app_no_internet_subtitle", @"")
+             cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+             otherButtonTitles:nil
+                      tapBlock:nil];
 
     [self.nscodingReachability stopNotifier];
     [self.nscodingReachability startNotifier];

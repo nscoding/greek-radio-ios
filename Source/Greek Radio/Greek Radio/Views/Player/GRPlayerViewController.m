@@ -410,61 +410,68 @@ typedef enum GRInformationBarOption
 
 - (IBAction)shareButtonPressed:(UIButton *)sender
 {
-    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
-    
-    [sheet addButtonWithTitle:NSLocalizedString(@"share_via_email", @"")
-                        block:^
-    {
-        if ([MFMailComposeViewController canSendMail])
-        {
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = @"Greek Radio";
-            
-            NSString *listeningTo;
-            if ([GRRadioPlayer shared].stationName.length > 0)
-            {
-                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                               [GRRadioPlayer shared].stationName];
-            }
-            else
-            {
-                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                               [NSLocalizedString(@"label_music", @"") lowercaseString]];
-            }
-            
-            NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
-                                       kAppiTunesURL];
-            
-            [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
-                                    isHTML:YES];
-            
-            [GRAppearanceHelper setUpDefaultAppearance];
-            [self.navigationController presentViewController:mailController animated:YES completion:nil];
-        }
-        else
-        {
-            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                           message:NSLocalizedString(@"share_email_error", @"")];
-        }
-    }];
-    
-    if ([SLComposeViewController class])
-    {
-        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_twitter", @"") block:^{
-            [GRShareHelper tweetTappedOnController:self];
-        }];
-    }
-    
-    if ([SLComposeViewController class])
-    {
-        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_facebook", @"") block:^{
-            [GRShareHelper facebookTappedOnController:self];
-        }];
-    }
-    
-    [sheet showInView:self.view];
+    [UIActionSheet showInView:self.view
+                    withTitle:@""
+            cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+       destructiveButtonTitle:nil
+            otherButtonTitles:@[NSLocalizedString(@"share_via_email", @""),
+                                NSLocalizedString(@"share_via_twitter", @""),
+                                NSLocalizedString(@"share_via_facebook", @"")]
+                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
+     {
+         if (buttonIndex == 0)
+         {
+             if ([MFMailComposeViewController canSendMail])
+             {
+                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                 mailController.mailComposeDelegate = self;
+                 mailController.subject = @"Greek Radio";
+                 
+                 NSString *listeningTo;
+                 if ([GRRadioPlayer shared].stationName.length > 0)
+                 {
+                     listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                    [GRRadioPlayer shared].stationName];
+                 }
+                 else
+                 {
+                     listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                    [NSLocalizedString(@"label_music", @"") lowercaseString]];
+                 }
+                 
+                 NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
+                                            kAppiTunesURL];
+                 
+                 [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
+                                         isHTML:YES];
+                 
+                 [GRAppearanceHelper setUpDefaultAppearance];
+                 [self.navigationController presentViewController:mailController animated:YES completion:nil];
+             }
+             else
+             {
+                 [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                    message:NSLocalizedString(@"share_email_error", @"")
+                          cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                          otherButtonTitles:nil
+                                   tapBlock:nil];
+             }
+         }
+         else if (buttonIndex == 1)
+         {
+             if ([SLComposeViewController class])
+             {
+                 [GRShareHelper tweetTappedOnController:self];
+             }
+         }
+         else if (buttonIndex == 2)
+         {
+             if ([SLComposeViewController class])
+             {
+                 [GRShareHelper facebookTappedOnController:self];
+             }
+         }
+     }];
 }
 
 

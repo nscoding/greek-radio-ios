@@ -21,8 +21,10 @@
 {
     if ([UIDevice isFlatUI])
     {
-        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"GRWoodHeader07"]
-                                           forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.757f
+                                                                      green:0.533f
+                                                                       blue:0.286f
+                                                                      alpha:1.00f]];
     }
     else
     {

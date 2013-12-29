@@ -9,6 +9,7 @@
 #import "GRAppDelegate.h"
 #import "GRListTableViewController.h"
 #import "GRSidebarViewController.h"
+#import "UIAlertView+Blocks.h"
 
 #import "Appirater.h"
 #import "TestFlight.h"
@@ -49,23 +50,20 @@
     
     if ([NSInternetDoctor shared].connected)
     {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:NSLocalizedString(@"app_welcome_title", @"")
-                                                       message:NSLocalizedString(@"app_welcome_subtitle", @"")];
-        
-        [alert setCancelButtonWithTitle:NSLocalizedString(@"button_enjoy", @"")
-                                  block:^{
-                                
-          double delayInSeconds = 1.0;
-          dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
-                                                  (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                                      
-          dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-              [Appirater appLaunched:YES];          
-          });
-                                      
+        [UIAlertView showWithTitle:NSLocalizedString(@"app_welcome_title", @"")
+                           message:NSLocalizedString(@"app_welcome_subtitle", @"")
+                 cancelButtonTitle:NSLocalizedString(@"button_enjoy", @"")
+                 otherButtonTitles:nil
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
+        {
+            double delayInSeconds = 1.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
+                                                    (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [Appirater appLaunched:YES];
+            });
         }];
-        
-        [alert show];
     }
     
     return YES;

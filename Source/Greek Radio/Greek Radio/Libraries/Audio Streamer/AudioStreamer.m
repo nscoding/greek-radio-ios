@@ -11,7 +11,7 @@
 
 #import "TestFlight.h"
 #import "NSInternetDoctor.h"
-#import "BlockAlertView.h"
+#import "UIAlertView+Blocks.h"
 #import <MessageUI/MessageUI.h>
 
 #define PRINTERROR(LABEL)	printf("%s err %4.4s %d\n", LABEL, (char *)&err, (int)err)
@@ -678,10 +678,12 @@ void ReadStreamCallBack
 			[self stop];
             
 			if ([[NSInternetDoctor shared] connected])
-            {                
-                BlockAlertView *alertView = [[BlockAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                                                          message:NSLocalizedString(@"app_player_error_subtitle", @"")];
-                [alertView setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
+            {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                                                    message:NSLocalizedString(@"app_player_error_subtitle", @"")
+                                                                   delegate:nil
+                                                          cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                                                          otherButtonTitles:nil];
                 [alertView show];
                 
                 if (url.absoluteString.length > 0)

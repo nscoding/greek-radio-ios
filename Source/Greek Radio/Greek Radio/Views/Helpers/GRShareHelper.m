@@ -46,8 +46,11 @@
     }
     else
     {
-        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_sorry", @"")
-                                       message:NSLocalizedString(@"share_twitter_error", @"")];
+        [UIAlertView showWithTitle:NSLocalizedString(@"label_sorry", @"")
+                           message:NSLocalizedString(@"share_twitter_error", @"")
+                 cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                 otherButtonTitles:nil
+                          tapBlock:nil];
     }
 }
 
@@ -82,8 +85,11 @@
     }
     else
     {
-        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_sorry", @"")
-                                       message:NSLocalizedString(@"share_facebook_error", @"")];
+        [UIAlertView showWithTitle:NSLocalizedString(@"label_sorry", @"")
+                           message:NSLocalizedString(@"share_facebook_error", @"")
+                 cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                 otherButtonTitles:nil
+                          tapBlock:nil];
     }
 }
 

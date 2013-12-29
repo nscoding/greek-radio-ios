@@ -585,52 +585,56 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.searchBar resignFirstResponder];
 
-    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"")
-                              block:nil];
-    
-    [sheet addButtonWithTitle:NSLocalizedString(@"button_sugggest", @"")
-                        block:^
+    [UIActionSheet showInView:self.view
+                    withTitle:@""
+            cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+       destructiveButtonTitle:NSLocalizedString(@"button_report", @"")
+            otherButtonTitles:@[NSLocalizedString(@"button_sugggest", @"")]
+                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
     {
-        if ([MFMailComposeViewController canSendMail])
+        if (buttonIndex == 1)
         {
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = NSLocalizedString(@"label_new_stations", @"");
-            [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
-            
-            [GRAppearanceHelper setUpDefaultAppearance];
-            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+            if ([MFMailComposeViewController canSendMail])
+            {
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                mailController.subject = NSLocalizedString(@"label_new_stations", @"");
+                [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+                
+                [GRAppearanceHelper setUpDefaultAppearance];
+                [self.navigationController presentViewController:mailController animated:YES completion:nil];
+            }
+            else
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"share_email_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
         }
-        else
+        else if (buttonIndex == 0)
         {
-            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                           message:NSLocalizedString(@"share_email_error", @"")];
+            if ([MFMailComposeViewController canSendMail])
+            {
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
+                [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+                
+                [GRAppearanceHelper setUpDefaultAppearance];
+                [self.navigationController presentViewController:mailController animated:YES completion:nil];
+            }
+            else
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"share_email_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
         }
-
     }];
-    
-    [sheet setDestructiveButtonWithTitle:NSLocalizedString(@"button_report", @"")
-                                   block:^
-    {
-        if ([MFMailComposeViewController canSendMail])
-        {
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
-            [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-            
-            [GRAppearanceHelper setUpDefaultAppearance];
-            [self.navigationController presentViewController:mailController animated:YES completion:nil];
-        }
-        else
-        {
-            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                           message:NSLocalizedString(@"share_email_error", @"")];
-        }
-    }];
-    
-    [sheet showInView:self.view];
 }
 
 
@@ -708,9 +712,12 @@ titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
     if ([GRRadioPlayer shared].isPlaying)
     {
         [[GRRadioPlayer shared] stopPlayingStation];
-        
-        [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
-                                       message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")];
+
+        [UIAlertView showWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
+                           message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")
+                 cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                 otherButtonTitles:nil
+                          tapBlock:nil];
     }
   
     [super didReceiveMemoryWarning];

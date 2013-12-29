@@ -12,8 +12,10 @@
 #import "NSInternetDoctor.h"
 #import "GRRadioPlayer.h"
 #import "GRAppearance‎Helper.h"
-#import "BlockAlertView.h"
-#import "BlockActionSheet.h"
+
+#import "UIAlertView+Blocks.h"
+#import "UIActionSheet+Blocks.h"
+
 #import "GRRadioPlayer.h"
 
 #ifndef __IPHONE_4_0
