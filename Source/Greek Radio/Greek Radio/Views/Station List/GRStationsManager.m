@@ -30,6 +30,8 @@ static const NSUInteger kLazyLoadSection = 2;
                                    NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, assign) NSUInteger updatesDelta;
+
 @property (nonatomic, strong) NSFetchedResultsController *stationsFetchedResultsController;
 @property (nonatomic, strong) NSFetchRequest *stationsFetchRequest;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
@@ -167,7 +169,7 @@ static const NSUInteger kLazyLoadSection = 2;
     {
         NSLog(@"Fetching non-sticky events failed: %@ %@", [error description], [error userInfo]);
     }
-
+    
     [self.tableView reloadData];
 }
 
@@ -179,6 +181,7 @@ static const NSUInteger kLazyLoadSection = 2;
         _stationsLayout = stationsLayout;
         [self setupFetchedResultsControllers];
         [self.tableView reloadData];
+
     }
 }
 
@@ -274,19 +277,15 @@ static const NSUInteger kLazyLoadSection = 2;
 // ------------------------------------------------------------------------------------------
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    self.updatesDelta += 1;
     [self.tableView beginUpdates];
 }
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    @try {
-        [self.tableView endUpdates];
-    }
-    @catch (NSException *exception)
-    {
-        [self.tableView reloadData];
-    }
+    [self.tableView endUpdates];
+    self.updatesDelta -= 1;
 }
 
 
@@ -370,6 +369,7 @@ static const NSUInteger kLazyLoadSection = 2;
         {
             [self.tableView reloadRowsAtIndexPaths:@[indexPath]
                                   withRowAnimation:UITableViewRowAnimationFade];
+
         }
     
         if (oldIndexPath && oldIndexPath.row != NSNotFound)
