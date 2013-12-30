@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GRPlayerViewController">
             <connections>
+                <outlet property="playerTableView" destination="HfR-B5-ry8" id="mT1-Zf-del"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -15,15 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="HfR-B5-ry8">
-                    <rect key="frame" x="0.0" y="136" width="320" height="364"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="HfR-B5-ry8">
+                    <rect key="frame" x="0.0" y="150" width="320" height="350"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="yWv-Xg-G3t"/>
+                        <outlet property="delegate" destination="-1" id="hKB-O9-lJL"/>
+                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.18039216101169586" green="0.18039216101169586" blue="0.16078431904315948" alpha="1" colorSpace="deviceRGB"/>
             <constraints>
-                <constraint firstItem="HfR-B5-ry8" firstAttribute="top" secondItem="1" secondAttribute="top" constant="100" id="aZ2-02-yGA"/>
+                <constraint firstItem="HfR-B5-ry8" firstAttribute="top" secondItem="1" secondAttribute="top" constant="150" id="aZ2-02-yGA"/>
                 <constraint firstAttribute="bottom" secondItem="HfR-B5-ry8" secondAttribute="bottom" id="dBr-CD-Giy"/>
                 <constraint firstAttribute="trailing" secondItem="HfR-B5-ry8" secondAttribute="trailing" id="dS5-dU-TTK"/>
                 <constraint firstItem="HfR-B5-ry8" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="vZ5-sP-x6t"/>

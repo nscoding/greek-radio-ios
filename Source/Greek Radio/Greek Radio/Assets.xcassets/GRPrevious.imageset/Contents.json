@@ -2,12 +2,13 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "GRPrevious.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "GRHeartSelected@2x.png"
+      "filename" : "GRPrevious@2x.png"
     }
   ],
   "info" : {

@@ -9,6 +9,11 @@
 "button_mark_as_favorite" = "Προσθήκη στα αγαπημένα";
 "button_unmark_as_favorite" = "Αφαίρεση απο τα αγαπημένα";
 
+"button_play" = "Αναπαραγωγή";
+"button_pause" = "Παύση";
+"button_next_station" = "Αναπαραγωγή επόμενου σταθμού";
+"button_previous_station" = "Αναπαραγωγή προηγουμένου σταθμού";
+
 "button_visit_station" = "Επισκεφθείτε τον σταθμό";
 
 "label_now_playing" = "Παίζει τώρα";

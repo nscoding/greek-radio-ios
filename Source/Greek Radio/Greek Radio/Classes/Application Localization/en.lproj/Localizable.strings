@@ -9,6 +9,11 @@
 "button_mark_as_favorite" = "Mark as favorite";
 "button_unmark_as_favorite" = "Remove from favorite";
 
+"button_play" = "Start playing";
+"button_pause" = "Stop playing";
+"button_next_station" = "Play next station";
+"button_previous_station" = "Play previous station";
+
 "button_visit_station" = "Visit station";
 
 "label_now_playing" = "Now Playing";

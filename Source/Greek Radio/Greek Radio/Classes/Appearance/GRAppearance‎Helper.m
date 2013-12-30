@@ -45,27 +45,12 @@
                                                            NSShadowAttributeName : shadow
                                                            }];
     
-    // Set the slider track images
-	[[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
-                    setMinimumTrackImage:[[UIImage imageNamed:@"GRTrackFill"]
-             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 0)]
-                                forState:UIControlStateNormal];
-	
-	[[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
-                    setMaximumTrackImage:[[UIImage imageNamed:@"GRTrackEmpty"]
-             resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 6)]
-                                forState:UIControlStateNormal];
-    
-    [[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]
-                           setThumbImage:[UIImage imageNamed:@"GRKnobBase"]
-                                forState:UIControlStateNormal];
 }
 
 
 + (void)setUpDefaultAppearance
 {
-    [[UINavigationBar appearance] setBackgroundImage:nil
-                                       forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:nil];
 }
 

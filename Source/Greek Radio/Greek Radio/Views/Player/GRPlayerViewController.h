@@ -13,12 +13,9 @@
 
 @property (nonatomic, strong) UILabel *stationLabel;
 @property (nonatomic, strong) UILabel *genreLabel;
+@property (nonatomic, assign) IBOutlet UITableView *playerTableView;
 
 - (id)initWithStation:(GRStation *)station
          previousView:(UIView *)preView;
-
-- (IBAction)markStationAsFavourite:(id)sender;
-- (IBAction)playOrPause:(id)sender;
-- (IBAction)shareButtonPressed:(UIButton *)sender;
 
 @end
