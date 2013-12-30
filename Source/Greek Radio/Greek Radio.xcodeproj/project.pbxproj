@@ -515,11 +515,11 @@
 		CDE43AAC17303F5B004C0698 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CD55C0D117442493000BFFE5 /* Settings */,
-				CD7A017D1732774F003A2E2D /* Helpers */,
 				CDA7534E17306A56005B25EC /* Cells */,
-				CD7A018717327ADD003A2E2D /* Station List */,
+				CD7A017D1732774F003A2E2D /* Helpers */,
 				CD7A018617327AC7003A2E2D /* Player */,
+				CD55C0D117442493000BFFE5 /* Settings */,
+				CD7A018717327ADD003A2E2D /* Station List */,
 			);
 			path = Views;
 			sourceTree = "<group>";

@@ -648,6 +648,7 @@ void ReadStreamCallBack
     if (!CFReadStreamOpen(stream))
 	{
         CFRelease(stream);
+        stream = nil;
 		goto cleanup;
     }
 	

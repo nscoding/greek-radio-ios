@@ -365,9 +365,13 @@ static const NSUInteger kLazyLoadSection = 2;
     if (self.delegate && [self.delegate respondsToSelector:@selector(stationManager:shouldPlayStation:)])
     {
         [self.delegate stationManager:self shouldPlayStation:station];
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                              withRowAnimation:UITableViewRowAnimationFade];
-        
+
+        if (indexPath && indexPath.row != NSNotFound)
+        {
+            [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
+    
         if (oldIndexPath && oldIndexPath.row != NSNotFound)
         {
             [self.tableView reloadRowsAtIndexPaths:@[oldIndexPath]

@@ -116,8 +116,12 @@
 
 - (void)configureDataSource
 {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    GRStationsLayout stationsLayout = [[userDefaults valueForKey:@"GreekRadioSearchScope"] integerValue];
+    self.searchBar.selectedScopeButtonIndex = stationsLayout;
+
     self.stationManager = [[GRStationsManager alloc] initWithTableView:self.tableView
-                                                        stationsLayout:GRStationsLayoutGenre];
+                                                        stationsLayout:stationsLayout];
     
     self.stationManager.delegate = self;
 }
@@ -415,6 +419,10 @@
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     self.stationManager.stationsLayout = selectedScope;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setValue:@(selectedScope) forKey:@"GreekRadioSearchScope"];
+    [userDefaults synchronize];
 }
 
 
