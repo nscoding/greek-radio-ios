@@ -622,14 +622,14 @@ typedef enum GRInformationBarOption
         {
             if ([SLComposeViewController class])
             {
-                [GRShareHelper tweetTappedOnController:self];
+                [GRShareHelper facebookTappedOnController:self];
             }
         }
         else if (indexPath.row == 2)
         {
             if ([SLComposeViewController class])
             {
-                [GRShareHelper facebookTappedOnController:self];
+                [GRShareHelper tweetTappedOnController:self];
             }
         }
     }
