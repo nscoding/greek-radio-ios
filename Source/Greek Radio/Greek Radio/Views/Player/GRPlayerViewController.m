@@ -15,11 +15,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-#define kGenreCenterY (self.view.frame.size.height * 0.55) - 30
-#define kStationCenterY (self.view.frame.size.height * 0.55) - 70
-
-
-
 // ------------------------------------------------------------------------------------------
 
 
@@ -101,6 +96,15 @@ typedef enum GRInformationBarOption
 }
 
 
+- (void)viewDidLoad
+{
+    self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
+    [super viewDidLoad];
+}
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -119,8 +123,6 @@ typedef enum GRInformationBarOption
     
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
     [self.favouriteButton setNeedsDisplay];
-    
-    self.navigationItem.title = self.currentStation.title;
 }
 
 
@@ -220,18 +222,21 @@ typedef enum GRInformationBarOption
                          animations:^{
                              
              blockSelf.genreLabel.alpha = 1.0;
-             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+                                                       blockSelf.genreLabel.center.y);
                              
         } completion:^(BOOL finished) {
  
             blockSelf.genreLabel.alpha = 1.0;
             
             blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
-            CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+            CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width, FLT_MAX)];
             blockSelf.genreLabel.numberOfLines = 1;
+            CGFloat centerY = blockSelf.genreLabel.center.y;
             blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
             blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
-                                                 (blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
+                                                      (blockSelf.genreLabel.frame.size.width / 2),
+                                                      centerY);
 
             [UIView animateWithDuration:12.0
                                   delay:0.0
@@ -239,9 +244,8 @@ typedef enum GRInformationBarOption
                              animations:^{
                                  blockSelf.genreLabel.alpha = 1.0;
                                  blockSelf.genreLabel.center =
-                                 CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
-
-                                 
+                                 CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+                                             blockSelf.genreLabel.center.y);
                              } completion:^(BOOL finished) {                                 
                                      [blockSelf animateStatus];
                              }];
@@ -313,7 +317,7 @@ typedef enum GRInformationBarOption
 {
     self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.stationLabel.backgroundColor = [UIColor clearColor];
-    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:26];
+    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:23];
     self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
     self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
     self.stationLabel.shadowOffset = CGSizeMake(0, 1);
@@ -327,7 +331,6 @@ typedef enum GRInformationBarOption
     CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
     self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
     self.stationLabel.alpha = 0.0;
-    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, kStationCenterY)];
     [self.view addSubview:self.stationLabel];
     
     
@@ -340,12 +343,12 @@ typedef enum GRInformationBarOption
                                                            constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
-                                                          attribute:NSLayoutAttributeCenterY
+                                                          attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterY
+                                                          attribute:NSLayoutAttributeTop
                                                          multiplier:1.0
-                                                           constant:-70.0]];
+                                                           constant:20.0]];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
                                                           attribute:NSLayoutAttributeLeft
@@ -381,8 +384,6 @@ typedef enum GRInformationBarOption
 
     CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
     self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2),
-                                           kGenreCenterY)];
     [self.view addSubview:self.genreLabel];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
@@ -394,12 +395,12 @@ typedef enum GRInformationBarOption
                                                            constant:0.0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
-                                                          attribute:NSLayoutAttributeCenterY
+                                                          attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterY
+                                                          attribute:NSLayoutAttributeTop
                                                          multiplier:1.0
-                                                           constant:-30.0]];
+                                                           constant:55.0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
                                                           attribute:NSLayoutAttributeLeft

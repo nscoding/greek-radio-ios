@@ -73,6 +73,7 @@
     [self buildAndConfigureMotionDetector];
     [self buildAndConfigurePullToRefresh];
     [self buildAndConfigureMadeWithLove];
+    [self buildAndConfigureRightGesture];
 }
 
 
@@ -83,7 +84,6 @@
     self.navigationItem.title = @"Greek Radio";
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
-    [self buildAndConfigureNowPlayingButton];
 }
 
 
@@ -207,23 +207,6 @@
 }
 
 
-- (void)buildAndConfigureNowPlayingButton
-{
-    if ([GRRadioPlayer shared].isPlaying)
-    {
-        UIBarButtonItem *nowPlayingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                                                                         target:self
-                                                                         action:@selector(nowPlayingButtonPressed:)];
-
-        self.navigationItem.rightBarButtonItem = nowPlayingButton;
-    }
-    else
-    {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-}
-
-
 - (void)buildAndConfigureMotionDetector
 {
     self.motionManager = [[CMMotionManager alloc] init];
@@ -277,6 +260,15 @@
     
     [self.motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
                                              withHandler:accelerometerHandler];
+}
+
+
+- (void)buildAndConfigureRightGesture
+{
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
+                                                initWithTarget:self action:@selector(handleRightSwipe:)];
+    recognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:recognizer];
 }
 
 
@@ -356,18 +348,28 @@
 
 - (void)nowPlayingButtonPressed:(UIBarButtonItem *)sender
 {
-    [self.searchBar resignFirstResponder];
-    
-    GRPlayerViewController *playController =
+    if ([GRRadioPlayer shared].currentStation &&
+        [GRRadioPlayer shared].isPlaying)
+    {
+        [self.searchBar resignFirstResponder];
+
+        GRPlayerViewController *playController =
         [[GRPlayerViewController alloc] initWithStation:[GRRadioPlayer shared].currentStation
                                            previousView:self.view];
-    
-    if (self.navigationController.visibleViewController == self)
-    {
-        [UIMenuController sharedMenuController].menuVisible = NO;
-        [self.navigationController pushViewController:playController
-                                             animated:YES];
+        
+        if (self.navigationController.visibleViewController == self)
+        {
+            [UIMenuController sharedMenuController].menuVisible = NO;
+            [self.navigationController pushViewController:playController
+                                                 animated:YES];
+        }
     }
+}
+
+
+- (void)handleRightSwipe:(UISwipeGestureRecognizer *)recognizer
+{
+    [self nowPlayingButtonPressed:nil];
 }
 
 

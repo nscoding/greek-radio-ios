@@ -73,7 +73,7 @@
         return;
     }
 
-    if ([self.streamURL isEqualToString:self.currentStation.streamURL] == NO)
+    if ([self.streamURL isEqualToString:station.streamURL] == NO)
     {
         [self stopPlayingStation];
     }
