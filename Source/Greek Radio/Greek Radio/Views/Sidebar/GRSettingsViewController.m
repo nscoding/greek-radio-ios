@@ -51,31 +51,48 @@
     UITableViewCell *tableViewCell =
         [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                reuseIdentifier:@"SettingsCell"];
-    
-    UISwitch *stateSwitch = [[UISwitch alloc] init];
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
-    if (indexPath.section == 0)
+    tableViewCell.textLabel.textColor = [UIColor blackColor];
+
+    if (indexPath.section == 0 ||
+        indexPath.section == 1)
     {
-        [stateSwitch addTarget:self
-                        action:@selector(lockSwitchDidChange:)
-              forControlEvents:UIControlEventValueChanged];
+        UISwitch *stateSwitch = [[UISwitch alloc] init];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         
-        stateSwitch.on = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
-        tableViewCell.textLabel.text = NSLocalizedString(@"label_auto_lock_header", @"");
+        if (indexPath.section == 0)
+        {
+            [stateSwitch addTarget:self
+                            action:@selector(lockSwitchDidChange:)
+                  forControlEvents:UIControlEventValueChanged];
+            
+            stateSwitch.on = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
+            tableViewCell.textLabel.text = NSLocalizedString(@"label_auto_lock_header", @"");
+        }
+        else if (indexPath.section == 1)
+        {
+            [stateSwitch addTarget:self
+                            action:@selector(shakeSwitchDidChange:)
+                  forControlEvents:UIControlEventValueChanged];
+            
+            stateSwitch.on = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
+            tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
+        }
+        
+        tableViewCell.accessoryView = stateSwitch;
     }
-    else if (indexPath.section == 1)
+    else
     {
-        [stateSwitch addTarget:self
-                        action:@selector(shakeSwitchDidChange:)
-              forControlEvents:UIControlEventValueChanged];
-
-        stateSwitch.on = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
-        tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
+        if (indexPath.row == 0)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"button_sugggest", @"");
+        }
+        else if (indexPath.row == 1)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"button_report", @"");
+            tableViewCell.textLabel.textColor = [UIColor redColor];
+        }
     }
-    
-    
-    tableViewCell.accessoryView = stateSwitch;
     
     return tableViewCell;
 }
@@ -83,12 +100,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == 2)
+    {
+        return 2;
+    }
+    
     return 1;
 }
 
@@ -105,6 +127,70 @@
     }
     
     return @"";
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2)
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 0)
+    {
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_new_stations", @"");
+            [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController
+                                                    animated:YES
+                                                  completion:nil];
+        }
+        else
+        {
+            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                               message:NSLocalizedString(@"share_email_error", @"")
+                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+        }
+    }
+    else if (indexPath.row == 1)
+    {
+        if ([MFMailComposeViewController canSendMail])
+        {
+            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+            mailController.mailComposeDelegate = self;
+            mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
+            [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+            
+            [GRAppearanceHelper setUpDefaultAppearance];
+            [self.navigationController presentViewController:mailController
+                                                    animated:YES
+                                                  completion:nil];
+        }
+        else
+        {
+            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                               message:NSLocalizedString(@"share_email_error", @"")
+                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                     otherButtonTitles:nil
+                              tapBlock:nil];
+        }
+    }
 }
 
 
@@ -131,6 +217,18 @@
 - (void)closeSettingsViewController
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Mail Composer delegate
+// ------------------------------------------------------------------------------------------
+- (void)mailComposeController:(MFMailComposeViewController *)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError *)error
+{
+    [GRAppearanceHelper setUpGreekRadioAppearance];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 

@@ -6,7 +6,8 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
+#import <MessageUI/MessageUI.h>
 
-@interface GRSettingsViewController : UIViewController
+@interface GRSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @end

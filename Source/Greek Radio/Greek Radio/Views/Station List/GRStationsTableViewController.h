@@ -6,10 +6,8 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import <MessageUI/MessageUI.h>
 
-@interface GRStationsTableViewController : UITableViewController <MFMailComposeViewControllerDelegate,
-                                            UISearchBarDelegate, UITextFieldDelegate>
+@interface GRStationsTableViewController : UITableViewController <UISearchBarDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet UINavigationController *navigationController;
 

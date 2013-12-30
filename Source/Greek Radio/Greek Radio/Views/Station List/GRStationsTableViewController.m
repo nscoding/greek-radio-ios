@@ -320,67 +320,6 @@
 }
 
 
-- (void)moreButtonPressed:(UIButton *)sender
-{
-    [self.searchBar resignFirstResponder];
-
-    [UIActionSheet showInView:self.view
-                    withTitle:@""
-            cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-       destructiveButtonTitle:NSLocalizedString(@"button_report", @"")
-            otherButtonTitles:@[NSLocalizedString(@"button_sugggest", @"")]
-                     tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex)
-    {
-        if (buttonIndex == 1)
-        {
-            if ([MFMailComposeViewController canSendMail])
-            {
-                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-                mailController.mailComposeDelegate = self;
-                mailController.subject = NSLocalizedString(@"label_new_stations", @"");
-                [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
-                
-                [GRAppearanceHelper setUpDefaultAppearance];
-                [self.navigationController presentViewController:mailController
-                                                        animated:YES
-                                                      completion:nil];
-            }
-            else
-            {
-                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                   message:NSLocalizedString(@"share_email_error", @"")
-                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                         otherButtonTitles:nil
-                                  tapBlock:nil];
-            }
-        }
-        else if (buttonIndex == 0)
-        {
-            if ([MFMailComposeViewController canSendMail])
-            {
-                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-                mailController.mailComposeDelegate = self;
-                mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
-                [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-                
-                [GRAppearanceHelper setUpDefaultAppearance];
-                [self.navigationController presentViewController:mailController
-                                                        animated:YES
-                                                      completion:nil];
-            }
-            else
-            {
-                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                   message:NSLocalizedString(@"share_email_error", @"")
-                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                         otherButtonTitles:nil
-                                  tapBlock:nil];
-            }
-        }
-    }];
-}
-
-
 - (void)settingsButtonPressed:(UIButton *)sender
 {
     [self.searchBar resignFirstResponder];
@@ -393,18 +332,6 @@
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Mail Composer delegate
-// ------------------------------------------------------------------------------------------
-- (void)mailComposeController:(MFMailComposeViewController *)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError *)error
-{
-    [GRAppearanceHelper setUpGreekRadioAppearance];
-    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 
