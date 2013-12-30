@@ -26,14 +26,6 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>JSBadgeView</string>
-			<key>File</key>
-			<string>Licence-JSBadgeView</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>Title</key>
 			<string>Reachability</string>
 			<key>File</key>
 			<string>Licence-Reachability</string>
