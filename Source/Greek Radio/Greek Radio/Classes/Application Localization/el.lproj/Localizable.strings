@@ -7,6 +7,8 @@
 "button_sugggest" = "Πρότεινε ένα σταθμό";
 "button_report" ="Ανάφερε ένα πρόβλημα";
 "button_mark_as_favorite" = "Προσθήκη στα αγαπημένα";
+"button_unmark_as_favorite" = "Αφαίρεση απο τα αγαπημένα";
+
 "button_visit_station" = "Επισκεφθείτε τον σταθμό";
 
 "label_now_playing" = "Παίζει τώρα";

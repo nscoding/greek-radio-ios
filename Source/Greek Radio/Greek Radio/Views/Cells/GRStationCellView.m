@@ -36,12 +36,17 @@
         UIMenuItem *markAsFavorite =
             [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
                                        action:@selector(markAsFavorite:)];
+        
+        UIMenuItem *removeFromFavorite =
+        [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_unmark_as_favorite", @"")
+                                   action:@selector(removeFromFavorite:)];
+
         UIMenuItem *visitStation =
             [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
                                        action:@selector(visitStation:)];
 
         UIMenuController *menuController = [UIMenuController sharedMenuController];
-        menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, visitStation, nil];
+        menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, removeFromFavorite, visitStation, nil];
 
         UILongPressGestureRecognizer *longGesture
             = [[UILongPressGestureRecognizer alloc] initWithTarget:self
@@ -127,7 +132,14 @@
 
 - (void)markAsFavorite:(UIMenuController*)sender
 {
-    [self.station setFavourite:[NSNumber numberWithBool:YES]];
+    [self.station setFavourite:@YES];
+    [self.station.managedObjectContext save:nil];
+}
+
+
+- (void)removeFromFavorite:(UIMenuController*)sender
+{
+    [self.station setFavourite:@NO];
     [self.station.managedObjectContext save:nil];
 }
 
@@ -140,10 +152,16 @@
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
+    BOOL favorite = self.station.favourite.boolValue;
+
     if (action == @selector(markAsFavorite:))
     {
-        BOOL favorite = self.station.favourite.boolValue;
-        return !favorite;
+        return (favorite == NO);
+    }
+
+    if (action == @selector(removeFromFavorite:))
+    {
+        return favorite;
     }
     
     if (action == @selector(visitStation:))
