@@ -24,22 +24,26 @@
                                                                    blue:0.286f
                                                                   alpha:1.00f]];
     
-    [[UIBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                          [UIFont boldSystemFontOfSize:16.0f], NSFontAttributeName,
-                                                          [UIColor darkGrayColor], UITextAttributeTextShadowColor,
-                                                          [NSValue valueWithCGSize:CGSizeMake(0.0, -1.0)], UITextAttributeTextShadowOffset,
-                                                          nil]
+    UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
+    NSShadow *shadow = [[NSShadow alloc] init];
+    shadow.shadowColor = [UIColor blackColor];
+    shadow.shadowOffset = CGSizeMake(0, 1);
+
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{
+                                                            NSForegroundColorAttributeName : textColor,
+                                                            NSFontAttributeName : [UIFont boldSystemFontOfSize:16.0f],
+                                                            NSShadowAttributeName : shadow
+                                                           }
                                                 forState:UIControlStateNormal];
 
     [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2
                                                        forBarMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0], NSForegroundColorAttributeName,
-                                                           [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8], UITextAttributeTextShadowColor,
-                                                           [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
-                                                           [UIFont fontWithName:@"HelveticaNeue-Bold" size:21.0], NSFontAttributeName, nil]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName : textColor,
+                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
+                                                           NSShadowAttributeName : shadow
+                                                           }];
     
     // Set the slider track images
 	[[UISlider appearanceWhenContainedIn:[MPVolumeView class], nil]

@@ -16,16 +16,19 @@
 @implementation GRSettingsViewController
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - View life cycle
+// ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
     self.navigationController.navigationBar.translucent = NO;
 
-    [self setupCloseButton];
+    [self buildAndConfigureCloseButton];
 }
 
 
-- (void)setupCloseButton
+- (void)buildAndConfigureCloseButton
 {
     NSDictionary *titleTextAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:17.0],
                                            NSForegroundColorAttributeName : [UIColor whiteColor] };
@@ -41,7 +44,7 @@
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - Table View
+#pragma mark - Table View Delegate
 // ------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

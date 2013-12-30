@@ -8,7 +8,7 @@
 
 #import <MessageUI/MessageUI.h>
 
-@interface GRListTableViewController : UITableViewController <MFMailComposeViewControllerDelegate,
+@interface GRStationsTableViewController : UITableViewController <MFMailComposeViewControllerDelegate,
                                             UISearchBarDelegate, UITextFieldDelegate>
 
 @property (nonatomic, weak) IBOutlet UINavigationController *navigationController;

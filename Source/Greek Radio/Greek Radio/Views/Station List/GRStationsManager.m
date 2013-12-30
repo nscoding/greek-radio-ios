@@ -250,7 +250,13 @@ static const NSUInteger kLazyLoadSection = 2;
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    @try {
+        [self.tableView endUpdates];
+    }
+    @catch (NSException *exception)
+    {
+        [self.tableView reloadData];
+    }
 }
 
 

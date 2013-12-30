@@ -7,7 +7,7 @@
 //
 
 #import "GRAppDelegate.h"
-#import "GRListTableViewController.h"
+#import "GRStationsTableViewController.h"
 
 #import "Appirater.h"
 #import "TestFlight.h"
@@ -53,6 +53,8 @@
                  otherButtonTitles:nil
                           tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
         {
+            [self.listTableViewController.tableView setContentOffset:CGPointZero animated:YES];
+
             double delayInSeconds = 1.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
                                                     (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -122,7 +124,7 @@
 - (void)buildAndConfigureStationsViewController
 {
     // Override point for customization after application launch.
-    self.listTableViewController = [[GRListTableViewController alloc] init];
+    self.listTableViewController = [[GRStationsTableViewController alloc] init];
     
     self.menuNavigationController
         = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];

@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import "GRListTableViewController.h"
+#import "GRStationsTableViewController.h"
 #import "GRPlayerViewController.h"
 #import "GRSettingsViewController.h"
 #import "GRNavigationController.h"
@@ -21,7 +21,7 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRListTableViewController () <UIAccelerometerDelegate, GRStationsManagerDelegate>
+@interface GRStationsTableViewController () <UIAccelerometerDelegate, GRStationsManagerDelegate>
 {
 	CFTimeInterval lastTime;
 	CGFloat	shakeAccelerometer[3];
@@ -46,7 +46,7 @@
 // ------------------------------------------------------------------------------------------
 
 
-@implementation GRListTableViewController
+@implementation GRStationsTableViewController
 
 
 // ------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@
 // ------------------------------------------------------------------------------------------
 - (id)init
 {
-    return [super initWithNibName:@"GRListTableViewController" bundle:nil];
+    return [super initWithNibName:@"GRStationsTableViewController" bundle:nil];
 }
 
 
@@ -79,7 +79,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
     self.navigationItem.title = @"Greek Radio";
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
@@ -192,21 +191,9 @@
 
 - (void)buildAndConfigureNavigationButtons
 {
-    UIButton *moreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    moreButton.frame = CGRectMake(0, 0, 40, 12);
-    [moreButton setImage:[UIImage imageNamed:@"GRMore"] forState:UIControlStateNormal];
-    [moreButton addTarget:self action:@selector(moreButtonPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]
-                                    initWithCustomView:moreButton];
-    
-    self.navigationItem.rightBarButtonItem = rightButton;
-    
-    
     UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingButton.frame = CGRectMake(0, 0, 22, 22);
-    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButtonWhite"] forState:UIControlStateNormal];
+    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButton"] forState:UIControlStateNormal];
     [settingButton addTarget:self
                       action:@selector(settingsButtonPressed:)
             forControlEvents:UIControlEventTouchUpInside];
