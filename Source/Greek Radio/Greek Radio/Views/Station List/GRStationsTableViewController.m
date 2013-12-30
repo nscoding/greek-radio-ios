@@ -69,7 +69,7 @@
     [self configureTableViewAndSearchBar];
     [self configureTrackClearButton];
     [self registerObservers];
-    [self buildAndConfigureNavigationButtons];
+    [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
     [self buildAndConfigurePullToRefresh];
     [self buildAndConfigureMadeWithLove];
@@ -79,9 +79,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     self.navigationItem.title = @"Greek Radio";
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
+    [self buildAndConfigureNowPlayingButton];
 }
 
 
@@ -189,7 +191,7 @@
 }
 
 
-- (void)buildAndConfigureNavigationButtons
+- (void)buildAndConfigureNavigationButton
 {
     UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
     settingButton.frame = CGRectMake(0, 0, 22, 22);
@@ -202,6 +204,23 @@
                                    initWithCustomView:settingButton];
     
     self.navigationItem.leftBarButtonItem = leftButton;
+}
+
+
+- (void)buildAndConfigureNowPlayingButton
+{
+    if ([GRRadioPlayer shared].isPlaying)
+    {
+        UIBarButtonItem *nowPlayingButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                                                                         target:self
+                                                                         action:@selector(nowPlayingButtonPressed:)];
+
+        self.navigationItem.rightBarButtonItem = nowPlayingButton;
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 
@@ -286,7 +305,7 @@
 {
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
                                                                                 previousView:self.view];
-    
+
     if (self.navigationController.visibleViewController == self)
     {
         [UIMenuController sharedMenuController].menuVisible = NO;
@@ -332,6 +351,23 @@
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];
+}
+
+
+- (void)nowPlayingButtonPressed:(UIBarButtonItem *)sender
+{
+    [self.searchBar resignFirstResponder];
+    
+    GRPlayerViewController *playController =
+        [[GRPlayerViewController alloc] initWithStation:[GRRadioPlayer shared].currentStation
+                                           previousView:self.view];
+    
+    if (self.navigationController.visibleViewController == self)
+    {
+        [UIMenuController sharedMenuController].menuVisible = NO;
+        [self.navigationController pushViewController:playController
+                                             animated:YES];
+    }
 }
 
 

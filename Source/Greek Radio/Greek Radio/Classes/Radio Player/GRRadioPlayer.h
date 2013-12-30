@@ -7,24 +7,19 @@
 //
 
 #import "AudioStreamer.h"
+#import "GRStation.h"
 
 @interface GRRadioPlayer : NSObject <AudioStreamerDelegate>
-{
-    AudioStreamer *audioStreamer;
-    UIBackgroundTaskIdentifier backgroundOperation;
-    BOOL wasPlaying;
-    BOOL wentBackground;
-}
 
 @property (nonatomic, strong) NSString *stationName;
 @property (nonatomic, strong) NSString *streamURL;
+@property (nonatomic, weak) GRStation *currentStation;
 
 + (GRRadioPlayer *)shared;
 
-- (void)playStation:(NSString *)aStationName
-      withStreamURL:(NSString *)aStreamURL;
-
+- (void)playStation:(GRStation *)station;
 - (void)stopPlayingStation;
+
 - (BOOL)isPlaying;
 
 @end

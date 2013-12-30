@@ -78,17 +78,19 @@
             stateSwitch.on = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
             tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
         }
-        
+        tableViewCell.imageView.image = nil;
         tableViewCell.accessoryView = stateSwitch;
     }
     else
     {
         if (indexPath.row == 0)
         {
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_sugggest", @"");
         }
         else if (indexPath.row == 1)
         {
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_report", @"");
             tableViewCell.textLabel.textColor = [UIColor redColor];
         }

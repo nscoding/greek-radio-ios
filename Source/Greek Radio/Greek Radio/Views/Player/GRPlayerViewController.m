@@ -83,9 +83,7 @@ typedef enum GRInformationBarOption
         myVolumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self.bottomBar addSubview:myVolumeView];
         
-        [[GRRadioPlayer shared] playStation:self.currentStation.title
-                              withStreamURL:self.currentStation.streamURL];
-        
+        [[GRRadioPlayer shared] playStation:self.currentStation];
         [self configurePlayButton];
         [self animateStatus];
         
@@ -100,13 +98,6 @@ typedef enum GRInformationBarOption
     }
     
     return self;
-}
-
-
-- (void)viewDidLoad
-{
-    self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
-    [super viewDidLoad];
 }
 
 
@@ -128,6 +119,8 @@ typedef enum GRInformationBarOption
     
     self.favouriteButton.selected = [self.currentStation.favourite boolValue];
     [self.favouriteButton setNeedsDisplay];
+    
+    self.navigationItem.title = self.currentStation.title;
 }
 
 
@@ -519,8 +512,7 @@ typedef enum GRInformationBarOption
     }
     else
     {
-        [[GRRadioPlayer shared] playStation:self.currentStation.title
-                              withStreamURL:self.currentStation.streamURL];
+        [[GRRadioPlayer shared] playStation:self.currentStation];
     }
 }
 
