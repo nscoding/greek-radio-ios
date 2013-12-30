@@ -37,6 +37,7 @@ typedef enum GRInformationBarOption
 @property (nonatomic, copy) NSString *currentSong;
 @property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, strong) NSTimer *informationTimer;
+@property (nonatomic, weak) id<GRPlayerViewControllerDelegate> delegate;
 
 @end
 
@@ -51,10 +52,12 @@ typedef enum GRInformationBarOption
 #pragma mark - Initializer
 // ------------------------------------------------------------------------------------------
 - (id)initWithStation:(GRStation *)station
+             delegate:(id<GRPlayerViewControllerDelegate>)delegate
          previousView:(UIView *)preView
 {
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
+        self.delegate = delegate;
         self.currentStation = station;        
         [self.view setFrame:preView.frame];
         
@@ -558,7 +561,22 @@ typedef enum GRInformationBarOption
     }
     else if (indexPath.section == 1)
     {
-    
+        if (indexPath.row == 0)
+        {
+            if (self.delegate &&
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayPreviousStation:)])
+            {
+                [self.delegate playerViewControllerPlayPreviousStation:self];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            if (self.delegate &&
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayNextStation:)])
+            {
+                [self.delegate playerViewControllerPlayNextStation:self];
+            }
+        }
     }
     else if (indexPath.section == 2)
     {
@@ -566,6 +584,8 @@ typedef enum GRInformationBarOption
         {
             if ([MFMailComposeViewController canSendMail])
             {
+                [GRAppearanceHelper setUpDefaultAppearance];
+
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
                 mailController.mailComposeDelegate = self;
                 mailController.subject = @"Greek Radio";
@@ -587,7 +607,6 @@ typedef enum GRInformationBarOption
                 [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
                                         isHTML:YES];
                 
-                [GRAppearanceHelper setUpDefaultAppearance];
                 [self.navigationController presentViewController:mailController animated:YES completion:nil];
             }
             else
@@ -637,6 +656,7 @@ typedef enum GRInformationBarOption
     [[GRShoutCastHelper shared] cancelGet];
     [self.informationTimer invalidate];
     self.informationTimer = nil;
+    self.delegate = nil;
 }
 
 

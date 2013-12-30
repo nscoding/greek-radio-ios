@@ -13,6 +13,8 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *title;
 @property (nonatomic, weak) IBOutlet UILabel *subtitle;
+@property (nonatomic, weak) IBOutlet UIImageView *iconImageView;
+
 @property (nonatomic, weak) GRStation *station;
 
 + (NSString *)reusableIdentifier;

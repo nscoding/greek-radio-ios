@@ -11,8 +11,8 @@
 
 "button_play" = "Αναπαραγωγή";
 "button_pause" = "Παύση";
-"button_next_station" = "Αναπαραγωγή επόμενου σταθμού";
-"button_previous_station" = "Αναπαραγωγή προηγουμένου σταθμού";
+"button_next_station" = "Επόμενος σταθμός";
+"button_previous_station" = "Προηγούμενος σταθμός";
 
 "button_visit_station" = "Επισκεφθείτε τον σταθμό";
 

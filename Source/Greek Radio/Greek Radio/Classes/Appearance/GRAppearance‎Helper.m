@@ -51,7 +51,17 @@
 + (void)setUpDefaultAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:nil];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName : [UIColor blackColor],
+                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:13.0f],
+                                                           }
+                                                forState:UIControlStateNormal];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName : [UIColor blackColor],
+                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
+                                                           }];
+
 }
 
 

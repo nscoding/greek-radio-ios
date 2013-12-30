@@ -8,9 +8,10 @@
 
 
 #import "GRStationsManager.h"
-
+#import "GRRadioPlayer.h"
 #import "GRCoreDataStack.h"
 #import "GRStationCellView.h"
+#import "UITableView+Extensions.h"
 
 
 // ------------------------------------------------------------------------------------------
@@ -31,6 +32,7 @@ static const NSUInteger kLazyLoadSection = 2;
 @property (nonatomic, weak) UITableView *tableView;
 @property (nonatomic, strong) NSFetchedResultsController *stationsFetchedResultsController;
 @property (nonatomic, strong) NSFetchRequest *stationsFetchRequest;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -137,7 +139,26 @@ static const NSUInteger kLazyLoadSection = 2;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == YES"];
     if (filter.length > 0)
     {
-        predicate = [NSPredicate predicateWithFormat:@"server == YES AND title CONTAINS[cd] %@", filter];
+        switch (self.stationsLayout)
+        {
+            case GRStationsLayoutGenre:
+            {
+                predicate = [NSPredicate predicateWithFormat:
+                             @"server == YES AND (title CONTAINS[cd] %@ OR genre CONTAINS[cd] %@)", filter, filter];
+                break;
+            }
+            case GRStationsLayoutCity:
+            {
+                predicate = [NSPredicate predicateWithFormat:
+                             @"server == YES AND (title CONTAINS[cd] %@ OR location CONTAINS[cd] %@)", filter, filter];
+                break;
+            }
+            case GRStationsLayoutAlphabetical:
+            {
+                predicate = [NSPredicate predicateWithFormat:@"server == YES AND title CONTAINS[cd] %@", filter];
+                break;
+            }
+        }
     }
 
     self.stationsFetchRequest.predicate = predicate;
@@ -194,6 +215,15 @@ static const NSUInteger kLazyLoadSection = 2;
     cell.subtitle.text = [NSString stringWithFormat:@"%@, %@", station.location, station.genre];
     cell.station = station;
 
+    if ([[GRRadioPlayer shared].currentStation isEqual:station])
+    {
+        cell.iconImageView.image = [UIImage imageNamed:@"GRNote"];
+    }
+    else
+    {
+        cell.iconImageView.image = [UIImage imageNamed:@"GRMicrophone"];
+    }
+    
     [cell setNeedsDisplay];
     
     return cell;
@@ -321,12 +351,53 @@ static const NSUInteger kLazyLoadSection = 2;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self playStationAtIndexPath:indexPath];
+}
+
+
+- (void)playStationAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSIndexPath *oldIndexPath = [self.selectedIndexPath copy];
+    self.selectedIndexPath = indexPath;
+
     GRStation *station = [self stationForIndexPath:indexPath];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(stationManager:shouldPlayStation:)])
     {
         [self.delegate stationManager:self shouldPlayStation:station];
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationFade];
+        
+        if (oldIndexPath && oldIndexPath.row != NSNotFound)
+        {
+            [self.tableView reloadRowsAtIndexPaths:@[oldIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+        }
     }
+}
+
+
+- (void)playNextStation
+{
+    NSIndexPath *oldIndexPath = [self.selectedIndexPath copy];
+    NSIndexPath *newIndexPath = [self.tableView nextIndexPathForPath:oldIndexPath];
+    [self playStationAtIndexPath:newIndexPath];
+    
+    [self.tableView scrollToRowAtIndexPath:newIndexPath
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
+}
+
+
+- (void)playPreviousStation
+{
+    NSIndexPath *oldIndexPath = [self.selectedIndexPath copy];
+    NSIndexPath *newIndexPath = [self.tableView previousIndexPathForPath:oldIndexPath];
+    [self playStationAtIndexPath:newIndexPath];
+    
+    [self.tableView scrollToRowAtIndexPath:newIndexPath
+                          atScrollPosition:UITableViewScrollPositionMiddle
+                                  animated:YES];
 }
 
 

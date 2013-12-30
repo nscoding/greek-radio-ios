@@ -151,12 +151,12 @@
     {
         if ([MFMailComposeViewController canSendMail])
         {
+            [GRAppearanceHelper setUpDefaultAppearance];
             MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
             mailController.mailComposeDelegate = self;
             mailController.subject = NSLocalizedString(@"label_new_stations", @"");
             [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
             
-            [GRAppearanceHelper setUpDefaultAppearance];
             [self.navigationController presentViewController:mailController
                                                     animated:YES
                                                   completion:nil];
@@ -174,12 +174,12 @@
     {
         if ([MFMailComposeViewController canSendMail])
         {
+            [GRAppearanceHelper setUpDefaultAppearance];
             MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
             mailController.mailComposeDelegate = self;
             mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
             [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
             
-            [GRAppearanceHelper setUpDefaultAppearance];
             [self.navigationController presentViewController:mailController
                                                     animated:YES
                                                   completion:nil];

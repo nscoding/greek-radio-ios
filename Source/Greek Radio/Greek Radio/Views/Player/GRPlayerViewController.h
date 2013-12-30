@@ -9,6 +9,17 @@
 #import "GRStation.h"
 #import <MessageUI/MessageUI.h>
 
+@class GRPlayerViewController;
+
+@protocol GRPlayerViewControllerDelegate <NSObject>
+
+- (void)playerViewControllerPlayNextStation:(GRPlayerViewController *)playViewController;
+
+- (void)playerViewControllerPlayPreviousStation:(GRPlayerViewController *)playViewControllerl;
+
+@end
+
+
 @interface GRPlayerViewController : UIViewController <MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UILabel *stationLabel;
@@ -16,6 +27,7 @@
 @property (nonatomic, assign) IBOutlet UITableView *playerTableView;
 
 - (id)initWithStation:(GRStation *)station
+             delegate:(id<GRPlayerViewControllerDelegate>)delegate
          previousView:(UIView *)preView;
 
 @end

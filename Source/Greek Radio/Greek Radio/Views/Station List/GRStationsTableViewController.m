@@ -10,9 +10,9 @@
 #import "GRPlayerViewController.h"
 #import "GRSettingsViewController.h"
 #import "GRNavigationController.h"
-
 #import "GRStationsManager.h"
 
+#import "UITableView+Extensions.h"
 #import "UIDevice+Extensions.h"
 
 #import <CoreMotion/CoreMotion.h>
@@ -21,7 +21,7 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRStationsTableViewController () <UIAccelerometerDelegate, GRStationsManagerDelegate>
+@interface GRStationsTableViewController () <UIAccelerometerDelegate, GRStationsManagerDelegate, GRPlayerViewControllerDelegate>
 {
 	CFTimeInterval lastTime;
 	CGFloat	shakeAccelerometer[3];
@@ -295,8 +295,9 @@
 // ------------------------------------------------------------------------------------------
 - (void)stationManager:(GRStationsManager *)stationManager shouldPlayStation:(GRStation *)station
 {
-    GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
-                                                                                previousView:self.view];
+   GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
+                                                                                   delegate:self
+                                                                               previousView:self.view];
 
     if (self.navigationController.visibleViewController == self)
     {
@@ -354,8 +355,9 @@
         [self.searchBar resignFirstResponder];
 
         GRPlayerViewController *playController =
-        [[GRPlayerViewController alloc] initWithStation:[GRRadioPlayer shared].currentStation
-                                           previousView:self.view];
+            [[GRPlayerViewController alloc] initWithStation:[GRRadioPlayer shared].currentStation
+                                                   delegate:self
+                                               previousView:self.view];
         
         if (self.navigationController.visibleViewController == self)
         {
@@ -378,7 +380,7 @@
 // ------------------------------------------------------------------------------------------
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    [self.stationManager setupFetchedResultsControllersWithString:@""];
+    [self.stationManager setupFetchedResultsControllersWithString:self.searchBar.text];
     [searchBar resignFirstResponder];
 }
 
@@ -413,6 +415,21 @@
     searchBar.text = @"";
     [searchBar resignFirstResponder];
     self.stationManager.stationsLayout = selectedScope;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - GRPlayerViewController delegate
+// ------------------------------------------------------------------------------------------
+- (void)playerViewControllerPlayNextStation:(GRPlayerViewController *)playViewController
+{
+    [self.stationManager playNextStation];
+}
+
+
+- (void)playerViewControllerPlayPreviousStation:(GRPlayerViewController *)playViewControllerl
+{
+    [self.stationManager playPreviousStation];
 }
 
 

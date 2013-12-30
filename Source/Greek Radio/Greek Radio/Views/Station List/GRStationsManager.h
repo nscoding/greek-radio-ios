@@ -32,7 +32,15 @@ typedef NS_ENUM(NSUInteger, GRStationsLayout)
 @property (nonatomic, assign) GRStationsLayout stationsLayout;
 
 - (id)initWithTableView:(UITableView *)tableView stationsLayout:(GRStationsLayout)layout;
+
 - (void)setupFetchedResultsControllersWithString:(NSString *)filter;
+
+- (void)playStationAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)playNextStation;
+
+- (void)playPreviousStation;
+
 - (NSUInteger)numberOfStations;
 
 

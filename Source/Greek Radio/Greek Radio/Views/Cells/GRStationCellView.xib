@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GRStationCellView">
             <connections>
                 <outlet property="backgroundView" destination="27" id="65"/>
+                <outlet property="iconImageView" destination="68" id="rjH-Gg-byY"/>
                 <outlet property="subtitle" destination="64" id="67"/>
                 <outlet property="title" destination="7" id="66"/>
             </connections>
@@ -33,7 +34,7 @@
                     <color key="textColor" red="0.45882356169999999" green="0.45490199329999997" blue="0.45490199329999997" alpha="1" colorSpace="deviceRGB"/>
                     <color key="highlightedColor" red="0.94117653369999998" green="0.93725496529999996" blue="0.92549026010000002" alpha="1" colorSpace="deviceRGB"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="GRMicrophone.png" id="68">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="GRMicrophone" id="68">
                     <rect key="frame" x="8" y="14" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -42,6 +43,6 @@
         </view>
     </objects>
     <resources>
-        <image name="GRMicrophone.png" width="32" height="32"/>
+        <image name="GRMicrophone" width="32" height="32"/>
     </resources>
 </document>
