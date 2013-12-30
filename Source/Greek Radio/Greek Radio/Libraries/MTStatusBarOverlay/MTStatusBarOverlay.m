@@ -673,7 +673,7 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(clearHistory) object:nil];
     
 	// update UI depending on current status bar style
-	UIStatusBarStyle statusBarStyle = UIStatusBarStyleBlackTranslucent;
+	UIStatusBarStyle statusBarStyle = UIStatusBarStyleLightContent;
 	[self setStatusBarBackgroundForStyle:statusBarStyle];
 	[self setColorSchemeForStatusBarStyle:statusBarStyle messageType:messageType];
 	[self updateUIForMessageType:messageType duration:duration];

@@ -13,6 +13,12 @@
 // ------------------------------------------------------------------------------------------
 
 
+static NSString *kSettingCellIdentifier = @"GRSettingsCell";
+
+
+// ------------------------------------------------------------------------------------------
+
+
 @implementation GRSettingsViewController
 
 
@@ -24,6 +30,7 @@
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
     self.navigationController.navigationBar.translucent = NO;
 
+    [self.settingsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSettingCellIdentifier];
     [self buildAndConfigureCloseButton];
 }
 
@@ -48,9 +55,8 @@
 // ------------------------------------------------------------------------------------------
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *tableViewCell =
-        [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                               reuseIdentifier:@"SettingsCell"];
+    UITableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:kSettingCellIdentifier
+                                                                     forIndexPath:indexPath];
 
     tableViewCell.textLabel.textColor = [UIColor blackColor];
 

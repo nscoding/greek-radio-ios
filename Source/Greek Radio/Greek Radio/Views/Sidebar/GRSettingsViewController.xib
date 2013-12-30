@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GRSettingsViewController">
             <connections>
+                <outlet property="settingsTableView" destination="1mI-WS-mf9" id="LAl-ZO-pj1"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
