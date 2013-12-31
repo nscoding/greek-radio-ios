@@ -59,12 +59,12 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
                                                                      forIndexPath:indexPath];
 
     tableViewCell.textLabel.textColor = [UIColor blackColor];
-
+    tableViewCell.textLabel.backgroundColor = [UIColor whiteColor];
+    
     if (indexPath.section == 0 ||
         indexPath.section == 1)
     {
         UISwitch *stateSwitch = [[UISwitch alloc] init];
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         
         if (indexPath.section == 0)
         {
@@ -72,7 +72,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
                             action:@selector(lockSwitchDidChange:)
                   forControlEvents:UIControlEventValueChanged];
             
-            stateSwitch.on = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
+            stateSwitch.on = [GRUserDefaults isAutomaticLockDisabled];
             tableViewCell.textLabel.text = NSLocalizedString(@"label_auto_lock_header", @"");
         }
         else if (indexPath.section == 1)
@@ -81,7 +81,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
                             action:@selector(shakeSwitchDidChange:)
                   forControlEvents:UIControlEventValueChanged];
             
-            stateSwitch.on = [userDefaults boolForKey:@"GreekRadioShakeRandom"];
+            stateSwitch.on = [GRUserDefaults isShakeForRandomStationEnabled];
             tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
         }
         tableViewCell.imageView.image = nil;
@@ -207,18 +207,13 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 // ------------------------------------------------------------------------------------------
 - (void)shakeSwitchDidChange:(UISwitch *)sender
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:sender.isOn forKey:@"GreekRadioShakeRandom"];
-    [userDefaults synchronize];
+    [GRUserDefaults setShakeForRandomStationEnabled:sender.isOn];
 }
 
 
 - (void)lockSwitchDidChange:(UISwitch *)sender
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setBool:sender.isOn forKey:@"GreekRadioAutoLockDisabled"];
-    [userDefaults synchronize];
-    [UIApplication sharedApplication].idleTimerDisabled = sender.selected;
+    [GRUserDefaults setAutomaticLockDisabled:sender.isOn];
 }
 
 

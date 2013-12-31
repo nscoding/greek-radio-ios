@@ -11,6 +11,7 @@
 #import "GRRadioPlayer.h"
 #import "GRCoreDataStack.h"
 #import "GRStationCellView.h"
+
 #import "UITableView+Extensions.h"
 
 
@@ -30,8 +31,6 @@ static const NSUInteger kLazyLoadSection = 2;
                                    NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, weak) UITableView *tableView;
-@property (nonatomic, assign) NSUInteger updatesDelta;
-
 @property (nonatomic, strong) NSFetchedResultsController *stationsFetchedResultsController;
 @property (nonatomic, strong) NSFetchRequest *stationsFetchRequest;
 @property (nonatomic, strong) NSIndexPath *selectedIndexPath;
@@ -89,10 +88,10 @@ static const NSUInteger kLazyLoadSection = 2;
         {
             self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"genre"
                                                                                       ascending:YES
-                                                                                       selector:@selector(caseInsensitiveCompare:)],
+                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)],
                                                           [[NSSortDescriptor alloc] initWithKey:@"title"
                                                                                       ascending:YES
-                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)]];
             sectionKeyPath = @"genre";
             break;
         }
@@ -100,10 +99,10 @@ static const NSUInteger kLazyLoadSection = 2;
         {
             self.stationsFetchRequest.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"location"
                                                                                       ascending:YES
-                                                                                       selector:@selector(caseInsensitiveCompare:)],
+                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)],
                                                           [[NSSortDescriptor alloc] initWithKey:@"title"
                                                                                       ascending:YES
-                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)]];
 
             sectionKeyPath = @"location";
             break;
@@ -114,7 +113,7 @@ static const NSUInteger kLazyLoadSection = 2;
                                                                                       ascending:NO],
                                                           [[NSSortDescriptor alloc] initWithKey:@"title"
                                                                                       ascending:YES
-                                                                                       selector:@selector(caseInsensitiveCompare:)]];
+                                                                                       selector:@selector(localizedCaseInsensitiveCompare:)]];
 
             sectionKeyPath = @"favourite";
             break;
@@ -131,7 +130,7 @@ static const NSUInteger kLazyLoadSection = 2;
     self.stationsFetchedResultsController.delegate = self;
     if ([self.stationsFetchedResultsController performFetch:&error] == NO)
     {
-        NSLog(@"Fetching non-sticky events failed: %@ %@", [error description], [error userInfo]);
+        DLog(@"Fetching non-sticky events failed: %@ %@", [error description], [error userInfo]);
     }
 }
 
@@ -167,7 +166,7 @@ static const NSUInteger kLazyLoadSection = 2;
     NSError *error;
     if ([self.stationsFetchedResultsController performFetch:&error] == NO)
     {
-        NSLog(@"Fetching non-sticky events failed: %@ %@", [error description], [error userInfo]);
+        DLog(@"Fetching non-sticky events failed: %@ %@", [error description], [error userInfo]);
     }
     
     [self.tableView reloadData];
@@ -181,7 +180,6 @@ static const NSUInteger kLazyLoadSection = 2;
         _stationsLayout = stationsLayout;
         [self setupFetchedResultsControllers];
         [self.tableView reloadData];
-
     }
 }
 
@@ -277,7 +275,6 @@ static const NSUInteger kLazyLoadSection = 2;
 // ------------------------------------------------------------------------------------------
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    self.updatesDelta += 1;
     [self.tableView beginUpdates];
 }
 
@@ -285,7 +282,6 @@ static const NSUInteger kLazyLoadSection = 2;
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-    self.updatesDelta -= 1;
 }
 
 
@@ -317,8 +313,10 @@ static const NSUInteger kLazyLoadSection = 2;
         }
         case NSFetchedResultsChangeMove:
         {
-            [self.tableView moveRowAtIndexPath:indexPath
-                                   toIndexPath:newIndexPath];
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
     }

@@ -90,7 +90,7 @@
              application by pressing the Home button.
              */
             
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            DLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }
@@ -178,20 +178,17 @@
                                                          options:optionsDictionary
                                                            error:&error])
     {
-        NSLog(@"Add persistent store failed with error %@, %@", error, [error userInfo]);
+        DLog(@"Add persistent store failed with error %@, %@", error, [error userInfo]);
         [self deleteDatabase];
         
-        NSLog(@"Trying to delete and recreate database...");
+        DLog(@"Trying to delete and recreate database...");
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                        configuration:nil
                                                                  URL:dbURL
                                                              options:optionsDictionary
                                                                error:&error])
         {
-            NSLog(@"Add persistent store after delete and recreated failed with error %@, %@",
-                  error,
-                  [error userInfo]);
-            
+            DLog(@"Add persistent store after delete and recreated failed with error %@, %@", error, [error userInfo]);
             _persistentStoreCoordinator = nil;
             
             abort();
@@ -272,7 +269,7 @@
     NSFileManager *fileManager = [[NSFileManager alloc] init];
     if ([fileManager removeItemAtURL:dbURL error:&error] == NO)
     {
-        NSLog(@"Persistent store deletion failed with error %@, %@", error, [error userInfo]);
+        DLog(@"Persistent store deletion failed with error %@, %@", error, [error userInfo]);
     }
 }
 

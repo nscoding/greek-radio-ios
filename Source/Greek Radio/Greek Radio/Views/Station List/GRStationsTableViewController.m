@@ -116,13 +116,10 @@
 
 - (void)configureDataSource
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    GRStationsLayout stationsLayout = [[userDefaults valueForKey:@"GreekRadioSearchScope"] integerValue];
+    GRStationsLayout stationsLayout = [GRUserDefaults currentSearchScope];
     self.searchBar.selectedScopeButtonIndex = stationsLayout;
-
     self.stationManager = [[GRStationsManager alloc] initWithTableView:self.tableView
                                                         stationsLayout:stationsLayout];
-    
     self.stationManager.delegate = self;
 }
 
@@ -220,7 +217,7 @@
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
         {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"GreekRadioShakeRandom"])
+            if ([GRUserDefaults isShakeForRandomStationEnabled])
             {
                 CMAcceleration acceleration = accelerometerData.acceleration;
                 CGFloat length,	x, y, z;
@@ -418,11 +415,9 @@
 {
     searchBar.text = @"";
     [searchBar resignFirstResponder];
+
     self.stationManager.stationsLayout = selectedScope;
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setValue:@(selectedScope) forKey:@"GreekRadioSearchScope"];
-    [userDefaults synchronize];
+    [GRUserDefaults setCurrentSearchScope:selectedScope];
 }
 
 

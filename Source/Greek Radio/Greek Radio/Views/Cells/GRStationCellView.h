@@ -8,7 +8,6 @@
 
 #import "GRStation.h"
 
-
 @interface GRStationCellView : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *title;

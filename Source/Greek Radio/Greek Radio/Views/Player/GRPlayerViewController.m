@@ -64,7 +64,6 @@ typedef enum GRInformationBarOption
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureStationGenre:station.genre];
         [self buildAndConfigureVolumeSlider];
-        
         [self registerObservers];
         
         

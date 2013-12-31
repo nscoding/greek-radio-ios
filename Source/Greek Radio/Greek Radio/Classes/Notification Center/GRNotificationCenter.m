@@ -25,7 +25,7 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
     }
     @catch (NSException *exception)
     {
-        NSLog(@"postNotifcationOnMainThread failed: %@, %@", exception.name, exception.userInfo);
+        DLog(@"postNotifcationOnMainThread failed: %@, %@", exception.name, exception.userInfo);
     }
 }
 

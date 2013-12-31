@@ -149,7 +149,7 @@
     UIApplication *application = [notification object];
     wentBackground = YES;
     
-    NSLog(@"Application entered background state.");
+    DLog(@"Application entered background state.");
     
 	NSAssert(backgroundOperation == UIBackgroundTaskInvalid, nil);
 	backgroundOperation = [application beginBackgroundTaskWithExpirationHandler:^{
