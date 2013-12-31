@@ -64,7 +64,8 @@ typedef enum GRInformationBarOption
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureStationGenre:station.genre];
         [self buildAndConfigureVolumeSlider];
-        
+        [self buildAndConfigureLeftSwipeGesture];
+        [self buildAndConfigureRightSwipeGesture];
         [self registerObservers];
         
         
@@ -252,6 +253,24 @@ typedef enum GRInformationBarOption
 }
 
 
+- (void)buildAndConfigureRightSwipeGesture
+{
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(handleRightSwipe:)];
+    recognizer.direction = (UISwipeGestureRecognizerDirectionRight);
+    [self.view addGestureRecognizer:recognizer];
+}
+
+
+- (void)buildAndConfigureLeftSwipeGesture
+{
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(handleLeftSwipe:)];
+    recognizer.direction = (UISwipeGestureRecognizerDirectionLeft);
+    [self.view addGestureRecognizer:recognizer];
+}
+
+
 - (void)configurePlayButton
 {
     [self.playerTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
@@ -410,6 +429,26 @@ typedef enum GRInformationBarOption
 - (void)playerDidEnd:(NSNotification *)notification
 {
     [self configurePlayButton];
+}
+
+
+- (void)handleRightSwipe:(UISwipeGestureRecognizer *)recognizer
+{
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(playerViewControllerPlayPreviousStation:)])
+    {
+        [self.delegate playerViewControllerPlayPreviousStation:self];
+    }
+}
+
+
+- (void)handleLeftSwipe:(UISwipeGestureRecognizer *)recognizer
+{
+    if (self.delegate &&
+        [self.delegate respondsToSelector:@selector(playerViewControllerPlayNextStation:)])
+    {
+        [self.delegate playerViewControllerPlayNextStation:self];
+    }
 }
 
 
