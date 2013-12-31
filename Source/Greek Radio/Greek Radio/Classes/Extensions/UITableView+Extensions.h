@@ -12,4 +12,7 @@
 - (NSIndexPath *)previousIndexPathForPath:(NSIndexPath *)path;
 - (NSIndexPath *)nextIndexPathForPath:(NSIndexPath *)path;
 
+- (NSIndexPath *)firstIndexPath;
+- (NSIndexPath *)lastIndexPath;
+
 @end

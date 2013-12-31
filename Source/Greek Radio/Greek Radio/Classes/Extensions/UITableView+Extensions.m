@@ -70,4 +70,34 @@
 }
 
 
+- (NSIndexPath *)firstIndexPath
+{
+    NSInteger numberOfRowsInFirstSection = [self numberOfRowsInSection:0];
+    
+    if (numberOfRowsInFirstSection == 0)
+    {
+        return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:0
+                              inSection:0];
+}
+
+
+- (NSIndexPath *)lastIndexPath
+{
+    NSInteger numberOfSections = [self numberOfSections];
+    NSInteger numberOfRowsInLastSection = [self numberOfRowsInSection:(numberOfSections - 1)];
+    
+    if (numberOfSections == 0 &&
+        numberOfRowsInLastSection == 0)
+    {
+        return nil;
+    }
+    
+    return [NSIndexPath indexPathForRow:(numberOfRowsInLastSection - 1)
+                              inSection:(numberOfSections - 1)];
+}
+
+
 @end

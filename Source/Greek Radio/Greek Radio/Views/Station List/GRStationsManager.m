@@ -385,8 +385,13 @@ static const NSUInteger kLazyLoadSection = 2;
 {
     NSIndexPath *oldIndexPath = [self.selectedIndexPath copy];
     NSIndexPath *newIndexPath = [self.tableView nextIndexPathForPath:oldIndexPath];
-    [self playStationAtIndexPath:newIndexPath];
     
+    if (newIndexPath == nil)
+    {
+        newIndexPath = [self.tableView firstIndexPath];
+    }
+    
+    [self playStationAtIndexPath:newIndexPath];
     [self.tableView scrollToRowAtIndexPath:newIndexPath
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
@@ -397,8 +402,13 @@ static const NSUInteger kLazyLoadSection = 2;
 {
     NSIndexPath *oldIndexPath = [self.selectedIndexPath copy];
     NSIndexPath *newIndexPath = [self.tableView previousIndexPathForPath:oldIndexPath];
-    [self playStationAtIndexPath:newIndexPath];
     
+    if (newIndexPath == nil)
+    {
+        newIndexPath = [self.tableView lastIndexPath];
+    }
+    
+    [self playStationAtIndexPath:newIndexPath];
     [self.tableView scrollToRowAtIndexPath:newIndexPath
                           atScrollPosition:UITableViewScrollPositionMiddle
                                   animated:YES];
