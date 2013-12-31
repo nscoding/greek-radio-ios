@@ -36,13 +36,23 @@
 		</dict>
 		<dict>
 			<key>DefaultValue</key>
-			<string>Argiris Paraskevas</string>
+			<string>Vasileios Matsoukas</string>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
 			<string>Icon Design</string>
 			<key>Key</key>
 			<string>IconDesign</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>www.flaticon.com</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Freepik Icons</string>
+			<key>Key</key>
+			<string>ApplicationIcons</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

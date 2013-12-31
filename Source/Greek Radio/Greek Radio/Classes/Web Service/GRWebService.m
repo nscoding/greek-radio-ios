@@ -162,9 +162,11 @@
         [[MTStatusBarOverlay sharedOverlay] hide];
         if ([[NSInternetDoctor shared] connected])
         {
-            NSString *errorString = [NSString stringWithFormat:NSLocalizedString(@"app_fetch_stations_error", @"")];
-            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                           message:errorString];
+            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                               message:NSLocalizedString(@"app_fetch_stations_error", @"")
+                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                     otherButtonTitles:nil
+                              tapBlock:nil];
         }
     
         [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];

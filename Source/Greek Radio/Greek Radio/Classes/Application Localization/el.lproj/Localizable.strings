@@ -7,9 +7,18 @@
 "button_sugggest" = "Πρότεινε ένα σταθμό";
 "button_report" ="Ανάφερε ένα πρόβλημα";
 "button_mark_as_favorite" = "Προσθήκη στα αγαπημένα";
+"button_unmark_as_favorite" = "Αφαίρεση απο τα αγαπημένα";
+
+"button_play" = "Αναπαραγωγή";
+"button_pause" = "Παύση";
+"button_next_station" = "Επόμενος σταθμός";
+"button_previous_station" = "Προηγούμενος σταθμός";
+
 "button_visit_station" = "Επισκεφθείτε τον σταθμό";
 
 "label_now_playing" = "Παίζει τώρα";
+"label_now_playing_newLine" = "Παίζει\nτώρα";
+
 "label_sorry" = "Σύγνωμη";
 "label_something_wrong" = "Ούπς, κάτι δεν πάει καλά...";
 "label_refresh_stations" = "Ανανέωση Σταθμών";
@@ -21,9 +30,9 @@
 "label_music" = "Μουσική";
 "label_syncing" = "Συγχρονισμός...";
 
-"label_auto_lock_header" = "Απενεργοποιήση αυτόματου κλειδώματος";
+"label_auto_lock_header" = "Απεν/ση κλειδώματος";
 "label_auto_lock_text" = "Δεν επιτρέπει το τηλέφωνό σας να κλειδώσει όταν η εφαρμογή είναι σε λειτουργία.";
-"label_shake_music_header" = "Kίνηση της συσκευής για τυχαία αναπαραγωγή";
+"label_shake_music_header" = "Τυχαία αναπαραγωγή";
 "label_shake_music_text" = "Κουνήστε το τηλέφωνό σας (δεξιά αριστερά),για να επιλέξετε εναν τυχαίο ραδιοφωνικό σταθμό.";
 "label_settings" = "Επιλογές";
 
@@ -45,3 +54,7 @@
 "share_via_twitter" = "Μοιράσου το μέσω Twitter";
 "share_via_facebook" = "Μοιράσου το μέσω Facebook";
 "share_via_email_check_it_$" = "Μπορείς να το δεις <a href='%@'>εδω</a>";
+
+"label_genre" = "Είδος";
+"label_location" = "Περιοχή";
+"label_AZ" = "Α-Ω";

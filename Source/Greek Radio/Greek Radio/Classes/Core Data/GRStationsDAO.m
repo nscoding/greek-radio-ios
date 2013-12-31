@@ -81,7 +81,7 @@
     
     NSError *error = nil;
     
-    if (![managedObjectContext save:&error] == NO)
+    if ([managedObjectContext save:&error] == NO)
     {
         return NO;
     }
@@ -104,7 +104,7 @@
     
     NSError *error = nil;
     
-    if (![managedObjectContext save:&error] == NO)
+    if ([managedObjectContext save:&error] == NO)
     {
         return NO;
     }

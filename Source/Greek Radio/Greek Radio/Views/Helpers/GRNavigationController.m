@@ -14,33 +14,11 @@
 
 @implementation GRNavigationController
 
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Orientations
-// ------------------------------------------------------------------------------------------
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+- (void)viewDidLoad
 {
-    return UIInterfaceOrientationPortrait | UIInterfaceOrientationPortraitUpsideDown;
-}
-
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    UIViewController *top = self.topViewController;
-    return top.supportedInterfaceOrientations;
-}
-
-- (BOOL)shouldAutorotate
-{
-    UIViewController *top = self.topViewController;
-    return [top shouldAutorotate];
-}
-
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait) ||
-           (interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    [super viewDidLoad];
+    
+    self.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 

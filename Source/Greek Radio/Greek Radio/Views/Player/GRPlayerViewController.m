@@ -15,11 +15,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 
-#define kGenreCenterY (self.view.frame.size.height * 0.75) - 30
-#define kStationCenterY (self.view.frame.size.height * 0.75) - 70
-
-
-
 // ------------------------------------------------------------------------------------------
 
 
@@ -37,16 +32,12 @@ typedef enum GRInformationBarOption
 
 @interface GRPlayerViewController ()
 
-@property (nonatomic, weak) IBOutlet UIButton *favouriteButton;
-@property (nonatomic, weak) IBOutlet UIButton *playButton;
-@property (nonatomic, weak) IBOutlet UIButton *sharebutton;
-@property (nonatomic, weak) IBOutlet UIView *bottomBar;
-
 @property (nonatomic, weak) GRStation *currentStation;
 @property (nonatomic, assign) GRInformationBarOption informationBarOption;
 @property (nonatomic, copy) NSString *currentSong;
 @property (nonatomic, copy) NSString *currentArtist;
 @property (nonatomic, strong) NSTimer *informationTimer;
+@property (nonatomic, weak) id<GRPlayerViewControllerDelegate> delegate;
 
 @end
 
@@ -61,32 +52,23 @@ typedef enum GRInformationBarOption
 #pragma mark - Initializer
 // ------------------------------------------------------------------------------------------
 - (id)initWithStation:(GRStation *)station
+             delegate:(id<GRPlayerViewControllerDelegate>)delegate
          previousView:(UIView *)preView
 {
     if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
     {
+        self.delegate = delegate;
         self.currentStation = station;        
         [self.view setFrame:preView.frame];
-        [self.view setBackgroundColor:[UIColor blackColor]];
         
         [self buildAndConfigureStationName:station.title];
         [self buildAndConfigureStationGenre:station.genre];
-        [self buildAndConfigureListButton];
+        [self buildAndConfigureVolumeSlider];
+        
         [self registerObservers];
         
-        CGRect bottomFrame = self.bottomBar.frame;
-        bottomFrame.origin.y = self.view.frame.size.height - bottomFrame.size.height;
-        [self.bottomBar setFrame:bottomFrame];
         
-        MPVolumeView *myVolumeView =
-        [[MPVolumeView alloc] initWithFrame:CGRectMake(20, self.bottomBar.frame.size.height - 34,
-                                                       self.view.frame.size.width - 40, 20)];
-        myVolumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
-        [self.bottomBar addSubview:myVolumeView];
-        
-        [[GRRadioPlayer shared] playStation:self.currentStation.title
-                              withStreamURL:self.currentStation.streamURL];
-        
+        [[GRRadioPlayer shared] playStation:self.currentStation];
         [self configurePlayButton];
         [self animateStatus];
         
@@ -104,33 +86,15 @@ typedef enum GRInformationBarOption
 }
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - View life cycle
+// ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
     self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     [super viewDidLoad];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    if ([UIDevice isIPad])
-    {
-        CGFloat partWidth = (self.view.frame.size.width / 3) * 1.11;
-        self.playButton.center = CGPointMake(self.playButton.center.x, self.playButton.center.y);
-        
-        self.favouriteButton.center = CGPointMake((partWidth / 2) - (self.favouriteButton.frame.size.width / 2),
-                                                  self.favouriteButton.center.y);
-
-        self.sharebutton.center = CGPointMake((self.view.frame.size.width - (partWidth / 2)) +
-                                              (self.sharebutton.frame.size.width / 2), self.sharebutton.center.y);
-    }
-    
-    self.favouriteButton.selected = [self.currentStation.favourite boolValue];
-    [self.favouriteButton setNeedsDisplay];
 }
 
 
@@ -142,7 +106,6 @@ typedef enum GRInformationBarOption
                      animations:^
     {
         self.stationLabel.alpha = 1.0;
-        self.stationLabel.center = CGPointMake(self.view.center.x, kStationCenterY);
     }
     completion:^(BOOL finished)
     {
@@ -150,9 +113,7 @@ typedef enum GRInformationBarOption
                          animations:^
         {
             self.genreLabel.alpha = 1.0;
-            self.genreLabel.center = CGPointMake(self.view.center.x, kGenreCenterY);
         }];
-        
     }];
 }
 
@@ -164,6 +125,137 @@ typedef enum GRInformationBarOption
     [[GRShoutCastHelper shared] cancelGet];
     [self.informationTimer invalidate];
     self.informationTimer = nil;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Build and configure
+// ------------------------------------------------------------------------------------------
+- (void)buildAndConfigureStationName:(NSString *)name
+{
+    self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.stationLabel.backgroundColor = [UIColor clearColor];
+    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:23];
+    self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.stationLabel.shadowOffset = CGSizeMake(0, 1);
+    self.stationLabel.textAlignment = NSTextAlignmentCenter;
+    self.stationLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.stationLabel.text =  [name copy];
+    self.stationLabel.numberOfLines = 1;
+    self.stationLabel.minimumScaleFactor = 0.3f;
+    self.stationLabel.adjustsFontSizeToFitWidth = YES;
+
+    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
+    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
+    self.stationLabel.alpha = 0.0;
+    [self.view addSubview:self.stationLabel];
+    
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0
+                                                           constant:20.0]];
+
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+}
+
+
+- (void)buildAndConfigureStationGenre:(NSString *)genre
+{
+    self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.genreLabel.backgroundColor = [UIColor clearColor];
+    self.genreLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+    self.genreLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
+    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
+    self.genreLabel.shadowOffset = CGSizeMake(0, 1);
+    self.genreLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.genreLabel.textAlignment = NSTextAlignmentCenter;
+    self.genreLabel.text =  [genre copy];
+    self.genreLabel.numberOfLines = 1;
+    self.genreLabel.alpha = 0.0;
+
+    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
+    self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+    [self.view addSubview:self.genreLabel];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
+                                                          attribute:NSLayoutAttributeTop
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0
+                                                           constant:60.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
+                                                          attribute:NSLayoutAttributeLeft
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
+                                                          attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0
+                                                           constant:0.0]];
+}
+
+
+- (void)buildAndConfigureVolumeSlider
+{
+    MPVolumeView *myVolumeView = [[MPVolumeView alloc] initWithFrame:
+                                    CGRectMake(60, 110, self.view.frame.size.width - 90, 20)];
+    myVolumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
+    myVolumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:myVolumeView];
+    
+    UIImageView *volumeLowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GRVolumeUp"]];
+    volumeLowImageView.center = CGPointMake(33, myVolumeView.center.y);
+    [self.view addSubview:volumeLowImageView];
+}
+
+
+- (void)configurePlayButton
+{
+    [self.playerTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
+                                withRowAnimation:UITableViewRowAnimationFade];
 }
 
 
@@ -181,10 +273,10 @@ typedef enum GRInformationBarOption
              blockSelf.currentSong = [songName copy];
              blockSelf.currentArtist = [songArtist copy];
          }
-         failBlock:^{
-                blockSelf.currentSong = nil;
-                blockSelf.currentArtist = nil;
-         }];
+                                            failBlock:^{
+                                                blockSelf.currentSong = nil;
+                                                blockSelf.currentArtist = nil;
+                                            }];
     }
 }
 
@@ -193,7 +285,7 @@ typedef enum GRInformationBarOption
 {
     GRInformationBarOption currentOption = self.informationBarOption;
     GRInformationBarOption goToOption = self.informationBarOption;
-
+    
     if (currentOption == GRInformationBarOptionArtist) {
         currentOption = GRInformationBarOptionGenre;
         goToOption = GRInformationBarOptionGenre;
@@ -208,7 +300,7 @@ typedef enum GRInformationBarOption
     {
         goToOption++;
     }
-
+    
     if (goToOption == GRInformationBarOptionArtist &&
         self.currentArtist.length == 0)
     {
@@ -231,43 +323,45 @@ typedef enum GRInformationBarOption
                               delay:0.0
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
-                             
+             
              blockSelf.genreLabel.alpha = 1.0;
-             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
-                             
-        } completion:^(BOOL finished) {
- 
-            blockSelf.genreLabel.alpha = 1.0;
-            
-            blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
-            CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
-            blockSelf.genreLabel.numberOfLines = 1;
-            blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-            blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
-                                                 (blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
-
-            [UIView animateWithDuration:12.0
-                                  delay:0.0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^{
-                                 blockSelf.genreLabel.alpha = 1.0;
-                                 blockSelf.genreLabel.center =
-                                 CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2), kGenreCenterY);
-
-                                 
-                             } completion:^(BOOL finished) {                                 
-                                     [blockSelf animateStatus];
-                             }];
-        }];
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+                                                       blockSelf.genreLabel.center.y);
+             
+         } completion:^(BOOL finished) {
+             
+             blockSelf.genreLabel.alpha = 1.0;
+             
+             blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
+             CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width, FLT_MAX)];
+             blockSelf.genreLabel.numberOfLines = 1;
+             CGFloat centerY = blockSelf.genreLabel.center.y;
+             blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+             blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
+                                                       (blockSelf.genreLabel.frame.size.width / 2),
+                                                       centerY);
+             
+             [UIView animateWithDuration:12.0
+                                   delay:0.0
+                                 options:UIViewAnimationOptionCurveLinear
+                              animations:^{
+                                  blockSelf.genreLabel.alpha = 1.0;
+                                  blockSelf.genreLabel.center =
+                                  CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+                                              blockSelf.genreLabel.center.y);
+                              } completion:^(BOOL finished) {
+                                  [blockSelf animateStatus];
+                              }];
+         }];
     }
     else
     {
         double delayInSeconds = 5.0f;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [blockSelf animateStatus];
-
-        });
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+                       {
+                           [blockSelf animateStatus];
+                       });
     }
 }
 
@@ -299,7 +393,7 @@ typedef enum GRInformationBarOption
                                              selector:@selector(playerDidStart:)
                                                  name:GRNotificationStreamDidStart
                                                object:nil];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(playerDidEnd:)
                                                  name:GRNotificationStreamDidEnd
@@ -320,182 +414,225 @@ typedef enum GRInformationBarOption
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - Build and configure
+#pragma mark - Table View Delegate
 // ------------------------------------------------------------------------------------------
-- (void)buildAndConfigureStationName:(NSString *)name
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.stationLabel.backgroundColor = [UIColor clearColor];
-    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:26];
-    self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    self.stationLabel.shadowOffset = CGSizeMake(0, 1);
-    self.stationLabel.textAlignment = NSTextAlignmentCenter;
-    self.stationLabel.text =  [name copy];
-    self.stationLabel.numberOfLines = 1;
-    self.stationLabel.minimumScaleFactor = 0.3f;
-    self.stationLabel.adjustsFontSizeToFitWidth = YES;
-
-    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
-    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
-    self.stationLabel.alpha = 0.0;
+    UITableViewCell *tableViewCell =
+    [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                           reuseIdentifier:@"PlayerCell"];
     
-    [self.stationLabel setCenter:CGPointMake(-self.stationLabel.frame.size.width, kStationCenterY)];
-    [self.view addSubview:self.stationLabel];
-}
+    tableViewCell.textLabel.textColor = [UIColor blackColor];
+    tableViewCell.imageView.image = nil;
 
-
-- (void)buildAndConfigureStationGenre:(NSString *)genre
-{
-    self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.genreLabel.backgroundColor = [UIColor clearColor];
-    self.genreLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
-    self.genreLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    self.genreLabel.shadowOffset = CGSizeMake(0, 1);
-    self.genreLabel.textAlignment = NSTextAlignmentCenter;
-    self.genreLabel.text =  [genre copy];
-    self.genreLabel.numberOfLines = 1;
-    self.genreLabel.alpha = 0.0;
-
-    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
-    self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
-    [self.genreLabel setCenter:CGPointMake(self.view.frame.size.width + (self.genreLabel.frame.size.width / 2),
-                                           kGenreCenterY)];
-    [self.view addSubview:self.genreLabel];
-}
-
-
-
-- (void)buildAndConfigureListButton
-{
-    UIButton *listButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    listButton.frame = CGRectMake(0, 0, 30, 30);
-    
-    [listButton setImage:[UIImage imageNamed:@"GRList"] forState:UIControlStateNormal];
-    [listButton addTarget:self action:@selector(listButtonPressed:)
-         forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
-                                   initWithCustomView:listButton];
-    
-    self.navigationItem.leftBarButtonItem = backButton;
-}
-
-
-
-- (void)configurePlayButton
-{
-    if ([GRRadioPlayer shared].isPlaying)
+    if (indexPath.section == 0)
     {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPause"]
-                         forState:UIControlStateNormal];
-    }
-    else
-    {
-        [self.playButton setImage:[UIImage imageNamed:@"GRPlay"]
-                         forState:UIControlStateNormal];
-    }
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Actions
-// ------------------------------------------------------------------------------------------
-- (void)listButtonPressed:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-- (IBAction)shareButtonPressed:(UIButton *)sender
-{
-    BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@""];
-    [sheet setCancelButtonWithTitle:NSLocalizedString(@"button_dismiss", @"") block:nil];
-    
-    [sheet addButtonWithTitle:NSLocalizedString(@"share_via_email", @"")
-                        block:^
-    {
-        if ([MFMailComposeViewController canSendMail])
+        if (indexPath.row == 0)
         {
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = @"Greek Radio";
-            
-            NSString *listeningTo;
-            if ([GRRadioPlayer shared].stationName.length > 0)
+            if ([GRRadioPlayer shared].isPlaying == NO)
             {
-                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                               [GRRadioPlayer shared].stationName];
+                tableViewCell.textLabel.text = NSLocalizedString(@"button_play", @"");
+                tableViewCell.imageView.image = [UIImage imageNamed:@"GRPlay"];
+                tableViewCell.textLabel.textColor = [UIColor colorWithRed:0.082f
+                                                                    green:0.494f
+                                                                     blue:0.984f
+                                                                    alpha:1.00f];
             }
             else
             {
-                listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
-                               [NSLocalizedString(@"label_music", @"") lowercaseString]];
+                tableViewCell.textLabel.text = NSLocalizedString(@"button_pause", @"");
+                tableViewCell.imageView.image = [UIImage imageNamed:@"GRPause"];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            if (self.currentStation.favourite.boolValue)
+            {
+                tableViewCell.textLabel.text = NSLocalizedString(@"button_unmark_as_favorite", @"");
+            }
+            else
+            {
+                tableViewCell.textLabel.text = NSLocalizedString(@"button_mark_as_favorite", @"");
+                tableViewCell.textLabel.textColor = [UIColor redColor];
             }
             
-            NSString *itunesCheckIt = [NSString stringWithFormat:NSLocalizedString(@"share_via_email_check_it_$", @""),
-                                       kAppiTunesURL];
-            
-            [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
-                                    isHTML:YES];
-            
-            [GRAppearanceHelper setUpDefaultAppearance];
-            [self.navigationController presentViewController:mailController animated:YES completion:nil];
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GRHeart"];
         }
-        else
+    }
+
+    if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
         {
-            [BlockAlertView showInfoAlertWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                           message:NSLocalizedString(@"share_email_error", @"")];
+            tableViewCell.textLabel.text = NSLocalizedString(@"button_previous_station", @"");
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GRPrevious"];
         }
-    }];
-    
-    if ([SLComposeViewController class])
+        else if (indexPath.row == 1)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"button_next_station", @"");
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GRNext"];
+        }
+    }
+
+    if (indexPath.section == 2)
     {
-        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_twitter", @"") block:^{
-            [GRShareHelper tweetTappedOnController:self];
-        }];
+        tableViewCell.imageView.image = [UIImage imageNamed:@"GRNetwork"];
+
+        if (indexPath.row == 0)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"share_via_email", @"");
+        }
+        else if (indexPath.row == 1)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"share_via_facebook", @"");
+        }
+        else if (indexPath.row == 2)
+        {
+            tableViewCell.textLabel.text = NSLocalizedString(@"share_via_twitter", @"");
+        }
     }
     
-    if ([SLComposeViewController class])
-    {
-        [sheet addButtonWithTitle:NSLocalizedString(@"share_via_facebook", @"") block:^{
-            [GRShareHelper facebookTappedOnController:self];
-        }];
-    }
     
-    [sheet showInView:self.view];
+    return tableViewCell;
 }
 
 
-- (IBAction)playOrPause:(id)sender
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([GRRadioPlayer shared].isPlaying)
-    {
-        [[GRRadioPlayer shared] stopPlayingStation];
-    }
-    else
-    {
-        [[GRRadioPlayer shared] playStation:self.currentStation.title
-                              withStreamURL:self.currentStation.streamURL];
-    }
+    return 3;
 }
 
 
-- (IBAction)markStationAsFavourite:(id)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // inform test flight
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
+    if (section == 0)
+    {
+        return 2;
+    }
     
-    // set the value and save
-    self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
-    [self.currentStation.managedObjectContext save:nil];
+    if (section == 1)
+    {
+        return 2;
+    }
     
-    // inform about the change
-    [GRNotificationCenter postChangeTriggeredByUserWithSender:self];
+    return 3;
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return @"";
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    // adjust the button state
-    self.favouriteButton.selected = [self.currentStation.favourite boolValue];
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 0)
+        {
+            if ([GRRadioPlayer shared].isPlaying)
+            {
+                [[GRRadioPlayer shared] stopPlayingStation];
+            }
+            else
+            {
+                [[GRRadioPlayer shared] playStation:self.currentStation];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            // inform test flight
+            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
+            self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
+            [self.currentStation.managedObjectContext save:nil];
+        }
+        
+        // set the value and save
+        [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else if (indexPath.section == 1)
+    {
+        if (indexPath.row == 0)
+        {
+            if (self.delegate &&
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayPreviousStation:)])
+            {
+                [self.delegate playerViewControllerPlayPreviousStation:self];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            if (self.delegate &&
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayNextStation:)])
+            {
+                [self.delegate playerViewControllerPlayNextStation:self];
+            }
+        }
+    }
+    else if (indexPath.section == 2)
+    {
+        if (indexPath.row == 0)
+        {
+            if ([MFMailComposeViewController canSendMail])
+            {
+                [GRAppearanceHelper setUpDefaultAppearance];
+
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                mailController.subject = @"Greek Radio";
+                
+                NSString *listeningTo;
+                if ([GRRadioPlayer shared].stationName.length > 0)
+                {
+                    listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                   [GRRadioPlayer shared].stationName];
+                }
+                else
+                {
+                    listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
+                                   [NSLocalizedString(@"label_music", @"") lowercaseString]];
+                }
+                
+                NSString *itunesCheckIt = [NSString stringWithFormat:
+                                           NSLocalizedString(@"share_via_email_check_it_$", @""), kAppiTunesURL];
+                [mailController setMessageBody:[NSString stringWithFormat:@"%@\n\n%@",listeningTo, itunesCheckIt]
+                                        isHTML:YES];
+                
+                [self.navigationController presentViewController:mailController animated:YES completion:nil];
+            }
+            else
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"share_email_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
+        }
+        else if (indexPath.row == 1)
+        {
+            if ([SLComposeViewController class])
+            {
+                [GRShareHelper facebookTappedOnController:self];
+            }
+        }
+        else if (indexPath.row == 2)
+        {
+            if ([SLComposeViewController class])
+            {
+                [GRShareHelper tweetTappedOnController:self];
+            }
+        }
+    }
 }
 
 
@@ -519,6 +656,7 @@ typedef enum GRInformationBarOption
     [[GRShoutCastHelper shared] cancelGet];
     [self.informationTimer invalidate];
     self.informationTimer = nil;
+    self.delegate = nil;
 }
 
 

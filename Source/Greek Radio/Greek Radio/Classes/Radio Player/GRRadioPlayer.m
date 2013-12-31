@@ -14,6 +14,20 @@
 // ------------------------------------------------------------------------------------------
 
 
+@interface GRRadioPlayer()
+{
+    AudioStreamer *audioStreamer;
+    UIBackgroundTaskIdentifier backgroundOperation;
+    BOOL wasPlaying;
+    BOOL wentBackground;
+}
+
+@end
+
+
+// ------------------------------------------------------------------------------------------
+
+
 @implementation GRRadioPlayer
 
 + (GRRadioPlayer *)shared
@@ -22,24 +36,24 @@
     static GRRadioPlayer *shared = nil;
     
     dispatch_once(&pred, ^()
-                  {
-                      shared = [[GRRadioPlayer alloc] init];
-                      
-                      [[NSNotificationCenter defaultCenter] addObserver:shared
-                                                               selector:@selector(applicationDidEnterBackground:)
-                                                                   name:UIApplicationDidEnterBackgroundNotification
-                                                                 object:nil];
+    {
+      shared = [[GRRadioPlayer alloc] init];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                               selector:@selector(applicationDidEnterBackground:)
+                                                   name:UIApplicationDidEnterBackgroundNotification
+                                                 object:nil];
 
-                      [[NSNotificationCenter defaultCenter] addObserver:shared
-                                                               selector:@selector(applicationDidBecomeActive:)
-                                                                   name:UIApplicationDidBecomeActiveNotification
-                                                                 object:nil];
-                      
-                      [[NSNotificationCenter defaultCenter] addObserver:shared
-                                                               selector:@selector(applicationWillResignActive:)
-                                                                   name:UIApplicationWillResignActiveNotification
-                                                                 object:nil];
-                  });
+      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                               selector:@selector(applicationDidBecomeActive:)
+                                                   name:UIApplicationDidBecomeActiveNotification
+                                                 object:nil];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:shared
+                                               selector:@selector(applicationWillResignActive:)
+                                                   name:UIApplicationWillResignActiveNotification
+                                                 object:nil];
+    });
     
     return shared;
 }
@@ -48,8 +62,7 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
-- (void)playStation:(NSString *)aStationName
-      withStreamURL:(NSString *)aStreamURL
+- (void)playStation:(GRStation *)station
 {
     if ([[NSInternetDoctor shared] connected] == NO)
     {
@@ -60,7 +73,7 @@
         return;
     }
 
-    if ([self.streamURL isEqualToString:aStreamURL] == NO)
+    if ([self.streamURL isEqualToString:station.streamURL] == NO)
     {
         [self stopPlayingStation];
     }
@@ -73,17 +86,18 @@
     [audioStreamer stop];
     audioStreamer = nil;
     
-    NSURL *url = [NSURL URLWithString:aStreamURL];
+    self.currentStation = station;
+    self.streamURL = [NSString stringWithFormat:@"%@",self.currentStation.streamURL];
+    self.stationName = [NSString stringWithFormat:@"%@",self.currentStation.title];
+
+    NSURL *url = [NSURL URLWithString:self.streamURL];
     audioStreamer = [[AudioStreamer alloc] initWithURL:url];
     audioStreamer.delegate = self;
     [audioStreamer start];
     audioStreamer.isPlaying = YES;
     
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Playing)", aStationName]];
+    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Playing)", self.stationName]];
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
-
-    self.streamURL = [NSString stringWithFormat:@"%@",aStreamURL];
-    self.stationName = [NSString stringWithFormat:@"%@",aStationName];
 }
 
 
@@ -104,6 +118,7 @@
 {
     [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
 
+    self.currentStation = nil;
     self.stationName = @"";
     self.streamURL = @"";
 
@@ -159,12 +174,8 @@
     
     if (wasPlaying && wentBackground == NO)
     {
-        NSString *stationName = [self.stationName copy];
-        NSString *streamURL = [self.streamURL copy];
-        
         [self stopPlayingStation];
-        [self playStation:stationName
-            withStreamURL:streamURL];
+        [self playStation:self.currentStation];
     }
     
     wentBackground = NO;
