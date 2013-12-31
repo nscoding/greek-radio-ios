@@ -7,7 +7,6 @@
 //
 
 #import "GRStation.h"
-#import <MessageUI/MessageUI.h>
 
 @class GRPlayerViewController;
 

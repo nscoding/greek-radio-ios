@@ -12,7 +12,6 @@
 #import "TestFlight.h"
 #import "NSInternetDoctor.h"
 #import "UIAlertView+Blocks.h"
-#import <MessageUI/MessageUI.h>
 
 #define PRINTERROR(LABEL)	printf("%s err %4.4s %d\n", LABEL, (char *)&err, (int)err)
 

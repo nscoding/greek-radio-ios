@@ -21,9 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    BOOL autoLockDisabled = [userDefaults boolForKey:@"GreekRadioAutoLockDisabled"];
-    [UIApplication sharedApplication].idleTimerDisabled = autoLockDisabled;
+    [UIApplication sharedApplication].idleTimerDisabled = [GRUserDefaults isAutomaticLockDisabled];
 
     [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
 

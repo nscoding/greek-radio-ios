@@ -12,6 +12,7 @@
 		1330039F183B97ED00AA5AFF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 13300399183B97ED00AA5AFF /* release_notes.md */; };
 		1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */; };
 		1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */; };
+		13A4C73F1873438D005DB591 /* GRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A4C73E1873438D005DB591 /* GRUserDefaults.m */; };
 		13CDC161187062970041FED4 /* GRStationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC160187062970041FED4 /* GRStationsManager.m */; };
 		13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13CDC18218715D4E0041FED4 /* Assets.xcassets */; };
 		13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC18B187167250041FED4 /* UITableView+Extensions.m */; };
@@ -39,7 +40,6 @@
 		CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CD92B501173400B600771F26 /* GRShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B500173400B600771F26 /* GRShareHelper.m */; };
 		CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B5021734272800771F26 /* MediaPlayer.framework */; };
-		CD92B519173572C100771F26 /* GRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B518173572C100771F26 /* GRConstants.m */; };
 		CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF35A173A8227006AD8C3 /* Localizable.strings */; };
 		CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA226A5174808AF00209736 /* UIDevice+Extensions.m */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
@@ -76,6 +76,10 @@
 		1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		1374C15C1870439B006B2A15 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		13A4C7311873429C005DB591 /* GRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMacros.h; sourceTree = "<group>"; };
+		13A4C73D1873438D005DB591 /* GRUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRUserDefaults.h; sourceTree = "<group>"; };
+		13A4C73E1873438D005DB591 /* GRUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRUserDefaults.m; sourceTree = "<group>"; };
+		13A4C7401873451B005DB591 /* GRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRConstants.h; sourceTree = "<group>"; };
 		13CDC15F187062970041FED4 /* GRStationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsManager.h; sourceTree = "<group>"; };
 		13CDC160187062970041FED4 /* GRStationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsManager.m; sourceTree = "<group>"; };
 		13CDC18218715D4E0041FED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,8 +123,6 @@
 		CD92B4FF173400B600771F26 /* GRShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShareHelper.h; sourceTree = "<group>"; };
 		CD92B500173400B600771F26 /* GRShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShareHelper.m; sourceTree = "<group>"; };
 		CD92B5021734272800771F26 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		CD92B517173572C100771F26 /* GRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRConstants.h; sourceTree = "<group>"; };
-		CD92B518173572C100771F26 /* GRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRConstants.m; sourceTree = "<group>"; };
 		CD9EF358173A8227006AD8C3 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
 		CD9EF35B173A8227006AD8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CDA226A4174808AF00209736 /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extensions.h"; sourceTree = "<group>"; };
@@ -312,8 +314,10 @@
 		CD92B5161735729E00771F26 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				CD92B517173572C100771F26 /* GRConstants.h */,
-				CD92B518173572C100771F26 /* GRConstants.m */,
+				13A4C7311873429C005DB591 /* GRMacros.h */,
+				13A4C7401873451B005DB591 /* GRConstants.h */,
+				13A4C73D1873438D005DB591 /* GRUserDefaults.h */,
+				13A4C73E1873438D005DB591 /* GRUserDefaults.m */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -380,9 +384,9 @@
 		CDA7534E17306A56005B25EC /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				CD7A017B17327591003A2E2D /* GRStationCellView.xib */,
 				CDA7534F173070A6005B25EC /* GRStationCellView.h */,
 				CDA75350173070A6005B25EC /* GRStationCellView.m */,
+				CD7A017B17327591003A2E2D /* GRStationCellView.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -635,11 +639,11 @@
 				CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */,
 				1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */,
 				CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */,
+				13A4C73F1873438D005DB591 /* GRUserDefaults.m in Sources */,
 				CDD7EBE21733B66100225F5A /* Reachability.m in Sources */,
 				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,
 				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
 				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
-				CD92B519173572C100771F26 /* GRConstants.m in Sources */,
 				CD53C95E1737B0D400264230 /* Appirater.m in Sources */,
 				CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */,
 				CD55C0D5174424F6000BFFE5 /* GRSettingsViewController.m in Sources */,

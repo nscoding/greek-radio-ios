@@ -14,10 +14,16 @@
 
 @implementation GRNavigationController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self configureNavigationBar];
+}
+
+
+- (void)configureNavigationBar
+{
     self.navigationBar.tintColor = [UIColor whiteColor];
 }
 
