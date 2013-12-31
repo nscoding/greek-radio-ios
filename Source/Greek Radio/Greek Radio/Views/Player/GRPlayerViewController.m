@@ -258,7 +258,7 @@ typedef enum GRInformationBarOption
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
                                             initWithTarget:self action:@selector(handleRightSwipe:)];
     recognizer.direction = (UISwipeGestureRecognizerDirectionRight);
-    [self.view addGestureRecognizer:recognizer];
+    [self.stationLabel addGestureRecognizer:recognizer];
 }
 
 
@@ -267,7 +267,7 @@ typedef enum GRInformationBarOption
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
                                             initWithTarget:self action:@selector(handleLeftSwipe:)];
     recognizer.direction = (UISwipeGestureRecognizerDirectionLeft);
-    [self.view addGestureRecognizer:recognizer];
+    [self.stationLabel addGestureRecognizer:recognizer];
 }
 
 
