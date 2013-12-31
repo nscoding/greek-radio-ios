@@ -11,6 +11,7 @@
 #import "GRRadioPlayer.h"
 #import "GRCoreDataStack.h"
 #import "GRStationCellView.h"
+
 #import "UITableView+Extensions.h"
 
 
@@ -181,7 +182,6 @@ static const NSUInteger kLazyLoadSection = 2;
         _stationsLayout = stationsLayout;
         [self setupFetchedResultsControllers];
         [self.tableView reloadData];
-
     }
 }
 

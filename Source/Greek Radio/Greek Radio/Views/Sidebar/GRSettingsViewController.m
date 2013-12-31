@@ -219,7 +219,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:sender.isOn forKey:@"GreekRadioAutoLockDisabled"];
     [userDefaults synchronize];
-    [UIApplication sharedApplication].idleTimerDisabled = sender.selected;
+    [UIApplication sharedApplication].idleTimerDisabled = sender.isOn;
 }
 
 
