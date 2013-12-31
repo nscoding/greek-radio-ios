@@ -59,7 +59,8 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
                                                                      forIndexPath:indexPath];
 
     tableViewCell.textLabel.textColor = [UIColor blackColor];
-
+    tableViewCell.textLabel.backgroundColor = [UIColor whiteColor];
+    
     if (indexPath.section == 0 ||
         indexPath.section == 1)
     {
