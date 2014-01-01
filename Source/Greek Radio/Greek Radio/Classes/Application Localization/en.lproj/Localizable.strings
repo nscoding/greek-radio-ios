@@ -30,12 +30,15 @@
 "label_music" = "Music";
 "label_syncing" = "Syncing...";
 
-"label_auto_lock_header" = "Disable locking";
-"label_auto_lock_text" = "Prevents your phone from locking automatically while the application is running.";
-"label_shake_music_header" = "Shuffle music";
+"label_auto_lock_header" = "Disable Auto-Lock";
+"label_auto_lock_text" = "Prevents your iPhone/iPad from locking automatically while the application is running.";
+"label_shake_music_header" = "Shake to shuffle";
 "label_shake_music_text" = "Shake your phone to listen to a random station.";
 "label_settings" = "Settings";
 "label_contact_us" = "Contact Us";
+"label_general" = "General";
+"label_visit_us" = "Visit our website";
+"label_made_with_love" = "Made in Berlin with ❤︎ from Patrick and Vasileia";
 
 "app_no_internet_title" = "No internet connection";
 "app_no_internet_subtitle" = "You require an internet connection via WiFi or cellular network for this application to work";

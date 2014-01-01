@@ -72,7 +72,6 @@
     [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
     [self buildAndConfigurePullToRefresh];
-    [self buildAndConfigureMadeWithLove];
     [self buildAndConfigureRightGesture];
 }
 
@@ -105,15 +104,13 @@
         UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateNormal];
         [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateHighlighted];
-        
-        [nowPlayingButton setImageEdgeInsets:UIEdgeInsetsMake(0, 70, 0, 0)];
-        
+        [nowPlayingButton setImageEdgeInsets:UIEdgeInsetsMake(0, 68, 0, 0)];
         [nowPlayingButton setTitle:NSLocalizedString(@"label_now_playing_newLine", nil) forState:UIControlStateNormal];
         [nowPlayingButton setTitleColor:[UIColor colorWithRed:0.929f green:0.932f blue:0.932f alpha:1.00f] forState:UIControlStateNormal];
         [nowPlayingButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
         [nowPlayingButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
         
-        nowPlayingButton.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+        nowPlayingButton.titleLabel.font = [UIFont boldSystemFontOfSize:11];
         nowPlayingButton.titleLabel.numberOfLines = 2;
         nowPlayingButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
         nowPlayingButton.titleLabel.textAlignment = NSTextAlignmentRight;
@@ -195,34 +192,6 @@
                       forControlEvents:UIControlEventValueChanged];
         
         [self.refreshControl endRefreshing];
-    }
-}
-
-
-- (void)buildAndConfigureMadeWithLove
-{
-    if (self.tableView.tableFooterView == nil)
-    {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
-        label.textColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.00f];
-        label.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
-        label.shadowOffset = CGSizeMake(0, 1);
-        label.textAlignment = NSTextAlignmentCenter;
-        label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
-        label.numberOfLines = 0;
-        label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
-        
-        UITapGestureRecognizer *tapGestureRecognizer
-            = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                      action:@selector(madeWithLovePressed)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        label.userInteractionEnabled = YES;
-
-        [label addGestureRecognizer:tapGestureRecognizer];
-
-        self.tableView.tableFooterView = label;
     }
 }
 
@@ -359,12 +328,6 @@
     {
         [[GRWebService shared] parseXML];
     });
-}
-
-
-- (void)madeWithLovePressed
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nscoding.co.uk"]];
 }
 
 

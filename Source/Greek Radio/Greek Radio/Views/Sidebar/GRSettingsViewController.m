@@ -37,15 +37,10 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 
 - (void)buildAndConfigureCloseButton
 {
-    NSDictionary *titleTextAttributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:17.0],
-                                           NSForegroundColorAttributeName : [UIColor whiteColor] };
-    
     UIBarButtonItem *doneItem =
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
-                                                  action:@selector(closeSettingsViewController)];
-    
-    [doneItem setTitleTextAttributes:titleTextAttributes forState:UIControlStateNormal];
+                                                  action:@selector(closeSettingsViewController)];    
     self.navigationItem.rightBarButtonItem = doneItem;
 }
 
@@ -87,7 +82,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
         tableViewCell.imageView.image = nil;
         tableViewCell.accessoryView = stateSwitch;
     }
-    else
+    else if (indexPath.section == 2)
     {
         if (indexPath.row == 0)
         {
@@ -101,6 +96,11 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
             tableViewCell.textLabel.textColor = [UIColor redColor];
         }
     }
+    else if (indexPath.section == 3)
+    {
+        tableViewCell.imageView.image = [UIImage imageNamed:@"GRInformation"];
+        tableViewCell.textLabel.text = NSLocalizedString(@"label_visit_us", @"");
+    }
     
     return tableViewCell;
 }
@@ -108,7 +108,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 
@@ -133,6 +133,10 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
     {
         return NSLocalizedString(@"label_shake_music_text", @"");
     }
+    else if (section == 3)
+    {
+        return NSLocalizedString(@"label_made_with_love", @"");
+    }
     
     return @"";
 }
@@ -140,6 +144,11 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (section == 0)
+    {
+        return NSLocalizedString(@"label_general", @"");
+    }
+    
     if (section == 2)
     {
         return NSLocalizedString(@"label_contact_us", @"");
@@ -151,7 +160,8 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 2)
+    if (indexPath.section == 2 ||
+        indexPath.section == 3)
     {
         return YES;
     }
@@ -164,51 +174,58 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0)
+    if (indexPath.section == 2)
     {
-        if ([MFMailComposeViewController canSendMail])
+        if (indexPath.row == 0)
         {
-            [GRAppearanceHelper setUpDefaultAppearance];
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = NSLocalizedString(@"label_new_stations", @"");
-            [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
-            
-            [self.navigationController presentViewController:mailController
-                                                    animated:YES
-                                                  completion:nil];
+            if ([MFMailComposeViewController canSendMail])
+            {
+                [GRAppearanceHelper setUpDefaultAppearance];
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                mailController.subject = NSLocalizedString(@"label_new_stations", @"");
+                [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
+                
+                [self.navigationController presentViewController:mailController
+                                                        animated:YES
+                                                      completion:nil];
+            }
+            else
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"share_email_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
         }
-        else
+        else if (indexPath.row == 1)
         {
-            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                               message:NSLocalizedString(@"share_email_error", @"")
-                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                     otherButtonTitles:nil
-                              tapBlock:nil];
+            if ([MFMailComposeViewController canSendMail])
+            {
+                [GRAppearanceHelper setUpDefaultAppearance];
+                MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.mailComposeDelegate = self;
+                mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
+                [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
+                
+                [self.navigationController presentViewController:mailController
+                                                        animated:YES
+                                                      completion:nil];
+            }
+            else
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"share_email_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
         }
     }
-    else if (indexPath.row == 1)
+    else if (indexPath.section == 3)
     {
-        if ([MFMailComposeViewController canSendMail])
-        {
-            [GRAppearanceHelper setUpDefaultAppearance];
-            MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
-            mailController.mailComposeDelegate = self;
-            mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
-            [mailController setToRecipients:@[@"team@nscoding.co.uk"]];
-            
-            [self.navigationController presentViewController:mailController
-                                                    animated:YES
-                                                  completion:nil];
-        }
-        else
-        {
-            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                               message:NSLocalizedString(@"share_email_error", @"")
-                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-        }
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nscoding.co.uk"]];
     }
 }
 
