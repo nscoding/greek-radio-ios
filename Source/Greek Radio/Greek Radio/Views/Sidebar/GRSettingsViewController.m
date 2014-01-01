@@ -138,6 +138,17 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
 }
 
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 2)
+    {
+        return NSLocalizedString(@"label_contact_us", @"");
+    }
+    
+    return @"";
+}
+
+
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 2)

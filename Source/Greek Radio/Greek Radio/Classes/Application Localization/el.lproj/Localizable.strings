@@ -4,8 +4,8 @@
 "button_enjoy" = "Καλή Ακρόαση!";
 "button_dismiss" = "Ακύρωση";
 "button_remove" = "Αφαίρεση";
-"button_sugggest" = "Πρότεινε ένα σταθμό";
-"button_report" ="Ανάφερε ένα πρόβλημα";
+"button_sugggest" = "Πρόταση σταθμού";
+"button_report" ="Αναφορά προβλήματος";
 "button_mark_as_favorite" = "Προσθήκη στα αγαπημένα";
 "button_unmark_as_favorite" = "Αφαίρεση απο τα αγαπημένα";
 
@@ -35,6 +35,7 @@
 "label_shake_music_header" = "Τυχαία αναπαραγωγή";
 "label_shake_music_text" = "Κουνήστε το τηλέφωνό σας (δεξιά αριστερά),για να επιλέξετε εναν τυχαίο ραδιοφωνικό σταθμό.";
 "label_settings" = "Επιλογές";
+"label_contact_us" = "Επικοινωνήστε μαζί μας";
 
 "app_no_internet_title" = "Δεν υπάρχει σύνδεση με το Ίντερνετ";
 "app_no_internet_subtitle" = "Απαιτείται σύνδεση με Ίντερνετ μέσω WiFi ή 3g για να λειτουργήσει η εφαρμογή";
