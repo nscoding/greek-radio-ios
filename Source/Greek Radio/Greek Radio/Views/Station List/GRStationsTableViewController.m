@@ -99,7 +99,6 @@
 // ------------------------------------------------------------------------------------------
 - (void)configureTableViewAndSearchBar
 {
-    self.tableView.separatorColor = [UIColor blackColor];
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
                                                        green:0.180f
                                                         blue:0.161f
