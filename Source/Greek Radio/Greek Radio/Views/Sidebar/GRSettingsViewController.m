@@ -86,19 +86,19 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
     {
         if (indexPath.row == 0)
         {
-            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GRMailFolder"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_sugggest", @"");
         }
         else if (indexPath.row == 1)
         {
-            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GRMailFolder"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_report", @"");
             tableViewCell.textLabel.textColor = [UIColor redColor];
         }
     }
     else if (indexPath.section == 3)
     {
-        tableViewCell.imageView.image = [UIImage imageNamed:@"GRInformation"];
+        tableViewCell.imageView.image = [UIImage imageNamed:@"GRSafari"];
         tableViewCell.textLabel.text = NSLocalizedString(@"label_visit_us", @"");
     }
     
