@@ -60,6 +60,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
         indexPath.section == 1)
     {
         UISwitch *stateSwitch = [[UISwitch alloc] init];
+        stateSwitch.onTintColor = [UIColor colorWithRed:0.525f green:0.576f blue:0.616f alpha:1.00f];
         
         if (indexPath.section == 0)
         {
@@ -86,12 +87,12 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
     {
         if (indexPath.row == 0)
         {
-            tableViewCell.imageView.image = [UIImage imageNamed:@"GRMailFolder"];
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_sugggest", @"");
         }
         else if (indexPath.row == 1)
         {
-            tableViewCell.imageView.image = [UIImage imageNamed:@"GRMailFolder"];
+            tableViewCell.imageView.image = [UIImage imageNamed:@"GREmail"];
             tableViewCell.textLabel.text = NSLocalizedString(@"button_report", @"");
             tableViewCell.textLabel.textColor = [UIColor redColor];
         }
