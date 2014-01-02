@@ -183,6 +183,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
             {
                 [GRAppearanceHelper setUpDefaultAppearance];
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.modalPresentationStyle = UIModalPresentationFullScreen;
                 mailController.mailComposeDelegate = self;
                 mailController.subject = NSLocalizedString(@"label_new_stations", @"");
                 [mailController setToRecipients:@[@"vasileia@nscoding.co.uk"]];
@@ -206,6 +207,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
             {
                 [GRAppearanceHelper setUpDefaultAppearance];
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+                mailController.modalPresentationStyle = UIModalPresentationFullScreen;
                 mailController.mailComposeDelegate = self;
                 mailController.subject = NSLocalizedString(@"label_something_wrong", @"");
                 [mailController setToRecipients:@[@"team@nscoding.co.uk"]];

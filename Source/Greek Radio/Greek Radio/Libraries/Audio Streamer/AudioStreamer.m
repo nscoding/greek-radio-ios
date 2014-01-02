@@ -591,7 +591,7 @@ void ReadStreamCallBack
 	//
 	AudioFileTypeID fileTypeHint = kAudioFileMP3Type;
 	NSString *fileExtension = [[url path] lastPathComponent];
-	if ([fileExtension isEqualToString:@"mp3"])
+	if ([fileExtension rangeOfString:@"mp3"].location != NSNotFound)
 	{
 		fileTypeHint = kAudioFileMP3Type;
 	}

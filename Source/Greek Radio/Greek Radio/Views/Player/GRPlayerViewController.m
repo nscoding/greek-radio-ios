@@ -587,6 +587,7 @@ typedef enum GRInformationBarOption
 
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
                 mailController.mailComposeDelegate = self;
+                mailController.modalPresentationStyle = UIModalPresentationFormSheet;
                 mailController.subject = @"Greek Radio";
                 
                 NSString *listeningTo;
