@@ -285,8 +285,8 @@ typedef enum GRInformationBarOption
     GRInformationBarOption currentOption = self.informationBarOption;
     GRInformationBarOption goToOption = self.informationBarOption;
     
-    if (currentOption == GRInformationBarOptionArtist) {
-        currentOption = GRInformationBarOptionGenre;
+    if (currentOption == GRInformationBarOptionArtist)
+    {
         goToOption = GRInformationBarOptionGenre;
     }
     else
@@ -308,7 +308,6 @@ typedef enum GRInformationBarOption
     
     if ([GRRadioPlayer shared].isPlaying == NO)
     {
-        currentOption = GRInformationBarOptionGenre;
         goToOption = GRInformationBarOptionGenre;
     }
     

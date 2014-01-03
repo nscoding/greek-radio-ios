@@ -145,7 +145,6 @@
 {
     // Request permission to run in the background. Provide an
     // expiration handler in case the task runs long.
-    
     UIApplication *application = [notification object];
     wentBackground = YES;
     
@@ -155,7 +154,8 @@
 	backgroundOperation = [application beginBackgroundTaskWithExpirationHandler:^{
         // Synchronize the cleanup call on the main thread in case
         // the task actually finishes at around the same time.
-		dispatch_async(dispatch_get_main_queue(), ^{
+		dispatch_async(dispatch_get_main_queue(), ^
+        {
 			if (backgroundOperation != UIBackgroundTaskInvalid)
 			{
 				[application endBackgroundTask:backgroundOperation];
@@ -174,8 +174,9 @@
     
     if (wasPlaying && wentBackground == NO)
     {
+        GRStation *currentStation = self.currentStation;
         [self stopPlayingStation];
-        [self playStation:self.currentStation];
+        [self playStation:currentStation];
     }
     
     wentBackground = NO;
