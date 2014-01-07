@@ -249,12 +249,12 @@ static const NSUInteger kLazyLoadSection = 2;
     id<NSFetchedResultsSectionInfo> sectionInfo = self.stationsFetchedResultsController.sections[section];
     if (self.stationsLayout == GRStationsLayoutAlphabetical)
     {
-        if (section == 0)
+        if (section == 0 && tableView.numberOfSections == 2)
         {
             sectionHeader.text = [NSString stringWithFormat:@"%@ (%i)",
                                   NSLocalizedString(@"label_favorites", @""), sectionInfo.numberOfObjects];
         }
-        else if (section == 1)
+        else
         {
             sectionHeader.text = [NSString stringWithFormat:@"%@ (%i)",
                                   NSLocalizedString(@"label_stations", @""), sectionInfo.numberOfObjects];

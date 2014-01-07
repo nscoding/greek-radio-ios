@@ -72,7 +72,6 @@
     [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
     [self buildAndConfigurePullToRefresh];
-    [self buildAndConfigureMadeWithLove];
     [self buildAndConfigureRightGesture];
 }
 
@@ -80,10 +79,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationItem.title = @"Greek Radio";
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
+    
+    [self configureNowPlayingButton];
+    self.navigationItem.title = @"Greek Radio";
 }
 
 
@@ -97,9 +97,41 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
+- (void)configureNowPlayingButton
+{
+    if ([GRRadioPlayer shared].currentStation)
+    {
+        UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateNormal];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateHighlighted];
+        [nowPlayingButton setImageEdgeInsets:UIEdgeInsetsMake(0, 68, 0, 0)];
+        [nowPlayingButton setTitle:NSLocalizedString(@"label_now_playing_newLine", nil) forState:UIControlStateNormal];
+        [nowPlayingButton setTitleColor:[UIColor colorWithRed:0.929f green:0.932f blue:0.932f alpha:1.00f] forState:UIControlStateNormal];
+        [nowPlayingButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [nowPlayingButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+        
+        nowPlayingButton.titleLabel.font = [UIFont boldSystemFontOfSize:11];
+        nowPlayingButton.titleLabel.numberOfLines = 2;
+        nowPlayingButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+        nowPlayingButton.titleLabel.textAlignment = NSTextAlignmentRight;
+        
+        nowPlayingButton.frame = CGRectMake(0, 0, 80, 32);
+        [nowPlayingButton addTarget:self
+                             action:@selector(nowPlayingButtonPressed:)
+                   forControlEvents:UIControlEventTouchUpInside];
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:nowPlayingButton];
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
+}
+
+
 - (void)configureTableViewAndSearchBar
 {
-    self.tableView.separatorColor = [UIColor blackColor];
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
                                                        green:0.180f
                                                         blue:0.161f
@@ -160,34 +192,6 @@
                       forControlEvents:UIControlEventValueChanged];
         
         [self.refreshControl endRefreshing];
-    }
-}
-
-
-- (void)buildAndConfigureMadeWithLove
-{
-    if (self.tableView.tableFooterView == nil)
-    {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:15];
-        label.textColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.00f];
-        label.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
-        label.shadowOffset = CGSizeMake(0, 1);
-        label.textAlignment = NSTextAlignmentCenter;
-        label.text =  @"Made in Berlin with ❤\n❝Patrick - Vasileia❞";
-        label.numberOfLines = 0;
-        label.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 100);
-        
-        UITapGestureRecognizer *tapGestureRecognizer
-            = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                      action:@selector(madeWithLovePressed)];
-        tapGestureRecognizer.numberOfTapsRequired = 1;
-        label.userInteractionEnabled = YES;
-
-        [label addGestureRecognizer:tapGestureRecognizer];
-
-        self.tableView.tableFooterView = label;
     }
 }
 
@@ -327,12 +331,6 @@
 }
 
 
-- (void)madeWithLovePressed
-{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.nscoding.co.uk"]];
-}
-
-
 - (void)settingsButtonPressed:(UIButton *)sender
 {
     [self.searchBar resignFirstResponder];
@@ -350,8 +348,7 @@
 
 - (void)nowPlayingButtonPressed:(UIBarButtonItem *)sender
 {
-    if ([GRRadioPlayer shared].currentStation &&
-        [GRRadioPlayer shared].isPlaying)
+    if ([GRRadioPlayer shared].currentStation)
     {
         [self.searchBar resignFirstResponder];
 
