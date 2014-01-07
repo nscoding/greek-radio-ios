@@ -57,14 +57,8 @@
         [self addSubview:self.backgroundView];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
         
-        self.title.shadowColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-        self.title.shadowOffset = CGSizeMake(0, 1);
         self.title.textAlignment = NSTextAlignmentLeft;
         self.title.numberOfLines = 1;
-
-        
-        self.subtitle.shadowColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-        self.subtitle.shadowOffset = CGSizeMake(0, 1);
         self.subtitle.textAlignment = NSTextAlignmentLeft;
         self.subtitle.numberOfLines = 1;
     }

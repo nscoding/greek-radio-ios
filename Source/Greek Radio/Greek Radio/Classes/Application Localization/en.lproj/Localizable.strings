@@ -30,7 +30,7 @@
 "label_music" = "Music";
 "label_syncing" = "Syncing...";
 
-"label_auto_lock_header" = "Disable Auto-Lock";
+"label_auto_lock_header" = "Disable auto-lock";
 "label_auto_lock_text" = "Prevents your iPhone/iPad from locking automatically while the application is running.";
 "label_shake_music_header" = "Shake to shuffle";
 "label_shake_music_text" = "Shake your phone to listen to a random station.";
