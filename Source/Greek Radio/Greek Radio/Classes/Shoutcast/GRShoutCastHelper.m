@@ -160,7 +160,7 @@ didReceiveResponse:(NSURLResponse *)response
 	}
     
 	// Gets the index of the character after the body tag
-	int index = ([metadata rangeOfString:@"<body>"].location + 1);
+	NSInteger index = ([metadata rangeOfString:@"<body>"].location + 1);
     
 	// Removes the <html> and the <body> tag
 	metadata = [metadata substringFromIndex:index];

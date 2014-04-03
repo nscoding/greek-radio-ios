@@ -80,6 +80,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
             stateSwitch.on = [GRUserDefaults isShakeForRandomStationEnabled];
             tableViewCell.textLabel.text = NSLocalizedString(@"label_shake_music_header", @"");
         }
+        
         tableViewCell.imageView.image = nil;
         tableViewCell.accessoryView = stateSwitch;
     }
@@ -96,11 +97,14 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
             tableViewCell.textLabel.text = NSLocalizedString(@"button_report", @"");
             tableViewCell.textLabel.textColor = [UIColor redColor];
         }
+        
+        tableViewCell.accessoryView = nil;
     }
     else if (indexPath.section == 3)
     {
         tableViewCell.imageView.image = [UIImage imageNamed:@"GRSafari"];
         tableViewCell.textLabel.text = NSLocalizedString(@"label_visit_us", @"");
+        tableViewCell.accessoryView = nil;
     }
     
     return tableViewCell;
