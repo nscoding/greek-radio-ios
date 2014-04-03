@@ -18,14 +18,6 @@
 // ------------------------------------------------------------------------------------------
 
 
-static const NSUInteger kFavoriteStickySection = 0;
-static const NSUInteger kNonStickySection = 1;
-static const NSUInteger kLazyLoadSection = 2;
-
-
-// ------------------------------------------------------------------------------------------
-
-
 
 @interface GRStationsManager () <UITableViewDataSource, UITableViewDelegate,
                                    NSFetchedResultsControllerDelegate>
@@ -251,19 +243,19 @@ static const NSUInteger kLazyLoadSection = 2;
     {
         if (section == 0 && tableView.numberOfSections == 2)
         {
-            sectionHeader.text = [NSString stringWithFormat:@"%@ (%i)",
-                                  NSLocalizedString(@"label_favorites", @""), sectionInfo.numberOfObjects];
+            sectionHeader.text = [NSString stringWithFormat:@"%@ (%lu)",
+                                  NSLocalizedString(@"label_favorites", @""), (unsigned long)sectionInfo.numberOfObjects];
         }
         else
         {
-            sectionHeader.text = [NSString stringWithFormat:@"%@ (%i)",
-                                  NSLocalizedString(@"label_stations", @""), sectionInfo.numberOfObjects];
+            sectionHeader.text = [NSString stringWithFormat:@"%@ (%lu)",
+                                  NSLocalizedString(@"label_stations", @""), (unsigned long)sectionInfo.numberOfObjects];
         }
     }
     else
     {
-        sectionHeader.text = [NSString stringWithFormat:@"%@ (%i)",
-                              sectionInfo.name, sectionInfo.numberOfObjects];
+        sectionHeader.text = [NSString stringWithFormat:@"%@ (%lu)",
+                              sectionInfo.name, (unsigned long)sectionInfo.numberOfObjects];
     }
     
     return sectionHeader;
