@@ -54,7 +54,7 @@
     
     return @{
              NSForegroundColorAttributeName : textColor,
-             NSFontAttributeName : [UIFont systemFontOfSize:21.0f]
+             NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f]
              };
 }
 
