@@ -19,49 +19,61 @@
 
 + (void)setUpGreekRadioAppearance
 {
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.757f
-                                                                  green:0.533f
-                                                                   blue:0.286f
-                                                                  alpha:1.00f]];
-    
-    UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor blackColor];
-    shadow.shadowOffset = CGSizeMake(0, 1);
-
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{
-                                                            NSForegroundColorAttributeName : textColor,
-                                                            NSFontAttributeName : [UIFont boldSystemFontOfSize:16.0f],
-                                                            NSShadowAttributeName : shadow
-                                                           }
-                                                forState:UIControlStateNormal];
-
-    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2
-                                                       forBarMetrics:UIBarMetricsDefault];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName : textColor,
-                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
-                                                           NSShadowAttributeName : shadow
-                                                           }];
-    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.757f green:0.533f blue:0.286f alpha:1.00f]];
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2 forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleTextAttributes:[self customNavigationBarAttributes]];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[self customBarButtonItemAttributes] forState:UIControlStateNormal];
 }
 
 
 + (void)setUpDefaultAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName : [UIColor blackColor],
-                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:13.0f],
-                                                           }
-                                                forState:UIControlStateNormal];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           NSForegroundColorAttributeName : [UIColor blackColor],
-                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
-                                                           }];
+    [[UINavigationBar appearance] setTitleTextAttributes:[self defaultNavigationBarAttributes]];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[self defaultBarButtonItemAttributes] forState:UIControlStateNormal];
+}
 
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Attributes
+// ------------------------------------------------------------------------------------------
++ (NSDictionary *)customBarButtonItemAttributes
+{
+    UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
+    
+    return @{
+             NSForegroundColorAttributeName : textColor,
+             NSFontAttributeName : [UIFont preferredFontForTextStyle:UIFontTextStyleBody]
+             };
+}
+
+
++ (NSDictionary *)customNavigationBarAttributes
+{
+    UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
+    
+    return @{
+             NSForegroundColorAttributeName : textColor,
+             NSFontAttributeName : [UIFont systemFontOfSize:21.0f]
+             };
+}
+
+
++ (NSDictionary *)defaultBarButtonItemAttributes
+{
+    return @{
+             NSForegroundColorAttributeName : [UIColor blackColor],
+             NSFontAttributeName : [UIFont boldSystemFontOfSize:13.0f],
+             };
+}
+
+
++ (NSDictionary *)defaultNavigationBarAttributes
+{
+    return @{
+             NSForegroundColorAttributeName : [UIColor blackColor],
+             NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
+             };
 }
 
 

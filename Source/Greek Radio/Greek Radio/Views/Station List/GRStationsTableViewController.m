@@ -64,11 +64,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     [self configureDataSource];
     [self configureTableViewAndSearchBar];
     [self configureTrackClearButton];
     [self registerObservers];
+    
     [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
     [self buildAndConfigurePullToRefresh];
@@ -81,55 +81,14 @@
     [super viewWillAppear:animated];
     [self.searchBar resignFirstResponder];
     [self becomeFirstResponder];
-    
-    [self configureNowPlayingButton];
+
     self.navigationItem.title = @"Greek Radio";
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.navigationItem.title = @"";
 }
 
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
-- (void)configureNowPlayingButton
-{
-    if ([GRRadioPlayer shared].currentStation)
-    {
-        UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateNormal];
-        [nowPlayingButton setImage:[UIImage imageNamed:@"GRNowPlayingArrow"] forState:UIControlStateHighlighted];
-        [nowPlayingButton setImageEdgeInsets:UIEdgeInsetsMake(0, 68, 0, 0)];
-        [nowPlayingButton setTitle:NSLocalizedString(@"label_now_playing_newLine", nil) forState:UIControlStateNormal];
-        [nowPlayingButton setTitleColor:[UIColor colorWithRed:0.929f green:0.932f blue:0.932f alpha:1.00f] forState:UIControlStateNormal];
-        [nowPlayingButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [nowPlayingButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-        
-        nowPlayingButton.titleLabel.font = [UIFont boldSystemFontOfSize:11];
-        nowPlayingButton.titleLabel.numberOfLines = 2;
-        nowPlayingButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
-        nowPlayingButton.titleLabel.textAlignment = NSTextAlignmentRight;
-        
-        nowPlayingButton.frame = CGRectMake(0, 0, 80, 32);
-        [nowPlayingButton addTarget:self
-                             action:@selector(nowPlayingButtonPressed:)
-                   forControlEvents:UIControlEventTouchUpInside];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:nowPlayingButton];
-    }
-    else
-    {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
-    
-}
-
-
 - (void)configureTableViewAndSearchBar
 {
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
@@ -198,15 +157,10 @@
 
 - (void)buildAndConfigureNavigationButton
 {
-    UIButton *settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingButton.frame = CGRectMake(0, 0, 22, 22);
-    [settingButton setImage:[UIImage imageNamed:@"GRSettingsButton"] forState:UIControlStateNormal];
-    [settingButton addTarget:self
-                      action:@selector(settingsButtonPressed:)
-            forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc]
-                                   initWithCustomView:settingButton];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"label_settings", @"")
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(settingsButtonPressed:)];
     
     self.navigationItem.leftBarButtonItem = leftButton;
 }
@@ -300,21 +254,19 @@
 // ------------------------------------------------------------------------------------------
 - (void)stationManager:(GRStationsManager *)stationManager shouldPlayStation:(GRStation *)station
 {
-   GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
-                                                                                   delegate:self
-                                                                               previousView:self.view];
+    GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
+                                                                                    delegate:self
+                                                                                previousView:self.view];
 
     if (self.navigationController.visibleViewController == self)
     {
         [UIMenuController sharedMenuController].menuVisible = NO;
-        [self.navigationController pushViewController:playController
-                                             animated:YES];
+        [self.navigationController pushViewController:playController animated:YES];
     }
     else
     {
         [self.navigationController popViewControllerAnimated:NO];
-        [self.navigationController pushViewController:playController
-                                             animated:NO];
+        [self.navigationController pushViewController:playController animated:NO];
     }
 }
 
@@ -360,8 +312,7 @@
         if (self.navigationController.visibleViewController == self)
         {
             [UIMenuController sharedMenuController].menuVisible = NO;
-            [self.navigationController pushViewController:playController
-                                                 animated:YES];
+            [self.navigationController pushViewController:playController animated:YES];
         }
     }
 }

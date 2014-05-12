@@ -239,14 +239,14 @@ typedef enum GRInformationBarOption
 
 - (void)buildAndConfigureVolumeSlider
 {
-    MPVolumeView *myVolumeView = [[MPVolumeView alloc] initWithFrame:
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:
                                     CGRectMake(60, 110, self.view.frame.size.width - 90, 20)];
-    myVolumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
-    myVolumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:myVolumeView];
+    volumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
+    volumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:volumeView];
     
     UIImageView *volumeLowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GRVolumeUp"]];
-    volumeLowImageView.center = CGPointMake(33, myVolumeView.center.y);
+    volumeLowImageView.center = CGPointMake(33.0f, volumeView.center.y);
     [self.view addSubview:volumeLowImageView];
 }
 
@@ -265,17 +265,18 @@ typedef enum GRInformationBarOption
 {
     if ([GRRadioPlayer shared].isPlaying)
     {
-        __weak GRPlayerViewController *blockSelf = self;
+        __weak GRPlayerViewController *weakSelf = self;
         [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
                                          successBlock:^(NSString *songName, NSString *songArtist)
-         {
-             blockSelf.currentSong = [songName copy];
-             blockSelf.currentArtist = [songArtist copy];
-         }
-                                            failBlock:^{
-                                                blockSelf.currentSong = nil;
-                                                blockSelf.currentArtist = nil;
-                                            }];
+        {
+             weakSelf.currentSong = [songName copy];
+             weakSelf.currentArtist = [songArtist copy];
+        }
+        failBlock:^
+        {
+             weakSelf.currentSong = nil;
+             weakSelf.currentArtist = nil;
+        }];
     }
 }
 
@@ -357,9 +358,9 @@ typedef enum GRInformationBarOption
         double delayInSeconds = 5.0f;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-                       {
-                           [blockSelf animateStatus];
-                       });
+        {
+            [blockSelf animateStatus];
+       });
     }
 }
 

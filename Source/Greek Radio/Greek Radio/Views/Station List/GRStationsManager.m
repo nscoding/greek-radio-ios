@@ -235,7 +235,7 @@
     sectionHeader.autoresizingMask = UIViewAutoresizingNone;
     sectionHeader.backgroundColor = self.tableView.backgroundColor;
     sectionHeader.textAlignment = NSTextAlignmentCenter;
-    sectionHeader.font = [UIFont boldSystemFontOfSize:13];
+    sectionHeader.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     sectionHeader.textColor = [UIColor whiteColor];
     
     id<NSFetchedResultsSectionInfo> sectionInfo = self.stationsFetchedResultsController.sections[section];
