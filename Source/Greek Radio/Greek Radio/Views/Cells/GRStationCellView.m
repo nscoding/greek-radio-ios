@@ -32,38 +32,65 @@
     if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
     {
         self.backgroundColor = [UIColor whiteColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        UIMenuItem *markAsFavorite =
-            [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
-                                       action:@selector(markAsFavorite:)];
-        
-        UIMenuItem *removeFromFavorite =
-        [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_unmark_as_favorite", @"")
-                                   action:@selector(removeFromFavorite:)];
-
-        UIMenuItem *visitStation =
-            [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
-                                       action:@selector(visitStation:)];
-
-        UIMenuController *menuController = [UIMenuController sharedMenuController];
-        menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, removeFromFavorite, visitStation, nil];
-
-        UILongPressGestureRecognizer *longGesture
-            = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                            action:@selector(onShowMenu:)];
-        [self addGestureRecognizer:longGesture];
-
-        [[NSBundle mainBundle] loadNibNamed:@"GRStationCellView" owner:self options:nil];
-        [self addSubview:self.backgroundView];
-        [self setSelectionStyle:UITableViewCellSelectionStyleNone];
-        
-        self.title.textAlignment = NSTextAlignmentLeft;
-        self.title.numberOfLines = 1;
-        self.subtitle.textAlignment = NSTextAlignmentLeft;
-        self.subtitle.numberOfLines = 1;
+        [self configureMenuController];
+        [self configureLongTapGesture];
+        [self loadNibFromBundle];
     }
 
     return self;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Configure
+// ------------------------------------------------------------------------------------------
+- (void)configureMenuController
+{
+    UIMenuItem *markAsFavorite =
+    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
+                               action:@selector(markAsFavorite:)];
+    
+    UIMenuItem *removeFromFavorite =
+    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_unmark_as_favorite", @"")
+                               action:@selector(removeFromFavorite:)];
+    
+    UIMenuItem *visitStation =
+    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
+                               action:@selector(visitStation:)];
+    
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, removeFromFavorite, visitStation, nil];
+}
+
+
+- (void)configureLongTapGesture
+{
+    UILongPressGestureRecognizer *longTap
+        = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showLongTapMenu:)];
+    [self addGestureRecognizer:longTap];
+}
+
+
+- (void)loadNibFromBundle
+{
+    [[NSBundle mainBundle] loadNibNamed:@"GRStationCellView" owner:self options:nil];
+    [self addSubview:self.backgroundView];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Overrides
+// ------------------------------------------------------------------------------------------
+- (void)prepareForReuse
+{
+    self.title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.subtitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    self.title.textAlignment = NSTextAlignmentNatural;
+    self.title.numberOfLines = 1;
+    self.subtitle.textAlignment = NSTextAlignmentNatural;
+    self.subtitle.numberOfLines = 1;
 }
 
 
@@ -80,60 +107,55 @@
     if (highlighted)
     {
         self.selectionColor = [[UIView alloc] init];
-        self.selectionColor.frame = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height - 2);
+        self.selectionColor.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, self.bounds.size.height - 2.0f);
         self.selectionColor.backgroundColor = [UIColor colorWithRed:0.614f green:0.635f blue:0.619f alpha:0.40];
         [self.backgroundView addSubview:self.selectionColor];
     }
     else
     {
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.4f
                          animations:^
-        {
-            self.selectionColor.alpha = 0.0f;
-        }
-        completion:^(BOOL finished)
          {
-            [self.selectionColor removeFromSuperview];
-        }];
+             self.selectionColor.alpha = 0.0f;
+         }
+                         completion:^(BOOL finished)
+         {
+             [self.selectionColor removeFromSuperview];
+         }];
     }
-}
-
-
-+ (NSString *)reusableIdentifier
-{
-    return @"GRStationCellView";
 }
 
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Menu
 // ------------------------------------------------------------------------------------------
-- (void)onShowMenu:(UIGestureRecognizer *)sender
+- (void)showLongTapMenu:(UIGestureRecognizer *)sender
 {
     [sender.view becomeFirstResponder];
-    
     UIMenuController *menuController = [UIMenuController sharedMenuController];
-    [menuController setTargetRect:sender.view.frame
-                           inView:sender.view.superview];
+    [menuController setTargetRect:sender.view.frame inView:sender.view.superview];
     [menuController setMenuVisible:YES animated:NO];
 }
 
 
-- (void)markAsFavorite:(UIMenuController*)sender
+// ------------------------------------------------------------------------------------------
+#pragma mark - Actions
+// ------------------------------------------------------------------------------------------
+- (void)markAsFavorite:(UIMenuController *)sender
 {
     [self.station setFavourite:@YES];
     [self.station.managedObjectContext save:nil];
 }
 
 
-- (void)removeFromFavorite:(UIMenuController*)sender
+- (void)removeFromFavorite:(UIMenuController *)sender
 {
     [self.station setFavourite:@NO];
     [self.station.managedObjectContext save:nil];
 }
 
 
-- (void)visitStation:(UIMenuController*)sender
+- (void)visitStation:(UIMenuController *)sender
 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.station.stationURL]];
 }
@@ -164,6 +186,15 @@
     }
     
     return [super canPerformAction:action withSender:sender];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Class Methods
+// ------------------------------------------------------------------------------------------
++ (NSString *)reusableIdentifier
+{
+    return NSStringFromClass([self class]);
 }
 
 

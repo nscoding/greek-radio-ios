@@ -20,9 +20,9 @@
 
 typedef enum GRInformationBarOption
 {
-    GRInformationBarOptionGenre = 0,
-    GRInformationBarOptionSong = 1,
-    GRInformationBarOptionArtist = 2,
+    GRInformationBarOptionGenre     = 0,
+    GRInformationBarOptionSong      = 1,
+    GRInformationBarOptionArtist    = 2,
 } GRInformationBarOption;
 
 
@@ -71,7 +71,7 @@ typedef enum GRInformationBarOption
         [self configurePlayButton];
         [self animateStatus];
         
-        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:30
+        self.informationTimer = [NSTimer scheduledTimerWithTimeInterval:30.0f
                                                                  target:self
                                                                selector:@selector(updateSongInformation)
                                                                userInfo:nil
@@ -93,6 +93,7 @@ typedef enum GRInformationBarOption
     self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
+    [self configureNavigationBarBackTitle];
     [super viewDidLoad];
 }
 
@@ -100,18 +101,18 @@ typedef enum GRInformationBarOption
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-    [UIView animateWithDuration:0.4
+
+    [UIView animateWithDuration:0.4f
                      animations:^
     {
-        self.stationLabel.alpha = 1.0;
+        self.stationLabel.alpha = 1.0f;
     }
     completion:^(BOOL finished)
     {
-        [UIView animateWithDuration:0.4
+        [UIView animateWithDuration:0.4f
                          animations:^
         {
-            self.genreLabel.alpha = 1.0;
+            self.genreLabel.alpha = 1.0f;
         }];
     }];
 }
@@ -130,58 +131,63 @@ typedef enum GRInformationBarOption
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and configure
 // ------------------------------------------------------------------------------------------
+- (void)configureNavigationBarBackTitle
+{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
+}
+
+
 - (void)buildAndConfigureStationName:(NSString *)name
 {
     self.stationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.stationLabel.backgroundColor = [UIColor clearColor];
-    self.stationLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:23];
+    self.stationLabel.font = [UIFont boldSystemFontOfSize:29.0f];
     self.stationLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    self.stationLabel.shadowOffset = CGSizeMake(0, 1);
+    self.stationLabel.shadowColor = [UIColor colorWithWhite:0.3f alpha:0.5f];
+    self.stationLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.stationLabel.textAlignment = NSTextAlignmentCenter;
     self.stationLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.stationLabel.text =  [name copy];
     self.stationLabel.numberOfLines = 1;
     self.stationLabel.minimumScaleFactor = 0.3f;
     self.stationLabel.adjustsFontSizeToFitWidth = YES;
-
-    CGSize size = [self.stationLabel sizeThatFits:CGSizeMake(self.view.frame.size.width - 40, FLT_MAX)];
-    self.stationLabel.frame = CGRectMake(0, 0, MIN(size.width, self.view.frame.size.width - 40), size.height);
-    self.stationLabel.alpha = 0.0;
+    self.stationLabel.alpha = 0.0f;
     [self.view addSubview:self.stationLabel];
     
-    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeTop
-                                                         multiplier:1.0
-                                                           constant:20.0]];
+                                                         multiplier:1.0f
+                                                           constant:20.0f]];
 
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeLeft
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:20.0f]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.stationLabel
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeRight
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:-20.0f]];
 }
 
 
@@ -189,18 +195,15 @@ typedef enum GRInformationBarOption
 {
     self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.genreLabel.backgroundColor = [UIColor clearColor];
-    self.genreLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
+    self.genreLabel.font = [UIFont systemFontOfSize:23.0f];
     self.genreLabel.textColor = [UIColor colorWithRed:0.839f green:0.839f blue:0.839f alpha:1.00f];
-    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3 alpha:0.5];
-    self.genreLabel.shadowOffset = CGSizeMake(0, 1);
+    self.genreLabel.shadowColor = [UIColor colorWithWhite:0.3f alpha:0.5f];
+    self.genreLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.genreLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.genreLabel.textAlignment = NSTextAlignmentCenter;
     self.genreLabel.text =  [genre copy];
     self.genreLabel.numberOfLines = 1;
-    self.genreLabel.alpha = 0.0;
-
-    CGSize size = [self.genreLabel sizeThatFits:CGSizeMake(FLT_MAX, 20)];
-    self.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+    self.genreLabel.alpha = 0.0f;
     [self.view addSubview:self.genreLabel];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
@@ -208,39 +211,39 @@ typedef enum GRInformationBarOption
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
                                                           attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeTop
-                                                         multiplier:1.0
-                                                           constant:60.0]];
+                                                         multiplier:1.0f
+                                                           constant:60.0f]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
                                                           attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeLeft
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.genreLabel
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeRight
-                                                         multiplier:1.0
-                                                           constant:0.0]];
+                                                         multiplier:1.0f
+                                                           constant:0.0f]];
 }
 
 
 - (void)buildAndConfigureVolumeSlider
 {
     MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:
-                                    CGRectMake(60, 110, self.view.frame.size.width - 90, 20)];
+                                    CGRectMake(60.0f, 110.0f, self.view.frame.size.width - 90.0f, 20.0f)];
     volumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
     volumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:volumeView];
@@ -318,35 +321,35 @@ typedef enum GRInformationBarOption
     {
         self.informationBarOption = goToOption;
         
-        [UIView animateWithDuration:6.0
-                              delay:0.0
+        [UIView animateWithDuration:6.0f
+                              delay:0.0f
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
              
-             blockSelf.genreLabel.alpha = 1.0;
-             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+             blockSelf.genreLabel.alpha = 1.0f;
+             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2.0f),
                                                        blockSelf.genreLabel.center.y);
              
          } completion:^(BOOL finished) {
              
-             blockSelf.genreLabel.alpha = 1.0;
+             blockSelf.genreLabel.alpha = 1.0f;
              
              blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
              CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width, FLT_MAX)];
              blockSelf.genreLabel.numberOfLines = 1;
              CGFloat centerY = blockSelf.genreLabel.center.y;
-             blockSelf.genreLabel.frame = CGRectMake(0, 0, size.width, size.height);
+             blockSelf.genreLabel.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
              blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
-                                                       (blockSelf.genreLabel.frame.size.width / 2),
+                                                       (blockSelf.genreLabel.frame.size.width / 2.0f),
                                                        centerY);
              
-             [UIView animateWithDuration:12.0
-                                   delay:0.0
+             [UIView animateWithDuration:12.0f
+                                   delay:0.0f
                                  options:UIViewAnimationOptionCurveLinear
                               animations:^{
-                                  blockSelf.genreLabel.alpha = 1.0;
+                                  blockSelf.genreLabel.alpha = 1.0f;
                                   blockSelf.genreLabel.center =
-                                  CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2),
+                                  CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2.0f),
                                               blockSelf.genreLabel.center.y);
                               } completion:^(BOOL finished) {
                                   [blockSelf animateStatus];

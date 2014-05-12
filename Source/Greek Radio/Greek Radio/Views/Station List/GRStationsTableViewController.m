@@ -64,6 +64,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self configureNavigationBarBackTitle];
     [self configureDataSource];
     [self configureTableViewAndSearchBar];
     [self configureTrackClearButton];
@@ -89,6 +91,15 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
+- (void)configureNavigationBarBackTitle
+{
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
+}
+
+
 - (void)configureTableViewAndSearchBar
 {
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
@@ -182,11 +193,11 @@
                 
                 //Use a basic high-pass filter to remove the influence of the gravity
                 shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
-                shakeAccelerometer[0] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[0] * (1.0f - kFilteringFactor);
                 shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
-                shakeAccelerometer[1] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[1] * (1.0f - kFilteringFactor);
                 shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
-                shakeAccelerometer[2] * (1.0 - kFilteringFactor);
+                shakeAccelerometer[2] * (1.0f - kFilteringFactor);
                 
                 // Compute values for the three axes of the acceleromater
                 x = acceleration.x - shakeAccelerometer[0];
@@ -240,12 +251,23 @@
                                              selector:@selector(syncDidEnd:)
                                                  name:GRNotificationSyncManagerDidEnd
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(preferredTextSizeChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
 }
 
 
 - (void)syncDidEnd:(NSNotification *)notification
 {
     [self.refreshControl performSelector:@selector(endRefreshing)];
+}
+
+
+- (void)preferredTextSizeChanged:(NSNotification *)notification
+{
+    [self.tableView reloadData];
 }
 
 
