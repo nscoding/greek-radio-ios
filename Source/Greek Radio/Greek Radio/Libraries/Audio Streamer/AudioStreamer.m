@@ -9,7 +9,6 @@
 #include <netdb.h>
 #endif
 
-#import "TestFlight.h"
 #import "NSInternetDoctor.h"
 #import "UIAlertView+Blocks.h"
 
@@ -685,12 +684,6 @@ void ReadStreamCallBack
                                                           cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
                                                           otherButtonTitles:nil];
                 [alertView show];
-                
-                if (url.absoluteString.length > 0)
-                {
-                    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Εrror)",
-                                                [url absoluteString]]];
-                }
 			}
 			else
             {

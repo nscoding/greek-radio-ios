@@ -7,12 +7,6 @@
 //
 
 #import "GRAppearanceHelper.h"
-#import "UIDevice+Extensions.h"
-
-#import <MediaPlayer/MediaPlayer.h>
-
-// ------------------------------------------------------------------------------------------
-
 
 @implementation GRAppearanceHelper
 
@@ -20,9 +14,10 @@
 + (void)setUpGreekRadioAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.757f green:0.533f blue:0.286f alpha:1.00f]];
-    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2 forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:2.0f forBarMetrics:UIBarMetricsDefault];
     [[UINavigationBar appearance] setTitleTextAttributes:[self customNavigationBarAttributes]];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:[self customBarButtonItemAttributes] forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[self customBarButtonItemAttributes]
+                                                forState:UIControlStateNormal];
 }
 
 
@@ -30,7 +25,8 @@
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:[self defaultNavigationBarAttributes]];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:[self defaultBarButtonItemAttributes] forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:[self defaultBarButtonItemAttributes]
+                                                forState:UIControlStateNormal];
 }
 
 
@@ -44,7 +40,7 @@
     return @{
              NSForegroundColorAttributeName : textColor,
              NSFontAttributeName : [UIFont systemFontOfSize:16.0f]
-             };
+            };
 }
 
 
@@ -55,7 +51,7 @@
     return @{
              NSForegroundColorAttributeName : textColor,
              NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f]
-             };
+            };
 }
 
 
@@ -64,7 +60,7 @@
     return @{
              NSForegroundColorAttributeName : [UIColor blackColor],
              NSFontAttributeName : [UIFont boldSystemFontOfSize:13.0f],
-             };
+            };
 }
 
 
@@ -73,7 +69,7 @@
     return @{
              NSForegroundColorAttributeName : [UIColor blackColor],
              NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
-             };
+            };
 }
 
 

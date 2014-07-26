@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132003AF17E65A2C00829AA0 /* CoreMotion.framework */; };
-		1330039D183B97ED00AA5AFF /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13300397183B97ED00AA5AFF /* libTestFlight.a */; };
-		1330039F183B97ED00AA5AFF /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 13300399183B97ED00AA5AFF /* release_notes.md */; };
 		1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */; };
 		1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */; };
 		13A4C73F1873438D005DB591 /* GRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A4C73E1873438D005DB591 /* GRUserDefaults.m */; };
@@ -66,12 +64,6 @@
 
 /* Begin PBXFileReference section */
 		132003AF17E65A2C00829AA0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		13300397183B97ED00AA5AFF /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		13300398183B97ED00AA5AFF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		13300399183B97ED00AA5AFF /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		1330039A183B97ED00AA5AFF /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		1330039B183B97ED00AA5AFF /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		1330039C183B97ED00AA5AFF /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		1374C1581870439B006B2A15 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
 		1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 		1374C15C1870439B006B2A15 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
@@ -168,7 +160,6 @@
 			files = (
 				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
 				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
-				1330039D183B97ED00AA5AFF /* libTestFlight.a in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
@@ -187,20 +178,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		13300396183B97ED00AA5AFF /* TestFlightSDK3 */ = {
-			isa = PBXGroup;
-			children = (
-				13300397183B97ED00AA5AFF /* libTestFlight.a */,
-				13300398183B97ED00AA5AFF /* README.md */,
-				13300399183B97ED00AA5AFF /* release_notes.md */,
-				1330039A183B97ED00AA5AFF /* TestFlight+AsyncLogging.h */,
-				1330039B183B97ED00AA5AFF /* TestFlight+ManualSessions.h */,
-				1330039C183B97ED00AA5AFF /* TestFlight.h */,
-			);
-			name = TestFlightSDK3;
-			path = TestFlightSDK2;
-			sourceTree = "<group>";
-		};
 		1374C1561870439B006B2A15 /* UIActionSheet-Blocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,7 +516,6 @@
 				CD6AD35F17312F5D0009A106 /* Audio Streamer */,
 				CDA752DF1730451E005B25EC /* libz.dylib */,
 				CDD7EBDF1733B66100225F5A /* Reachability */,
-				13300396183B97ED00AA5AFF /* TestFlightSDK3 */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -606,7 +582,6 @@
 				CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */,
 				CD7A018C17327ADD003A2E2D /* GRStationsTableViewController.xib in Resources */,
 				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
-				1330039F183B97ED00AA5AFF /* release_notes.md in Resources */,
 				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
 				CD53C95D1737B0D400264230 /* .gitignore in Resources */,
 				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,

@@ -334,6 +334,12 @@
                           withRowAnimation:UITableViewRowAnimationFade];
             break;
         }
+        case NSFetchedResultsChangeMove:
+        case NSFetchedResultsChangeUpdate:
+        {
+            NSAssert(NO, @"We should not encounter a Move or Update section.");
+            break;
+        }
     }
 }
 

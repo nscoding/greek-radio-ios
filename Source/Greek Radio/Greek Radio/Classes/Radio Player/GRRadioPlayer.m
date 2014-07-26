@@ -8,8 +8,6 @@
 
 #import "GRRadioPlayer.h"
 
-#import "TestFlight.h"
-
 
 // ------------------------------------------------------------------------------------------
 
@@ -96,7 +94,6 @@
     [audioStreamer start];
     audioStreamer.isPlaying = YES;
     
-    [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Playing)", self.stationName]];
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 

@@ -7,10 +7,21 @@
 //
 
 #import "GRAppDelegate.h"
+#import "GRNavigationController.h"
 #import "GRStationsTableViewController.h"
 
 #import "Appirater.h"
-#import "TestFlight.h"
+
+
+// ------------------------------------------------------------------------------------------
+
+
+@interface GRAppDelegate ()
+
+@property (nonatomic, strong, readwrite) GRStationsTableViewController *listTableViewController;
+@property (nonatomic, strong, readwrite) GRNavigationController *menuNavigationController;
+
+@end
 
 
 // ------------------------------------------------------------------------------------------
@@ -23,26 +34,23 @@
 {
     [UIApplication sharedApplication].idleTimerDisabled = [GRUserDefaults isAutomaticLockDisabled];
 
-    [TestFlight takeOff:@"fbd248aa-5493-47ee-9487-de4639b10d0b"];
-
     NSString *appVersionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
     [[NSUserDefaults standardUserDefaults] setObject:appVersionString forKey:@"currentVersionKey"];
-
     [GRAppearanceHelper setUpGreekRadioAppearance];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
     [self buildAndConfigureMainWindow];
     [self buildAndConfigureStationsViewController];
+    [self configureAppirater];
     [self registerObservers];
     
-    [Appirater setAppId:@"321094050"];
-    [Appirater setDaysUntilPrompt:3];
-    [Appirater setUsesUntilPrompt:3];
-    [Appirater setSignificantEventsUntilPrompt:-1];
-    [Appirater setTimeBeforeReminding:3];
-    [Appirater setUsesAnimation:YES];    
-    [Appirater setDebug:NO];
-    
+    // Begin parsing the XML file located on our server www.nscoding.co.uk/..
+    // with an asynchronous execution in global concurrent queue
+    //
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+        [[GRWebService shared] parseXML];
+    });
+
     if ([NSInternetDoctor shared].connected)
     {
         [UIAlertView showWithTitle:NSLocalizedString(@"app_welcome_title", @"")
@@ -57,13 +65,49 @@
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
                                                     (int64_t)(delayInSeconds * NSEC_PER_SEC));
             
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+            {
                 [Appirater appLaunched:YES];
             });
         }];
     }
     
     return YES;
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Build and configure
+// ------------------------------------------------------------------------------------------
+- (void)buildAndConfigureMainWindow
+{
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [self.window makeKeyAndVisible];
+}
+
+
+- (void)buildAndConfigureStationsViewController
+{
+    self.listTableViewController = [[GRStationsTableViewController alloc] init];
+        self.menuNavigationController
+        = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];
+    
+    self.menuNavigationController.navigationBar.translucent = NO;
+    self.menuNavigationController.navigationBarHidden = NO;
+    self.listTableViewController.navigationController = self.menuNavigationController;
+    self.window.rootViewController = self.menuNavigationController;
+}
+
+
+- (void)configureAppirater
+{
+    [Appirater setAppId:@"321094050"];
+    [Appirater setDaysUntilPrompt:3];
+    [Appirater setUsesUntilPrompt:3];
+    [Appirater setSignificantEventsUntilPrompt:-1];
+    [Appirater setTimeBeforeReminding:3];
+    [Appirater setUsesAnimation:YES];
+    [Appirater setDebug:NO];
 }
 
 
@@ -96,7 +140,7 @@
 
 - (void)activityDidStart:(NSNotification *)notification
 {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 
@@ -104,37 +148,8 @@
 {
     if ([GRRadioPlayer shared].isPlaying == NO)
     {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
-}
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Build and configure
-// ------------------------------------------------------------------------------------------
-- (void)buildAndConfigureMainWindow
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.window makeKeyAndVisible];
-}
-
-
-- (void)buildAndConfigureStationsViewController
-{
-    // Override point for customization after application launch.
-    self.listTableViewController = [[GRStationsTableViewController alloc] init];
-    
-    self.menuNavigationController
-        = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];
-    
-    self.menuNavigationController.navigationBar.translucent = NO;
-    self.menuNavigationController.navigationBarHidden = NO;
-    self.listTableViewController.navigationController = self.menuNavigationController;
-    self.window.rootViewController = self.menuNavigationController;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[GRWebService shared] parseXML];
-    });
 }
 
 

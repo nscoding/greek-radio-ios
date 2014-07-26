@@ -8,7 +8,6 @@
 
 #import "GRPlayerViewController.h"
 #import "GRShareHelper.h"
-#import "TestFlight.h"
 #import "GRShoutCastHelper.h"
 #import "UIDevice+Extensions.h"
 
@@ -552,8 +551,6 @@ typedef enum GRInformationBarOption
         }
         else if (indexPath.row == 1)
         {
-            // inform test flight
-            [TestFlight passCheckpoint:[NSString stringWithFormat:@"%@ - (Favorite)",self.currentStation.title]];
             self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
             [self.currentStation.managedObjectContext save:nil];
         }

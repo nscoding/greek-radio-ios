@@ -102,7 +102,8 @@
     
     if ([[NSInternetDoctor shared] connected] == NO)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^()
+        {
             [[NSInternetDoctor shared] showNoInternetAlert];
             [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
         });
@@ -112,7 +113,8 @@
         return;
     }
 
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^()
+    {
         [[MTStatusBarOverlay sharedOverlay] postImmediateMessage:NSLocalizedString(@"label_syncing", @"")
                                                         animated:YES];
         [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
@@ -121,17 +123,15 @@
     self.isParsing = YES;
     self.dateLastSynced = [NSDate date];
     
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^
     {
         [self parseXMLFileAtURL:kWebServiceURL];
         
-        dispatch_sync(dispatch_get_main_queue(), ^
+        dispatch_sync(dispatch_get_main_queue(), ^()
         {
-
             [[MTStatusBarOverlay sharedOverlay] hide];
             [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-
         });
     });
 }
@@ -157,7 +157,7 @@
 {
     self.dateLastSynced = nil;
 
-    dispatch_async(dispatch_get_main_queue(), ^
+    dispatch_async(dispatch_get_main_queue(), ^()
     {
         [[MTStatusBarOverlay sharedOverlay] hide];
         if ([[NSInternetDoctor shared] connected])

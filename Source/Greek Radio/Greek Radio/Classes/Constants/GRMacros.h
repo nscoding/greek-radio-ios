@@ -21,3 +21,10 @@ NSLog(@"(%s), %@", #condition, [NSString stringWithFormat:__VA_ARGS__]); \
 #    define DLog(...)
 #endif
 #define ALog(...) NSLog(__VA_ARGS__)
+
+#define WEAKIFY(var) \
+__weak typeof(var) weakVar = var;
+
+#define STRONGIFY(var) \
+__strong typeof(var) var = weakVar; \
+if (var == nil) return;
