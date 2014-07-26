@@ -7,14 +7,6 @@
 //
 
 
-#define GRAssert(condition, ...) \
-do \
-{ \
-if (!(condition)) { \
-NSLog(@"(%s), %@", #condition, [NSString stringWithFormat:__VA_ARGS__]); \
-} \
-} while(0)
-
 #ifdef DEBUG
 #    define DLog(...) NSLog(__VA_ARGS__)
 #else
