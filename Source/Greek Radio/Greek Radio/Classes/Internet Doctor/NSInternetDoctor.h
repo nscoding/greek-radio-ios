@@ -6,15 +6,15 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import "Reachability.h"
 
 @interface NSInternetDoctor : NSObject
 
-@property (nonatomic, assign) BOOL connected;
+@property (nonatomic, assign, getter: isConnected) BOOL connected;
 
+/// Signleton
 + (NSInternetDoctor *)shared;
 
+/// Method to show the no internet alert
 - (void)showNoInternetAlert;
-
 
 @end

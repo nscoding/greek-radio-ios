@@ -12,12 +12,15 @@
 
 @interface GRUserDefaults : NSObject
 
+/// Method to check if the automatic lock is disabled
 + (BOOL)isAutomaticLockDisabled;
 + (void)setAutomaticLockDisabled:(BOOL)disabled;
 
+/// Method to check if the shake for shuffle is enabled
 + (BOOL)isShakeForRandomStationEnabled;
 + (void)setShakeForRandomStationEnabled:(BOOL)enabled;
 
+/// Method to remember the last selected search scope
 + (NSUInteger)currentSearchScope;
 + (void)setCurrentSearchScope:(NSInteger)searchScope;
 

@@ -8,11 +8,13 @@
 
 #import "NSInternetDoctor.h"
 
+#import "Reachability.h"
+
 
 // ------------------------------------------------------------------------------------------
 
 
-#define kPingServerNSCoding @"www.nscoding.co.uk"
+static NSString *kServerURL = @"www.nscoding.co.uk";
 
 
 // ------------------------------------------------------------------------------------------
@@ -25,73 +27,59 @@
 @end
 
 
+// ------------------------------------------------------------------------------------------
+
+
 @implementation NSInternetDoctor
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - Singleton
+// ------------------------------------------------------------------------------------------
 + (NSInternetDoctor *)shared
 {
     static dispatch_once_t pred;
     static NSInternetDoctor *shared = nil;
     
     dispatch_once(&pred, ^()
-                  {
-                      shared = [[NSInternetDoctor alloc] init];
-                      [shared buildAndConfigure];
-                  });
+    {
+        shared = [[NSInternetDoctor alloc] init];
+    });
     
     return shared;
 }
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - Initializer
+// ------------------------------------------------------------------------------------------
+- (instancetype)init
+{
+    if ((self = [super init]))
+    {
+        _connected = YES;
+
+        [self registerObservers];
+        [self pingNSCoding];
+    }
+    
+    return self;
+}
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
 // ------------------------------------------------------------------------------------------
-- (void)buildAndConfigure
+- (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
-    self.connected = YES;
-    
-    [self pingNSCoding];
 }
 
 
-// ------------------------------------------------------------------------------------------
-#pragma mark - Ping
-// ------------------------------------------------------------------------------------------
--(void)pingNSCoding
-{
-    self.nscodingReachability = [Reachability reachabilityWithHostname:kPingServerNSCoding];
-    
-    __weak NSInternetDoctor *blockSelf = self;
-    
-    self.nscodingReachability.reachableBlock = ^(Reachability *reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            blockSelf.connected = YES;
-        });
-    };
-    
-    self.nscodingReachability.unreachableBlock = ^(Reachability *reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            blockSelf.connected = NO;
-        });
-    };
-    
-    [self.nscodingReachability startNotifier];
-}
-
-
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Reachability notifications
-// ------------------------------------------------------------------------------------------
--(void)reachabilityChanged:(NSNotification*)notification
+- (void)reachabilityChanged:(NSNotification *)notification
 {
     Reachability *reach = [notification object];
     if (reach == self.nscodingReachability)
@@ -102,7 +90,37 @@
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - Alert panel
+#pragma mark - Ping
+// ------------------------------------------------------------------------------------------
+-(void)pingNSCoding
+{
+    self.nscodingReachability = [Reachability reachabilityWithHostname:kServerURL];
+    
+    WEAKIFY(self);
+    self.nscodingReachability.reachableBlock = ^(Reachability *reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^()
+        {
+            STRONGIFY(self);
+            self.connected = YES;
+        });
+    };
+    
+    self.nscodingReachability.unreachableBlock = ^(Reachability *reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^()
+        {
+            STRONGIFY(self);
+            self.connected = NO;
+        });
+    };
+    
+    [self.nscodingReachability startNotifier];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Exposed Method
 // ------------------------------------------------------------------------------------------
 - (void)showNoInternetAlert
 {
