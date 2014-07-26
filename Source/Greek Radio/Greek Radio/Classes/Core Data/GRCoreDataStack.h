@@ -7,22 +7,21 @@
 //
 
 
-#define kManagedObjectContextKey @"ManagedObjectContextKey"
-
 @interface GRCoreDataStack : NSObject
-{
-@private
-	NSManagedObjectModel *_managedObjectModel;
-	NSPersistentStoreCoordinator *_persistentStoreCoordinator;
-}
 
 @property(nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property(nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property(nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 + (GRCoreDataStack *)shared;
+
+/// Saves changes on the core data context
 - (void)saveChanges;
+
+/// Method to retrieve the documents direcectory for this application, returns nil if it doesn't exist
 - (NSURL *)applicationDocumentsDirectoryURL;
+
+/// Exposed methods which is used from the DAO to fetch specific entities with a specific predicate.
 - (NSArray *)fetchObjectsForEntityName:(NSString *)newEntityName withPredicate:(NSPredicate *)predicate;
 
 @end

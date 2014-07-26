@@ -8,13 +8,26 @@
 
 #import "GRCoreDataStack.h"
 
+
+// ------------------------------------------------------------------------------------------
+
+
+static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
+
+
 // ------------------------------------------------------------------------------------------
 
 
 @implementation GRCoreDataStack
+{
+@private
+    NSManagedObjectModel *_managedObjectModel;
+    NSPersistentStoreCoordinator *_persistentStoreCoordinator;
+}
 
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
@@ -33,19 +46,14 @@
 }
 
 
+// ------------------------------------------------------------------------------------------
+#pragma mark - Initializer
+// ------------------------------------------------------------------------------------------
 - (id)init
 {
     if ((self = [super init]))
     {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(contextDidSave:)
-                                                     name:NSManagedObjectContextDidSaveNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(contextDidSave:)
-                                                     name:NSManagedObjectContextObjectsDidChangeNotification
-                                                   object:nil];
+        [self registerNotitifacations];
     }
     
     return self;
@@ -55,6 +63,20 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
 // ------------------------------------------------------------------------------------------
+- (void)registerNotitifacations
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextDidSave:)
+                                                 name:NSManagedObjectContextDidSaveNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(contextDidSave:)
+                                                 name:NSManagedObjectContextObjectsDidChangeNotification
+                                               object:nil];
+}
+
+
 - (void)contextDidSave:(NSNotification *)notification
 {
     [self performSelectorOnMainThread:@selector(mergeChangesWithNotification:)
@@ -75,12 +97,10 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     [managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
     
-    
     if (managedObjectContext != nil)
     {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
         {
-            
             /*
              Replace this implementation with code to handle the error appropriately.
              
@@ -96,13 +116,10 @@
     }
 }
 
-- (void)reset
-{
-    [[self managedObjectContext] reset];
-}
 
-#pragma mark -
-#pragma mark Core Data stack
+// ------------------------------------------------------------------------------------------
+#pragma mark - Core Data Stack
+// ------------------------------------------------------------------------------------------
 
 /**
  Returns the managed object context for the application.
@@ -111,27 +128,26 @@
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *managedObjectContext = nil;
-    
     @synchronized(kManagedObjectContextKey)
     {
         managedObjectContext = [[[NSThread currentThread] threadDictionary] objectForKey:kManagedObjectContextKey];
         if (managedObjectContext == nil)
         {
             NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-            
-            
             if (coordinator != nil)
             {
                 managedObjectContext = [[NSManagedObjectContext alloc] init];
                 [managedObjectContext setPersistentStoreCoordinator:coordinator];
                 
-                [[[NSThread currentThread] threadDictionary] setObject:managedObjectContext forKey:kManagedObjectContextKey];
+                [[[NSThread currentThread] threadDictionary] setObject:managedObjectContext
+                                                                forKey:kManagedObjectContextKey];
             }
         }
     }
     
     return managedObjectContext;
 }
+
 
 /**
  Returns the managed object model for the application.
@@ -144,13 +160,12 @@
         return _managedObjectModel;
     }
     
-    NSBundle *bundle = [NSBundle mainBundle];
-    
-    NSURL *modelURL = [bundle URLForResource:@"GreekRadioModel" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"GreekRadioModel" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     
     return _managedObjectModel;
 }
+
 
 /**
  Returns the persistent store coordinator for the application.
@@ -166,16 +181,13 @@
     NSURL *dbURL = [[self applicationDocumentsDirectoryURL] URLByAppendingPathComponent:@"GreekRadioModel.sqlite"];
     
     NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    
-    NSDictionary *optionsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],
-                                       NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES],
-                                       NSInferMappingModelAutomaticallyOption, nil];
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                    initWithManagedObjectModel:[self managedObjectModel]];
     
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                    configuration:nil
                                                              URL:dbURL
-                                                         options:optionsDictionary
+                                                         options:[self migrationAndPersistenceOptions]
                                                            error:&error])
     {
         DLog(@"Add persistent store failed with error %@, %@", error, [error userInfo]);
@@ -185,15 +197,15 @@
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                        configuration:nil
                                                                  URL:dbURL
-                                                             options:optionsDictionary
+                                                             options:[self migrationAndPersistenceOptions]
                                                                error:&error])
         {
             DLog(@"Add persistent store after delete and recreated failed with error %@, %@", error, [error userInfo]);
             _persistentStoreCoordinator = nil;
             
+            // Something went terribly wrong, the application has to abort
             abort();
         }
-        
     }
     
     return _persistentStoreCoordinator;
@@ -202,11 +214,12 @@
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - Helpers
+#pragma mark - Exposed Methods
 // ------------------------------------------------------------------------------------------
 - (NSArray *)fetchObjectsForEntityName:(NSString *)newEntityName withPredicate:(NSPredicate*)predicate
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:newEntityName inManagedObjectContext:[self managedObjectContext]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:newEntityName
+                                              inManagedObjectContext:[self managedObjectContext]];
 	
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = entity;
@@ -222,7 +235,7 @@
     
     if (error != nil)
     {
-        [NSException raise:NSGenericException format:@"Error: %@",[error description]];
+        [NSException raise:NSGenericException format:@"Error: %@", [error description]];
     }
 	else
 	{
@@ -244,11 +257,11 @@
 
 
 // ------------------------------------------------------------------------------------------
-#pragma mark - Operations
+#pragma mark - Helpers
 // ------------------------------------------------------------------------------------------
-// Delete our local SQLite db
 - (void)deleteDatabase
 {
+    // Delete our local SQLite db
     // Do not delete anything if we are using a in-memory persistent store.
     BOOL isInMemory = NO;
     
@@ -271,6 +284,15 @@
     {
         DLog(@"Persistent store deletion failed with error %@, %@", error, [error userInfo]);
     }
+}
+
+
+- (NSDictionary *)migrationAndPersistenceOptions
+{
+    return  @{
+              NSMigratePersistentStoresAutomaticallyOption : @YES,
+              NSInferMappingModelAutomaticallyOption : @YES
+             };
 }
 
 

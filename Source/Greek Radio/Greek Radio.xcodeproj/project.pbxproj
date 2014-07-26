@@ -71,7 +71,6 @@
 		13A4C7311873429C005DB591 /* GRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMacros.h; sourceTree = "<group>"; };
 		13A4C73D1873438D005DB591 /* GRUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRUserDefaults.h; sourceTree = "<group>"; };
 		13A4C73E1873438D005DB591 /* GRUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRUserDefaults.m; sourceTree = "<group>"; };
-		13A4C7401873451B005DB591 /* GRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRConstants.h; sourceTree = "<group>"; };
 		13CDC15F187062970041FED4 /* GRStationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsManager.h; sourceTree = "<group>"; };
 		13CDC160187062970041FED4 /* GRStationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsManager.m; sourceTree = "<group>"; };
 		13CDC18218715D4E0041FED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -293,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				13A4C7311873429C005DB591 /* GRMacros.h */,
-				13A4C7401873451B005DB591 /* GRConstants.h */,
 				13A4C73D1873438D005DB591 /* GRUserDefaults.h */,
 				13A4C73E1873438D005DB591 /* GRUserDefaults.m */,
 			);

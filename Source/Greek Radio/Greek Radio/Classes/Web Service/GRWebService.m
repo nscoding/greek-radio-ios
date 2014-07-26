@@ -45,6 +45,7 @@
 
 @implementation GRWebService
 
+
 // ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
 // ------------------------------------------------------------------------------------------
@@ -54,9 +55,9 @@
     static GRWebService *shared = nil;
     
     dispatch_once(&pred, ^()
-                  {
-                      shared = [[GRWebService alloc] init];
-                  });
+    {
+        shared = [[GRWebService alloc] init];
+    });
     
     return shared;
 }
