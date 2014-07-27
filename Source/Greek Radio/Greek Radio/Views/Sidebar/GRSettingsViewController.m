@@ -41,7 +41,7 @@ static NSString *kSettingCellIdentifier = @"GRSettingsCell";
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                   target:self
                                                   action:@selector(closeSettingsViewController)];    
-    self.navigationItem.rightBarButtonItem = doneItem;
+    self.navigationItem.leftBarButtonItem = doneItem;
 }
 
 

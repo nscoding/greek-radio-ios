@@ -10,6 +10,7 @@
 @interface GRAppearanceHelper : NSObject
 
 + (void)setUpGreekRadioAppearance;
+
 + (void)setUpDefaultAppearance;
 
 @end
