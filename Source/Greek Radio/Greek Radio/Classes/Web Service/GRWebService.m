@@ -101,7 +101,7 @@
         return;
     }
     
-    if ([[NSInternetDoctor shared] connected] == NO)
+    if ([[NSInternetDoctor shared] isConnected] == NO)
     {
         dispatch_async(dispatch_get_main_queue(), ^()
         {
@@ -161,7 +161,7 @@
     dispatch_async(dispatch_get_main_queue(), ^()
     {
         [[MTStatusBarOverlay sharedOverlay] hide];
-        if ([[NSInternetDoctor shared] connected])
+        if ([[NSInternetDoctor shared] isConnected])
         {
             [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
                                message:NSLocalizedString(@"app_fetch_stations_error", @"")

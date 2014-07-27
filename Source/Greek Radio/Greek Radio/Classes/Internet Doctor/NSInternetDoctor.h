@@ -9,7 +9,7 @@
 
 @interface NSInternetDoctor : NSObject
 
-@property (nonatomic, assign, getter: isConnected) BOOL connected;
+@property (nonatomic, assign, getter = isConnected) BOOL connected;
 
 /// Signleton
 + (NSInternetDoctor *)shared;

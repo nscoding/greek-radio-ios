@@ -62,7 +62,7 @@
 // ------------------------------------------------------------------------------------------
 - (void)playStation:(GRStation *)station
 {
-    if ([[NSInternetDoctor shared] connected] == NO)
+    if ([[NSInternetDoctor shared] isConnected] == NO)
     {
         [self stopPlayingStation];
         [[NSInternetDoctor shared] showNoInternetAlert];

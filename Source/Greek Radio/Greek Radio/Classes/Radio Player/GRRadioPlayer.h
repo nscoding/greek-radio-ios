@@ -18,6 +18,7 @@
 + (GRRadioPlayer *)shared;
 
 - (void)playStation:(GRStation *)station;
+
 - (void)stopPlayingStation;
 
 - (BOOL)isPlaying;

@@ -16,7 +16,7 @@
 
 + (void)tweetTappedOnController:(UIViewController *)controller
 {
-    if ([[NSInternetDoctor shared] connected] == NO)
+    if ([[NSInternetDoctor shared] isConnected] == NO)
     {
         [[NSInternetDoctor shared] showNoInternetAlert];
         return;
@@ -57,7 +57,7 @@
 
 + (void)facebookTappedOnController:(UIViewController *)controller
 {
-    if ([[NSInternetDoctor shared] connected] == NO)
+    if ([[NSInternetDoctor shared] isConnected] == NO)
     {
         [[NSInternetDoctor shared] showNoInternetAlert];
         return;
