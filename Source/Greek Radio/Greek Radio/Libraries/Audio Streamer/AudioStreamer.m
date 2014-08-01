@@ -676,14 +676,16 @@ void ReadStreamCallBack
 		{
 			[self stop];
             
-			if ([[NSInternetDoctor shared] connected])
+			if ([[NSInternetDoctor shared] isConnected])
             {
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                                                                    message:NSLocalizedString(@"app_player_error_subtitle", @"")
-                                                                   delegate:nil
-                                                          cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                                                          otherButtonTitles:nil];
-                [alertView show];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                                                        message:NSLocalizedString(@"app_player_error_subtitle", @"")
+                                                                       delegate:nil
+                                                              cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                });
 			}
 			else
             {
