@@ -11,6 +11,14 @@
 #import "MTStatusBarOverlay.h"
 
 
+typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
+{
+    GRWebServiceSyncStatusError = -1,
+    GRWebServiceSyncStatusNoInternet = 0,
+    GRWebServiceSyncStatusSuccessful = 0,
+};
+
+
 // ------------------------------------------------------------------------------------------
 
 
@@ -96,44 +104,78 @@
 // ------------------------------------------------------------------------------------------
 - (void)parseXML
 {
-    if (self.isParsing)
+    // Begin parsing the XML file located on our server www.nscoding.co.uk/..
+    // with an asynchronous execution in global concurrent queue
+    [self parseXMLInBackgroundThread];
+}
+
+
+- (void)parseXMLInBackgroundThread
+{
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^
     {
-        return;
-    }
-    
-    if ([[NSInternetDoctor shared] isConnected] == NO)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^()
+        if (self.isParsing)
         {
-            [[NSInternetDoctor shared] showNoInternetAlert];
-            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-        });
-
-        self.isParsing = NO;
+            return;
+        }
         
-        return;
-    }
+        if ([[NSInternetDoctor shared] isConnected] == NO)
+        {
+            self.isParsing = NO;
 
+            [self endSyncingOnMainThread:GRWebServiceSyncStatusNoInternet];
+        }
+        else
+        {
+            self.isParsing = YES;
+            self.dateLastSynced = [NSDate date];
+            
+            [self startSyncingOnMainThread];
+            [self parseXMLFileAtURL:kWebServiceURL];
+            [self endSyncingOnMainThread:GRWebServiceSyncStatusSuccessful];
+        }
+    });
+}
+
+
+
+- (void)startSyncingOnMainThread
+{
     dispatch_async(dispatch_get_main_queue(), ^()
     {
         [[MTStatusBarOverlay sharedOverlay] postImmediateMessage:NSLocalizedString(@"label_syncing", @"")
                                                         animated:YES];
-        [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:nil];
+        [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:self];
     });
+}
 
-    self.isParsing = YES;
-    self.dateLastSynced = [NSDate date];
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    dispatch_async(queue, ^
+
+- (void)endSyncingOnMainThread:(GRWebServiceSyncStatus)status
+{
+    NSAssert([NSThread isMainThread] == NO, @"End syncing should be on a background thread.");
+    dispatch_sync(dispatch_get_main_queue(), ^()
     {
-        [self parseXMLFileAtURL:kWebServiceURL];
-        
-        dispatch_sync(dispatch_get_main_queue(), ^()
+        NSAssert([NSThread isMainThread], @"UI and notifications should be on the main thread.");
+
+        if (status == GRWebServiceSyncStatusNoInternet)
         {
-            [[MTStatusBarOverlay sharedOverlay] hide];
-            [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-        });
+            [[NSInternetDoctor shared] showNoInternetAlert];
+        }
+        else if (status == GRWebServiceSyncStatusError)
+        {
+            if ([[NSInternetDoctor shared] isConnected])
+            {
+                [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                   message:NSLocalizedString(@"app_fetch_stations_error", @"")
+                         cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                         otherButtonTitles:nil
+                                  tapBlock:nil];
+            }
+        }
+
+        [[MTStatusBarOverlay sharedOverlay] hide];
+        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:self];
     });
 }
 
@@ -157,23 +199,9 @@
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     self.dateLastSynced = nil;
-
-    dispatch_async(dispatch_get_main_queue(), ^()
-    {
-        [[MTStatusBarOverlay sharedOverlay] hide];
-        if ([[NSInternetDoctor shared] isConnected])
-        {
-            [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
-                               message:NSLocalizedString(@"app_fetch_stations_error", @"")
-                     cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
-                     otherButtonTitles:nil
-                              tapBlock:nil];
-        }
-    
-        [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:nil];
-    });
-    
     self.isParsing = NO;
+    
+    [self endSyncingOnMainThread:GRWebServiceSyncStatusError];
 }
 
 

@@ -39,7 +39,7 @@
     
     return @{
              NSForegroundColorAttributeName : textColor,
-             NSFontAttributeName : [UIFont systemFontOfSize:18.0f]
+             NSFontAttributeName : [UIFont boldSystemFontOfSize:17.0f]
             };
 }
 
@@ -47,10 +47,17 @@
 + (NSDictionary *)customNavigationBarAttributes
 {
     UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
+    UIFont *textFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:21.0f];
+ 
+    NSAssert(textColor, @"HelveticaNeue-Light was not found!");
+    if (textFont == nil)
+    {
+        textFont = [UIFont systemFontOfSize:21.0f];
+    }
     
     return @{
              NSForegroundColorAttributeName : textColor,
-             NSFontAttributeName : [UIFont boldSystemFontOfSize:18.0f]
+             NSFontAttributeName : textFont
             };
 }
 

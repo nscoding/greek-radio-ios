@@ -71,9 +71,9 @@
     [self configureTrackClearButton];
     [self registerObservers];
     
+    [self buildAndConfigurePullToRefresh];
     [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
-    [self buildAndConfigurePullToRefresh];
     [self buildAndConfigureRightGesture];
 }
 
@@ -298,10 +298,7 @@
 // ------------------------------------------------------------------------------------------
 - (void)updateStations
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
-        [[GRWebService shared] parseXML];
-    });
+    [[GRWebService shared] parseXML];
 }
 
 

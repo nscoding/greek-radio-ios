@@ -99,20 +99,14 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
     WEAKIFY(self);
     self.nscodingReachability.reachableBlock = ^(Reachability *reachability)
     {
-        dispatch_async(dispatch_get_main_queue(), ^()
-        {
-            STRONGIFY(self);
-            self.connected = YES;
-        });
+        STRONGIFY(self);
+        self.connected = YES;
     };
     
     self.nscodingReachability.unreachableBlock = ^(Reachability *reachability)
     {
-        dispatch_async(dispatch_get_main_queue(), ^()
-        {
-            STRONGIFY(self);
-            self.connected = NO;
-        });
+        STRONGIFY(self);
+        self.connected = NO;
     };
     
     [self.nscodingReachability startNotifier];

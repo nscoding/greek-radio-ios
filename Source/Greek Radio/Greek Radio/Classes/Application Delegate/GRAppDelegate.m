@@ -43,14 +43,6 @@
     [self configureAppirater];
     [self registerObservers];
     
-    // Begin parsing the XML file located on our server www.nscoding.co.uk/..
-    // with an asynchronous execution in global concurrent queue
-    //
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-    {
-        [[GRWebService shared] parseXML];
-    });
-
     if ([NSInternetDoctor shared].connected)
     {
         [UIAlertView showWithTitle:NSLocalizedString(@"app_welcome_title", @"")
@@ -72,6 +64,8 @@
         }];
     }
     
+    [[GRWebService shared] parseXML];
+
     return YES;
 }
 
