@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 {
     GRWebServiceSyncStatusError = -1,
     GRWebServiceSyncStatusNoInternet = 0,
-    GRWebServiceSyncStatusSuccessful = 0,
+    GRWebServiceSyncStatusSuccessful = 1,
 };
 
 
