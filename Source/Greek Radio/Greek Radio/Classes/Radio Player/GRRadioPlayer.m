@@ -154,15 +154,11 @@
     self.stationName = [NSString stringWithFormat:@"%@",self.currentStation.title];
 
     [self createPlayer];
-    
-    [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
 
 - (void)stopPlayingStation
 {
-    [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
-    
     self.currentStation = nil;
     self.stationName = @"";
     self.streamURL = @"";
@@ -197,6 +193,7 @@
     self.player = [[AVPlayer alloc] initWithURL:url];
     [self.player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
     [self.player play];
+    [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
 
@@ -208,6 +205,8 @@
         [self.player pause];
         self.player = nil;
     }
+    
+    [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
 }
 
 
