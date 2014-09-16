@@ -21,15 +21,16 @@
 // ------------------------------------------------------------------------------------------
 
 
-@interface GRStationsTableViewController () <UIAccelerometerDelegate, GRStationsManagerDelegate, GRPlayerViewControllerDelegate>
+@interface GRStationsTableViewController() <UIAccelerometerDelegate, GRStationsManagerDelegate,
+                                            GRPlayerViewControllerDelegate, UISearchBarDelegate, UITextFieldDelegate>
 {
 	CFTimeInterval lastTime;
 	CGFloat	shakeAccelerometer[3];
 }
 
-@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) CMMotionManager *motionManager;
 @property (nonatomic, strong) GRStationsManager *stationManager;
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 @end
 
@@ -54,7 +55,7 @@
 // ------------------------------------------------------------------------------------------
 - (id)init
 {
-    return [super initWithNibName:@"GRStationsTableViewController" bundle:nil];
+    return [super init];
 }
 
 
@@ -67,10 +68,11 @@
     
     [self configureNavigationBarBackTitle];
     [self configureDataSource];
-    [self configureTableViewAndSearchBar];
+    [self configureTableView];
     [self configureTrackClearButton];
     [self registerObservers];
     
+    [self buildAndConfigureSearchBar];
     [self buildAndConfigurePullToRefresh];
     [self buildAndConfigureNavigationButton];
     [self buildAndConfigureMotionDetector];
@@ -100,26 +102,20 @@
 }
 
 
-- (void)configureTableViewAndSearchBar
+- (void)configureTableView
 {
+    [self.tableView setRowHeight:60.0f];
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
                                                        green:0.180f
                                                         blue:0.161f
                                                        alpha:1.00f]];
-    [self.tableView setContentOffset:CGPointMake(0, 44) animated:YES];
-
-    self.searchBar.delegate = self;
-    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
-                                         NSLocalizedString(@"label_location", @""),
-                                         NSLocalizedString(@"label_AZ", @"")];
-    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+    [self.tableView setContentOffset:CGPointMake(0.0f, 44.0f) animated:YES];
 }
 
 
 - (void)configureDataSource
 {
     GRStationsLayout stationsLayout = [GRUserDefaults currentSearchScope];
-    self.searchBar.selectedScopeButtonIndex = stationsLayout;
     self.stationManager = [[GRStationsManager alloc] initWithTableView:self.tableView
                                                         stationsLayout:stationsLayout];
     self.stationManager.delegate = self;
@@ -141,28 +137,43 @@
 }
 
 
+- (void)buildAndConfigureSearchBar
+{
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.showsScopeBar = YES;
+    self.searchBar.barStyle = UIBarStyleBlack;
+    self.searchBar.delegate = self;
+    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
+                                         NSLocalizedString(@"label_location", @""),
+                                         NSLocalizedString(@"label_AZ", @"")];
+    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+    self.searchBar.selectedScopeButtonIndex = [GRUserDefaults currentSearchScope];
+    
+    // showsScopeBar default is NO. if YES, shows the scope bar. call sizeToFit: to update frame
+    [self.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchBar;
+}
+
+
 - (void)buildAndConfigurePullToRefresh
 {
-    if (self.refreshControl == nil)
-    {
-        self.refreshControl = [[UIRefreshControl alloc] init];
-        
-        NSMutableAttributedString *refreshTitleString
-            = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"label_refresh_stations", @"")];
-        
-        [refreshTitleString addAttribute:NSForegroundColorAttributeName
-                                   value:[UIColor colorWithRed:0.471f green:0.471f blue:0.471f alpha:1.00f]
-                                   range:NSMakeRange(0, refreshTitleString.string.length)];
-
-        self.refreshControl.attributedTitle = refreshTitleString;
-        self.refreshControl.tintColor = [UIColor colorWithRed:0.671f green:0.671f blue:0.671f alpha:1.00f];
-
-        [self.refreshControl addTarget:self
-                                action:@selector(updateStations)
-                      forControlEvents:UIControlEventValueChanged];
-        
-        [self.refreshControl endRefreshing];
-    }
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    
+    NSMutableAttributedString *refreshTitleString
+        = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"label_refresh_stations", @"")];
+    
+    [refreshTitleString addAttribute:NSForegroundColorAttributeName
+                               value:[UIColor colorWithRed:0.471f green:0.471f blue:0.471f alpha:1.00f]
+                               range:NSMakeRange(0, refreshTitleString.string.length)];
+    
+    self.refreshControl.attributedTitle = refreshTitleString;
+    self.refreshControl.tintColor = [UIColor colorWithRed:0.671f green:0.671f blue:0.671f alpha:1.00f];
+    
+    [self.refreshControl addTarget:self
+                            action:@selector(updateStations)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    [self.refreshControl endRefreshing];
 }
 
 

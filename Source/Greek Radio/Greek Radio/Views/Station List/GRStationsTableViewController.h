@@ -7,8 +7,8 @@
 //
 
 
-@interface GRStationsTableViewController : UITableViewController <UISearchBarDelegate, UITextFieldDelegate>
+@interface GRStationsTableViewController : UITableViewController
 
-@property (nonatomic, weak) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, weak) UINavigationController *navigationController;
 
 @end
