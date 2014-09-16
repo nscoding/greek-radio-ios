@@ -17,6 +17,7 @@
 @interface GRStationCellView()
 
 @property (nonatomic, strong) UIView *selectionColor;
+@property (nonatomic, strong) UIView *lineView;
 
 @end
 
@@ -49,11 +50,11 @@
 // ------------------------------------------------------------------------------------------
 - (void)buildAndConfigureLine
 {
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(40.0f, self.frame.size.height - 1.0f,
+    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(40.0f, self.frame.size.height - 1.0f,
                                                                 self.frame.size.width - 40.0f, 1.0f)];
-    lineView.backgroundColor = [UIColor lightGrayColor];
-    lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self addSubview:lineView];
+    self.lineView.backgroundColor = [UIColor lightGrayColor];
+    self.lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self addSubview:self.lineView];
 }
 
 
@@ -197,6 +198,16 @@
     }
     
     return [super canPerformAction:action withSender:sender];
+}
+
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Override
+// ------------------------------------------------------------------------------------------
+- (void)setShowDivider:(BOOL)showDivider
+{
+    _showDivider = showDivider;
+    self.lineView.alpha = _showDivider;
 }
 
 

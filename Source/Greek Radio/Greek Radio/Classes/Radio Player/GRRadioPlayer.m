@@ -9,6 +9,7 @@
 #import "GRRadioPlayer.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import <CoreMedia/CoreMedia.h>
 
 
 // ------------------------------------------------------------------------------------------
@@ -117,7 +118,7 @@
         }
         else
         {
-            [self stopPlayingStation];
+            [self stopPlayingCurrentStation];
         }
     }
 }
@@ -128,36 +129,31 @@
 // ------------------------------------------------------------------------------------------
 - (void)playStation:(GRStation *)station
 {
-    if ([[NSInternetDoctor shared] isConnected] == NO)
+    if ([[NSInternetDoctor shared] isConnected])
     {
-        [self stopPlayingStation];
+        if ([self.streamURL isEqualToString:station.streamURL] == NO)
+        {
+            [self stopPlayingCurrentStation];
+        }
+        
+        if (self.player)
+        {
+            return;
+        }
+        
+        [self tearDownPlayer];
+        [self createPlayerForStation:station];
+    }
+    else
+    {
+        [self stopPlayingCurrentStation];
         [[NSInternetDoctor shared] showNoInternetAlert];
         [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
-        
-        return;
     }
-
-    if ([self.streamURL isEqualToString:station.streamURL] == NO)
-    {
-        [self stopPlayingStation];
-    }
-    
-    if (self.player)
-    {
-        return;
-    }
-    
-    [self tearDownPlayer];
-
-    self.currentStation = station;
-    self.streamURL = [NSString stringWithFormat:@"%@", self.currentStation.streamURL];
-    self.stationName = [NSString stringWithFormat:@"%@", self.currentStation.title];
-
-    [self createPlayer];
 }
 
 
-- (void)stopPlayingStation
+- (void)stopPlayingCurrentStation
 {
     self.currentStation = nil;
     self.stationName = @"";
@@ -181,8 +177,12 @@
 // ------------------------------------------------------------------------------------------
 #pragma mark - Helper Methods
 // ------------------------------------------------------------------------------------------
-- (void)createPlayer
+- (void)createPlayerForStation:(GRStation *)station
 {
+    self.currentStation = station;
+    self.streamURL = [NSString stringWithFormat:@"%@", self.currentStation.streamURL];
+    self.stationName = [NSString stringWithFormat:@"%@", self.currentStation.title];
+    
     self.streamSession = [AVAudioSession sharedInstance];
     [self.streamSession setCategory:AVAudioSessionCategoryPlayAndRecord
                         withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
@@ -193,8 +193,9 @@
     NSURL *url = [NSURL URLWithString:self.streamURL];
     self.player = [[AVPlayer alloc] initWithURL:url];
     [self.player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
+    [self.player.currentItem addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:nil];
     [self.player play];
-    
+
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
@@ -203,6 +204,7 @@
 {
     if (self.player)
     {
+        [self.player.currentItem removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
         [self.player removeObserver:self forKeyPath:NSStringFromSelector(@selector(rate))];
         [self.player pause];
         self.player = nil;
@@ -230,7 +232,7 @@
         [[NSInternetDoctor shared] showNoInternetAlert];
     }
     
-    [self stopPlayingStation];
+    [self stopPlayingCurrentStation];
 }
 
 

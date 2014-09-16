@@ -21,7 +21,7 @@
 - (void)playStation:(GRStation *)station;
 
 /// Method to stop the playback
-- (void)stopPlayingStation;
+- (void)stopPlayingCurrentStation;
 
 /// Method to check if the player is currently playing.
 - (BOOL)isPlaying;

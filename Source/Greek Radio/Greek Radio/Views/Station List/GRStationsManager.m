@@ -207,7 +207,10 @@
     cell.title.text = [NSString stringWithFormat:@"%@",station.title];
     cell.subtitle.text = [NSString stringWithFormat:@"%@, %@", station.location, station.genre];
     cell.station = station;
-
+    
+    id<NSFetchedResultsSectionInfo> sectionInfo = self.stationsFetchedResultsController.sections[indexPath.section];
+    cell.showDivider = (indexPath.row != (sectionInfo.numberOfObjects - 1));
+    
     if ([[GRRadioPlayer shared].currentStation isEqual:station])
     {
         cell.iconImageView.image = [UIImage imageNamed:@"GRNote"];

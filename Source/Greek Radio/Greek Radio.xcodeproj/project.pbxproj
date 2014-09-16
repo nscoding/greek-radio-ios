@@ -60,6 +60,7 @@
 		CDE43AA217303F54004C0698 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA117303F54004C0698 /* InfoPlist.strings */; };
 		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
 		CDFACF2519C8CBB000F87476 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */; };
+		CDFACF2719C8E32E00F87476 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFACF2619C8E32E00F87476 /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +151,7 @@
 		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
 		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
 		CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CDFACF2619C8E32E00F87476 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDFACF2719C8E32E00F87476 /* CoreMedia.framework in Frameworks */,
 				CDFACF2519C8CBB000F87476 /* AVFoundation.framework in Frameworks */,
 				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
 				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
@@ -416,6 +419,7 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDFACF2619C8E32E00F87476 /* CoreMedia.framework */,
 				CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */,
 				132003AF17E65A2C00829AA0 /* CoreMotion.framework */,
 				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,

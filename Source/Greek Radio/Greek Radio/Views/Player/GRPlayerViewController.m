@@ -542,7 +542,7 @@ typedef enum GRInformationBarOption
         {
             if ([GRRadioPlayer shared].isPlaying)
             {
-                [[GRRadioPlayer shared] stopPlayingStation];
+                [[GRRadioPlayer shared] stopPlayingCurrentStation];
             }
             else
             {
