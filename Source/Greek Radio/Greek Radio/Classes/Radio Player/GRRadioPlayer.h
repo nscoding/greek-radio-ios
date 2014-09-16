@@ -14,12 +14,16 @@
 @property (nonatomic, strong) NSString *streamURL;
 @property (nonatomic, weak) GRStation *currentStation;
 
+/// Singleton
 + (GRRadioPlayer *)shared;
 
+/// Method to start the playback for a given station
 - (void)playStation:(GRStation *)station;
 
+/// Method to stop the playback
 - (void)stopPlayingStation;
 
+/// Method to check if the player is currently playing.
 - (BOOL)isPlaying;
 
 @end
