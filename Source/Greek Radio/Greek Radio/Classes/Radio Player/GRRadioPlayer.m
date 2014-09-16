@@ -111,7 +111,7 @@
 {
     if (object == self.player && [keyPath isEqualToString:NSStringFromSelector(@selector(rate))])
     {
-        if (self.player.rate != 0)
+        if (self.isPlaying)
         {
             [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
         }
@@ -150,8 +150,8 @@
     [self tearDownPlayer];
 
     self.currentStation = station;
-    self.streamURL = [NSString stringWithFormat:@"%@",self.currentStation.streamURL];
-    self.stationName = [NSString stringWithFormat:@"%@",self.currentStation.title];
+    self.streamURL = [NSString stringWithFormat:@"%@", self.currentStation.streamURL];
+    self.stationName = [NSString stringWithFormat:@"%@", self.currentStation.title];
 
     [self createPlayer];
 }
@@ -187,12 +187,14 @@
     [self.streamSession setCategory:AVAudioSessionCategoryPlayAndRecord
                         withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker
                               error:nil];
+    
     [self.streamSession setActive:YES error:nil];
     
     NSURL *url = [NSURL URLWithString:self.streamURL];
     self.player = [[AVPlayer alloc] initWithURL:url];
     [self.player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
     [self.player play];
+    
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
@@ -207,6 +209,28 @@
     }
     
     [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
+}
+
+
+- (void)stationPlaybackFailed
+{
+    if ([[NSInternetDoctor shared] isConnected])
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
+                                                                message:NSLocalizedString(@"app_player_error_subtitle", @"")
+                                                               delegate:nil
+                                                      cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        });
+    }
+    else
+    {
+        [[NSInternetDoctor shared] showNoInternetAlert];
+    }
+    
+    [self stopPlayingStation];
 }
 
 
