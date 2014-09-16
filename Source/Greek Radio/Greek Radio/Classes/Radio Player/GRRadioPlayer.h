@@ -6,10 +6,9 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-#import "AudioStreamer.h"
 #import "GRStation.h"
 
-@interface GRRadioPlayer : NSObject <AudioStreamerDelegate>
+@interface GRRadioPlayer : NSObject
 
 @property (nonatomic, strong) NSString *stationName;
 @property (nonatomic, strong) NSString *streamURL;
