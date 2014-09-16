@@ -104,11 +104,9 @@
 
 - (void)configureTableView
 {
-    [self.tableView setRowHeight:60.0f];
-    [self.tableView setBackgroundColor:[UIColor colorWithRed:0.180f
-                                                       green:0.180f
-                                                        blue:0.161f
-                                                       alpha:1.00f]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.rowHeight = 60.0f;
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.180f green:0.180f blue:0.161f alpha:1.00f];
     [self.tableView setContentOffset:CGPointMake(0.0f, 44.0f) animated:YES];
 }
 
@@ -143,6 +141,7 @@
     self.searchBar.showsScopeBar = YES;
     self.searchBar.barStyle = UIBarStyleBlack;
     self.searchBar.delegate = self;
+    self.searchBar.tintColor = [UIColor grayColor];
     self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
                                          NSLocalizedString(@"label_location", @""),
                                          NSLocalizedString(@"label_AZ", @"")];

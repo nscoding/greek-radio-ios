@@ -24,15 +24,15 @@ File.foreach(ARGV[0]).with_index { |line, line_num|
           
       if ratio == 0
         puts "<station>"
-        puts "<title>#{line.chomp}</title>"
+        puts "<title>#{line.chomp.rstrip}</title>"
       elsif ratio == 1
-        puts "<streamURL>#{line.chomp}</streamURL>"
+        puts "<streamURL>#{line.chomp.rstrip}</streamURL>"
       elsif ratio == 2
-        puts "<siteURL>#{line.chomp}</siteURL>"
+        puts "<siteURL>#{line.chomp.rstrip}</siteURL>"
       elsif ratio == 3
-        puts "<genre>#{line.chomp}</genre>"
+        puts "<genre>#{line.chomp.rstrip}</genre>"
       elsif ratio == 4
-        puts "<location>#{line.chomp}</location>"
+        puts "<location>#{line.chomp.rstrip}</location>"
         puts "</station>"      
       end
       

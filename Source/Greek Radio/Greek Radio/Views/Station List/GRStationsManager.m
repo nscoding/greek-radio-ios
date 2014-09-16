@@ -223,6 +223,18 @@
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.0f;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    return 20.0f;
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
     return [self.stationsFetchedResultsController.sectionIndexTitles indexOfObject:title];
@@ -231,9 +243,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 20)];
+    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.frame.size.width, 20.0f)];
     sectionHeader.autoresizingMask = UIViewAutoresizingNone;
-    sectionHeader.backgroundColor = self.tableView.backgroundColor;
+    sectionHeader.backgroundColor = [UIColor colorWithRed:0.180f green:0.180f blue:0.161f alpha:1.00f];
     sectionHeader.textAlignment = NSTextAlignmentCenter;
     sectionHeader.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
     sectionHeader.textColor = [UIColor whiteColor];
