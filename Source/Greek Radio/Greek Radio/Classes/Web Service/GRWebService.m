@@ -8,7 +8,7 @@
 
 #import "GRWebService.h"
 #import "GRStationsDAO.h"
-#import "MTStatusBarOverlay.h"
+#import "CWStatusBarNotification.h"
 
 
 typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
@@ -43,6 +43,7 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 @property (nonatomic, strong) NSString *currentElement;
 @property (nonatomic, strong) NSMutableDictionary *dataDictionary;
 @property (nonatomic, strong) GRStationsDAO *stationsDAO;
+@property (nonatomic, strong) CWStatusBarNotification *statusBarNotification;
 @property (nonatomic, assign) BOOL isParsing;
 
 @end
@@ -142,10 +143,23 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 
 - (void)startSyncingOnMainThread
 {
+    if (self.statusBarNotification)
+    {
+        return;
+    }
+    
+    WEAKIFY(self);
     dispatch_async(dispatch_get_main_queue(), ^()
     {
-        [[MTStatusBarOverlay sharedOverlay] postImmediateMessage:NSLocalizedString(@"label_syncing", @"")
-                                                        animated:YES];
+        STRONGIFY(self);
+        self.statusBarNotification = [CWStatusBarNotification new];
+        
+        // set default blue color (since iOS 7.1, default window tintColor is black)
+        self.statusBarNotification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.180f green:0.180f blue:0.161f alpha:1.00f];
+        self.statusBarNotification.notificationAnimationInStyle = CWNotificationAnimationStyleTop;
+        self.statusBarNotification.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
+
+        [self.statusBarNotification displayNotificationWithMessage:NSLocalizedString(@"label_syncing", @"") completion:NULL];
         [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:self];
     });
 }
@@ -154,8 +168,12 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 - (void)endSyncingOnMainThread:(GRWebServiceSyncStatus)status
 {
     NSAssert([NSThread isMainThread] == NO, @"End syncing should be on a background thread.");
+    
+    WEAKIFY(self);
     dispatch_sync(dispatch_get_main_queue(), ^()
     {
+        STRONGIFY(self);
+        
         NSAssert([NSThread isMainThread], @"UI and notifications should be on the main thread.");
 
         if (status == GRWebServiceSyncStatusNoInternet)
@@ -174,7 +192,9 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
             }
         }
 
-        [[MTStatusBarOverlay sharedOverlay] hide];
+        [self.statusBarNotification dismissNotification];
+        self.statusBarNotification = nil;
+        
         [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:self];
     });
 }
@@ -200,7 +220,6 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 {
     self.dateLastSynced = nil;
     self.isParsing = NO;
-    
     [self endSyncingOnMainThread:GRWebServiceSyncStatusError];
 }
 
