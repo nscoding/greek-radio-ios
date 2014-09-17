@@ -522,6 +522,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CDE43A9E17303DD5004C0698 /* Build configuration list for PBXNativeTarget "Greek Radio" */;
 			buildPhases = (
+				CD6E4A7219C9879300DBA0A7 /* ShellScript */,
 				CDE43A7717303DD5004C0698 /* Sources */,
 				CDE43A7817303DD5004C0698 /* Frameworks */,
 				CDE43A7917303DD5004C0698 /* Resources */,
@@ -586,6 +587,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CD6E4A7219C9879300DBA0A7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CDE43A7717303DD5004C0698 /* Sources */ = {

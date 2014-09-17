@@ -18,9 +18,9 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>Audio Streamer</string>
+			<string>CWStatusBarNotification</string>
 			<key>File</key>
-			<string>Licence-Audio Streamer</string>
+			<string>Licence-CWStatusBarNotification</string>
 		</dict>
 		<dict>
 			<key>Type</key>
