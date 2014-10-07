@@ -15,11 +15,11 @@
 		13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13CDC18218715D4E0041FED4 /* Assets.xcassets */; };
 		13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC18B187167250041FED4 /* UITableView+Extensions.m */; };
 		CD01B3D619853A2E00B3AA66 /* GRSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD01B3D519853A2E00B3AA66 /* GRSearchBar.m */; };
+		CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD27CEE119DF7E3B00B02565 /* StoreKit.framework */; };
 		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
 		CD53C9521737A97900264230 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9511737A97800264230 /* Settings.bundle */; };
 		CD53C95E1737B0D400264230 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53C9571737B0D400264230 /* Appirater.m */; };
 		CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */; };
-		CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD53C9621737B15800264230 /* StoreKit.framework */; };
 		CD55C0D5174424F6000BFFE5 /* GRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */; };
 		CD55C0D6174424F6000BFFE5 /* GRSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD55C0D4174424F6000BFFE5 /* GRSettingsViewController.xib */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
@@ -79,6 +79,7 @@
 		13CDC18B187167250041FED4 /* UITableView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extensions.m"; sourceTree = "<group>"; };
 		CD01B3D419853A2E00B3AA66 /* GRSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSearchBar.h; sourceTree = "<group>"; };
 		CD01B3D519853A2E00B3AA66 /* GRSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSearchBar.m; sourceTree = "<group>"; };
+		CD27CEE119DF7E3B00B02565 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
 		CD53900117476F480044092D /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
 		CD53C9511737A97800264230 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -87,7 +88,6 @@
 		CD53C9581737B0D400264230 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
 		CD53C95A1737B0D400264230 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		CD53C95B1737B0D400264230 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		CD53C9621737B15800264230 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CD55C0D2174424F6000BFFE5 /* GRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSettingsViewController.h; sourceTree = "<group>"; };
 		CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSettingsViewController.m; sourceTree = "<group>"; };
 		CD55C0D4174424F6000BFFE5 /* GRSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSettingsViewController.xib; sourceTree = "<group>"; };
@@ -159,10 +159,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */,
 				CDFACF2719C8E32E00F87476 /* CoreMedia.framework in Frameworks */,
 				CDFACF2519C8CBB000F87476 /* AVFoundation.framework in Frameworks */,
 				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
-				CD53C9631737B15800264230 /* StoreKit.framework in Frameworks */,
 				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
 				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
 				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
@@ -419,6 +419,7 @@
 		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD27CEE119DF7E3B00B02565 /* StoreKit.framework */,
 				CDFACF2619C8E32E00F87476 /* CoreMedia.framework */,
 				CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */,
 				132003AF17E65A2C00829AA0 /* CoreMotion.framework */,
@@ -431,7 +432,6 @@
 				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
 				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
 				CD92B4F91733EF7000771F26 /* Social.framework */,
-				CD53C9621737B15800264230 /* StoreKit.framework */,
 				CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */,
 				CDE43A7E17303DD5004C0698 /* UIKit.framework */,
 			);
@@ -548,6 +548,11 @@
 				TargetAttributes = {
 					CDE43A7A17303DD5004C0698 = {
 						DevelopmentTeam = HPSF3D2F4U;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

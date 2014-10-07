@@ -192,6 +192,8 @@
     
     NSURL *url = [NSURL URLWithString:self.streamURL];
     self.player = [[AVPlayer alloc] initWithURL:url];
+    self.player.allowsExternalPlayback = YES;
+    
     [self.player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
     [self.player.currentItem addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:nil];
     [self.player play];
