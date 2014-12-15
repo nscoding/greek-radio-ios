@@ -1054,6 +1054,12 @@ http://www.radiokymata.gr
 Pop
 Θεσσαλονίκη 
 
+Ραδιοφωνικός Σταθμός της Εκκλησίας της Ελλάδος
+http://85.10.206.222:8002/
+http://www.radio895.gr
+Εκκλησιαστικά
+Αθήνα 
+
 Ρυθμός 106 FM
 http://s4.onweb.gr:8406/
 http://www.rythmos106.gr
@@ -1112,4 +1118,4 @@ Mainstream
 http://s2.onweb.gr:8622/
 http://www.tsirigofm.gr
 Pop
-Κύθηρα 
+Κύθηρα
