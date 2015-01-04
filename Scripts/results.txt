@@ -1,0 +1,1326 @@
+<?xml version="1.0" standalone="yes"?>
+<item>
+<station>
+<title>143.1 AM</title>
+<streamURL>http://radiofono.eng.auth.gr:8000/1431med</streamURL>
+<siteURL>http://www.1431am.org</siteURL>
+<genre>News</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>2000 FM 99.8</title>
+<streamURL>http://s6.onweb.gr:8014/</streamURL>
+<siteURL>http://2000fmsamos.blogspot.gr</siteURL>
+<genre>News</genre>
+<location>Σάμος</location>
+</station>
+<station>
+<title>4U Radio 93.3</title>
+<streamURL>http://s3.onweb.gr:8046/</streamURL>
+<siteURL>http://www.4uradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Ηγουμενίτσα</location>
+</station>
+<station>
+<title>902 Αριστερά στα FM</title>
+<streamURL>http://icecast.902.gr:8000/902</streamURL>
+<siteURL>http://www.902.gr</siteURL>
+<genre>News</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>94.8 Eρωτικός FM</title>
+<streamURL>http://178.32.72.192:8050/eroticos</streamURL>
+<siteURL>http://www.eroticos.gr</siteURL>
+<genre>Ερωτικά</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Alfa Radio 96</title>
+<streamURL>http://s2.onweb.gr:8624/</streamURL>
+<siteURL>http://www.alfaradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Σέρρες</location>
+</station>
+<station>
+<title>Amore FM 87.5</title>
+<streamURL>http://s4.onweb.gr:8442/</streamURL>
+<siteURL>http://www.radioamore.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Χανιά</location>
+</station>
+<station>
+<title>Aquarius Hit Party</title>
+<streamURL>http://s6.onweb.gr:8064/</streamURL>
+<siteURL>http://www.aquariusfm.gr</siteURL>
+<genre>Pop</genre>
+<location>Γαστούνη</location>
+</station>
+<station>
+<title>Arena FM 89.4</title>
+<streamURL>http://eco.onestreaming.com:8418</streamURL>
+<siteURL>http://arenafm.gr</siteURL>
+<genre>Sports</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Athens DeeJay 95.2</title>
+<streamURL>http://91.132.6.21:8001/</streamURL>
+<siteURL>http://www.athensdeejay.gr</siteURL>
+<genre>Pop</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Athletic Radio</title>
+<streamURL>http://eco.onestreaming.com:8052/</streamURL>
+<siteURL>http://athleticradio.weebly.com</siteURL>
+<genre>Sports</genre>
+<location>Μυτιλήνη</location>
+</station>
+<station>
+<title>Atlantis 105.2 FM</title>
+<streamURL>http://46.4.73.140:8046</streamURL>
+<siteURL>http://www.atlantisfm.gr</siteURL>
+<genre>Rock</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Biscuit Radio</title>
+<streamURL>http://s6.onweb.gr:8026/</streamURL>
+<siteURL>http://www.biscuitradio.com</siteURL>
+<genre>Lounge</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Capital FM 97.7</title>
+<streamURL>http://eco.onestreaming.com:8298/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Pop</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Cavo Paradiso</title>
+<streamURL>http://s5.onweb.gr:8488/</streamURL>
+<siteURL>http://cavoparadiso.rad.io</siteURL>
+<genre>House</genre>
+<location>Μύκονος</location>
+</station>
+<station>
+<title>Cool FM 106.5</title>
+<streamURL>http://sc.greekstream.net:4010/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Classic</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>D-Code 96.2</title>
+<streamURL>http://s3.onweb.gr:8032/</streamURL>
+<siteURL>http://www.962.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Χανιά</location>
+</station>
+<station>
+<title>Deezer Radio 100.6</title>
+<streamURL>http://s7.onweb.gr:8556/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Pop</genre>
+<location>Λαμία</location>
+</station>
+<station>
+<title>Desperado Radio</title>
+<streamURL>http://108.163.223.242:8035</streamURL>
+<siteURL>www.desperado.gr</siteURL>
+<genre>Rock</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Discomania Radio</title>
+<streamURL>http://radio1.discomaniaradio.com:7030/</streamURL>
+<siteURL>http://www.discomaniaradio.com</siteURL>
+<genre>80's</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Ecclhsia Radio 89.5 FM</title>
+<streamURL>http://eco.caststream.net:8094/</streamURL>
+<siteURL>http://www.ecclesia.gr/greek/ecclesiaradio/index.asp</siteURL>
+<genre>Εκκλησιαστικά</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Echoes Radio</title>
+<streamURL>http://85.17.75.143:80</streamURL>
+<siteURL>http://www.echoes.gr</siteURL>
+<genre>Lounge</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ellinikos FM</title>
+<streamURL>http://174.36.237.66:8386</streamURL>
+<siteURL>http://ellinikosfm.com</siteURL>
+<genre>Greek Hits</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Energy FM 101.0</title>
+<streamURL>http://174.36.237.66:8112</streamURL>
+<siteURL>http://www.energyfmkastoria.com/live/</siteURL>
+<genre>Rock</genre>
+<location>Καστοριά</location>
+</station>
+<station>
+<title>Energy FM 88.3</title>
+<streamURL>http://s1.onweb.gr:8412/</streamURL>
+<siteURL>http://www.energy883.gr</siteURL>
+<genre>Pop</genre>
+<location>Βέροια</location>
+</station>
+<station>
+<title>Flash Μαγνησίας 94.5 FM</title>
+<streamURL>http://www.gointernet.gr:8001/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Mainstream</genre>
+<location>Βόλος</location>
+</station>
+<station>
+<title>FM 100</title>
+<streamURL>http://eco.caststream.net:8038/</streamURL>
+<siteURL>http://www.fm100.gr/depthe/</siteURL>
+<genre>News</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>FM Life 105.3</title>
+<streamURL>http://s6.onweb.gr:8044/</streamURL>
+<siteURL>http://www.fmlife.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Κάλυμνος</location>
+</station>
+<station>
+<title>Funtastic Radio</title>
+<streamURL>http://176.28.8.38:2600/</streamURL>
+<siteURL>http://www.radio-funtastic.com/news.php</siteURL>
+<genre>Pop</genre>
+<location>Γερμανία</location>
+</station>
+<station>
+<title>Future Radio</title>
+<streamURL>http://s3.onweb.gr:8894/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Sophisticated</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Galaxias FM 92.1</title>
+<streamURL>http://static.9.80.63.178.clients.your-server.de:8072</streamURL>
+<siteURL>http://www.galaxiasfm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Άμφισσα‎</location>
+</station>
+<station>
+<title>God Radio</title>
+<streamURL>http://uk1-vn.mixstream.net:9868</streamURL>
+<siteURL>http://www.godradio.gr</siteURL>
+<genre>Christian Greek</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Heart FM 103.5</title>
+<streamURL>http://s3.onweb.gr:8462/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Mainstream</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Imagine 89.7</title>
+<streamURL>http://imagine.1stepstream.com:8000/aac</streamURL>
+<siteURL>http://www.imagine897.gr</siteURL>
+<genre>Rock</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Indieground Radio</title>
+<streamURL>http://s2.onweb.gr:8628/</streamURL>
+<siteURL>http://www.indiegroundradio.com</siteURL>
+<genre>Sophisticated</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Ionian Galaxy 90.8</title>
+<streamURL>http://s4.onweb.gr:8018/</streamURL>
+<siteURL>http://www.ioniangalaxy.gr</siteURL>
+<genre>News</genre>
+<location>Κεφαλλονιά</location>
+</station>
+<station>
+<title>Just Radio 93 FM</title>
+<streamURL>http://5.9.70.203:8009</streamURL>
+<siteURL>http://www.justradio.gr/index.php/profile</siteURL>
+<genre>Mainstream</genre>
+<location>Χαλκίδα</location>
+</station>
+<station>
+<title>Karamela Radio</title>
+<streamURL>http://stream2.greekradios.gr:8040/</streamURL>
+<siteURL>www.karamelaradio.com</siteURL>
+<genre>Mainstream</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Kiss FM 96.1</title>
+<streamURL>http://s6.onweb.gr:8032/</streamURL>
+<siteURL>http://kissradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Ηράκλειο</location>
+</station>
+<station>
+<title>Klik FM 106.2</title>
+<streamURL>http://www.111.gr:8002/</streamURL>
+<siteURL>http://www.klikfm.net</siteURL>
+<genre>Mainstream</genre>
+<location>Ρόδος</location>
+</station>
+<station>
+<title>Larissa DeeJay 95.8</title>
+<streamURL>http://s4.onweb.gr:8850/</streamURL>
+<siteURL>http://www.deejay.gr</siteURL>
+<genre>Pop</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Legend FM 101.6</title>
+<streamURL>http://s6.onweb.gr:8002/</streamURL>
+<siteURL>http://www.legendfm.gr</siteURL>
+<genre>Rock</genre>
+<location>Ξάνθη</location>
+</station>
+<station>
+<title>Libero 107.4</title>
+<streamURL>http://eco.onestreaming.com:8081/</streamURL>
+<siteURL>http://www.libero.fm</siteURL>
+<genre>Sports</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Life Radio FM 102.9</title>
+<streamURL>http://sh1.onradio.gr:8836</streamURL>
+<siteURL>http://www.liferadio.gr</siteURL>
+<genre>Pop</genre>
+<location>Κέρκυρα</location>
+</station>
+<station>
+<title>Loud Radio 88.8</title>
+<streamURL>http://s3.onweb.gr:8888/</streamURL>
+<siteURL>www.loudradio.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Τρίκαλα</location>
+</station>
+<station>
+<title>Love 88.2 FM</title>
+<streamURL>http://s1.onweb.gr:8424/</streamURL>
+<siteURL>http://www.loveradio882.gr/</siteURL>
+<genre>Έντεχνα</genre>
+<location>Μυτιλήνη</location>
+</station>
+<station>
+<title>Mad Radio 107</title>
+<streamURL>http://sc2.streamwithq.com:8052/</streamURL>
+<siteURL>http://www.madradio107.gr</siteURL>
+<genre>Pop</genre>
+<location>Ορεστιάδα</location>
+</station>
+<station>
+<title>MADness 95 FM</title>
+<streamURL>http://s7.onweb.gr:8044/</streamURL>
+<siteURL>http://www.madness95.gr</siteURL>
+<genre>Pop</genre>
+<location>Ιεράπετρα</location>
+</station>
+<station>
+<title>Master FM 90.2</title>
+<streamURL>http://streaming.468.gr:9902/</streamURL>
+<siteURL>http://www.masterfm.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Αίγιο</location>
+</station>
+<station>
+<title>Maximum FM 93.6</title>
+<streamURL>http://s1.onweb.gr:8838/</streamURL>
+<siteURL>http://www.radiomax.gr</siteURL>
+<genre>News</genre>
+<location>Αλεξανδρούπολη</location>
+</station>
+<station>
+<title>Metropolis 95.5</title>
+<streamURL>http://85.25.207.34:8000</streamURL>
+<siteURL>http://www.metropolisradio.gr</siteURL>
+<genre>Sports</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Mini FM 107.1</title>
+<streamURL>http://62.212.82.142:8142/</streamURL>
+<siteURL>http://www.minifm.gr</siteURL>
+<genre>Rock</genre>
+<location>Ηλεία</location>
+</station>
+<station>
+<title>Music FM 105.8</title>
+<streamURL>http://s6.onweb.gr:8048/</streamURL>
+<siteURL>http://www.radio1058.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Ηράκλειο</location>
+</station>
+<station>
+<title>Must FM 97.0</title>
+<streamURL>http://shoutcast.24radio.gr:8012/</streamURL>
+<siteURL>https://www.facebook.com/pages/Must-fm-97/341274015963811</siteURL>
+<genre>Greek Hits</genre>
+<location>Άργος</location>
+</station>
+<station>
+<title>Notos FM 101.8</title>
+<streamURL>http://s4.onweb.gr:8484/</streamURL>
+<siteURL>http://www.notosfm.gr</siteURL>
+<genre>Κρητικά</genre>
+<location>Κρήτη</location>
+</station>
+<station>
+<title>NovaΣΠΟΡ FM 94.6</title>
+<streamURL>http://sportfm.live24.gr:80/sportfm7712</streamURL>
+<siteURL>www.sport-fm.gr/</siteURL>
+<genre>Sports</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>NRG Power Radio 89.5</title>
+<streamURL>http://eco.onestreaming.com:8314</streamURL>
+<siteURL>http://www.nrgradio.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Κοζάνη</location>
+</station>
+<station>
+<title>NRG Radio 88.9 FM</title>
+<streamURL>http://s5.onweb.gr:8030/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Mainstream</genre>
+<location>Δράμα</location>
+</station>
+<station>
+<title>OFF Radio</title>
+<streamURL>http://78.47.106.235:9080/offradiolq</streamURL>
+<siteURL>http://www.offradio.gr</siteURL>
+<genre>Sophisticated</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Ola 91.4</title>
+<streamURL>http://ola.isolservers.com:8300/</streamURL>
+<siteURL>http://www.olafm.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>OnAir24</title>
+<streamURL>http://onair24.serverroom.us:5476</streamURL>
+<siteURL>http://www.onair24.gr</siteURL>
+<genre>News</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Open Radio</title>
+<streamURL>http://s3.onweb.gr:8014/</streamURL>
+<siteURL>http://www.openradio.gr/home/</siteURL>
+<genre>Sophisticated</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Palace Radio 91.4</title>
+<streamURL>http://s1.onweb.gr:8848/</streamURL>
+<siteURL>http://palaceradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Palmos On Air 105.4</title>
+<streamURL>http://s6.onweb.gr:8010/</streamURL>
+<siteURL>http://www.palmosradio.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Piqeras Deejay 105.6 FM</title>
+<streamURL>http://212.1.213.31:8038/</streamURL>
+<siteURL>http://www.piqerasdeejay.gr</siteURL>
+<genre>Pop</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Pirate FM 91.0</title>
+<streamURL>http://live.piratefm.net:8000/</streamURL>
+<siteURL>http://www.piratefm.net</siteURL>
+<genre>Pop</genre>
+<location>Χίος</location>
+</station>
+<station>
+<title>Play 91.5 FM</title>
+<streamURL>http://195.154.167.62:8104/</streamURL>
+<siteURL>http://radioplaygr.weebly.com</siteURL>
+<genre>Λαϊκά</genre>
+<location>Ξάνθη</location>
+</station>
+<station>
+<title>Play FM</title>
+<streamURL>http://87.117.201.159:8000</streamURL>
+<siteURL>http://www.playfm.gr/main/</siteURL>
+<genre>Ρεμπέτικα</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>PlusRadio 102.6</title>
+<streamURL>http://80.86.82.101:8120/</streamURL>
+<siteURL>http://plusradio.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Pop FM 102.1</title>
+<streamURL>http://s1.onweb.gr:8422/</streamURL>
+<siteURL>http://www.popfm.gr</siteURL>
+<genre>Pop</genre>
+<location>Κέρκυρα</location>
+</station>
+<station>
+<title>Power FM 100.2</title>
+<streamURL>http://s1.onweb.gr:8854/</streamURL>
+<siteURL>http://www.powerfm.gr</siteURL>
+<genre>Pop</genre>
+<location>Βόλος</location>
+</station>
+<station>
+<title>Prime Radio 100.3</title>
+<streamURL>http://s5.onweb.gr:8020/</streamURL>
+<siteURL>http://www.primeradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Σύρος</location>
+</station>
+<station>
+<title>Procka FM 93.4</title>
+<streamURL>http://184.154.202.243:8042/</streamURL>
+<siteURL>http://www.prockafm.tk</siteURL>
+<genre>Metal-Hard Rock</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Radio 1 88 FM</title>
+<streamURL>http://111.gr:8800</streamURL>
+<siteURL>http://www.radio1.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Ρόδος</location>
+</station>
+<station>
+<title>Radio 1 FM 100.1</title>
+<streamURL>http://s3.onweb.gr:8814/</streamURL>
+<siteURL>http://www.radio1serres.gr</siteURL>
+<genre>Pop</genre>
+<location>Σέρρες</location>
+</station>
+<station>
+<title>Radio 98fm</title>
+<streamURL>http://147.102.82.129:8000/medium</streamURL>
+<siteURL>http://radio98fm.org/index/</siteURL>
+<genre>News</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Radio Alpha Omega 90.4</title>
+<streamURL>http://live.radioalphaomega.com:4006</streamURL>
+<siteURL>http://www.radioalphaomega.com</siteURL>
+<genre>Christian Rock</genre>
+<location>Χίος</location>
+</station>
+<station>
+<title>Radio Creta</title>
+<streamURL>http://46.227.60.32:8072/</streamURL>
+<siteURL>http://www.radiocreta.gr/</siteURL>
+<genre>Κρητικά</genre>
+<location>Κρήτη</location>
+</station>
+<station>
+<title>Radio Energy 96.6</title>
+<streamURL>http://liveradio.energy966.com:8008/</streamURL>
+<siteURL>http://www.energy966.com/</siteURL>
+<genre>Pop</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Radio Greece</title>
+<streamURL>http://159.253.149.12:9248/</streamURL>
+<siteURL>http://www.radiogreece.gr</siteURL>
+<genre>News</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Radio Relax</title>
+<streamURL>http://eco.caststream.net:8116/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Λαϊκά</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Radio Δραμα 99.1 FM</title>
+<streamURL>http://144.76.179.38:4010/stream/1/</streamURL>
+<siteURL>http://www.radiodrama.gr</siteURL>
+<genre>Pop</genre>
+<location>Δράμα</location>
+</station>
+<station>
+<title>Rainbow 89 FM</title>
+<streamURL>http://188.138.121.94:8002/</streamURL>
+<siteURL>http://www.89rainbow.gr</siteURL>
+<genre>Rock</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Real FM 107.1</title>
+<streamURL>http://realfm.megabyte.gr:8999/</streamURL>
+<siteURL>http://www.real.gr/DefaultArthro.aspx?page=radiothes</siteURL>
+<genre>News</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Rock FM 96.9</title>
+<streamURL>http://91.132.6.21:8003/</streamURL>
+<siteURL>http://www.rockfm.gr</siteURL>
+<genre>Rock</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Rock Radio 1</title>
+<streamURL>http://87.98.146.216:8000/</streamURL>
+<siteURL>http://www.rockradio1.com</siteURL>
+<genre>Heavy Metal</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Rockarolla</title>
+<streamURL>http://5.9.15.53:9996/</streamURL>
+<siteURL>http://www.rockarolla.eu</siteURL>
+<genre>Rock</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>RSO 91.7</title>
+<streamURL>http://rso.isolservers.com:8200/</streamURL>
+<siteURL>http://www.rso.gr</siteURL>
+<genre>Rock</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Sfera 90.7</title>
+<streamURL>http://s4.onweb.gr:8818/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Pop</genre>
+<location>Βόλος</location>
+</station>
+<station>
+<title>Sfera FM 94.1</title>
+<streamURL>http://eco.onestreaming.com:8238/</streamURL>
+<siteURL>http://www.sferaradio.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Αργολίδα</location>
+</station>
+<station>
+<title>Sohos FM 88.7</title>
+<streamURL>http://s5.onweb.gr:8418/</streamURL>
+<siteURL>http://sohosfm.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Space FM 107.5</title>
+<streamURL>http://s3.onweb.gr:8010/</streamURL>
+<siteURL>http://www.spacefm.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Νάξος</location>
+</station>
+<station>
+<title>Splash FM</title>
+<streamURL>http://174.36.237.66:8198</streamURL>
+<siteURL>http://www.splashfm.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Θεσσαλονική</location>
+</station>
+<station>
+<title>Star FM 88.8</title>
+<streamURL>http://s1.onweb.gr:8800/</streamURL>
+<siteURL>www.star888.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Κέρκυρα</location>
+</station>
+<station>
+<title>Studio 3 103.6</title>
+<streamURL>http://s1.onweb.gr:8408/</streamURL>
+<siteURL>http://www.studio3.gr</siteURL>
+<genre>Traditional</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>STYL FM 104.8</title>
+<streamURL>http://s3.onweb.gr:8530/</streamURL>
+<siteURL>http://www.stylfm.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Style FM 89.6</title>
+<streamURL>http://46.4.65.194:8011/</streamURL>
+<siteURL>Missing Info</siteURL>
+<genre>Dance Hits</genre>
+<location>Άργος</location>
+</station>
+<station>
+<title>Super Radio 90.4</title>
+<streamURL>http://50.7.77.114:8138</streamURL>
+<siteURL>http://www.super904.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Ηράκλειο</location>
+</station>
+<station>
+<title>Top FM 106.4</title>
+<streamURL>http://s6.onweb.gr:8012/</streamURL>
+<siteURL>http://www.topfmvolos.gr</siteURL>
+<genre>Pop</genre>
+<location>Βόλος</location>
+</station>
+<station>
+<title>Traffic FM 91.8</title>
+<streamURL>http://s5.onweb.gr:8506/</streamURL>
+<siteURL>http://www.trafficfm.gr</siteURL>
+<genre>House</genre>
+<location>Ηράκλειο</location>
+</station>
+<station>
+<title>Trance Radio</title>
+<streamURL>http://46.165.195.133:8008</streamURL>
+<siteURL>http://tranceathens.com</siteURL>
+<genre>Trance</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Troll Radio</title>
+<streamURL>http://85.17.81.152/listen/trollradio-gr</streamURL>
+<siteURL>http://trollradio.gr</siteURL>
+<genre>Rock</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Tuning Radio</title>
+<streamURL>http://www.tuningradio.gr:8000</streamURL>
+<siteURL>http://www.tuningradio.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Velvet FM 96.8</title>
+<streamURL>http://188.138.112.127:8006/</streamURL>
+<siteURL>http://www.velvet968.gr</siteURL>
+<genre>Pop</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Venus FM 105.1</title>
+<streamURL>http://s3.onweb.gr:8808/</streamURL>
+<siteURL>http://www.venusfm.gr</siteURL>
+<genre>Pop</genre>
+<location>Αμαλιάδα</location>
+</station>
+<station>
+<title>Viva 88.3 FM</title>
+<streamURL>http://webradio.stordia.com:9040/stream</streamURL>
+<siteURL>http://www.viva883.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Viva FM 95.3</title>
+<streamURL>http://s17.myradiostream.com:8742/</streamURL>
+<siteURL>http://www.vivafm.com</siteURL>
+<genre>Dance Hits</genre>
+<location>Πτολεμαϊδα</location>
+</station>
+<station>
+<title>Wave Radio 97.4</title>
+<streamURL>http://85.25.106.137:8007/stream</streamURL>
+<siteURL>http://www.wave974.gr</siteURL>
+<genre>Rock</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>Xanthi Radio Deejay 90.6</title>
+<streamURL>http://s4.onweb.gr:8402/</streamURL>
+<siteURL>http://www.xanthiradiodj.gr</siteURL>
+<genre>Pop</genre>
+<location>Ξάνθη</location>
+</station>
+<station>
+<title>Xronos 87.5</title>
+<streamURL>http://s6.onweb.gr:8006/</streamURL>
+<siteURL>http://easyradio.gr/xronos/</siteURL>
+<genre>News</genre>
+<location>Κομοτηνή</location>
+</station>
+<station>
+<title>Yes! FM 91.2</title>
+<streamURL>http://46.4.65.194:8039/</streamURL>
+<siteURL>http://yesradio.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>You FM 100.1</title>
+<streamURL>http://eco.onestreaming.com:8150/</streamURL>
+<siteURL>http://www.youfmradio.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>Zbutsam Radio</title>
+<streamURL>http://radio.zbutsam.net:30570/</streamURL>
+<siteURL>http://zbutsam.net</siteURL>
+<genre>Rock</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Zoo Radio 90.8</title>
+<streamURL>http://188.138.121.94:8004/</streamURL>
+<siteURL>http://www.zooradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ακρόαμα 97.8  FM</title>
+<streamURL>http://stream.24live.gr:9876/</streamURL>
+<siteURL>akroamafm978.blogspot.com/</siteURL>
+<genre>Mainstream</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Ακτίνα FM 107.6</title>
+<streamURL>http://s2.onweb.gr:8632/</streamURL>
+<siteURL>http://www.aktinafm.gr</siteURL>
+<genre>Κλαρίνα</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Αρμονία</title>
+<streamURL>http://s5.onweb.gr:8844/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Έντεχνα</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Αρμονία FM 103.2</title>
+<streamURL>http://s3.onweb.gr:8500/</streamURL>
+<siteURL>http://www.armoniaradio.gr</siteURL>
+<genre>News</genre>
+<location>Σάμος</location>
+</station>
+<station>
+<title>Αρτεμης FM 94.4</title>
+<streamURL>http://s1.onweb.gr:8416/</streamURL>
+<siteURL>http://www.artemisfm.gr</siteURL>
+<genre>News</genre>
+<location>Λέρος</location>
+</station>
+<station>
+<title>Γαλαξίας FM 105.8</title>
+<streamURL>http://50.115.124.196:46406/</streamURL>
+<siteURL>http://www.g-radio.gr/radio/</siteURL>
+<genre>Λαϊκά</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Γλέντι FM 101.1</title>
+<streamURL>http://s3.onweb.gr:8532/</streamURL>
+<siteURL>http://www.glentifm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Ξάνθη</location>
+</station>
+<station>
+<title>Δημοτική Ραδιοφωνία 91.5</title>
+<streamURL>http://eco.onestreaming.com:8185</streamURL>
+<siteURL>http://www.drt915.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Τρίπολη</location>
+</station>
+<station>
+<title>Διόνυσος 89.2 FM</title>
+<streamURL>http://s6.onweb.gr:8054/</streamURL>
+<siteURL>http://www.dionisos892.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Ελληνικός 90.3</title>
+<streamURL>http://live.ellinikos.gr:8010/903.aac</streamURL>
+<siteURL>http://www.ellinikos.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Λιβαδειά</location>
+</station>
+<station>
+<title>Ζυγός FM 100</title>
+<streamURL>http://s3.onweb.gr:8420/</streamURL>
+<siteURL>http://www.zygos.fm</siteURL>
+<genre>News</genre>
+<location>Τρίκαλα</location>
+</station>
+<station>
+<title>Ηχώ FM 102.1</title>
+<streamURL>http://live3.onestreaming.com:8280</streamURL>
+<siteURL>http://www.parosradio.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Πάρος</location>
+</station>
+<station>
+<title>Καλαμαριά FM 101.7</title>
+<streamURL>http://sc.greekstream.net:80/</streamURL>
+<siteURL>http://www.kalamariafm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Κανάλι 7 98.4 FM</title>
+<streamURL>http://live.kanali7.com:4012</streamURL>
+<siteURL>http://www.kanali7.com</siteURL>
+<genre>Mainstream</genre>
+<location>Κύπρος</location>
+</station>
+<station>
+<title>Καστοριά FM 91.5</title>
+<streamURL>http://eco.onestreaming.com:8107</streamURL>
+<siteURL>http://www.kastoriafm.gr</siteURL>
+<genre>Sports</genre>
+<location>Καστοριά</location>
+</station>
+<station>
+<title>Κοσμοράδιο 95.1</title>
+<streamURL>http://80.86.82.101:8130/</streamURL>
+<siteURL>http://cosmoradio.gr</siteURL>
+<genre>Pop</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Κόσμος FM 100</title>
+<streamURL>http://s1.onweb.gr:8856/</streamURL>
+<siteURL>http://www.kosmos100.gr</siteURL>
+<genre>Pop</genre>
+<location>Χαλκίδα</location>
+</station>
+<station>
+<title>Κρήτη FM 87.5</title>
+<streamURL>http://s3.onweb.gr:8878/</streamURL>
+<siteURL>http://www.kritifm.com</siteURL>
+<genre>Κρητικά</genre>
+<location>Κρήτη</location>
+</station>
+<station>
+<title>Κύμα FM 90.3</title>
+<streamURL>http://shout.streamwithq.gr:4080</streamURL>
+<siteURL>http://www.kymaradio.gr</siteURL>
+<genre>Έντεχνο</genre>
+<location>Κέρκυρα</location>
+</station>
+<station>
+<title>Κυπαρισσία 93.6</title>
+<streamURL>http://s1.onweb.gr:8096/</streamURL>
+<siteURL>http://www.radio936.gr/main.php</siteURL>
+<genre>News</genre>
+<location>Καλαμάτα</location>
+</station>
+<station>
+<title>Λαϊκός FM 105.7</title>
+<streamURL>http://s7.onweb.gr:8542/</streamURL>
+<siteURL>http://www.laikosradio.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Λελέβωσε 101.3 FM</title>
+<streamURL>http://208.43.121.133:9652/</streamURL>
+<siteURL>www,lelevose.com</siteURL>
+<genre>Ποντιακά</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Λέσχη 97.6</title>
+<streamURL>http://s3.onweb.gr:8438/</streamURL>
+<siteURL>http://www.976.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Τρίκαλα</location>
+</station>
+<station>
+<title>Λέχοβο 97.1</title>
+<streamURL>http://s4.onweb.gr:8468/</streamURL>
+<siteURL>http://www.radio-lehovo.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Λέχοβο</location>
+</station>
+<station>
+<title>Λουτράκι 96.9</title>
+<streamURL>http://s3.onweb.gr:8510/</streamURL>
+<siteURL>http://www.loutrakifm.gr</siteURL>
+<genre>Sophisticated</genre>
+<location>Λουτράκι</location>
+</station>
+<station>
+<title>Μουσική Λάμψη 103.3</title>
+<streamURL>http://lampsi.serverroom.us:7668</streamURL>
+<siteURL>http://www.mousikilampsi.gr</siteURL>
+<genre>Pop</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>Μουσικό Πανόραμα 100.8</title>
+<streamURL>http://85.17.174.142:10300/</streamURL>
+<siteURL>http://www.mousikopanorama.gr</siteURL>
+<genre>Pop</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Μύθος στα FM 93.4</title>
+<streamURL>http://69.175.94.98:8094/</streamURL>
+<siteURL>http://www.mymythos.tk</siteURL>
+<genre>Έντεχνα</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ξενύχτης Μυτιλήνης Fm</title>
+<streamURL>http://stream2.greekradios.gr:8042</streamURL>
+<siteURL>http://e-vibe.net/play/gr/1238.htm</siteURL>
+<genre>Λαϊκά</genre>
+<location>Μυτιλήνη</location>
+</station>
+<station>
+<title>Παλμός 103.2 FM</title>
+<streamURL>http://46.4.65.194:8023</streamURL>
+<siteURL>http://www.palmoskavala.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Παλμός FM 104.2</title>
+<streamURL>http://s6.onweb.gr:8426/</streamURL>
+<siteURL>http://www.proinos.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Καρδίτσα</location>
+</station>
+<station>
+<title>Πάρος FM 98.5</title>
+<streamURL>http://s1.onweb.gr:8098/</streamURL>
+<siteURL>http://www.parosfm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Πάρος</location>
+</station>
+<station>
+<title>Πειραϊκή Εκκλησία</title>
+<streamURL>http://eco.caststream.net:8044/</streamURL>
+<siteURL>http://www.pe912fm.com</siteURL>
+<genre>Εκκλησιαστικά</genre>
+<location>Πειραιάς</location>
+</station>
+<station>
+<title>Ράδιο 1 FM 99</title>
+<streamURL>http://eco.onestreaming.com:8336/</streamURL>
+<siteURL>http://www.99fm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ράδιο Cafe FM 102.4</title>
+<streamURL>http://s6.onweb.gr:8046/</streamURL>
+<siteURL>http://www.radiocafe.gr</siteURL>
+<genre>News</genre>
+<location>Σάμος</location>
+</station>
+<station>
+<title>Ράδιο City 102.8</title>
+<streamURL>http://208.43.9.96:8346/</streamURL>
+<siteURL>http://radiocityfm.gr</siteURL>
+<genre>Pop</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Ράδιο Star 95.5 FM</title>
+<streamURL>http://eco.onestreaming.com:8257/</streamURL>
+<siteURL>http://star955.blogspot.de/2009/03/blog-post.html</siteURL>
+<genre>Λαϊκά</genre>
+<location>Χαλκιδική</location>
+</station>
+<station>
+<title>Ράδιο Αλέξανδρος 106.3 FM</title>
+<streamURL>http://s3.onweb.gr:8072/</streamURL>
+<siteURL>http://www.radioalexandros.com</siteURL>
+<genre>Λαϊκά</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Ράδιο Αμύνταιο</title>
+<streamURL>http://radio.radionova.gr:8263/radio-amuntaio</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Λαϊκά</genre>
+<location>Αμύνταιο</location>
+</station>
+<station>
+<title>Ράδιο Άργος 98.4</title>
+<streamURL>http://46.4.65.194:8035/</streamURL>
+<siteURL>https://www.facebook.com/pages/radio-argos-984-fm/212118352143376</siteURL>
+<genre>Pop</genre>
+<location>Καστοριά</location>
+</station>
+<station>
+<title>Ράδιο Αργοσαρωνικός 106.4</title>
+<streamURL>http://s3.onweb.gr:8536/</streamURL>
+<siteURL>http://www.radioargosaronikos.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Ράδιο Γρεβενά 101.5</title>
+<streamURL>http://eco.onestreaming.com:8251/live</streamURL>
+<siteURL>http://radiogrevena.wordpress.com</siteURL>
+<genre>Rock</genre>
+<location>Γρεβενά</location>
+</station>
+<station>
+<title>Ράδιο Έβρος 97.1</title>
+<streamURL>http://78.46.37.77:8001/stream</streamURL>
+<siteURL>http://www.radioevros.gr</siteURL>
+<genre>News</genre>
+<location>Ορεστιάδα</location>
+</station>
+<station>
+<title>Ράδιο Έκρηξη FM 99.8</title>
+<streamURL>http://sc.greekstream.net:4006/</streamURL>
+<siteURL>http://www.ekrixifm.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ράδιο Επιλογές 102.8 FM</title>
+<streamURL>http://s3.onweb.gr:8816/</streamURL>
+<siteURL>http://www.epilogesfm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Κιλκίς</location>
+</station>
+<station>
+<title>Ράδιο Επτάνησα 98.8</title>
+<streamURL>http://s8.onweb.gr:8716/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>News</genre>
+<location>Κέρκυρα</location>
+</station>
+<station>
+<title>Ράδιο Ήπειρος 94.5</title>
+<streamURL>http://159.253.149.12:9454/</streamURL>
+<siteURL>http://www.radioepirus.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Ιωάννινα</location>
+</station>
+<station>
+<title>Ράδιο Θάλασσα</title>
+<streamURL>http://stream2134.init7.net:80</streamURL>
+<siteURL>http://www.radiothalassa.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Internet</location>
+</station>
+<station>
+<title>Ράδιο Θεσσαλονίκη 94.5</title>
+<streamURL>http://198.178.123.5:9010</streamURL>
+<siteURL>http://www.rthess.gr</siteURL>
+<genre>News</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ράδιο Κιβωτός 87.8</title>
+<streamURL>http://s8.onweb.gr:8710/</streamURL>
+<siteURL>http://www.kivotos-fm.gr</siteURL>
+<genre>Έντεχνα</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Ράδιο Λασίθι 92.3</title>
+<streamURL>http://s7.onweb.gr:8802/</streamURL>
+<siteURL>http://www.radiolasithi.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Ιεράπετρα</location>
+</station>
+<station>
+<title>Ράδιο Λευκάδα 88.4 FM</title>
+<streamURL>http://50.7.173.162:8167</streamURL>
+<siteURL>http://www.radiolefkada.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Λευκάδα</location>
+</station>
+<station>
+<title>Ράδιο Λυδία η Φιλιππησία</title>
+<streamURL>http://82.192.84.30:1086/stream/1/</streamURL>
+<siteURL>http://www.radiolydia.gr</siteURL>
+<genre>Εκκλησιαστικά</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ράδιο Μακεδόνισσα 106.4</title>
+<streamURL>http://46.4.65.194:8027</streamURL>
+<siteURL>http://www.makedonisa.gr</siteURL>
+<genre>Pop</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Ράδιο Ξηρόμερο 88.3</title>
+<streamURL>http://stream2.greekradios.gr:8030/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Λαϊκά</genre>
+<location>Αγρίνιο</location>
+</station>
+<station>
+<title>Ράδιο Παρατηρητής 94 FM</title>
+<streamURL>http://s6.onweb.gr:8020/</streamURL>
+<siteURL>http://www.radioparatiritis.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Κομοτηνή</location>
+</station>
+<station>
+<title>Ράδιο Πάτρα 106.5</title>
+<streamURL>http://174.142.32.91:9200/</streamURL>
+<siteURL>http://www.radiopatra.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>Ράδιο Πιερία 104.2</title>
+<streamURL>http://s6.onweb.gr:8018/</streamURL>
+<siteURL>http://www.radiopieria.gr</siteURL>
+<genre>Λαϊκά</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>Ράδιο Πόλις 99.4</title>
+<streamURL>http://s1.onweb.gr:8088/</streamURL>
+<siteURL>http://www.radiopolis.gr</siteURL>
+<genre>Dance Hits</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Ράδιο Πρέβεζα 93.0</title>
+<streamURL>http://sc2.streamwithq.com:8050/</streamURL>
+<siteURL>http://www.radiopreveza.gr</siteURL>
+<genre>News</genre>
+<location>Πρέβεζα</location>
+</station>
+<station>
+<title>Ράδιο Πρωινή 93.7 FM</title>
+<streamURL>http://62.103.31.151:8000/</streamURL>
+<siteURL>MissingInfo</siteURL>
+<genre>Greek Hits</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Ράδιο Τύρναβος FM 103.8</title>
+<streamURL>http://s3.onweb.gr:8528/</streamURL>
+<siteURL>http://www.radiotirnavos.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Ράδιοενέργεια 106.4</title>
+<streamURL>http://s1.onweb.gr:8828/</streamURL>
+<siteURL>http://www.radioenergeia.gr</siteURL>
+<genre>Pop</genre>
+<location>Κόρινθος</location>
+</station>
+<station>
+<title>Ραδιοκύματα 104.4 FM</title>
+<streamURL>http://s1.onweb.gr:8812/</streamURL>
+<siteURL>http://www.radiokymata.gr</siteURL>
+<genre>Pop</genre>
+<location>Θεσσαλονίκη</location>
+</station>
+<station>
+<title>Ραδιοφωνικός Σταθμός της Εκκλησίας της Ελλάδος</title>
+<streamURL>http://85.10.206.222:8002/</streamURL>
+<siteURL>http://www.radio895.gr</siteURL>
+<genre>Εκκλησιαστικά</genre>
+<location>Αθήνα</location>
+</station>
+<station>
+<title>Ρυθμός 106 FM</title>
+<streamURL>http://s4.onweb.gr:8406/</streamURL>
+<siteURL>http://www.rythmos106.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Ξάνθη</location>
+</station>
+<station>
+<title>Ρυθμός 89.2</title>
+<streamURL>http://s4.onweb.gr:8892/</streamURL>
+<siteURL>http://www.rythmos892.gr</siteURL>
+<genre>Pop</genre>
+<location>Τρίκαλα</location>
+</station>
+<station>
+<title>Ρυθμός FM 98.8</title>
+<streamURL>http://eco.onestreaming.com:8189/</streamURL>
+<siteURL>http://www.rythmos988fm.gr</siteURL>
+<genre>Pop</genre>
+<location>Λάρισα</location>
+</station>
+<station>
+<title>Σκάι 89.4 (Αναμετάδοση Σκάι 100.3)</title>
+<streamURL>http://r4.webradiostreams.com:7002/</streamURL>
+<siteURL>http://www.skaipatras.gr</siteURL>
+<genre>News</genre>
+<location>Πάτρα</location>
+</station>
+<station>
+<title>Σκάι FM 92.6</title>
+<streamURL>http://s1.onweb.gr:8866/</streamURL>
+<siteURL>http://www.skai926.gr</siteURL>
+<genre>News</genre>
+<location>Κατερίνη</location>
+</station>
+<station>
+<title>ΣΚΑΙ Αιγαίου</title>
+<streamURL>http://live.isolservers.com:8500/</streamURL>
+<siteURL>http://www.skaiaegean.gr</siteURL>
+<genre>News</genre>
+<location>Λέσβος</location>
+</station>
+<station>
+<title>ΣΟΚ FM 104.8</title>
+<streamURL>http://212.7.199.201:8000</streamURL>
+<siteURL>http://www.sokfm.gr/radio/</siteURL>
+<genre>Greek Hits</genre>
+<location>Χαλκίδα</location>
+</station>
+<station>
+<title>Στόχος FM 98.9</title>
+<streamURL>http://s3.onweb.gr:8016/</streamURL>
+<siteURL>http://www.stoxosfm.gr</siteURL>
+<genre>Greek Hits</genre>
+<location>Καβάλα</location>
+</station>
+<station>
+<title>Στυλίδα FM 94.1</title>
+<streamURL>http://s1.onweb.gr:8860</streamURL>
+<siteURL>http://stylidafm.gr</siteURL>
+<genre>Mainstream</genre>
+<location>Στυλίδα</location>
+</station>
+<station>
+<title>Τσιρίγο FM 105.6</title>
+<streamURL>http://s2.onweb.gr:8622/</streamURL>
+<siteURL>http://www.tsirigofm.gr</siteURL>
+<genre>Pop</genre>
+<location>Κύθηρα</location>
+</station>
+</item>

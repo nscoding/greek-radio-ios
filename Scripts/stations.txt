@@ -1,3 +1,9 @@
+105.5 Rock FM
+http://s5.onweb.gr:8078/
+http://www.1055rock.gr
+Rock
+Θεσσαλονίκη 
+
 143.1 AM
 http://radiofono.eng.auth.gr:8000/1431med
 http://www.1431am.org
@@ -47,9 +53,9 @@ Pop
 Γαστούνη 
 
 Arena FM 89.4
-http://sc.greekstream.net:4044/
+http://eco.onestreaming.com:8418
 http://arenafm.gr
-Sport
+Sports
 Θεσσαλονίκη 
 
 Athens DeeJay 95.2
@@ -59,9 +65,9 @@ Pop
 Αθήνα 
 
 Athletic Radio
-http://s4.onweb.gr:8840/
+http://eco.onestreaming.com:8052/
 http://athleticradio.weebly.com
-Sport
+Sports
 Μυτιλήνη 
 
 Atlantis 105.2 FM
@@ -250,6 +256,12 @@ http://www.legendfm.gr
 Rock
 Ξάνθη 
 
+Libero 107.4
+http://eco.onestreaming.com:8081/
+http://www.libero.fm
+Sports
+Θεσσαλονίκη 
+
 Life Radio FM 102.9
 http://sh1.onradio.gr:8836
 http://www.liferadio.gr
@@ -293,9 +305,9 @@ News
 Αλεξανδρούπολη 
 
 Metropolis 95.5
-http://5.172.204.90:8000/stream4
+http://85.25.207.34:8000
 http://www.metropolisradio.gr
-Sport
+Sports
 Θεσσαλονίκη 
 
 Mini FM 107.1
@@ -321,6 +333,12 @@ http://s4.onweb.gr:8484/
 http://www.notosfm.gr
 Κρητικά
 Κρήτη 
+
+NovaΣΠΟΡ FM 94.6
+http://sportfm.live24.gr:80/sportfm7712
+www.sport-fm.gr/
+Sports
+Αθήνα 
 
 NRG Power Radio 89.5
 http://eco.onestreaming.com:8314
@@ -755,9 +773,9 @@ Mainstream
 Κύπρος 
 
 Καστοριά FM 91.5
-http://eco.onestreaming.com:8107/
+http://eco.onestreaming.com:8107
 http://www.kastoriafm.gr
-Sport
+Sports
 Καστοριά 
 
 Κοσμοράδιο 95.1
@@ -1118,4 +1136,4 @@ Mainstream
 http://s2.onweb.gr:8622/
 http://www.tsirigofm.gr
 Pop
-Κύθηρα
+Κύθηρα 

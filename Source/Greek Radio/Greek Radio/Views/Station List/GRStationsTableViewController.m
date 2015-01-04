@@ -266,6 +266,16 @@
                                              selector:@selector(preferredTextSizeChanged:)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerDidStart:)
+                                                 name:GRNotificationStreamDidStart
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerDidEnd:)
+                                                 name:GRNotificationStreamDidEnd
+                                               object:nil];
 }
 
 
@@ -280,6 +290,17 @@
     [self.tableView reloadData];
 }
 
+- (void)playerDidStart:(NSNotification *)notification
+{
+  [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows
+                        withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)playerDidEnd:(NSNotification *)notification
+{
+  [self.tableView reloadRowsAtIndexPaths:self.tableView.indexPathsForVisibleRows
+                        withRowAnimation:UITableViewRowAnimationNone];
+}
 
 // ------------------------------------------------------------------------------------------
 #pragma mark - GRStationsManager Delegate
