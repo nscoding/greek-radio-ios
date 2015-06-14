@@ -10,7 +10,6 @@
 
 @implementation GRAppearanceHelper
 
-
 + (void)setUpGreekRadioAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.757f green:0.533f blue:0.286f alpha:1.00f]];
@@ -20,7 +19,6 @@
                                                 forState:UIControlStateNormal];
 }
 
-
 + (void)setUpDefaultAppearance
 {
     [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
@@ -29,10 +27,8 @@
                                                 forState:UIControlStateNormal];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Attributes
-// ------------------------------------------------------------------------------------------
+
 + (NSDictionary *)customBarButtonItemAttributes
 {
     UIColor *textColor = [UIColor colorWithRed:0.929f green:0.932f blue:0.881f alpha:1.00f];
@@ -42,7 +38,6 @@
              NSFontAttributeName : [UIFont boldSystemFontOfSize:17.0f]
             };
 }
-
 
 + (NSDictionary *)customNavigationBarAttributes
 {
@@ -61,7 +56,6 @@
             };
 }
 
-
 + (NSDictionary *)defaultBarButtonItemAttributes
 {
     return @{
@@ -70,7 +64,6 @@
             };
 }
 
-
 + (NSDictionary *)defaultNavigationBarAttributes
 {
     return @{
@@ -78,6 +71,5 @@
              NSFontAttributeName : [UIFont boldSystemFontOfSize:21.0f],
             };
 }
-
 
 @end

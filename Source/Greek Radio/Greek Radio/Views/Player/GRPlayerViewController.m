@@ -65,10 +65,8 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - View life cycle
-// ------------------------------------------------------------------------------------------
+
 - (void)viewDidLoad
 {
     self.navigationItem.title = NSLocalizedString(@"label_now_playing", @"");

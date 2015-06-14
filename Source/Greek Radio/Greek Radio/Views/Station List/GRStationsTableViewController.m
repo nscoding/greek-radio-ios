@@ -17,10 +17,6 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @interface GRStationsTableViewController() <UIAccelerometerDelegate, GRStationsManagerDelegate,
                                             GRPlayerViewControllerDelegate, UISearchBarDelegate, UITextFieldDelegate>
 {
@@ -34,34 +30,22 @@
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 #define kAccelerometerFrequency			105
 #define kFilteringFactor				0.1
 #define kMinEraseInterval				0.5
 #define kEraseAccelerationThreshold		4.0
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRStationsTableViewController
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
+
 - (instancetype)init
 {
     return [super init];
 }
 
+#pragma mark - View life cycle
 
-// ------------------------------------------------------------------------------------------
-#pragma mark -
-// ------------------------------------------------------------------------------------------
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,7 +63,6 @@
     [self buildAndConfigureRightGesture];
 }
 
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -89,10 +72,8 @@
     self.navigationItem.title = @"Greek Radio";
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
-// ------------------------------------------------------------------------------------------
+
 - (void)configureNavigationBarBackTitle
 {
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
@@ -100,7 +81,6 @@
                                                                             target:nil
                                                                             action:nil];
 }
-
 
 - (void)configureTableView
 {
@@ -110,7 +90,6 @@
     [self.tableView setContentOffset:CGPointMake(0.0f, 44.0f) animated:YES];
 }
 
-
 - (void)configureDataSource
 {
     GRStationsLayout stationsLayout = [GRUserDefaults currentSearchScope];
@@ -118,7 +97,6 @@
                                                         stationsLayout:stationsLayout];
     self.stationManager.delegate = self;
 }
-
 
 - (void)configureTrackClearButton
 {
@@ -133,7 +111,6 @@
         }
     }
 }
-
 
 - (void)buildAndConfigureSearchBar
 {
@@ -152,7 +129,6 @@
     [self.searchBar sizeToFit];
     self.tableView.tableHeaderView = self.searchBar;
 }
-
 
 - (void)buildAndConfigurePullToRefresh
 {
@@ -175,7 +151,6 @@
     [self.refreshControl endRefreshing];
 }
 
-
 - (void)buildAndConfigureNavigationButton
 {
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"label_settings", @"")
@@ -185,7 +160,6 @@
     
     self.navigationItem.leftBarButtonItem = leftButton;
 }
-
 
 - (void)buildAndConfigureMotionDetector
 {
@@ -242,7 +216,6 @@
                                              withHandler:accelerometerHandler];
 }
 
-
 - (void)buildAndConfigureRightGesture
 {
     UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc]
@@ -251,10 +224,8 @@
     [self.view addGestureRecognizer:recognizer];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
+
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -278,12 +249,10 @@
                                                object:nil];
 }
 
-
 - (void)syncDidEnd:(NSNotification *)notification
 {
     [self.refreshControl performSelector:@selector(endRefreshing)];
 }
-
 
 - (void)preferredTextSizeChanged:(NSNotification *)notification
 {
@@ -302,9 +271,8 @@
                         withRowAnimation:UITableViewRowAnimationNone];
 }
 
-// ------------------------------------------------------------------------------------------
 #pragma mark - GRStationsManager Delegate
-// ------------------------------------------------------------------------------------------
+
 - (void)stationManager:(GRStationsManager *)stationManager shouldPlayStation:(GRStation *)station
 {
     GRPlayerViewController *playController = [[GRPlayerViewController alloc] initWithStation:station
@@ -323,15 +291,12 @@
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Actions
-// ------------------------------------------------------------------------------------------
+
 - (void)updateStations
 {
     [[GRWebService shared] parseXML];
 }
-
 
 - (void)settingsButtonPressed:(UIButton *)sender
 {
@@ -346,7 +311,6 @@
                        animated:YES
                      completion:nil];
 }
-
 
 - (void)nowPlayingButtonPressed:(UIBarButtonItem *)sender
 {
@@ -367,35 +331,29 @@
     }
 }
 
-
 - (void)handleRightSwipe:(UISwipeGestureRecognizer *)recognizer
 {
     [self nowPlayingButtonPressed:nil];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Search Delegate
-// ------------------------------------------------------------------------------------------
+
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
     [self.stationManager setupFetchedResultsControllersWithString:self.searchBar.text];
     [searchBar resignFirstResponder];
 }
 
-
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     [self.stationManager setupFetchedResultsControllersWithString:self.searchBar.text];
 }
-
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
     searchBar.text = @"";
     [searchBar resignFirstResponder];
 }
-
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
 {
@@ -408,7 +366,6 @@
     return YES;
 }
 
-
 - (void)searchBar:(UISearchBar *)searchBar selectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     searchBar.text = @"";
@@ -418,25 +375,20 @@
     [GRUserDefaults setCurrentSearchScope:selectedScope];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - GRPlayerViewController delegate
-// ------------------------------------------------------------------------------------------
+
 - (void)playerViewControllerPlayNextStation:(GRPlayerViewController *)playViewController
 {
     [self.stationManager playNextStation];
 }
-
 
 - (void)playerViewControllerPlayPreviousStation:(GRPlayerViewController *)playViewControllerl
 {
     [self.stationManager playPreviousStation];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Memory
-// ------------------------------------------------------------------------------------------
+
 - (void)didReceiveMemoryWarning
 {
     if ([GRRadioPlayer shared].isPlaying)
@@ -451,11 +403,9 @@
     [super didReceiveMemoryWarning];
 }
 
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end

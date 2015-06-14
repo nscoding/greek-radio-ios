@@ -6,10 +6,6 @@
 //  Copyright (c) 2013 Patrick Chamelo - nscoding. All rights reserved.
 //
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @interface GRUserDefaults : NSObject
 
 /// Method to check if the automatic lock is disabled

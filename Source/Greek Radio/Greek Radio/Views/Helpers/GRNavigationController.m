@@ -8,12 +8,7 @@
 
 #import "GRNavigationController.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRNavigationController
-
 
 - (void)viewDidLoad
 {
@@ -21,11 +16,9 @@
     [self configureNavigationBar];
 }
 
-
 - (void)configureNavigationBar
 {
     self.navigationBar.tintColor = [UIColor whiteColor];
 }
-
 
 @end

@@ -12,10 +12,6 @@
 
 #import "Appirater.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @interface GRAppDelegate ()
 
 @property (nonatomic, strong, readwrite) GRStationsTableViewController *listTableViewController;
@@ -23,12 +19,7 @@
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRAppDelegate
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -69,16 +60,13 @@
     return YES;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Build and configure
-// ------------------------------------------------------------------------------------------
+
 - (void)buildAndConfigureMainWindow
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.window makeKeyAndVisible];
 }
-
 
 - (void)buildAndConfigureStationsViewController
 {
@@ -92,7 +80,6 @@
     self.window.rootViewController = self.menuNavigationController;
 }
 
-
 - (void)configureAppirater
 {
     [Appirater setAppId:@"321094050"];
@@ -104,10 +91,8 @@
     [Appirater setDebug:NO];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notfications
-// ------------------------------------------------------------------------------------------
+
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -131,12 +116,10 @@
                                                object:nil];
 }
 
-
 - (void)activityDidStart:(NSNotification *)notification
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
-
 
 - (void)activityDidEnd:(NSNotification *)notification
 {
@@ -145,6 +128,5 @@
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
 }
-
 
 @end

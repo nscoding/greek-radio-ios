@@ -10,12 +10,7 @@
 #import "GRStation.h"
 #import "GRCoreDataStack.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRStationsDAO
-
 
 - (BOOL)createStationWithTitle:(NSString *)title
                        siteURL:(NSString *)stationURL
@@ -67,7 +62,6 @@
     return YES;
 }
 
-
 - (BOOL)removeAll
 {
     NSArray *stations = [self retrieveAll];
@@ -87,7 +81,6 @@
     
     return YES;
 }
-
 
 - (BOOL)removeAllStationsBeforeDate:(NSDate *)date
 {
@@ -111,7 +104,6 @@
     return YES;
 }
 
-
 - (GRStation *)retrieveByTitle:(NSString *)title
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title CONTAINS[cd] %@", title];
@@ -126,7 +118,6 @@
     return nil;
 }
 
-
 - (NSArray *)retrieveAll
 {
     NSArray *stations = [[GRCoreDataStack shared] fetchObjectsForEntityName:@"GRStation"
@@ -134,7 +125,6 @@
     
     return stations;
 }
-
 
 - (NSArray *)retrieveAllServerBased:(NSString *)filter
 {
@@ -153,7 +143,6 @@
     return stations;
 }
 
-
 - (NSArray *)retrieveAllLocalBased:(NSString *)filter
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"server == NO AND favourite == NO"];
@@ -170,7 +159,6 @@
     
     return stations;
 }
-
 
 - (NSArray *)retrieveAllFavourites:(NSString *)filter
 {

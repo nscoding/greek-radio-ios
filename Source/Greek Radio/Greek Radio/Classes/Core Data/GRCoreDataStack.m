@@ -8,15 +8,7 @@
 
 #import "GRCoreDataStack.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
-
-
-// ------------------------------------------------------------------------------------------
-
 
 @implementation GRCoreDataStack
 {
@@ -28,41 +20,32 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
-// ------------------------------------------------------------------------------------------
+
 + (GRCoreDataStack *)shared
 {
     static dispatch_once_t pred;
     static GRCoreDataStack *shared = nil;
-    
-    dispatch_once(&pred, ^()
-                  {
+    dispatch_once(&pred, ^() {
                       shared = [[GRCoreDataStack alloc] init];
                   });
     
     return shared;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
-- (id)init
+
+- (instancetype)init
 {
-    if ((self = [super init]))
-    {
+    if ((self = [super init])) {
         [self registerNotitifacations];
     }
     
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
+
 - (void)registerNotitifacations
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -76,7 +59,6 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
                                                object:nil];
 }
 
-
 - (void)contextDidSave:(NSNotification *)notification
 {
     [self performSelectorOnMainThread:@selector(mergeChangesWithNotification:)
@@ -84,12 +66,10 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
                         waitUntilDone:NO];
 }
 
-
 - (void)mergeChangesWithNotification:(NSNotification *)notification
 {
     [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
 }
-
 
 - (void)saveChanges
 {
@@ -116,10 +96,7 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Core Data Stack
-// ------------------------------------------------------------------------------------------
 
 /**
  Returns the managed object context for the application.
@@ -148,7 +125,6 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
     return managedObjectContext;
 }
 
-
 /**
  Returns the managed object model for the application.
  If the model doesn't already exist, it is created from the application's model.
@@ -165,7 +141,6 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
     
     return _managedObjectModel;
 }
-
 
 /**
  Returns the persistent store coordinator for the application.
@@ -248,17 +223,14 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
 	return nil;
 }
 
-
 - (NSURL *)applicationDocumentsDirectoryURL
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Helpers
-// ------------------------------------------------------------------------------------------
+
 - (void)deleteDatabase
 {
     // Delete our local SQLite db
@@ -286,7 +258,6 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
     }
 }
 
-
 - (NSDictionary *)migrationAndPersistenceOptions
 {
     return  @{
@@ -294,6 +265,5 @@ static const NSString *kManagedObjectContextKey = @"ManagedObjectContextKey";
               NSInferMappingModelAutomaticallyOption : @YES
              };
 }
-
 
 @end

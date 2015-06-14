@@ -11,10 +11,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CoreMedia.h>
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @interface GRRadioPlayer()
 
 @property (nonatomic, strong) AVAudioSession *streamSession;
@@ -23,33 +19,23 @@
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRRadioPlayer
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
-// ------------------------------------------------------------------------------------------
+
 + (GRRadioPlayer *)shared
 {
     static dispatch_once_t pred;
     static GRRadioPlayer *shared = nil;
-    
-    dispatch_once(&pred, ^()
-    {
+    dispatch_once(&pred, ^() {
       shared = [[GRRadioPlayer alloc] init];
     });
     
     return shared;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
+
 - (instancetype)init
 {
     if ((self = [super init]))
@@ -68,10 +54,8 @@
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
+
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
     // Request permission to run in the background. Provide an
@@ -93,7 +77,6 @@
     }];
 }
 
-
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     UIApplication *application = [notification object];
@@ -101,10 +84,8 @@
     self.backgroundOperation = UIBackgroundTaskInvalid;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - KVO
-// ------------------------------------------------------------------------------------------
+
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -123,10 +104,8 @@
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Exposed Methods
-// ------------------------------------------------------------------------------------------
+
 - (void)playStation:(GRStation *)station
 {
     if ([[NSInternetDoctor shared] isConnected])
@@ -152,7 +131,6 @@
     }
 }
 
-
 - (void)stopPlayingCurrentStation
 {
     self.currentStation = nil;
@@ -161,7 +139,6 @@
     
     [self tearDownPlayer];
 }
-
 
 - (BOOL)isPlaying
 {
@@ -173,10 +150,8 @@
     return NO;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Helper Methods
-// ------------------------------------------------------------------------------------------
+
 - (void)createPlayerForStation:(GRStation *)station
 {
     self.currentStation = station;
@@ -202,7 +177,6 @@
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
-
 - (void)tearDownPlayer
 {
     if (self.player)
@@ -215,7 +189,6 @@
     
     [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
 }
-
 
 - (void)stationPlaybackFailed
 {

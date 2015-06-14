@@ -8,12 +8,7 @@
 
 #import "UIDevice+Extensions.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation UIDevice (Extensions)
-
 
 + (BOOL)isIPad;
 {
@@ -26,7 +21,6 @@
     return NO;
 }
 
-
 + (BOOL)isTallIphone;
 {
     if ((UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) &&
@@ -37,7 +31,6 @@
     return NO;
 }
 
-
 + (BOOL)isFlatUI
 {
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 7.0)
@@ -47,6 +40,5 @@
     
     return NO;
 }
-
 
 @end

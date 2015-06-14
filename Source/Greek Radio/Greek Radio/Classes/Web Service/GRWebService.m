@@ -10,17 +10,12 @@
 #import "GRStationsDAO.h"
 #import "CWStatusBarNotification.h"
 
-
 typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 {
     GRWebServiceSyncStatusError = -1,
     GRWebServiceSyncStatusNoInternet = 0,
     GRWebServiceSyncStatusSuccessful = 1,
 };
-
-
-// ------------------------------------------------------------------------------------------
-
 
 #define kWebServiceURL @"http://nscoding.co.uk/xml/RadioStations.xml"
 // #define kWebServiceURL @"http://nscoding.co.uk/xml/RadioStationsBeta.xml"
@@ -31,10 +26,6 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     #define kElementStationURL @"siteURL"
     #define kElementGenre @"genre"
     #define kElemenLocation @"location"
-
-
-// ------------------------------------------------------------------------------------------
-
 
 @interface GRWebService ()
 
@@ -48,34 +39,24 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRWebService
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
-// ------------------------------------------------------------------------------------------
+
 + (GRWebService *)shared
 {
     static dispatch_once_t pred;
     static GRWebService *shared = nil;
-    
-    dispatch_once(&pred, ^()
-    {
+    dispatch_once(&pred, ^() {
         shared = [[GRWebService alloc] init];
     });
     
     return shared;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
-- (id)init
+
+- (instancetype)init
 {
     if ((self = [super init]))
     {
@@ -90,26 +71,21 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
+
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [self parseXML];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Actions
-// ------------------------------------------------------------------------------------------
+
 - (void)parseXML
 {
     // Begin parsing the XML file located on our server www.nscoding.co.uk/..
     // with an asynchronous execution in global concurrent queue
     [self parseXMLInBackgroundThread];
 }
-
 
 - (void)parseXMLInBackgroundThread
 {
@@ -139,8 +115,6 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     });
 }
 
-
-
 - (void)startSyncingOnMainThread
 {
     if (self.statusBarNotification)
@@ -163,7 +137,6 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
         [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:self];
     });
 }
-
 
 - (void)endSyncingOnMainThread:(GRWebServiceSyncStatus)status
 {
@@ -199,10 +172,8 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     });
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - XML parsing
-// ------------------------------------------------------------------------------------------
+
 - (void)parseXMLFileAtURL:(NSString *)URL
 {
     NSURL *xmlURL = [NSURL URLWithString:URL];
@@ -215,7 +186,6 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     [self.rssParser parse];
 }
 
-
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
     self.dateLastSynced = nil;
@@ -223,12 +193,10 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     [self endSyncingOnMainThread:GRWebServiceSyncStatusError];
 }
 
-
 - (void)parser:(NSXMLParser *)parser validationErrorOccurred:(NSError *)validationError;
 {
 
 }
-
 
 -  (void)parser:(NSXMLParser *)parser
 didStartElement:(NSString *)elementName
@@ -243,7 +211,6 @@ didStartElement:(NSString *)elementName
         self.dataDictionary = [NSMutableDictionary dictionary];
 	}
 }
-
 
 - (void)parser:(NSXMLParser *)parser
  didEndElement:(NSString *)elementName
@@ -264,7 +231,6 @@ didStartElement:(NSString *)elementName
 	}
 }
 
-
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
 {
     NSMutableString *currentValue = [self valueForCurrentElement];
@@ -273,7 +239,6 @@ didStartElement:(NSString *)elementName
     [self.dataDictionary setObject:currentValue
                             forKey:self.currentElement];
 }
-
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
@@ -286,10 +251,6 @@ didStartElement:(NSString *)elementName
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
-#pragma mark -
-// ------------------------------------------------------------------------------------------
 - (NSMutableString *)valueForCurrentElement
 {
     NSMutableString *property = [self.dataDictionary objectForKey:self.currentElement];
@@ -302,7 +263,6 @@ didStartElement:(NSString *)elementName
     
     return property;
 }
-
 
 @end
 
