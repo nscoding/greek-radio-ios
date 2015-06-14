@@ -287,11 +287,9 @@ static const CGFloat kEraseAccelerationThreshold = 4.0;
 {
     [_searchBar resignFirstResponder];
 
-    GRSettingsViewController *settingsNavigationController = [[GRSettingsViewController alloc] init];
-    UINavigationController *navigationController =
-        [[UINavigationController alloc] initWithRootViewController:settingsNavigationController];
+    GRSettingsViewController *settingsNavigationController = [[GRSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingsNavigationController];
     navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
-
     [self presentViewController:navigationController
                        animated:YES
                      completion:nil];

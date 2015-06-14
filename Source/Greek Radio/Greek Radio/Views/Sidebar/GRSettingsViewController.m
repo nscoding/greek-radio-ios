@@ -17,10 +17,10 @@ static NSString *const kSettingCellIdentifier = @"GRSettingsCell";
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.navigationController.navigationBar.topItem.title = NSLocalizedString(@"label_settings", @"");
     self.navigationController.navigationBar.translucent = NO;
-
-    [self.settingsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSettingCellIdentifier];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kSettingCellIdentifier];
     [self setUpCloseButton];
 }
 
@@ -86,7 +86,6 @@ static NSString *const kSettingCellIdentifier = @"GRSettingsCell";
     if (section == 2) {
         return 2;
     }
-    
     return 1;
 }
 
@@ -106,12 +105,9 @@ static NSString *const kSettingCellIdentifier = @"GRSettingsCell";
 {
     if (section == 0) {
         return NSLocalizedString(@"label_general", @"");
-    }
-    
-    if (section == 2) {
+    } else if (section == 2) {
         return NSLocalizedString(@"label_contact_us", @"");
     }
-    
     return @"";
 }
 
@@ -120,7 +116,6 @@ static NSString *const kSettingCellIdentifier = @"GRSettingsCell";
     if (indexPath.section == 2 || indexPath.section == 3) {
         return YES;
     }
-    
     return NO;
 }
 

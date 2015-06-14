@@ -7,8 +7,6 @@
 //
 
 
-@interface GRSettingsViewController : UIViewController <MFMailComposeViewControllerDelegate>
-
-@property (nonatomic, weak) IBOutlet UITableView *settingsTableView;
+@interface GRSettingsViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 @end
