@@ -20,7 +20,6 @@ typedef NS_ENUM(NSUInteger, GRStationsLayout)
 @protocol GRStationsManagerDelegate <NSObject>
 
 @required
-
 - (void)stationManager:(GRStationsManager *)stationManager shouldPlayStation:(GRStation *)station;
 
 @end

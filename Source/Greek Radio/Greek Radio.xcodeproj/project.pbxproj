@@ -14,11 +14,14 @@
 		13CDC161187062970041FED4 /* GRStationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC160187062970041FED4 /* GRStationsManager.m */; };
 		13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13CDC18218715D4E0041FED4 /* Assets.xcassets */; };
 		13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC18B187167250041FED4 /* UITableView+Extensions.m */; };
+		13EA5BBB1A341E6D00C264C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BB61A341E6D00C264C8 /* Localizable.strings */; };
+		13EA5BBC1A341E6D00C264C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BB91A341E6D00C264C8 /* Localizable.strings */; };
+		13EA5BC31A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */; };
+		13EA5BC41A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */; };
 		CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD27CEE119DF7E3B00B02565 /* StoreKit.framework */; };
 		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
 		CD53C9521737A97900264230 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9511737A97800264230 /* Settings.bundle */; };
 		CD53C95E1737B0D400264230 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53C9571737B0D400264230 /* Appirater.m */; };
-		CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */; };
 		CD55C0D5174424F6000BFFE5 /* GRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */; };
 		CD55C0D6174424F6000BFFE5 /* GRSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD55C0D4174424F6000BFFE5 /* GRSettingsViewController.xib */; };
 		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
@@ -36,7 +39,6 @@
 		CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		CD92B501173400B600771F26 /* GRShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B500173400B600771F26 /* GRShareHelper.m */; };
 		CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B5021734272800771F26 /* MediaPlayer.framework */; };
-		CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF35A173A8227006AD8C3 /* Localizable.strings */; };
 		CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA226A5174808AF00209736 /* UIDevice+Extensions.m */; };
 		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
 		CDA752E8173049A0005B25EC /* GRWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752E7173049A0005B25EC /* GRWebService.m */; };
@@ -47,7 +49,6 @@
 		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
 		CDA9AFA9174551990047C1F1 /* GRShoutCastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9AFA8174551990047C1F1 /* GRShoutCastHelper.m */; };
 		CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB6D1991737D5B900E9D842 /* GRStation.m */; };
-		CDD39C4C17A2BB0B002B0F57 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD9EF357173A8227006AD8C3 /* Localizable.strings */; };
 		CDD7EBE21733B66100225F5A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE11733B66100225F5A /* Reachability.m */; };
 		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
 		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
@@ -76,6 +77,10 @@
 		13CDC18218715D4E0041FED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13CDC18A187167250041FED4 /* UITableView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extensions.h"; sourceTree = "<group>"; };
 		13CDC18B187167250041FED4 /* UITableView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extensions.m"; sourceTree = "<group>"; };
+		13EA5BB71A341E6D00C264C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
+		13EA5BBA1A341E6D00C264C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		13EA5BBF1A341E9800C264C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		13EA5BC21A341E9800C264C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		CD27CEE119DF7E3B00B02565 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
 		CD53900117476F480044092D /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
@@ -83,8 +88,6 @@
 		CD53C9561737B0D400264230 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		CD53C9571737B0D400264230 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		CD53C9581737B0D400264230 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
-		CD53C95A1737B0D400264230 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		CD53C95B1737B0D400264230 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
 		CD55C0D2174424F6000BFFE5 /* GRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSettingsViewController.h; sourceTree = "<group>"; };
 		CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSettingsViewController.m; sourceTree = "<group>"; };
 		CD55C0D4174424F6000BFFE5 /* GRSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRSettingsViewController.xib; sourceTree = "<group>"; };
@@ -111,8 +114,6 @@
 		CD92B4FF173400B600771F26 /* GRShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShareHelper.h; sourceTree = "<group>"; };
 		CD92B500173400B600771F26 /* GRShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShareHelper.m; sourceTree = "<group>"; };
 		CD92B5021734272800771F26 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		CD9EF358173A8227006AD8C3 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
-		CD9EF35B173A8227006AD8C3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		CDA226A4174808AF00209736 /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extensions.h"; sourceTree = "<group>"; };
 		CDA226A5174808AF00209736 /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extensions.m"; sourceTree = "<group>"; };
 		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -196,13 +197,46 @@
 			path = "UIAlertView-Blocks";
 			sourceTree = "<group>";
 		};
+		13EA5BB51A341E6D00C264C8 /* el.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				13EA5BB61A341E6D00C264C8 /* Localizable.strings */,
+			);
+			path = el.lproj;
+			sourceTree = "<group>";
+		};
+		13EA5BB81A341E6D00C264C8 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				13EA5BB91A341E6D00C264C8 /* Localizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
+		13EA5BBD1A341E9800C264C8 /* el.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */,
+			);
+			path = el.lproj;
+			sourceTree = "<group>";
+		};
+		13EA5BC01A341E9800C264C8 /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		CD53C9541737B0D400264230 /* Appirater */ = {
 			isa = PBXGroup;
 			children = (
 				CD53C9561737B0D400264230 /* Appirater.h */,
 				CD53C9571737B0D400264230 /* Appirater.m */,
 				CD53C9581737B0D400264230 /* AppiraterDelegate.h */,
-				CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */,
+				13EA5BBD1A341E9800C264C8 /* el.lproj */,
+				13EA5BC01A341E9800C264C8 /* en.lproj */,
 			);
 			path = Appirater;
 			sourceTree = "<group>";
@@ -290,26 +324,10 @@
 		CD9EF34D173A8211006AD8C3 /* Application Localization */ = {
 			isa = PBXGroup;
 			children = (
-				CD9EF359173A8227006AD8C3 /* en.lproj */,
-				CD9EF356173A8227006AD8C3 /* el.lproj */,
+				13EA5BB51A341E6D00C264C8 /* el.lproj */,
+				13EA5BB81A341E6D00C264C8 /* en.lproj */,
 			);
 			path = "Application Localization";
-			sourceTree = "<group>";
-		};
-		CD9EF356173A8227006AD8C3 /* el.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CD9EF357173A8227006AD8C3 /* Localizable.strings */,
-			);
-			path = el.lproj;
-			sourceTree = "<group>";
-		};
-		CD9EF359173A8227006AD8C3 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				CD9EF35A173A8227006AD8C3 /* Localizable.strings */,
-			);
-			path = en.lproj;
 			sourceTree = "<group>";
 		};
 		CDA226A31748089C00209736 /* Extensions */ = {
@@ -462,10 +480,10 @@
 			isa = PBXGroup;
 			children = (
 				CD7A02BC1732E9AF003A2E2D /* Appearance */,
-				CD9EF34D173A8211006AD8C3 /* Application Localization */,
 				CDE43AA917303F5B004C0698 /* Application Delegate */,
-				CDA752EC17305471005B25EC /* Core Data */,
+				CD9EF34D173A8211006AD8C3 /* Application Localization */,
 				CD92B5161735729E00771F26 /* Constants */,
+				CDA752EC17305471005B25EC /* Core Data */,
 				CDA226A31748089C00209736 /* Extensions */,
 				CDD7EBE41733B69500225F5A /* Internet Doctor */,
 				CD7A02071732939F003A2E2D /* Notification Center */,
@@ -538,7 +556,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = GR;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Patrick Chamelo - nscoding";
 				TargetAttributes = {
 					CDE43A7A17303DD5004C0698 = {
@@ -556,8 +574,8 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				el,
+				en,
 			);
 			mainGroup = CDE43A7217303DD4004C0698;
 			productRefGroup = CDE43A7C17303DD5004C0698 /* Products */;
@@ -578,11 +596,12 @@
 				CD7A017C17327591003A2E2D /* GRStationCellView.xib in Resources */,
 				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
 				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
-				CD53C95F1737B0D400264230 /* AppiraterLocalizable.strings in Resources */,
-				CD9EF35D173A8227006AD8C3 /* Localizable.strings in Resources */,
+				13EA5BBC1A341E6D00C264C8 /* Localizable.strings in Resources */,
+				13EA5BBB1A341E6D00C264C8 /* Localizable.strings in Resources */,
 				CD55C0D6174424F6000BFFE5 /* GRSettingsViewController.xib in Resources */,
+				13EA5BC31A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */,
+				13EA5BC41A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */,
 				13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */,
-				CDD39C4C17A2BB0B002B0F57 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,29 +662,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		CD53C9591737B0D400264230 /* AppiraterLocalizable.strings */ = {
+		13EA5BB61A341E6D00C264C8 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CD53C95A1737B0D400264230 /* el */,
-				CD53C95B1737B0D400264230 /* en */,
+				13EA5BB71A341E6D00C264C8 /* el */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		13EA5BB91A341E6D00C264C8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13EA5BBA1A341E6D00C264C8 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13EA5BBF1A341E9800C264C8 /* el */,
 			);
 			name = AppiraterLocalizable.strings;
 			sourceTree = "<group>";
 		};
-		CD9EF357173A8227006AD8C3 /* Localizable.strings */ = {
+		13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CD9EF358173A8227006AD8C3 /* el */,
+				13EA5BC21A341E9800C264C8 /* en */,
 			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		CD9EF35A173A8227006AD8C3 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CD9EF35B173A8227006AD8C3 /* en */,
-			);
-			name = Localizable.strings;
+			name = AppiraterLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -734,14 +760,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Patrick CHAMELO (4S7SPYVR8G)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -753,16 +780,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO (HPSF3D2F4U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO (HPSF3D2F4U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D74B3B97-DC3B-4941-AE50-49D2A3B4E1C0";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D74B3B97-DC3B-4941-AE50-49D2A3B4E1C0";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5131313-e2ab-4209-9010-62e03ffc68ac";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
@@ -800,15 +827,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Patrick CHAMELO (HPSF3D2F4U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Patrick CHAMELO (HPSF3D2F4U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
 				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "14537C3B-93DD-4EE3-865F-19A0F55662DF";
+				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14537C3B-93DD-4EE3-865F-19A0F55662DF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

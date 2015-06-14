@@ -46,8 +46,8 @@
         self.tableView = tableView;
         self.tableView.delegate = self;
         self.tableView.dataSource = self;
+        self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
         self.stationsLayout = layout;
-        
         [self setupFetchedResultsControllers];
     }
     

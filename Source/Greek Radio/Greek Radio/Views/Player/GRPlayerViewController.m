@@ -17,14 +17,11 @@
 // ------------------------------------------------------------------------------------------
 
 
-typedef enum GRInformationBarOption
-{
-    GRInformationBarOptionGenre     = 0,
-    GRInformationBarOptionSong      = 1,
-    GRInformationBarOptionArtist    = 2,
-} GRInformationBarOption;
-
-
+typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
+  GRInformationBarOptionGenre     = 0,
+  GRInformationBarOptionSong      = 1,
+  GRInformationBarOptionArtist    = 2,
+};
 
 // ------------------------------------------------------------------------------------------
 
@@ -241,15 +238,14 @@ typedef enum GRInformationBarOption
 
 - (void)buildAndConfigureVolumeSlider
 {
-    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:
-                                    CGRectMake(60.0f, 110.0f, self.view.frame.size.width - 90.0f, 20.0f)];
-    volumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
-    volumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:volumeView];
-    
-    UIImageView *volumeLowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GRVolumeUp"]];
-    volumeLowImageView.center = CGPointMake(33.0f, volumeView.center.y);
-    [self.view addSubview:volumeLowImageView];
+  MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(60.0f, 110.0f, self.view.frame.size.width - 90.0f, 20.0f)];
+  volumeView.layer.backgroundColor = [UIColor clearColor].CGColor;
+  volumeView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+  [self.view addSubview:volumeView];
+  
+  UIImageView *volumeLowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"GRVolumeUp"]];
+  volumeLowImageView.center = CGPointMake(33.0f, volumeView.center.y);
+  [self.view addSubview:volumeLowImageView];
 }
 
 
