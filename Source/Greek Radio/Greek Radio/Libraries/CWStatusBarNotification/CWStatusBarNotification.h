@@ -15,6 +15,14 @@ typedef void(^CWCompletionBlock)(void);
 @end
 
 @interface CWWindowContainer : UIWindow
+
+@property (assign, nonatomic) CGFloat notificationHeight;
+
+@end
+
+@interface CWViewController : UIViewController
+@property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
+@property (nonatomic, setter=setSupportedInterfaceOrientations:) NSInteger supportedInterfaceOrientations;
 @end
 
 @interface CWStatusBarNotification : NSObject
@@ -39,14 +47,17 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (strong, nonatomic) ScrollLabel *notificationLabel;
 @property (strong, nonatomic) UIColor *notificationLabelBackgroundColor;
 @property (strong, nonatomic) UIColor *notificationLabelTextColor;
+@property (strong, nonatomic) UIFont *notificationLabelFont;
 @property (assign, nonatomic) CGFloat notificationLabelHeight;
+@property (strong, nonatomic) UIView *customView;
 @property (assign, nonatomic) BOOL multiline;
 
 @property (strong, nonatomic) UIView *statusBarView;
 
 @property (copy, nonatomic) CWCompletionBlock notificationTappedBlock;
 
-@property (nonatomic) CWNotificationAnimationStyle notificationStyle;
+@property (nonatomic) CWNotificationStyle notificationStyle;
+@property (nonatomic) NSInteger supportedInterfaceOrientations;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationInStyle;
 @property (nonatomic) CWNotificationAnimationStyle notificationAnimationOutStyle;
 @property (nonatomic) CWNotificationAnimationType notificationAnimationType;
@@ -54,9 +65,13 @@ typedef NS_ENUM(NSInteger, CWNotificationAnimationType) {
 @property (nonatomic) BOOL notificationIsDismissing;
 
 @property (strong, nonatomic) CWWindowContainer *notificationWindow;
+@property (nonatomic) UIStatusBarStyle preferredStatusBarStyle;
 
 - (void)displayNotificationWithMessage:(NSString *)message forDuration:(CGFloat)duration;
 - (void)displayNotificationWithMessage:(NSString *)message completion:(void (^)(void))completion;
+- (void)displayNotificationWithView:(UIView *)view forDuration:(CGFloat)duration;
+- (void)displayNotificationWithView:(UIView *)view completion:(void (^)(void))completion;
 - (void)dismissNotification;
+- (void)dismissNotificationWithCompletion:(void(^)(void))completion;
 
 @end

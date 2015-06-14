@@ -14,7 +14,6 @@
 		13CDC161187062970041FED4 /* GRStationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC160187062970041FED4 /* GRStationsManager.m */; };
 		13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13CDC18218715D4E0041FED4 /* Assets.xcassets */; };
 		13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC18B187167250041FED4 /* UITableView+Extensions.m */; };
-		CD01B3D619853A2E00B3AA66 /* GRSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CD01B3D519853A2E00B3AA66 /* GRSearchBar.m */; };
 		CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD27CEE119DF7E3B00B02565 /* StoreKit.framework */; };
 		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
 		CD53C9521737A97900264230 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9511737A97800264230 /* Settings.bundle */; };
@@ -77,8 +76,6 @@
 		13CDC18218715D4E0041FED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13CDC18A187167250041FED4 /* UITableView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extensions.h"; sourceTree = "<group>"; };
 		13CDC18B187167250041FED4 /* UITableView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extensions.m"; sourceTree = "<group>"; };
-		CD01B3D419853A2E00B3AA66 /* GRSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSearchBar.h; sourceTree = "<group>"; };
-		CD01B3D519853A2E00B3AA66 /* GRSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSearchBar.m; sourceTree = "<group>"; };
 		CD27CEE119DF7E3B00B02565 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
 		CD53900117476F480044092D /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
@@ -237,8 +234,6 @@
 				CD92B500173400B600771F26 /* GRShareHelper.m */,
 				CD53900017476F480044092D /* GRNavigationController.h */,
 				CD53900117476F480044092D /* GRNavigationController.m */,
-				CD01B3D419853A2E00B3AA66 /* GRSearchBar.h */,
-				CD01B3D519853A2E00B3AA66 /* GRSearchBar.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -622,7 +617,6 @@
 				CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */,
 				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
 				1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */,
-				CD01B3D619853A2E00B3AA66 /* GRSearchBar.m in Sources */,
 				13CDC161187062970041FED4 /* GRStationsManager.m in Sources */,
 				CD7A018B17327ADD003A2E2D /* GRStationsTableViewController.m in Sources */,
 				13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */,
