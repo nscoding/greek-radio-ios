@@ -11,15 +11,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CoreMedia.h>
 
-@interface GRRadioPlayer()
-
-@property (nonatomic, strong) AVAudioSession *streamSession;
-@property (nonatomic, strong) AVPlayer *player;
-@property (nonatomic, assign) UIBackgroundTaskIdentifier backgroundOperation;
-
-@end
-
 @implementation GRRadioPlayer
+{
+    AVAudioSession *_streamSession;
+    AVPlayer *_player;
+    UIBackgroundTaskIdentifier _backgroundOperation;
+}
 
 #pragma mark - Singleton
 
@@ -38,7 +35,7 @@
 
 - (instancetype)init
 {
-    if ((self = [super init]))
+    if (self = [super init])
     {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationDidEnterBackground:)
@@ -62,16 +59,14 @@
     // expiration handler in case the task runs long.
     UIApplication *application = [notification object];
     
-    NSAssert(self.backgroundOperation == UIBackgroundTaskInvalid, nil);
-    self.backgroundOperation = [application beginBackgroundTaskWithExpirationHandler:^{
+    NSAssert(_backgroundOperation == UIBackgroundTaskInvalid, nil);
+    _backgroundOperation = [application beginBackgroundTaskWithExpirationHandler:^{
         // Synchronize the cleanup call on the main thread in case
         // the task actually finishes at around the same time.
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            if (self.backgroundOperation != UIBackgroundTaskInvalid)
-            {
-                [application endBackgroundTask:self.backgroundOperation];
-                self.backgroundOperation = UIBackgroundTaskInvalid;
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            if (_backgroundOperation != UIBackgroundTaskInvalid) {
+                [application endBackgroundTask:_backgroundOperation];
+                _backgroundOperation = UIBackgroundTaskInvalid;
             }
         });
     }];
@@ -80,8 +75,8 @@
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
     UIApplication *application = [notification object];
-    [application endBackgroundTask:self.backgroundOperation];
-    self.backgroundOperation = UIBackgroundTaskInvalid;
+    [application endBackgroundTask:_backgroundOperation];
+    _backgroundOperation = UIBackgroundTaskInvalid;
 }
 
 #pragma mark - KVO
@@ -91,14 +86,10 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (object == self.player && [keyPath isEqualToString:NSStringFromSelector(@selector(rate))])
-    {
-        if (self.isPlaying)
-        {
+    if (object == _player && [keyPath isEqualToString:NSStringFromSelector(@selector(rate))]) {
+        if (self.isPlaying) {
             [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
-        }
-        else
-        {
+        } else {
             [self stopPlayingCurrentStation];
         }
     }
@@ -108,23 +99,17 @@
 
 - (void)playStation:(GRStation *)station
 {
-    if ([[NSInternetDoctor shared] isConnected])
-    {
-        if ([self.streamURL isEqualToString:station.streamURL] == NO)
-        {
+    if ([[NSInternetDoctor shared] isConnected]) {
+        if ([self.streamURL isEqualToString:station.streamURL] == NO) {
             [self stopPlayingCurrentStation];
         }
-        
-        if (self.player)
-        {
+        if (_player) {
             return;
         }
         
         [self tearDownPlayer];
         [self createPlayerForStation:station];
-    }
-    else
-    {
+    } else {
         [self stopPlayingCurrentStation];
         [[NSInternetDoctor shared] showNoInternetAlert];
         [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
@@ -136,14 +121,12 @@
     self.currentStation = nil;
     self.stationName = @"";
     self.streamURL = @"";
-    
     [self tearDownPlayer];
 }
 
 - (BOOL)isPlaying
 {
-    if (self.player && self.player.rate != 0)
-    {
+    if (_player && _player.rate != 0) {
         return YES;
     }
     
@@ -158,33 +141,31 @@
     self.streamURL = [NSString stringWithFormat:@"%@", self.currentStation.streamURL];
     self.stationName = [NSString stringWithFormat:@"%@", self.currentStation.title];
     
-    self.streamSession = [AVAudioSession sharedInstance];
-    [self.streamSession setCategory:AVAudioSessionCategoryPlayAndRecord
-                        withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionAllowBluetooth
-                              error:nil];
-    
-    [self.streamSession setActive:YES error:nil];
+    _streamSession = [AVAudioSession sharedInstance];
+    [_streamSession setCategory:AVAudioSessionCategoryPlayback
+                    withOptions:AVAudioSessionCategoryOptionDefaultToSpeaker | AVAudioSessionCategoryOptionAllowBluetooth
+                          error:nil];
+    [_streamSession setActive:YES error:nil];
   
     NSURL *url = [NSURL URLWithString:self.streamURL];
-    self.player = [[AVPlayer alloc] initWithURL:url];
-    self.player.allowsExternalPlayback = YES;
-    self.player.usesExternalPlaybackWhileExternalScreenIsActive = YES;
+    _player = [[AVPlayer alloc] initWithURL:url];
+    _player.allowsExternalPlayback = YES;
+    _player.usesExternalPlaybackWhileExternalScreenIsActive = YES;
   
-    [self.player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
-    [self.player.currentItem addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:nil];
-    [self.player play];
+    [_player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
+    [_player.currentItem addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:nil];
+    [_player play];
 
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
 - (void)tearDownPlayer
 {
-    if (self.player)
-    {
-        [self.player.currentItem removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
-        [self.player removeObserver:self forKeyPath:NSStringFromSelector(@selector(rate))];
-        [self.player pause];
-        self.player = nil;
+    if (_player) {
+        [_player.currentItem removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
+        [_player removeObserver:self forKeyPath:NSStringFromSelector(@selector(rate))];
+        [_player pause];
+        _player = nil;
     }
     
     [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
@@ -192,8 +173,7 @@
 
 - (void)stationPlaybackFailed
 {
-    if ([[NSInternetDoctor shared] isConnected])
-    {
+    if ([[NSInternetDoctor shared] isConnected]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"label_something_wrong", @"")
                                                                 message:NSLocalizedString(@"app_player_error_subtitle", @"")
@@ -202,9 +182,7 @@
                                                       otherButtonTitles:nil];
             [alertView show];
         });
-    }
-    else
-    {
+    } else {
         [[NSInternetDoctor shared] showNoInternetAlert];
     }
     

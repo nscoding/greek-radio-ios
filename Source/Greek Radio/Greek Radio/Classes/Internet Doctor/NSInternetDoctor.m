@@ -10,15 +10,7 @@
 
 #import "Reachability.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
 static NSString *kServerURL = @"www.nscoding.co.uk";
-
-
-// ------------------------------------------------------------------------------------------
-
 
 @interface NSInternetDoctor()
 
@@ -26,39 +18,28 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation NSInternetDoctor
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Singleton
-// ------------------------------------------------------------------------------------------
+
 + (NSInternetDoctor *)shared
 {
     static dispatch_once_t pred;
     static NSInternetDoctor *shared = nil;
     
-    dispatch_once(&pred, ^()
-    {
+    dispatch_once(&pred, ^() {
         shared = [[NSInternetDoctor alloc] init];
     });
     
     return shared;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
+
 - (instancetype)init
 {
-    if ((self = [super init]))
-    {
+    if (self = [super init]) {
         _connected = YES;
-
         [self registerObservers];
         [self pingNSCoding];
     }
@@ -66,10 +47,8 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Build and Configure
-// ------------------------------------------------------------------------------------------
+
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -77,7 +56,6 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
                                                  name:kReachabilityChangedNotification
                                                object:nil];
 }
-
 
 - (void)reachabilityChanged:(NSNotification *)notification
 {
@@ -88,23 +66,19 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Ping
-// ------------------------------------------------------------------------------------------
--(void)pingNSCoding
+
+- (void)pingNSCoding
 {
     self.nscodingReachability = [Reachability reachabilityWithHostname:kServerURL];
     
     WEAKIFY(self);
-    self.nscodingReachability.reachableBlock = ^(Reachability *reachability)
-    {
+    self.nscodingReachability.reachableBlock = ^(Reachability *reachability) {
         STRONGIFY(self);
         self.connected = YES;
     };
     
-    self.nscodingReachability.unreachableBlock = ^(Reachability *reachability)
-    {
+    self.nscodingReachability.unreachableBlock = ^(Reachability *reachability) {
         STRONGIFY(self);
         self.connected = NO;
     };
@@ -112,10 +86,8 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
     [self.nscodingReachability startNotifier];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Exposed Method
-// ------------------------------------------------------------------------------------------
+
 - (void)showNoInternetAlert
 {
     [UIAlertView showWithTitle:NSLocalizedString(@"app_no_internet_title", @"")
@@ -127,6 +99,5 @@ static NSString *kServerURL = @"www.nscoding.co.uk";
     [self.nscodingReachability stopNotifier];
     [self.nscodingReachability startNotifier];
 }
-
 
 @end

@@ -9,17 +9,13 @@
 #import "GRAppDelegate.h"
 #import "GRNavigationController.h"
 #import "GRStationsTableViewController.h"
-
 #import "Appirater.h"
 
-@interface GRAppDelegate ()
-
-@property (nonatomic, strong, readwrite) GRStationsTableViewController *listTableViewController;
-@property (nonatomic, strong, readwrite) GRNavigationController *menuNavigationController;
-
-@end
-
 @implementation GRAppDelegate
+{
+    GRStationsTableViewController *_listTableViewController;
+    GRNavigationController *_menuNavigationController;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -40,16 +36,12 @@
                            message:NSLocalizedString(@"app_welcome_subtitle", @"")
                  cancelButtonTitle:NSLocalizedString(@"button_enjoy", @"")
                  otherButtonTitles:nil
-                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex)
-        {
-            [self.listTableViewController.tableView setContentOffset:CGPointZero animated:YES];
+                          tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [_listTableViewController.tableView setContentOffset:CGPointZero animated:YES];
 
             double delayInSeconds = 1.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
-                                                    (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-            {
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,(int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
                 [Appirater appLaunched:YES];
             });
         }];
@@ -70,14 +62,12 @@
 
 - (void)buildAndConfigureStationsViewController
 {
-    self.listTableViewController = [[GRStationsTableViewController alloc] init];
-        self.menuNavigationController
-        = [[GRNavigationController alloc] initWithRootViewController:self.listTableViewController];
-    
-    self.menuNavigationController.navigationBar.translucent = NO;
-    self.menuNavigationController.navigationBarHidden = NO;
-    self.listTableViewController.navigationController = self.menuNavigationController;
-    self.window.rootViewController = self.menuNavigationController;
+    _listTableViewController = [[GRStationsTableViewController alloc] init];
+    _menuNavigationController = [[GRNavigationController alloc] initWithRootViewController:_listTableViewController];
+    _menuNavigationController.navigationBar.translucent = NO;
+    _menuNavigationController.navigationBarHidden = NO;
+    _listTableViewController.navigationController = _menuNavigationController;
+    self.window.rootViewController = _menuNavigationController;
 }
 
 - (void)configureAppirater
@@ -123,8 +113,7 @@
 
 - (void)activityDidEnd:(NSNotification *)notification
 {
-    if ([GRRadioPlayer shared].isPlaying == NO)
-    {
+    if ([GRRadioPlayer shared].isPlaying == NO) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
 }
