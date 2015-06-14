@@ -15,13 +15,9 @@ extern NSString *const GRNotificationStreamDidEnd;
 @interface GRNotificationCenter : NSObject
 
 + (void)postNotificationOnMainThread:(NSNotification *)notification;
-
 + (void)postSyncManagerDidStartNotificationWithSender:(id)sender;
-
 + (void)postSyncManagerDidEndNotificationWithSender:(id)sender;
-
 + (void)postPlayerDidStartNotificationWithSender:(id)sender;
-
 + (void)postPlayerDidEndNotificationWithSender:(id)sender;
 
 @end

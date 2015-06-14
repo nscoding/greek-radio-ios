@@ -16,19 +16,14 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
 
 @implementation GRNotificationCenter
 
-
 + (void)postNotificationOnMainThread:(NSNotification *)notification
 {
-    @try
-    {
+    @try {
         [[NSNotificationCenter defaultCenter] postNotification:notification];
-    }
-    @catch (NSException *exception)
-    {
+    } @catch (NSException *exception) {
         DLog(@"postNotifcationOnMainThread failed: %@, %@", exception.name, exception.userInfo);
     }
 }
-
 
 + (void)postSyncManagerDidStartNotificationWithSender:(id)sender
 {
@@ -41,7 +36,6 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
                                                         waitUntilDone:NO];
 }
 
-
 + (void)postSyncManagerDidEndNotificationWithSender:(id)sender
 {
     NSNotification *notification = [NSNotification notificationWithName:GRNotificationSyncManagerDidEnd
@@ -52,7 +46,6 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
                                                            withObject:notification
                                                         waitUntilDone:NO];
 }
-
 
 + (void)postPlayerDidStartNotificationWithSender:(id)sender
 {
@@ -65,7 +58,6 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
                                                         waitUntilDone:NO];
 }
 
-
 + (void)postPlayerDidEndNotificationWithSender:(id)sender
 {
     NSNotification *notification = [NSNotification notificationWithName:GRNotificationStreamDidEnd
@@ -76,6 +68,5 @@ NSString *const GRNotificationStreamDidEnd = @"GRNotificationStreamDidEnd";
                                                            withObject:notification
                                                         waitUntilDone:NO];
 }
-
 
 @end

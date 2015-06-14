@@ -24,23 +24,16 @@ typedef NS_ENUM(NSUInteger, GRStationsLayout)
 
 @end
 
-
 @interface GRStationsManager : NSObject
 
 @property (nonatomic, weak) id<GRStationsManagerDelegate> delegate;
 @property (nonatomic, assign) GRStationsLayout stationsLayout;
 
-- (id)initWithTableView:(UITableView *)tableView stationsLayout:(GRStationsLayout)layout;
-
+- (instancetype)initWithTableView:(UITableView *)tableView stationsLayout:(GRStationsLayout)layout;
 - (void)setupFetchedResultsControllersWithString:(NSString *)filter;
-
 - (void)playStationAtIndexPath:(NSIndexPath *)indexPath;
-
 - (void)playNextStation;
-
 - (void)playPreviousStation;
-
 - (NSUInteger)numberOfStations;
-
 
 @end

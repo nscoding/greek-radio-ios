@@ -9,7 +9,7 @@
 #import "GRSettingsViewController.h"
 #import "UIDevice+Extensions.h"
 
-static NSString *kSettingCellIdentifier = @"GRSettingsCell";
+static NSString *const kSettingCellIdentifier = @"GRSettingsCell";
 
 @implementation GRSettingsViewController
 

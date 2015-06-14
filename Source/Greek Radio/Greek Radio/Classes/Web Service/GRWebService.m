@@ -27,20 +27,16 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
     #define kElementGenre @"genre"
     #define kElemenLocation @"location"
 
-@interface GRWebService ()
-
-@property (nonatomic, strong) NSDate *dateLastSynced;
-@property (nonatomic, strong) NSXMLParser *rssParser;
-@property (nonatomic, strong) NSString *currentElement;
-@property (nonatomic, strong) NSMutableDictionary *dataDictionary;
-@property (nonatomic, strong) GRStationsDAO *stationsDAO;
-@property (nonatomic, strong) CWStatusBarNotification *statusBarNotification;
-@property (nonatomic, assign) BOOL isParsing;
-
-@end
-
 @implementation GRWebService
-
+{
+    NSDate *_dateLastSynced;
+    NSXMLParser *_rssParser;
+    NSString *_currentElement;
+    NSMutableDictionary *_data;
+    GRStationsDAO *_stationsDAO;
+    CWStatusBarNotification *_statusBarNotification;
+    BOOL _parsing;
+}
 #pragma mark - Singleton
 
 + (GRWebService *)shared
@@ -58,16 +54,13 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 
 - (instancetype)init
 {
-    if ((self = [super init]))
-    {
+    if (self = [super init]) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(applicationWillEnterForeground:)
                                                      name:UIApplicationWillEnterForegroundNotification
                                                    object:nil];
-
-        self.stationsDAO = [[GRStationsDAO alloc] init];
+        _stationsDAO = [[GRStationsDAO alloc] init];
     }
-    
     return self;
 }
 
@@ -90,24 +83,17 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 - (void)parseXMLInBackgroundThread
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
-    dispatch_async(queue, ^
-    {
-        if (self.isParsing)
-        {
+    dispatch_async(queue, ^ {
+        if (_parsing) {
             return;
         }
         
-        if ([[NSInternetDoctor shared] isConnected] == NO)
-        {
-            self.isParsing = NO;
-
+        if ([[NSInternetDoctor shared] isConnected] == NO) {
+            _parsing = NO;
             [self endSyncingOnMainThread:GRWebServiceSyncStatusNoInternet];
-        }
-        else
-        {
-            self.isParsing = YES;
-            self.dateLastSynced = [NSDate date];
-            
+        } else {
+            _parsing = YES;
+            _dateLastSynced = [NSDate date];
             [self startSyncingOnMainThread];
             [self parseXMLFileAtURL:kWebServiceURL];
             [self endSyncingOnMainThread:GRWebServiceSyncStatusSuccessful];
@@ -117,23 +103,20 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 
 - (void)startSyncingOnMainThread
 {
-    if (self.statusBarNotification)
-    {
+    if (_statusBarNotification) {
         return;
     }
     
     WEAKIFY(self);
-    dispatch_async(dispatch_get_main_queue(), ^()
-    {
+    dispatch_async(dispatch_get_main_queue(), ^() {
         STRONGIFY(self);
-        self.statusBarNotification = [CWStatusBarNotification new];
+        _statusBarNotification = [CWStatusBarNotification new];
         
         // set default blue color (since iOS 7.1, default window tintColor is black)
-        self.statusBarNotification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.180f green:0.180f blue:0.161f alpha:1.00f];
-        self.statusBarNotification.notificationAnimationInStyle = CWNotificationAnimationStyleTop;
-        self.statusBarNotification.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
-
-        [self.statusBarNotification displayNotificationWithMessage:NSLocalizedString(@"label_syncing", @"") completion:NULL];
+        _statusBarNotification.notificationLabelBackgroundColor = [UIColor colorWithRed:0.180f green:0.180f blue:0.161f alpha:1.00f];
+        _statusBarNotification.notificationAnimationInStyle = CWNotificationAnimationStyleTop;
+        _statusBarNotification.notificationAnimationOutStyle = CWNotificationAnimationStyleBottom;
+        [_statusBarNotification displayNotificationWithMessage:NSLocalizedString(@"label_syncing", @"") completion:NULL];
         [GRNotificationCenter postSyncManagerDidStartNotificationWithSender:self];
     });
 }
@@ -141,22 +124,15 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 - (void)endSyncingOnMainThread:(GRWebServiceSyncStatus)status
 {
     NSAssert([NSThread isMainThread] == NO, @"End syncing should be on a background thread.");
-    
     WEAKIFY(self);
     dispatch_sync(dispatch_get_main_queue(), ^()
     {
         STRONGIFY(self);
-        
         NSAssert([NSThread isMainThread], @"UI and notifications should be on the main thread.");
-
-        if (status == GRWebServiceSyncStatusNoInternet)
-        {
+        if (status == GRWebServiceSyncStatusNoInternet) {
             [[NSInternetDoctor shared] showNoInternetAlert];
-        }
-        else if (status == GRWebServiceSyncStatusError)
-        {
-            if ([[NSInternetDoctor shared] isConnected])
-            {
+        } else if (status == GRWebServiceSyncStatusError) {
+            if ([[NSInternetDoctor shared] isConnected]) {
                 [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
                                    message:NSLocalizedString(@"app_fetch_stations_error", @"")
                          cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
@@ -164,9 +140,8 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
                                   tapBlock:nil];
             }
         }
-
-        [self.statusBarNotification dismissNotification];
-        self.statusBarNotification = nil;
+        [_statusBarNotification dismissNotification];
+        _statusBarNotification = nil;
         
         [GRNotificationCenter postSyncManagerDidEndNotificationWithSender:self];
     });
@@ -177,19 +152,18 @@ typedef NS_ENUM(NSUInteger, GRWebServiceSyncStatus)
 - (void)parseXMLFileAtURL:(NSString *)URL
 {
     NSURL *xmlURL = [NSURL URLWithString:URL];
-    self.rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
-    self.rssParser.delegate = self;
-    [self.rssParser setShouldProcessNamespaces:NO];
-    [self.rssParser setShouldReportNamespacePrefixes:NO];
-    [self.rssParser setShouldResolveExternalEntities:NO];
-    
-    [self.rssParser parse];
+    _rssParser = [[NSXMLParser alloc] initWithContentsOfURL:xmlURL];
+    _rssParser.delegate = self;
+    [_rssParser setShouldProcessNamespaces:NO];
+    [_rssParser setShouldReportNamespacePrefixes:NO];
+    [_rssParser setShouldResolveExternalEntities:NO];
+    [_rssParser parse];
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
-    self.dateLastSynced = nil;
-    self.isParsing = NO;
+    _dateLastSynced = nil;
+    _parsing = NO;
     [self endSyncingOnMainThread:GRWebServiceSyncStatusError];
 }
 
@@ -204,11 +178,9 @@ didStartElement:(NSString *)elementName
   qualifiedName:(NSString *)qName
      attributes:(NSDictionary *)attributeDict
 {
-	self.currentElement = [elementName copy];
-	
-    if ([elementName isEqualToString:kTopElement])
-    {
-        self.dataDictionary = [NSMutableDictionary dictionary];
+	_currentElement = [elementName copy];
+    if ([elementName isEqualToString:kTopElement]) {
+        _data = [NSMutableDictionary dictionary];
 	}
 }
 
@@ -217,17 +189,15 @@ didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI
  qualifiedName:(NSString *)qName
 {
-	if ([elementName isEqualToString:kTopElement])
-    {
-        [self.stationsDAO createStationWithTitle:[[self.dataDictionary objectForKey:kElementTitle] copy]
-                                         siteURL:[[self.dataDictionary objectForKey:kElementStationURL] copy]
-                                       streamURL:[[self.dataDictionary objectForKey:kElementStreamURL] copy]
-                                           genre:[[self.dataDictionary objectForKey:kElementGenre] copy]
-                                        location:[[self.dataDictionary objectForKey:kElemenLocation] copy]
-                                     serverBased:YES];
-        
-        [self.dataDictionary removeAllObjects];
-        self.dataDictionary = nil;
+	if ([elementName isEqualToString:kTopElement]) {
+        [_stationsDAO createStationWithTitle:[_data[kElementTitle] copy]
+                                     siteURL:[_data[kElementStationURL] copy]
+                                   streamURL:[_data[kElementStreamURL] copy]
+                                       genre:[_data[kElementGenre] copy]
+                                    location:[_data[kElemenLocation] copy]
+                                 serverBased:YES];
+        [_data removeAllObjects];
+        _data = nil;
 	}
 }
 
@@ -235,34 +205,26 @@ didStartElement:(NSString *)elementName
 {
     NSMutableString *currentValue = [self valueForCurrentElement];
     [currentValue appendString:string];
-    
-    [self.dataDictionary setObject:currentValue
-                            forKey:self.currentElement];
+    [_data setObject:currentValue forKey:_currentElement];
 }
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     parser = nil;
-    
-    self.isParsing = NO;
-    if (self.dateLastSynced)
-    {
-        [self.stationsDAO removeAllStationsBeforeDate:self.dateLastSynced];
+    _parsing = NO;
+    if (_dateLastSynced) {
+        [_stationsDAO removeAllStationsBeforeDate:_dateLastSynced];
     }
 }
 
 - (NSMutableString *)valueForCurrentElement
 {
-    NSMutableString *property = [self.dataDictionary objectForKey:self.currentElement];
-    
-    if (property == nil)
-    {
+    NSMutableString *property = [_data objectForKey:_currentElement];
+    if (property == nil) {
         property = [[NSMutableString alloc] init];
-        [self.dataDictionary setObject:property forKey:self.currentElement];
+        [_data setObject:property forKey:_currentElement];
     }
-    
     return property;
 }
 
 @end
-

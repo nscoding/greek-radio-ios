@@ -17,23 +17,22 @@
 
 #import <CoreMotion/CoreMotion.h>
 
+static const CGFloat kAccelerometerFrequency = 105;
+static const CGFloat kFilteringFactor = 0.1;
+static const CGFloat kMinEraseInterval = 0.5;
+static const CGFloat kEraseAccelerationThreshold = 4.0;
+
 @interface GRStationsTableViewController() <UIAccelerometerDelegate, GRStationsManagerDelegate,
                                             GRPlayerViewControllerDelegate, UISearchBarDelegate, UITextFieldDelegate>
 {
-	CFTimeInterval lastTime;
-	CGFloat	shakeAccelerometer[3];
+	CFTimeInterval _lastTime;
+	CGFloat	_shakeAccelerometer[3];
+    CMMotionManager *_motionManager;
+    GRStationsManager *_stationManager;
+    UISearchBar *_searchBar;
 }
 
-@property (nonatomic, strong) CMMotionManager *motionManager;
-@property (nonatomic, strong) GRStationsManager *stationManager;
-@property (nonatomic, strong) UISearchBar *searchBar;
-
 @end
-
-#define kAccelerometerFrequency			105
-#define kFilteringFactor				0.1
-#define kMinEraseInterval				0.5
-#define kEraseAccelerationThreshold		4.0
 
 @implementation GRStationsTableViewController
 
@@ -66,9 +65,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.searchBar resignFirstResponder];
+    [_searchBar resignFirstResponder];
     [self becomeFirstResponder];
-
     self.navigationItem.title = @"Greek Radio";
 }
 
@@ -93,20 +91,17 @@
 - (void)configureDataSource
 {
     GRStationsLayout stationsLayout = [GRUserDefaults currentSearchScope];
-    self.stationManager = [[GRStationsManager alloc] initWithTableView:self.tableView
-                                                        stationsLayout:stationsLayout];
-    self.stationManager.delegate = self;
+    _stationManager = [[GRStationsManager alloc] initWithTableView:self.tableView stationsLayout:stationsLayout];
+    _stationManager.delegate = self;
 }
 
 - (void)configureTrackClearButton
 {
     /* https://gist.github.com/jeksys/1070394 */
-    for (UIView *view in self.searchBar.subviews)
-    {
-        if ([view isKindOfClass:[UITextField class]])
-        {
-            UITextField *tf = (UITextField *)view;
-            tf.delegate = self;
+    for (UIView *view in _searchBar.subviews){
+        if ([view isKindOfClass:[UITextField  class]]) {
+            UITextField *textfield = (UITextField *)view;
+            textfield.delegate = self;
             break;
         }
     }
@@ -114,20 +109,20 @@
 
 - (void)buildAndConfigureSearchBar
 {
-    self.searchBar = [[UISearchBar alloc] init];
-    self.searchBar.showsScopeBar = YES;
-    self.searchBar.barStyle = UIBarStyleBlack;
-    self.searchBar.delegate = self;
-    self.searchBar.tintColor = [UIColor grayColor];
-    self.searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
+    _searchBar = [[UISearchBar alloc] init];
+    _searchBar.showsScopeBar = YES;
+    _searchBar.barStyle = UIBarStyleBlack;
+    _searchBar.delegate = self;
+    _searchBar.tintColor = [UIColor grayColor];
+    _searchBar.scopeButtonTitles = @[NSLocalizedString(@"label_genre", @""),
                                          NSLocalizedString(@"label_location", @""),
                                          NSLocalizedString(@"label_AZ", @"")];
-    self.searchBar.placeholder = NSLocalizedString(@"label_search", @"");
-    self.searchBar.selectedScopeButtonIndex = [GRUserDefaults currentSearchScope];
+    _searchBar.placeholder = NSLocalizedString(@"label_search", @"");
+    _searchBar.selectedScopeButtonIndex = [GRUserDefaults currentSearchScope];
     
     // showsScopeBar default is NO. if YES, shows the scope bar. call sizeToFit: to update frame
-    [self.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchBar;
+    [_searchBar sizeToFit];
+    self.tableView.tableHeaderView = _searchBar;
 }
 
 - (void)buildAndConfigurePullToRefresh
@@ -138,11 +133,11 @@
         = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"label_refresh_stations", @"")];
     
     [refreshTitleString addAttribute:NSForegroundColorAttributeName
-                               value:[UIColor colorWithRed:0.471f green:0.471f blue:0.471f alpha:1.00f]
+                               value:[UIColor colorWithRed:0.471 green:0.471 blue:0.471 alpha:1.00]
                                range:NSMakeRange(0, refreshTitleString.string.length)];
     
     self.refreshControl.attributedTitle = refreshTitleString;
-    self.refreshControl.tintColor = [UIColor colorWithRed:0.671f green:0.671f blue:0.671f alpha:1.00f];
+    self.refreshControl.tintColor = [UIColor colorWithRed:0.671 green:0.671 blue:0.671 alpha:1.00];
     
     [self.refreshControl addTarget:self
                             action:@selector(updateStations)
@@ -163,48 +158,42 @@
 
 - (void)buildAndConfigureMotionDetector
 {
-    self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = 0.1;
+    _motionManager = [[CMMotionManager alloc] init];
+    _motionManager.accelerometerUpdateInterval = 0.1;
     
-    CMAccelerometerHandler accelerometerHandler = ^(CMAccelerometerData *accelerometerData, NSError *error)
-    {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
-        {
-            if ([GRUserDefaults isShakeForRandomStationEnabled])
-            {
+    CMAccelerometerHandler accelerometerHandler = ^(CMAccelerometerData *accelerometerData, NSError *error) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
+            if ([GRUserDefaults isShakeForRandomStationEnabled]) {
                 CMAcceleration acceleration = accelerometerData.acceleration;
                 CGFloat length,	x, y, z;
                 
                 //Use a basic high-pass filter to remove the influence of the gravity
-                shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
-                shakeAccelerometer[0] * (1.0f - kFilteringFactor);
-                shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
-                shakeAccelerometer[1] * (1.0f - kFilteringFactor);
-                shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
-                shakeAccelerometer[2] * (1.0f - kFilteringFactor);
+                _shakeAccelerometer[0] = acceleration.x * kFilteringFactor +
+                _shakeAccelerometer[0] * (1.0f - kFilteringFactor);
+                _shakeAccelerometer[1] = acceleration.y * kFilteringFactor +
+                _shakeAccelerometer[1] * (1.0f - kFilteringFactor);
+                _shakeAccelerometer[2] = acceleration.z * kFilteringFactor +
+                _shakeAccelerometer[2] * (1.0f - kFilteringFactor);
                 
                 // Compute values for the three axes of the acceleromater
-                x = acceleration.x - shakeAccelerometer[0];
-                y = acceleration.y - shakeAccelerometer[0];
-                z = acceleration.z - shakeAccelerometer[0];
+                x = acceleration.x - _shakeAccelerometer[0];
+                y = acceleration.y - _shakeAccelerometer[0];
+                z = acceleration.z - _shakeAccelerometer[0];
                 
                 // Compute the intensity of the current acceleration
                 length = sqrt(x * x + y * y + z * z);
                 
                 // If above a given threshold, play the erase sounds and erase the drawing view
                 if((length >= kEraseAccelerationThreshold) &&
-                   (CFAbsoluteTimeGetCurrent() > lastTime + kMinEraseInterval))
-                {
-                    lastTime = CFAbsoluteTimeGetCurrent();                    
-                    int random = arc4random() % (self.stationManager.numberOfStations - 1);
+                   (CFAbsoluteTimeGetCurrent() > _lastTime + kMinEraseInterval)) {
+                    _lastTime = CFAbsoluteTimeGetCurrent();                    
+                    int random = arc4random() % (_stationManager.numberOfStations - 1);
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:random inSection:2];
                     
-                    dispatch_async(dispatch_get_main_queue(), ^
-                    {
+                    dispatch_async(dispatch_get_main_queue(), ^{
                         [self.tableView selectRowAtIndexPath:indexPath
                                                     animated:YES
                                               scrollPosition:UITableViewScrollPositionMiddle];
-                        
                         [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
                     });
                 }
@@ -212,7 +201,7 @@
         });
     };
     
-    [self.motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
+    [_motionManager startAccelerometerUpdatesToQueue:[[NSOperationQueue alloc] init]
                                              withHandler:accelerometerHandler];
 }
 
@@ -279,15 +268,12 @@
                                                                                     delegate:self
                                                                                 previousView:self.view];
 
-    if (self.navigationController.visibleViewController == self)
-    {
+    if (_navigationController.visibleViewController == self) {
         [UIMenuController sharedMenuController].menuVisible = NO;
-        [self.navigationController pushViewController:playController animated:YES];
-    }
-    else
-    {
-        [self.navigationController popViewControllerAnimated:NO];
-        [self.navigationController pushViewController:playController animated:NO];
+        [_navigationController pushViewController:playController animated:YES];
+    } else {
+        [_navigationController popViewControllerAnimated:NO];
+        [_navigationController pushViewController:playController animated:NO];
     }
 }
 
@@ -300,7 +286,7 @@
 
 - (void)settingsButtonPressed:(UIButton *)sender
 {
-    [self.searchBar resignFirstResponder];
+    [_searchBar resignFirstResponder];
 
     GRSettingsViewController *settingsNavigationController = [[GRSettingsViewController alloc] init];
     UINavigationController *navigationController =
@@ -314,19 +300,17 @@
 
 - (void)nowPlayingButtonPressed:(UIBarButtonItem *)sender
 {
-    if ([GRRadioPlayer shared].currentStation)
-    {
-        [self.searchBar resignFirstResponder];
+    if ([GRRadioPlayer shared].currentStation) {
+        [_searchBar resignFirstResponder];
 
         GRPlayerViewController *playController =
             [[GRPlayerViewController alloc] initWithStation:[GRRadioPlayer shared].currentStation
                                                    delegate:self
                                                previousView:self.view];
         
-        if (self.navigationController.visibleViewController == self)
-        {
+        if (_navigationController.visibleViewController == self) {
             [UIMenuController sharedMenuController].menuVisible = NO;
-            [self.navigationController pushViewController:playController animated:YES];
+            [_navigationController pushViewController:playController animated:YES];
         }
     }
 }
@@ -340,13 +324,13 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    [self.stationManager setupFetchedResultsControllersWithString:self.searchBar.text];
+    [_stationManager setupFetchedResultsControllersWithString:_searchBar.text];
     [searchBar resignFirstResponder];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    [self.stationManager setupFetchedResultsControllersWithString:self.searchBar.text];
+    [_stationManager setupFetchedResultsControllersWithString:_searchBar.text];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
@@ -360,7 +344,7 @@
     //if we only try and resignFirstResponder on textField or searchBar,
     //the keyboard will not dissapear (at least not on iPad)!
     [self performSelector:@selector(searchBarCancelButtonClicked:)
-               withObject:self.searchBar
+               withObject:_searchBar
                afterDelay:0.1];
     
     return YES;
@@ -370,8 +354,7 @@
 {
     searchBar.text = @"";
     [searchBar resignFirstResponder];
-
-    self.stationManager.stationsLayout = selectedScope;
+    _stationManager.stationsLayout = selectedScope;
     [GRUserDefaults setCurrentSearchScope:selectedScope];
 }
 
@@ -379,20 +362,19 @@
 
 - (void)playerViewControllerPlayNextStation:(GRPlayerViewController *)playViewController
 {
-    [self.stationManager playNextStation];
+    [_stationManager playNextStation];
 }
 
 - (void)playerViewControllerPlayPreviousStation:(GRPlayerViewController *)playViewControllerl
 {
-    [self.stationManager playPreviousStation];
+    [_stationManager playPreviousStation];
 }
 
 #pragma mark - Memory
 
 - (void)didReceiveMemoryWarning
 {
-    if ([GRRadioPlayer shared].isPlaying)
-    {
+    if ([GRRadioPlayer shared].isPlaying) {
         [UIAlertView showWithTitle:NSLocalizedString(@"app_low_memory_error_title", @"")
                            message:NSLocalizedString(@"app_low_memory_error_subtitle", @"")
                  cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
