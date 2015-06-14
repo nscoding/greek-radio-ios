@@ -17,7 +17,6 @@
 
 #import <CoreMotion/CoreMotion.h>
 
-static const CGFloat kAccelerometerFrequency = 105;
 static const CGFloat kFilteringFactor = 0.1;
 static const CGFloat kMinEraseInterval = 0.5;
 static const CGFloat kEraseAccelerationThreshold = 4.0;
