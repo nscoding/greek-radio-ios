@@ -199,13 +199,12 @@
     
     if (cell == nil)
     {
-        cell = [[GRStationCellView alloc] initWithStyle:UITableViewCellStyleDefault
-                                        reuseIdentifier:identifier];
+        cell = [[GRStationCellView alloc] init];
     }
     
     GRStation *station = [self stationForIndexPath:indexPath];
-    cell.title.text = [NSString stringWithFormat:@"%@",station.title];
-    cell.subtitle.text = [NSString stringWithFormat:@"%@, %@", station.location, station.genre];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",station.title];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@, %@", station.location, station.genre];
     cell.station = station;
     
     id<NSFetchedResultsSectionInfo> sectionInfo = self.stationsFetchedResultsController.sections[indexPath.section];
@@ -213,11 +212,11 @@
     
     if ([[GRRadioPlayer shared].currentStation isEqual:station])
     {
-        cell.iconImageView.image = [UIImage imageNamed:@"GRNote"];
+        cell.imageView.image = [UIImage imageNamed:@"GRNote"];
     }
     else
     {
-        cell.iconImageView.image = [UIImage imageNamed:@"GRMicrophone"];
+        cell.imageView.image = [UIImage imageNamed:@"GRMicrophone"];
     }
     
     [cell setNeedsDisplay];

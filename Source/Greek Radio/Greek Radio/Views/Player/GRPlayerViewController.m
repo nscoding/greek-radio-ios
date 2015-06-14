@@ -13,18 +13,11 @@
 
 #import <MediaPlayer/MediaPlayer.h>
 
-
-// ------------------------------------------------------------------------------------------
-
-
 typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
   GRInformationBarOptionGenre     = 0,
   GRInformationBarOptionSong      = 1,
   GRInformationBarOptionArtist    = 2,
 };
-
-// ------------------------------------------------------------------------------------------
-
 
 @interface GRPlayerViewController ()
 
@@ -37,22 +30,15 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
 
 @end
 
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRPlayerViewController
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Initializer
-// ------------------------------------------------------------------------------------------
-- (id)initWithStation:(GRStation *)station
-             delegate:(id<GRPlayerViewControllerDelegate>)delegate
-         previousView:(UIView *)preView
+
+- (instancetype)initWithStation:(GRStation *)station
+                       delegate:(id<GRPlayerViewControllerDelegate>)delegate
+                   previousView:(UIView *)preView
 {
-    if ((self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]))
-    {
+    if (self = [super initWithNibName:@"GRPlayerViewController" bundle:nil]){
         self.delegate = delegate;
         self.currentStation = station;        
         [self.view setFrame:preView.frame];
@@ -61,7 +47,6 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
         [self buildAndConfigureStationGenre:station.genre];
         [self buildAndConfigureVolumeSlider];
         [self registerObservers];
-        
         
         [[GRRadioPlayer shared] playStation:self.currentStation];
         [self configurePlayButton];
@@ -99,20 +84,15 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     [super viewDidAppear:animated];
 
     [UIView animateWithDuration:0.4f
-                     animations:^
-    {
+                     animations:^ {
         self.stationLabel.alpha = 1.0f;
-    }
-    completion:^(BOOL finished)
-    {
+    } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.4f
-                         animations:^
-        {
+                         animations:^{
             self.genreLabel.alpha = 1.0f;
         }];
     }];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -123,10 +103,8 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     self.informationTimer = nil;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Build and configure
-// ------------------------------------------------------------------------------------------
+
 - (void)configureNavigationBarBackTitle
 {
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
@@ -134,7 +112,6 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                                                                             target:nil
                                                                             action:nil];
 }
-
 
 - (void)buildAndConfigureStationName:(NSString *)name
 {
@@ -186,7 +163,6 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                                                            constant:-20.0f]];
 }
 
-
 - (void)buildAndConfigureStationGenre:(NSString *)genre
 {
     self.genreLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -235,7 +211,6 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                                                            constant:0.0f]];
 }
 
-
 - (void)buildAndConfigureVolumeSlider
 {
   MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(60.0f, 110.0f, self.view.frame.size.width - 90.0f, 20.0f)];
@@ -248,70 +223,53 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
   [self.view addSubview:volumeLowImageView];
 }
 
-
 - (void)configurePlayButton
 {
     [self.playerTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]]
                                 withRowAnimation:UITableViewRowAnimationFade];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Timer
-// ------------------------------------------------------------------------------------------
+
 - (void)updateSongInformation
 {
-    if ([GRRadioPlayer shared].isPlaying)
-    {
+    if ([GRRadioPlayer shared].isPlaying) {
         __weak GRPlayerViewController *weakSelf = self;
         [[GRShoutCastHelper shared] getMetadataForURL:self.currentStation.streamURL
-                                         successBlock:^(NSString *songName, NSString *songArtist)
-        {
+                                         successBlock:^(NSString *songName, NSString *songArtist) {
              weakSelf.currentSong = [songName copy];
              weakSelf.currentArtist = [songArtist copy];
-        }
-        failBlock:^
-        {
+        } failBlock:^ {
              weakSelf.currentSong = nil;
              weakSelf.currentArtist = nil;
         }];
     }
 }
 
-
 - (void)animateStatus
 {
     GRInformationBarOption currentOption = self.informationBarOption;
     GRInformationBarOption goToOption = self.informationBarOption;
     
-    if (currentOption == GRInformationBarOptionArtist)
-    {
+    if (currentOption == GRInformationBarOptionArtist) {
         goToOption = GRInformationBarOptionGenre;
-    }
-    else
-    {
+    } else {
         goToOption++;
     }
     
-    if (goToOption == GRInformationBarOptionSong &&
-        self.currentSong.length == 0)
-    {
+    if (goToOption == GRInformationBarOptionSong && self.currentSong.length == 0) {
         goToOption++;
     }
     
-    if (goToOption == GRInformationBarOptionArtist &&
-        self.currentArtist.length == 0)
-    {
+    if (goToOption == GRInformationBarOptionArtist && self.currentArtist.length == 0) {
         goToOption = GRInformationBarOptionGenre;
     }
     
-    if ([GRRadioPlayer shared].isPlaying == NO)
-    {
+    if ([GRRadioPlayer shared].isPlaying == NO) {
         goToOption = GRInformationBarOptionGenre;
     }
     
-    __weak GRPlayerViewController *blockSelf = self;
-    
+    __weak GRPlayerViewController *weakSelf = self;
     if (self.informationBarOption != goToOption)
     {
         self.informationBarOption = goToOption;
@@ -320,48 +278,41 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                               delay:0.0f
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
-             
-             blockSelf.genreLabel.alpha = 1.0f;
-             blockSelf.genreLabel.center = CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2.0f),
-                                                       blockSelf.genreLabel.center.y);
-             
+             weakSelf.genreLabel.alpha = 1.0f;
+             weakSelf.genreLabel.center = CGPointMake(-(weakSelf.genreLabel.frame.size.width / 2.0f),
+                                                      weakSelf.genreLabel.center.y);
          } completion:^(BOOL finished) {
              
-             blockSelf.genreLabel.alpha = 1.0f;
-             
-             blockSelf.genreLabel.text = [blockSelf titleForBar:goToOption];
-             CGSize size = [blockSelf.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width, FLT_MAX)];
-             blockSelf.genreLabel.numberOfLines = 1;
-             CGFloat centerY = blockSelf.genreLabel.center.y;
-             blockSelf.genreLabel.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
-             blockSelf.genreLabel.center = CGPointMake(blockSelf.view.frame.size.width +
-                                                       (blockSelf.genreLabel.frame.size.width / 2.0f),
+             weakSelf.genreLabel.alpha = 1.0f;
+             weakSelf.genreLabel.text = [weakSelf titleForBar:goToOption];
+             CGSize size = [weakSelf.genreLabel sizeThatFits:CGSizeMake(self.view.frame.size.width, FLT_MAX)];
+             weakSelf.genreLabel.numberOfLines = 1;
+             CGFloat centerY = weakSelf.genreLabel.center.y;
+             weakSelf.genreLabel.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
+             weakSelf.genreLabel.center = CGPointMake(weakSelf.view.frame.size.width +
+                                                     (weakSelf.genreLabel.frame.size.width / 2.0f),
                                                        centerY);
              
              [UIView animateWithDuration:12.0f
                                    delay:0.0f
                                  options:UIViewAnimationOptionCurveLinear
                               animations:^{
-                                  blockSelf.genreLabel.alpha = 1.0f;
-                                  blockSelf.genreLabel.center =
-                                  CGPointMake(-(blockSelf.genreLabel.frame.size.width / 2.0f),
-                                              blockSelf.genreLabel.center.y);
+                                  weakSelf.genreLabel.alpha = 1.0f;
+                                  weakSelf.genreLabel.center =
+                                  CGPointMake(-(weakSelf.genreLabel.frame.size.width / 2.0f),
+                                              weakSelf.genreLabel.center.y);
                               } completion:^(BOOL finished) {
-                                  [blockSelf animateStatus];
+                                  [weakSelf animateStatus];
                               }];
          }];
-    }
-    else
-    {
+    } else {
         double delayInSeconds = 5.0f;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-        {
-            [blockSelf animateStatus];
-       });
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [weakSelf animateStatus];
+        });
     }
 }
-
 
 - (NSString *)titleForBar:(GRInformationBarOption)option
 {
@@ -380,10 +331,8 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     return @"";
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Notifications
-// ------------------------------------------------------------------------------------------
+
 - (void)registerObservers
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -397,188 +346,127 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                                                object:nil];
 }
 
-
 - (void)playerDidStart:(NSNotification *)notification
 {
     [self configurePlayButton];
 }
-
 
 - (void)playerDidEnd:(NSNotification *)notification
 {
     [self configurePlayButton];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Table View Delegate
-// ------------------------------------------------------------------------------------------
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *tableViewCell =
-    [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                           reuseIdentifier:@"PlayerCell"];
-    
+    UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PlayerCell"];
     tableViewCell.textLabel.textColor = [UIColor blackColor];
     tableViewCell.imageView.image = nil;
 
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 0)
-        {
-            if ([GRRadioPlayer shared].isPlaying == NO)
-            {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if ([GRRadioPlayer shared].isPlaying == NO) {
                 tableViewCell.textLabel.text = NSLocalizedString(@"button_play", @"");
                 tableViewCell.imageView.image = [UIImage imageNamed:@"GRPlay"];
                 tableViewCell.textLabel.textColor = [UIColor colorWithRed:0.082f
                                                                     green:0.494f
                                                                      blue:0.984f
                                                                     alpha:1.00f];
-            }
-            else
-            {
+            } else {
                 tableViewCell.textLabel.text = NSLocalizedString(@"button_pause", @"");
                 tableViewCell.imageView.image = [UIImage imageNamed:@"GRPause"];
             }
-        }
-        else if (indexPath.row == 1)
-        {
-            if (self.currentStation.favourite.boolValue)
-            {
+        } else if (indexPath.row == 1) {
+            if (self.currentStation.favourite.boolValue) {
                 tableViewCell.textLabel.text = NSLocalizedString(@"button_unmark_as_favorite", @"");
-            }
-            else
-            {
+            } else {
                 tableViewCell.textLabel.text = NSLocalizedString(@"button_mark_as_favorite", @"");
                 tableViewCell.textLabel.textColor = [UIColor redColor];
             }
-            
             tableViewCell.imageView.image = [UIImage imageNamed:@"GRHeart"];
         }
     }
 
-    if (indexPath.section == 1)
-    {
-        if (indexPath.row == 0)
-        {
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
             tableViewCell.textLabel.text = NSLocalizedString(@"button_previous_station", @"");
             tableViewCell.imageView.image = [UIImage imageNamed:@"GRPrevious"];
-        }
-        else if (indexPath.row == 1)
-        {
+        } else if (indexPath.row == 1) {
             tableViewCell.textLabel.text = NSLocalizedString(@"button_next_station", @"");
             tableViewCell.imageView.image = [UIImage imageNamed:@"GRNext"];
         }
     }
 
-    if (indexPath.section == 2)
-    {
+    if (indexPath.section == 2) {
         tableViewCell.imageView.image = [UIImage imageNamed:@"GRNetwork"];
-
-        if (indexPath.row == 0)
-        {
+        if (indexPath.row == 0) {
             tableViewCell.textLabel.text = NSLocalizedString(@"share_via_email", @"");
-        }
-        else if (indexPath.row == 1)
-        {
+        } else if (indexPath.row == 1) {
             tableViewCell.textLabel.text = NSLocalizedString(@"share_via_facebook", @"");
-        }
-        else if (indexPath.row == 2)
-        {
+        } else if (indexPath.row == 2) {
             tableViewCell.textLabel.text = NSLocalizedString(@"share_via_twitter", @"");
         }
     }
     
-    
     return tableViewCell;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 3;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
+    if (section == 0 || section == 1) {
         return 2;
     }
-    
-    if (section == 1)
-    {
-        return 2;
-    }
-    
     return 3;
 }
-
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     return @"";
 }
 
-
 - (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return YES;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 0)
-        {
-            if ([GRRadioPlayer shared].isPlaying)
-            {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if ([GRRadioPlayer shared].isPlaying) {
                 [[GRRadioPlayer shared] stopPlayingCurrentStation];
-            }
-            else
-            {
+            } else {
                 [[GRRadioPlayer shared] playStation:self.currentStation];
             }
-        }
-        else if (indexPath.row == 1)
-        {
+        } else if (indexPath.row == 1) {
             self.currentStation.favourite = [NSNumber numberWithBool:![self.currentStation.favourite boolValue]];
             [self.currentStation.managedObjectContext save:nil];
         }
-        
         // set the value and save
         [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-    else if (indexPath.section == 1)
-    {
-        if (indexPath.row == 0)
-        {
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
             if (self.delegate &&
-                [self.delegate respondsToSelector:@selector(playerViewControllerPlayPreviousStation:)])
-            {
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayPreviousStation:)]) {
                 [self.delegate playerViewControllerPlayPreviousStation:self];
             }
-        }
-        else if (indexPath.row == 1)
-        {
+        } else if (indexPath.row == 1) {
             if (self.delegate &&
-                [self.delegate respondsToSelector:@selector(playerViewControllerPlayNextStation:)])
-            {
+                [self.delegate respondsToSelector:@selector(playerViewControllerPlayNextStation:)]) {
                 [self.delegate playerViewControllerPlayNextStation:self];
             }
         }
-    }
-    else if (indexPath.section == 2)
-    {
-        if (indexPath.row == 0)
-        {
-            if ([MFMailComposeViewController canSendMail])
-            {
+    } else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            if ([MFMailComposeViewController canSendMail]) {
                 [GRAppearanceHelper setUpDefaultAppearance];
 
                 MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
@@ -587,13 +475,10 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                 mailController.subject = @"Greek Radio";
                 
                 NSString *listeningTo;
-                if ([GRRadioPlayer shared].stationName.length > 0)
-                {
+                if ([GRRadioPlayer shared].stationName.length > 0) {
                     listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
                                    [GRRadioPlayer shared].stationName];
-                }
-                else
-                {
+                } else {
                     listeningTo = [NSString stringWithFormat:NSLocalizedString(@"share_station_$_text", @""),
                                    [NSLocalizedString(@"label_music", @"") lowercaseString]];
                 }
@@ -604,37 +489,27 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
                                         isHTML:YES];
                 
                 [self.navigationController presentViewController:mailController animated:YES completion:nil];
-            }
-            else
-            {
+            } else {
                 [UIAlertView showWithTitle:NSLocalizedString(@"label_something_wrong", @"")
                                    message:NSLocalizedString(@"share_email_error", @"")
                          cancelButtonTitle:NSLocalizedString(@"button_dismiss", @"")
                          otherButtonTitles:nil
                                   tapBlock:nil];
             }
-        }
-        else if (indexPath.row == 1)
-        {
-            if ([SLComposeViewController class])
-            {
+        } else if (indexPath.row == 1) {
+            if ([SLComposeViewController class]) {
                 [GRShareHelper facebookTappedOnController:self];
             }
-        }
-        else if (indexPath.row == 2)
-        {
-            if ([SLComposeViewController class])
-            {
+        } else if (indexPath.row == 2) {
+            if ([SLComposeViewController class]) {
                 [GRShareHelper tweetTappedOnController:self];
             }
         }
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Mail Delegate
-// ------------------------------------------------------------------------------------------
+
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError*)error
@@ -643,10 +518,8 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Dealloc
-// ------------------------------------------------------------------------------------------
+
 - (void)dealloc
 {
     [[GRShoutCastHelper shared] cancelGet];
@@ -654,7 +527,6 @@ typedef NS_ENUM(NSUInteger, GRInformationBarOption) {
     self.informationTimer = nil;
     self.delegate = nil;
 }
-
 
 @end
 

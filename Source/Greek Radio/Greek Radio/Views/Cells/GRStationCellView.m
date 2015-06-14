@@ -10,70 +10,47 @@
 #import "GRStationCellView.h"
 #import "GRRadioPlayer.h"
 
-
-// ------------------------------------------------------------------------------------------
-
-
-@interface GRStationCellView()
-
-@property (nonatomic, strong) UIView *selectionColor;
-@property (nonatomic, strong) UIView *lineView;
-
-@end
-
-
-// ------------------------------------------------------------------------------------------
-
-
 @implementation GRStationCellView
-
-- (id)initWithStyle:(UITableViewCellStyle)style
-    reuseIdentifier:(NSString *)reuseIdentifier
 {
-    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]))
+    UIView *_selectionColor;
+    UIView *_lineView;
+}
+
+- (instancetype)init
+{
+    if (self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:[[self class] reusableIdentifier]])
     {
         self.backgroundColor = [UIColor whiteColor];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
+        [self setUpLine];
         [self configureMenuController];
         [self configureLongTapGesture];
-        [self loadNibFromBundle];
-        [self buildAndConfigureLine];
+        [self configureLabels];
     }
 
     return self;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Configure
-// ------------------------------------------------------------------------------------------
-- (void)buildAndConfigureLine
-{
-    self.lineView = [[UIView alloc] initWithFrame:CGRectMake(40.0f, self.frame.size.height - 1.0f,
-                                                                self.frame.size.width - 40.0f, 1.0f)];
-    self.lineView.backgroundColor = [UIColor lightGrayColor];
-    self.lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self addSubview:self.lineView];
-}
 
+- (void)setUpLine
+{
+    _lineView = [[UIView alloc] initWithFrame:CGRectMake(40.0, self.frame.size.height - 1.0, self.frame.size.width - 40.0, 1.0)];
+    _lineView.backgroundColor = [UIColor lightGrayColor];
+    _lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    [self addSubview:_lineView];
+}
 
 - (void)configureMenuController
 {
-    UIMenuItem *markAsFavorite =
-    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"")
-                               action:@selector(markAsFavorite:)];
-    
-    UIMenuItem *removeFromFavorite =
-    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_unmark_as_favorite", @"")
-                               action:@selector(removeFromFavorite:)];
-    
-    UIMenuItem *visitStation =
-    [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"")
-                               action:@selector(visitStation:)];
-    
     UIMenuController *menuController = [UIMenuController sharedMenuController];
-    menuController.menuItems = [NSArray arrayWithObjects:markAsFavorite, removeFromFavorite, visitStation, nil];
+    menuController.menuItems =
+        @[
+          [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_mark_as_favorite", @"") action:@selector(markAsFavorite:)],
+          [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_unmark_as_favorite", @"") action:@selector(removeFromFavorite:)],
+          [[UIMenuItem alloc] initWithTitle:NSLocalizedString(@"button_visit_station", @"") action:@selector(visitStation:)]
+         ];
 }
 
 
@@ -84,63 +61,56 @@
     [self addGestureRecognizer:longTap];
 }
 
-
-- (void)loadNibFromBundle
+- (void)configureLabels
 {
-    [[NSBundle mainBundle] loadNibNamed:@"GRStationCellView" owner:self options:nil];
-    [self addSubview:self.backgroundView];
+    self.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
+    self.textLabel.textAlignment = NSTextAlignmentNatural;
+    self.textLabel.numberOfLines = 1;
+    self.detailTextLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+    self.detailTextLabel.textAlignment = NSTextAlignmentNatural;
+    self.detailTextLabel.numberOfLines = 1;
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Overrides
-// ------------------------------------------------------------------------------------------
+
+- (void)setShowDivider:(BOOL)showDivider
+{
+    _showDivider = showDivider;
+    _lineView.alpha = _showDivider;
+}
+
 - (void)prepareForReuse
 {
-    self.title.font = [UIFont preferredFontForTextStyle:UIFontTextStyleHeadline];
-    self.subtitle.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
-    self.title.textAlignment = NSTextAlignmentNatural;
-    self.title.numberOfLines = 1;
-    self.subtitle.textAlignment = NSTextAlignmentNatural;
-    self.subtitle.numberOfLines = 1;
+    [self configureLabels];
 }
-
 
 - (BOOL)canBecomeFirstResponder
 {
     return YES;
 }
 
-
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
     [super setHighlighted:highlighted animated:animated];
     
-    if (highlighted)
-    {
-        self.selectionColor = [[UIView alloc] init];
-        self.selectionColor.frame = CGRectMake(0.0f, 0.0f, self.bounds.size.width, self.bounds.size.height - 2.0f);
-        self.selectionColor.backgroundColor = [UIColor colorWithRed:0.614f green:0.635f blue:0.619f alpha:0.40];
-        [self.backgroundView addSubview:self.selectionColor];
-    }
-    else
-    {
+    if (highlighted) {
+        _selectionColor = [[UIView alloc] init];
+        _selectionColor.frame = CGRectMake(0.0, 0.0, self.bounds.size.width, self.bounds.size.height - 2.0);
+        _selectionColor.backgroundColor = [UIColor colorWithRed:0.614 green:0.635 blue:0.619 alpha:0.40];
+        [self.backgroundView addSubview:_selectionColor];
+    } else {
         [UIView animateWithDuration:0.4f
-                         animations:^
-         {
-             self.selectionColor.alpha = 0.0f;
-         }
-                         completion:^(BOOL finished)
-         {
-             [self.selectionColor removeFromSuperview];
-         }];
+                         animations:^{
+             _selectionColor.alpha = 0.0;
+        }
+        completion:^(BOOL finished) {
+            [_selectionColor removeFromSuperview];
+        }];
     }
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Menu
-// ------------------------------------------------------------------------------------------
+
 - (void)showLongTapMenu:(UIGestureRecognizer *)sender
 {
     [sender.view becomeFirstResponder];
@@ -149,10 +119,8 @@
     [menuController setMenuVisible:YES animated:NO];
 }
 
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Actions
-// ------------------------------------------------------------------------------------------
+
 - (void)markAsFavorite:(UIMenuController *)sender
 {
     [self.station setFavourite:@YES];
@@ -176,48 +144,30 @@
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
     BOOL favorite = self.station.favourite.boolValue;
-
-    if (action == @selector(markAsFavorite:))
-    {
+    
+    if (action == @selector(markAsFavorite:)) {
         return (favorite == NO);
     }
 
-    if (action == @selector(removeFromFavorite:))
-    {
+    if (action == @selector(removeFromFavorite:)) {
         return favorite;
     }
     
-    if (action == @selector(visitStation:))
-    {
-        if ([self.station.stationURL rangeOfString:@"www"].location != NSNotFound)
-        {
+    if (action == @selector(visitStation:)) {
+        if ([self.station.stationURL rangeOfString:@"www"].location != NSNotFound) {
             return YES;
         }
-        
         return NO;
     }
     
     return [super canPerformAction:action withSender:sender];
 }
 
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - Override
-// ------------------------------------------------------------------------------------------
-- (void)setShowDivider:(BOOL)showDivider
-{
-    _showDivider = showDivider;
-    self.lineView.alpha = _showDivider;
-}
-
-
-// ------------------------------------------------------------------------------------------
 #pragma mark - Class Methods
-// ------------------------------------------------------------------------------------------
+
 + (NSString *)reusableIdentifier
 {
     return NSStringFromClass([self class]);
 }
-
 
 @end
