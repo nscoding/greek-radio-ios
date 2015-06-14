@@ -86,11 +86,11 @@
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    if (object == _player && [keyPath isEqualToString:NSStringFromSelector(@selector(rate))]) {
+    if ([keyPath isEqualToString:NSStringFromSelector(@selector(rate))]) {
         if (self.isPlaying) {
             [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
         } else {
-            [self stopPlayingCurrentStation];
+            [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
         }
     }
 }
@@ -100,15 +100,13 @@
 - (void)playStation:(GRStation *)station
 {
     if ([[NSInternetDoctor shared] isConnected]) {
-        if ([self.streamURL isEqualToString:station.streamURL] == NO) {
+        if ([_streamURL isEqualToString:station.streamURL] == NO) {
             [self stopPlayingCurrentStation];
         }
-        if (_player) {
-            return;
+        if (self.isPlaying == NO) {
+            [self tearDownPlayer];
+            [self createPlayerForStation:station];
         }
-        
-        [self tearDownPlayer];
-        [self createPlayerForStation:station];
     } else {
         [self stopPlayingCurrentStation];
         [[NSInternetDoctor shared] showNoInternetAlert];
@@ -118,9 +116,9 @@
 
 - (void)stopPlayingCurrentStation
 {
-    self.currentStation = nil;
-    self.stationName = @"";
-    self.streamURL = @"";
+    _currentStation = nil;
+    _stationName = @"";
+    _streamURL = @"";
     [self tearDownPlayer];
 }
 
@@ -129,7 +127,6 @@
     if (_player && _player.rate != 0) {
         return YES;
     }
-    
     return NO;
 }
 
@@ -137,9 +134,9 @@
 
 - (void)createPlayerForStation:(GRStation *)station
 {
-    self.currentStation = station;
-    self.streamURL = [NSString stringWithFormat:@"%@", self.currentStation.streamURL];
-    self.stationName = [NSString stringWithFormat:@"%@", self.currentStation.title];
+    _currentStation = station;
+    _streamURL = [NSString stringWithFormat:@"%@", _currentStation.streamURL];
+    _stationName = [NSString stringWithFormat:@"%@", _currentStation.title];
     
     _streamSession = [AVAudioSession sharedInstance];
     [_streamSession setCategory:AVAudioSessionCategoryPlayback
@@ -147,27 +144,23 @@
                           error:nil];
     [_streamSession setActive:YES error:nil];
   
-    NSURL *url = [NSURL URLWithString:self.streamURL];
+    NSAssert(_player == nil, @"There AVPlayer instance should be nil");
+    NSURL *url = [NSURL URLWithString:_streamURL];
     _player = [[AVPlayer alloc] initWithURL:url];
     _player.allowsExternalPlayback = YES;
     _player.usesExternalPlaybackWhileExternalScreenIsActive = YES;
-  
     [_player addObserver:self forKeyPath:NSStringFromSelector(@selector(rate)) options:0 context:nil];
-    [_player.currentItem addObserver:self forKeyPath:NSStringFromSelector(@selector(status)) options:0 context:nil];
     [_player play];
-
     [GRNotificationCenter postPlayerDidStartNotificationWithSender:nil];
 }
 
 - (void)tearDownPlayer
 {
     if (_player) {
-        [_player.currentItem removeObserver:self forKeyPath:NSStringFromSelector(@selector(status))];
         [_player removeObserver:self forKeyPath:NSStringFromSelector(@selector(rate))];
         [_player pause];
         _player = nil;
     }
-    
     [GRNotificationCenter postPlayerDidEndNotificationWithSender:nil];
 }
 
@@ -185,7 +178,6 @@
     } else {
         [[NSInternetDoctor shared] showNoInternetAlert];
     }
-    
     [self stopPlayingCurrentStation];
 }
 

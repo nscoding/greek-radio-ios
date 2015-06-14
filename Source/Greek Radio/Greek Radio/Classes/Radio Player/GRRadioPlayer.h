@@ -10,9 +10,9 @@
 
 @interface GRRadioPlayer : NSObject
 
-@property (nonatomic, strong) NSString *stationName;
-@property (nonatomic, strong) NSString *streamURL;
-@property (nonatomic, weak) GRStation *currentStation;
+@property (nonatomic, strong, readonly) NSString *stationName;
+@property (nonatomic, strong, readonly) NSString *streamURL;
+@property (nonatomic, weak, readonly) GRStation *currentStation;
 
 /// Singleton
 + (GRRadioPlayer *)shared;
