@@ -41,6 +41,18 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
             .sink { [weak self] _ in self?.refreshStationTemplates() }
             .store(in: &cancellables)
 
+        player.$currentStation
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.refreshStationTemplates() }
+            .store(in: &cancellables)
+
+        player.$isPlaying
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in self?.refreshStationTemplates() }
+            .store(in: &cancellables)
+
         Task { await stationStore.loadStationsIfNeeded() }
     }
 
