@@ -9,10 +9,29 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
     private let stationStore = RadioStationStore.shared
     private var cancellables: Set<AnyCancellable> = []
 
-    func templateApplicationScene(
+    // nonisolated so the ObjC runtime can see these selectors during respondsToSelector: checks.
+    // @MainActor on the class otherwise wraps them in actor-isolation thunks that become invisible.
+    nonisolated func templateApplicationScene(
         _ templateApplicationScene: CPTemplateApplicationScene,
         didConnect interfaceController: CPInterfaceController
     ) {
+        Task { @MainActor [weak self] in
+            self?.connect(to: interfaceController)
+        }
+    }
+
+    nonisolated func templateApplicationScene(
+        _ templateApplicationScene: CPTemplateApplicationScene,
+        didDisconnect interfaceController: CPInterfaceController
+    ) {
+        Task { @MainActor [weak self] in
+            self?.disconnect()
+        }
+    }
+
+    // MARK: - Lifecycle
+
+    private func connect(to interfaceController: CPInterfaceController) {
         self.interfaceController = interfaceController
         interfaceController.setRootTemplate(makeTabBarTemplate(), animated: false, completion: nil)
 
@@ -25,11 +44,8 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         Task { await stationStore.loadStationsIfNeeded() }
     }
 
-    func templateApplicationScene(
-        _ templateApplicationScene: CPTemplateApplicationScene,
-        didDisconnect interfaceController: CPInterfaceController
-    ) {
-        self.interfaceController = nil
+    private func disconnect() {
+        interfaceController = nil
         cancellables.removeAll()
     }
 
