@@ -1,13 +1,24 @@
 import SwiftUI
 import SwiftData
+import StoreKit
 import UIKit
+
+private enum ReviewPromptStorage {
+    static let hasCompleted = "reviewPrompt.hasCompleted"
+    static let declineCount = "reviewPrompt.declineCount"
+    static let nextEligibleDate = "reviewPrompt.nextEligibleDate"
+}
 
 struct ContentView: View {
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.modelContext) private var modelContext
     @Environment(\.openURL) private var openURL
+    @Environment(\.requestReview) private var requestReview
     @Query(sort: \FavoriteStation.createdAt) private var storedFavorites: [FavoriteStation]
     @AppStorage("accentThemeID") private var accentThemeID = AccentTheme.aegean.rawValue
+    @AppStorage(ReviewPromptStorage.hasCompleted) private var hasCompletedReviewPrompt = false
+    @AppStorage(ReviewPromptStorage.declineCount) private var reviewPromptDeclineCount = 0
+    @AppStorage(ReviewPromptStorage.nextEligibleDate) private var reviewPromptNextEligibleDate = 0.0
     @StateObject private var player = RadioPlayer.shared
     @StateObject private var stationStore = RadioStationStore.shared
     @State private var selectedSection: AppSection = .stations
@@ -15,6 +26,8 @@ struct ContentView: View {
     @State private var searchText = ""
     @State private var selectedStation: RadioStation?
     @State private var isPlayerPresented = false
+    @State private var featuredStationID: Int64?
+    @State private var isReviewPromptPresented = false
 
     private var favoriteIDs: Set<Int64> {
         Set(storedFavorites.map(\.stationID))
@@ -95,7 +108,23 @@ struct ContentView: View {
     }
 
     private var featuredStation: RadioStation? {
-        stationStore.stations.first
+        let stations = stationStore.stations
+
+        if let featuredStationID,
+           let station = stations.first(where: { $0.id == featuredStationID }) {
+            return station
+        }
+
+        return stations.randomElement()
+    }
+
+    private var popularStations: [RadioStation] {
+        filteredStations
+            .sorted { lhs, rhs in
+                dailyPopularityKey(for: lhs) < dailyPopularityKey(for: rhs)
+            }
+            .prefix(5)
+            .map(\.self)
     }
 
     var body: some View {
@@ -134,7 +163,51 @@ struct ContentView: View {
         }
         .task {
             await stationStore.loadStationsIfNeeded()
+            refreshFeaturedStation()
         }
+        .onChange(of: stationStore.stations.map(\.id)) { _, _ in
+            refreshFeaturedStation()
+        }
+        .alert("Enjoying Greek Radio?", isPresented: $isReviewPromptPresented) {
+            Button("Not Now") {
+                recordReviewPromptDecline()
+            }
+
+            Button("Review Now") {
+                completeReviewPromptFlow()
+            }
+        } message: {
+            Text("Would you like to leave a quick App Store review?")
+        }
+    }
+
+    private func refreshFeaturedStation() {
+        let stations = stationStore.stations
+
+        guard !stations.isEmpty else {
+            featuredStationID = nil
+            return
+        }
+
+        if let featuredStationID,
+           stations.contains(where: { $0.id == featuredStationID }) {
+            return
+        }
+
+        featuredStationID = stations.randomElement()?.id
+    }
+
+    private func dailyPopularityKey(for station: RadioStation) -> UInt64 {
+        let dayKey = Calendar.current.startOfDay(for: .now).formatted(.iso8601.year().month().day())
+        let seed = "\(station.id)-\(dayKey)"
+        var hash: UInt64 = 14_695_981_039_346_656_037
+
+        for byte in seed.utf8 {
+            hash ^= UInt64(byte)
+            hash &*= 1_099_511_628_211
+        }
+
+        return hash
     }
 
     @ViewBuilder
@@ -161,7 +234,7 @@ struct ContentView: View {
                         if featuredStation != nil {
                             featuredCard
                         }
-                        stationSection(title: "Popular Right Now", stations: Array(filteredStations.prefix(5)))
+                        stationSection(title: "Popular Right Now", stations: popularStations)
                     case .stations:
                         stationSection(title: "Top Stations", stations: filteredStations)
                     case .favorites:
@@ -188,6 +261,12 @@ struct ContentView: View {
                 .foregroundStyle(.primary)
 
             Spacer()
+
+            if stationStore.isLoading {
+                ProgressView()
+                    .controlSize(.small)
+                    .tint(accentTheme.primary)
+            }
         }
     }
 
@@ -303,7 +382,7 @@ struct ContentView: View {
                     .foregroundStyle(accentTheme.primary)
             }
 
-            if stationStore.isLoading {
+            if stationStore.isLoading && stations.isEmpty {
                 loadingState
             } else if stations.isEmpty {
                 emptyState(title: "No stations found", message: stationStore.errorMessage ?? "Try another search or choose a different category.")
@@ -330,7 +409,7 @@ struct ContentView: View {
             Text("Favorites")
                 .font(.title2.weight(.bold))
 
-            if stationStore.isLoading {
+            if stationStore.isLoading && filteredStations.isEmpty {
                 loadingState
             } else if filteredStations.isEmpty {
                 emptyState(title: "No favorites yet", message: "Tap the heart on a station to keep it here.")
@@ -565,6 +644,8 @@ struct ContentView: View {
     }
 
     private func toggleFavorite(_ station: RadioStation) {
+        let wasAddingFavorite = storedFavorites.contains(where: { $0.stationID == station.id }) == false
+
         if let storedFavorite = storedFavorites.first(where: { $0.stationID == station.id }) {
             modelContext.delete(storedFavorite)
             UISelectionFeedbackGenerator().selectionChanged()
@@ -575,8 +656,54 @@ struct ContentView: View {
 
         do {
             try modelContext.save()
+            if wasAddingFavorite {
+                scheduleReviewPromptIfNeeded()
+            }
         } catch {
             assertionFailure("Failed to save favorites: \(error.localizedDescription)")
+        }
+    }
+
+    private func scheduleReviewPromptIfNeeded() {
+        guard shouldPromptForReview else { return }
+
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1.5))
+
+            guard shouldPromptForReview else { return }
+            isReviewPromptPresented = true
+        }
+    }
+
+    private var shouldPromptForReview: Bool {
+        guard !hasCompletedReviewPrompt else { return false }
+        guard reviewPromptDeclineCount < 2 else { return false }
+
+        if reviewPromptDeclineCount == 0 {
+            return true
+        }
+
+        return Date().timeIntervalSince1970 >= reviewPromptNextEligibleDate
+    }
+
+    private func recordReviewPromptDecline() {
+        reviewPromptDeclineCount += 1
+
+        if reviewPromptDeclineCount >= 2 {
+            hasCompletedReviewPrompt = true
+            reviewPromptNextEligibleDate = 0
+        } else {
+            reviewPromptNextEligibleDate = Date().addingTimeInterval(30 * 24 * 60 * 60).timeIntervalSince1970
+        }
+    }
+
+    private func completeReviewPromptFlow() {
+        hasCompletedReviewPrompt = true
+        reviewPromptNextEligibleDate = 0
+
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(0.75))
+            requestReview()
         }
     }
 }
@@ -592,28 +719,29 @@ private struct StationRow: View {
 
     var body: some View {
         HStack(spacing: 14) {
-            StationArtwork(station: station, accentTheme: accentTheme, size: 58)
+            Button(action: rowAction) {
+                HStack(spacing: 14) {
+                    StationArtwork(station: station, accentTheme: accentTheme, size: 58)
 
-            VStack(alignment: .leading, spacing: 6) {
-                Text(station.name)
-                    .font(.headline)
-                    .foregroundStyle(.primary)
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(station.name)
+                            .font(.headline)
+                            .foregroundStyle(.primary)
 
-                HStack(spacing: 5) {
-                    Text(station.frequency)
-                        .font(.subheadline.weight(.bold))
-                        .foregroundStyle(accentTheme.primary)
+                        Text(station.frequency)
+                            .font(.subheadline.weight(.bold))
+                            .foregroundStyle(accentTheme.primary)
 
-                    Text("•")
-                        .foregroundStyle(.secondary)
+                        Text(station.region)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
 
-                    Text(station.region)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                    Spacer(minLength: 0)
                 }
+                .contentShape(Rectangle())
             }
-
-            Spacer()
+            .buttonStyle(.plain)
 
             Button(action: favoriteAction) {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
@@ -636,8 +764,6 @@ private struct StationRow: View {
         .padding(14)
         .background(Color(uiColor: .secondarySystemBackground), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
         .shadow(color: .black.opacity(0.12), radius: 18, y: 10)
-        .contentShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .onTapGesture(perform: rowAction)
     }
 }
 
