@@ -656,6 +656,7 @@ struct ContentView: View {
 
         do {
             try modelContext.save()
+            CarPlayFavorites.save(Set(storedFavorites.map(\.stationID)))
             if wasAddingFavorite {
                 scheduleReviewPromptIfNeeded()
             }
