@@ -3,875 +3,666 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132003AF17E65A2C00829AA0 /* CoreMotion.framework */; };
-		1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */; };
-		1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */; };
-		13A4C73F1873438D005DB591 /* GRUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A4C73E1873438D005DB591 /* GRUserDefaults.m */; };
-		13CDC161187062970041FED4 /* GRStationsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC160187062970041FED4 /* GRStationsManager.m */; };
-		13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13CDC18218715D4E0041FED4 /* Assets.xcassets */; };
-		13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 13CDC18B187167250041FED4 /* UITableView+Extensions.m */; };
-		13EA5BBB1A341E6D00C264C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BB61A341E6D00C264C8 /* Localizable.strings */; };
-		13EA5BBC1A341E6D00C264C8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BB91A341E6D00C264C8 /* Localizable.strings */; };
-		13EA5BC31A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */; };
-		13EA5BC41A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */; };
-		CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD27CEE119DF7E3B00B02565 /* StoreKit.framework */; };
-		CD53900217476F480044092D /* GRNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53900117476F480044092D /* GRNavigationController.m */; };
-		CD53C9521737A97900264230 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CD53C9511737A97800264230 /* Settings.bundle */; };
-		CD53C95E1737B0D400264230 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = CD53C9571737B0D400264230 /* Appirater.m */; };
-		CD55C0D5174424F6000BFFE5 /* GRSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */; };
-		CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36717312F7E0009A106 /* CFNetwork.framework */; };
-		CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD6AD36917312F8B0009A106 /* AudioToolbox.framework */; };
-		CD6E4A6F19C984A800DBA0A7 /* CWStatusBarNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = CD6E4A6E19C984A800DBA0A7 /* CWStatusBarNotification.m */; };
-		CD7A018B17327ADD003A2E2D /* GRStationsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018917327ADD003A2E2D /* GRStationsTableViewController.m */; };
-		CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */; };
-		CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */; };
-		CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */; };
-		CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A0222173299AF003A2E2D /* QuartzCore.framework */; };
-		CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */; };
-		CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */; };
-		CD83689F1997C1B800EFC0D1 /* UITextField+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CD83689E1997C1B800EFC0D1 /* UITextField+Extensions.m */; };
-		CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B4F91733EF7000771F26 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		CD92B501173400B600771F26 /* GRShareHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD92B500173400B600771F26 /* GRShareHelper.m */; };
-		CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD92B5021734272800771F26 /* MediaPlayer.framework */; };
-		CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA226A5174808AF00209736 /* UIDevice+Extensions.m */; };
-		CDA752E01730451E005B25EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752DF1730451E005B25EC /* libz.dylib */; };
-		CDA752E8173049A0005B25EC /* GRWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752E7173049A0005B25EC /* GRWebService.m */; };
-		CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752EE1730548F005B25EC /* GRCoreDataStack.m */; };
-		CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA752F0173055DA005B25EC /* CoreData.framework */; };
-		CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA752FD1730573C005B25EC /* GRStationsDAO.m */; };
-		CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */; };
-		CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA75350173070A6005B25EC /* GRStationCellView.m */; };
-		CDA9AFA9174551990047C1F1 /* GRShoutCastHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CDA9AFA8174551990047C1F1 /* GRShoutCastHelper.m */; };
-		CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB6D1991737D5B900E9D842 /* GRStation.m */; };
-		CDD7EBE21733B66100225F5A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE11733B66100225F5A /* Reachability.m */; };
-		CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */; };
-		CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */; };
-		CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */; };
-		CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A7E17303DD5004C0698 /* UIKit.framework */; };
-		CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8017303DD5004C0698 /* Foundation.framework */; };
-		CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDE43A8217303DD5004C0698 /* CoreGraphics.framework */; };
-		CDE43A8B17303DD5004C0698 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43A8A17303DD5004C0698 /* main.m */; };
-		CDE43AA217303F54004C0698 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDE43AA117303F54004C0698 /* InfoPlist.strings */; };
-		CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */; };
-		CDFACF2519C8CBB000F87476 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */; };
-		CDFACF2719C8E32E00F87476 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFACF2619C8E32E00F87476 /* CoreMedia.framework */; };
+		1338C1EE2FA900A500875B9B /* Greek_RadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1ED2FA900A500875B9B /* Greek_RadioTests.swift */; };
+		1338C1F12FA900A500875B9B /* Greek_RadioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1EF2FA900A500875B9B /* Greek_RadioUITests.swift */; };
+		1338C1F22FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1F02FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift */; };
+		F14A5C742FF1000100875B9B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = F14A5C732FF1000100875B9B /* Supabase */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1338C1BB2FA8E4E200875B9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1338C1A12FA8E4E100875B9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1338C1A82FA8E4E100875B9B;
+			remoteInfo = "Greek Radio";
+		};
+		1338C1C52FA8E4E200875B9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1338C1A12FA8E4E100875B9B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1338C1A82FA8E4E100875B9B;
+			remoteInfo = "Greek Radio";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		132003AF17E65A2C00829AA0 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		1374C1581870439B006B2A15 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
-		1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
-		1374C15C1870439B006B2A15 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
-		1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
-		13A4C7311873429C005DB591 /* GRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRMacros.h; sourceTree = "<group>"; };
-		13A4C73D1873438D005DB591 /* GRUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRUserDefaults.h; sourceTree = "<group>"; };
-		13A4C73E1873438D005DB591 /* GRUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRUserDefaults.m; sourceTree = "<group>"; };
-		13CDC15F187062970041FED4 /* GRStationsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsManager.h; sourceTree = "<group>"; };
-		13CDC160187062970041FED4 /* GRStationsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsManager.m; sourceTree = "<group>"; };
-		13CDC18218715D4E0041FED4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		13CDC18A187167250041FED4 /* UITableView+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extensions.h"; sourceTree = "<group>"; };
-		13CDC18B187167250041FED4 /* UITableView+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extensions.m"; sourceTree = "<group>"; };
-		13EA5BB71A341E6D00C264C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
-		13EA5BBA1A341E6D00C264C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
-		13EA5BBF1A341E9800C264C8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		13EA5BC21A341E9800C264C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		CD27CEE119DF7E3B00B02565 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		CD53900017476F480044092D /* GRNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNavigationController.h; sourceTree = "<group>"; };
-		CD53900117476F480044092D /* GRNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNavigationController.m; sourceTree = "<group>"; };
-		CD53C9511737A97800264230 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		CD53C9561737B0D400264230 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
-		CD53C9571737B0D400264230 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		CD53C9581737B0D400264230 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
-		CD55C0D2174424F6000BFFE5 /* GRSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRSettingsViewController.h; sourceTree = "<group>"; };
-		CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRSettingsViewController.m; sourceTree = "<group>"; };
-		CD6AD36717312F7E0009A106 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		CD6AD36917312F8B0009A106 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		CD6E4A6D19C984A800DBA0A7 /* CWStatusBarNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWStatusBarNotification.h; sourceTree = "<group>"; };
-		CD6E4A6E19C984A800DBA0A7 /* CWStatusBarNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWStatusBarNotification.m; sourceTree = "<group>"; };
-		CD77D1991760B4640097F975 /* Greek Radio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Greek Radio.entitlements"; sourceTree = "<group>"; };
-		CD7A018817327ADD003A2E2D /* GRStationsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsTableViewController.h; sourceTree = "<group>"; };
-		CD7A018917327ADD003A2E2D /* GRStationsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsTableViewController.m; sourceTree = "<group>"; };
-		CD7A018D17327AF4003A2E2D /* GRPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRPlayerViewController.h; sourceTree = "<group>"; };
-		CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRPlayerViewController.m; sourceTree = "<group>"; };
-		CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GRPlayerViewController.xib; sourceTree = "<group>"; };
-		CD7A0208173293D2003A2E2D /* GRNotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRNotificationCenter.h; sourceTree = "<group>"; };
-		CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRNotificationCenter.m; sourceTree = "<group>"; };
-		CD7A0222173299AF003A2E2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		CD7A02BD1732E9C8003A2E2D /* GRAppearance‎Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GRAppearance‎Helper.h"; sourceTree = "<group>"; };
-		CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GRAppearance‎Helper.m"; sourceTree = "<group>"; };
-		CD83689D1997C1B800EFC0D1 /* UITextField+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extensions.h"; sourceTree = "<group>"; };
-		CD83689E1997C1B800EFC0D1 /* UITextField+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extensions.m"; sourceTree = "<group>"; };
-		CD92B4F91733EF7000771F26 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		CD92B4FF173400B600771F26 /* GRShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShareHelper.h; sourceTree = "<group>"; };
-		CD92B500173400B600771F26 /* GRShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShareHelper.m; sourceTree = "<group>"; };
-		CD92B5021734272800771F26 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		CDA226A4174808AF00209736 /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extensions.h"; sourceTree = "<group>"; };
-		CDA226A5174808AF00209736 /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extensions.m"; sourceTree = "<group>"; };
-		CDA752DF1730451E005B25EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		CDA752E6173049A0005B25EC /* GRWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRWebService.h; sourceTree = "<group>"; };
-		CDA752E7173049A0005B25EC /* GRWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRWebService.m; sourceTree = "<group>"; };
-		CDA752ED1730548F005B25EC /* GRCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRCoreDataStack.h; sourceTree = "<group>"; };
-		CDA752EE1730548F005B25EC /* GRCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRCoreDataStack.m; sourceTree = "<group>"; };
-		CDA752F0173055DA005B25EC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		CDA752FC1730573C005B25EC /* GRStationsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStationsDAO.h; sourceTree = "<group>"; };
-		CDA752FD1730573C005B25EC /* GRStationsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStationsDAO.m; sourceTree = "<group>"; };
-		CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GreekRadioModel.xcdatamodel; sourceTree = "<group>"; };
-		CDA7534F173070A6005B25EC /* GRStationCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GRStationCellView.h; path = Cells/GRStationCellView.h; sourceTree = "<group>"; };
-		CDA75350173070A6005B25EC /* GRStationCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GRStationCellView.m; path = Cells/GRStationCellView.m; sourceTree = "<group>"; };
-		CDA9AFA7174551990047C1F1 /* GRShoutCastHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRShoutCastHelper.h; sourceTree = "<group>"; };
-		CDA9AFA8174551990047C1F1 /* GRShoutCastHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRShoutCastHelper.m; sourceTree = "<group>"; };
-		CDB6D1981737D5B900E9D842 /* GRStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRStation.h; sourceTree = "<group>"; };
-		CDB6D1991737D5B900E9D842 /* GRStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRStation.m; sourceTree = "<group>"; };
-		CDD7EBE01733B66100225F5A /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		CDD7EBE11733B66100225F5A /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		CDD7EBE51733B6A900225F5A /* NSInternetDoctor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSInternetDoctor.h; sourceTree = "<group>"; };
-		CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSInternetDoctor.m; sourceTree = "<group>"; };
-		CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRRadioPlayer.h; sourceTree = "<group>"; };
-		CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRRadioPlayer.m; sourceTree = "<group>"; };
-		CDE43A7B17303DD5004C0698 /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CDE43A7E17303DD5004C0698 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		CDE43A8017303DD5004C0698 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CDE43A8217303DD5004C0698 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CDE43A8617303DD5004C0698 /* Greek Radio-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Greek Radio-Info.plist"; sourceTree = "<group>"; };
-		CDE43A8A17303DD5004C0698 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CDE43A8C17303DD5004C0698 /* Greek Radio-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Greek Radio-Prefix.pch"; sourceTree = "<group>"; };
-		CDE43AA117303F54004C0698 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
-		CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GRAppDelegate.h; sourceTree = "<group>"; };
-		CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GRAppDelegate.m; sourceTree = "<group>"; };
-		CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		CDFACF2619C8E32E00F87476 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		1338C1A92FA8E4E100875B9B /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1338C1BA2FA8E4E200875B9B /* Greek RadioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Greek RadioTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1338C1C42FA8E4E200875B9B /* Greek RadioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Greek RadioUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1338C1ED2FA900A500875B9B /* Greek_RadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioTests.swift; sourceTree = "<group>"; };
+		1338C1EF2FA900A500875B9B /* Greek_RadioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioUITests.swift; sourceTree = "<group>"; };
+		1338C1F02FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		1338C1CC2FA8E4E200875B9B /* Exceptions for "Greek Radio" folder in "Greek Radio" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 1338C1A82FA8E4E100875B9B /* Greek Radio */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1338C1AB2FA8E4E100875B9B /* Greek Radio */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				1338C1CC2FA8E4E200875B9B /* Exceptions for "Greek Radio" folder in "Greek Radio" target */,
+			);
+			path = "Greek Radio";
+			sourceTree = "<group>";
+		};
+		1338C1BD2FA8E4E200875B9B /* Greek RadioTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Greek RadioTests";
+			sourceTree = "<group>";
+		};
+		1338C1C72FA8E4E200875B9B /* Greek RadioUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Greek RadioUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
-		CDE43A7817303DD5004C0698 /* Frameworks */ = {
+		1338C1A62FA8E4E100875B9B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD27CEE219DF7E3B00B02565 /* StoreKit.framework in Frameworks */,
-				CDFACF2719C8E32E00F87476 /* CoreMedia.framework in Frameworks */,
-				CDFACF2519C8CBB000F87476 /* AVFoundation.framework in Frameworks */,
-				132003B017E65A2C00829AA0 /* CoreMotion.framework in Frameworks */,
-				CD92B5031734272800771F26 /* MediaPlayer.framework in Frameworks */,
-				CD92B4FE1733FFBA00771F26 /* Social.framework in Frameworks */,
-				CDD7EBE91733BA9500225F5A /* SystemConfiguration.framework in Frameworks */,
-				CD7A02BB1732E5C7003A2E2D /* MessageUI.framework in Frameworks */,
-				CD7A0223173299B0003A2E2D /* QuartzCore.framework in Frameworks */,
-				CD6AD36A17312F8B0009A106 /* AudioToolbox.framework in Frameworks */,
-				CD6AD36817312F7E0009A106 /* CFNetwork.framework in Frameworks */,
-				CDA752F1173055DA005B25EC /* CoreData.framework in Frameworks */,
-				CDA752E01730451E005B25EC /* libz.dylib in Frameworks */,
-				CDE43A7F17303DD5004C0698 /* UIKit.framework in Frameworks */,
-				CDE43A8117303DD5004C0698 /* Foundation.framework in Frameworks */,
-				CDE43A8317303DD5004C0698 /* CoreGraphics.framework in Frameworks */,
+				F14A5C742FF1000100875B9B /* Supabase in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1B72FA8E4E200875B9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1C12FA8E4E200875B9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1374C1561870439B006B2A15 /* UIActionSheet-Blocks */ = {
+		1338C1A02FA8E4E100875B9B = {
 			isa = PBXGroup;
 			children = (
-				1374C1581870439B006B2A15 /* UIActionSheet+Blocks.h */,
-				1374C1591870439B006B2A15 /* UIActionSheet+Blocks.m */,
-			);
-			path = "UIActionSheet-Blocks";
-			sourceTree = "<group>";
-		};
-		1374C15A1870439B006B2A15 /* UIAlertView-Blocks */ = {
-			isa = PBXGroup;
-			children = (
-				1374C15C1870439B006B2A15 /* UIAlertView+Blocks.h */,
-				1374C15D1870439B006B2A15 /* UIAlertView+Blocks.m */,
-			);
-			path = "UIAlertView-Blocks";
-			sourceTree = "<group>";
-		};
-		13EA5BB51A341E6D00C264C8 /* el.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				13EA5BB61A341E6D00C264C8 /* Localizable.strings */,
-			);
-			path = el.lproj;
-			sourceTree = "<group>";
-		};
-		13EA5BB81A341E6D00C264C8 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				13EA5BB91A341E6D00C264C8 /* Localizable.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		13EA5BBD1A341E9800C264C8 /* el.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */,
-			);
-			path = el.lproj;
-			sourceTree = "<group>";
-		};
-		13EA5BC01A341E9800C264C8 /* en.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */,
-			);
-			path = en.lproj;
-			sourceTree = "<group>";
-		};
-		CD53C9541737B0D400264230 /* Appirater */ = {
-			isa = PBXGroup;
-			children = (
-				CD53C9561737B0D400264230 /* Appirater.h */,
-				CD53C9571737B0D400264230 /* Appirater.m */,
-				CD53C9581737B0D400264230 /* AppiraterDelegate.h */,
-				13EA5BBD1A341E9800C264C8 /* el.lproj */,
-				13EA5BC01A341E9800C264C8 /* en.lproj */,
-			);
-			path = Appirater;
-			sourceTree = "<group>";
-		};
-		CD55C0D117442493000BFFE5 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				CD55C0D2174424F6000BFFE5 /* GRSettingsViewController.h */,
-				CD55C0D3174424F6000BFFE5 /* GRSettingsViewController.m */,
-			);
-			name = Settings;
-			path = Sidebar;
-			sourceTree = "<group>";
-		};
-		CD6E4A6C19C984A800DBA0A7 /* CWStatusBarNotification */ = {
-			isa = PBXGroup;
-			children = (
-				CD6E4A6D19C984A800DBA0A7 /* CWStatusBarNotification.h */,
-				CD6E4A6E19C984A800DBA0A7 /* CWStatusBarNotification.m */,
-			);
-			path = CWStatusBarNotification;
-			sourceTree = "<group>";
-		};
-		CD7A017D1732774F003A2E2D /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				CD92B4FF173400B600771F26 /* GRShareHelper.h */,
-				CD92B500173400B600771F26 /* GRShareHelper.m */,
-				CD53900017476F480044092D /* GRNavigationController.h */,
-				CD53900117476F480044092D /* GRNavigationController.m */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		CD7A018617327AC7003A2E2D /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A018D17327AF4003A2E2D /* GRPlayerViewController.h */,
-				CD7A018E17327AF4003A2E2D /* GRPlayerViewController.m */,
-				CD7A018F17327AF4003A2E2D /* GRPlayerViewController.xib */,
-			);
-			path = Player;
-			sourceTree = "<group>";
-		};
-		CD7A018717327ADD003A2E2D /* Station List */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A018817327ADD003A2E2D /* GRStationsTableViewController.h */,
-				CD7A018917327ADD003A2E2D /* GRStationsTableViewController.m */,
-				13CDC15F187062970041FED4 /* GRStationsManager.h */,
-				13CDC160187062970041FED4 /* GRStationsManager.m */,
-			);
-			path = "Station List";
-			sourceTree = "<group>";
-		};
-		CD7A02071732939F003A2E2D /* Notification Center */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A0208173293D2003A2E2D /* GRNotificationCenter.h */,
-				CD7A0209173293D2003A2E2D /* GRNotificationCenter.m */,
-			);
-			path = "Notification Center";
-			sourceTree = "<group>";
-		};
-		CD7A02BC1732E9AF003A2E2D /* Appearance */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A02BD1732E9C8003A2E2D /* GRAppearance‎Helper.h */,
-				CD7A02BE1732E9C8003A2E2D /* GRAppearance‎Helper.m */,
-			);
-			path = Appearance;
-			sourceTree = "<group>";
-		};
-		CD92B5161735729E00771F26 /* Constants */ = {
-			isa = PBXGroup;
-			children = (
-				13A4C7311873429C005DB591 /* GRMacros.h */,
-				13A4C73D1873438D005DB591 /* GRUserDefaults.h */,
-				13A4C73E1873438D005DB591 /* GRUserDefaults.m */,
-			);
-			path = Constants;
-			sourceTree = "<group>";
-		};
-		CD9EF34D173A8211006AD8C3 /* Application Localization */ = {
-			isa = PBXGroup;
-			children = (
-				13EA5BB51A341E6D00C264C8 /* el.lproj */,
-				13EA5BB81A341E6D00C264C8 /* en.lproj */,
-			);
-			path = "Application Localization";
-			sourceTree = "<group>";
-		};
-		CDA226A31748089C00209736 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				13CDC18A187167250041FED4 /* UITableView+Extensions.h */,
-				13CDC18B187167250041FED4 /* UITableView+Extensions.m */,
-				CDA226A4174808AF00209736 /* UIDevice+Extensions.h */,
-				CDA226A5174808AF00209736 /* UIDevice+Extensions.m */,
-				CD83689D1997C1B800EFC0D1 /* UITextField+Extensions.h */,
-				CD83689E1997C1B800EFC0D1 /* UITextField+Extensions.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		CDA752E5173049A0005B25EC /* Web Service */ = {
-			isa = PBXGroup;
-			children = (
-				CDA752E6173049A0005B25EC /* GRWebService.h */,
-				CDA752E7173049A0005B25EC /* GRWebService.m */,
-			);
-			path = "Web Service";
-			sourceTree = "<group>";
-		};
-		CDA752EC17305471005B25EC /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-				CDA752ED1730548F005B25EC /* GRCoreDataStack.h */,
-				CDA752EE1730548F005B25EC /* GRCoreDataStack.m */,
-				CDA752FC1730573C005B25EC /* GRStationsDAO.h */,
-				CDA752FD1730573C005B25EC /* GRStationsDAO.m */,
-				CDB6D1981737D5B900E9D842 /* GRStation.h */,
-				CDB6D1991737D5B900E9D842 /* GRStation.m */,
-				CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */,
-			);
-			path = "Core Data";
-			sourceTree = "<group>";
-		};
-		CDA7534E17306A56005B25EC /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				CDA7534F173070A6005B25EC /* GRStationCellView.h */,
-				CDA75350173070A6005B25EC /* GRStationCellView.m */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		CDA9AFA5174551800047C1F1 /* Shoutcast */ = {
-			isa = PBXGroup;
-			children = (
-				CDA9AFA7174551990047C1F1 /* GRShoutCastHelper.h */,
-				CDA9AFA8174551990047C1F1 /* GRShoutCastHelper.m */,
-			);
-			path = Shoutcast;
-			sourceTree = "<group>";
-		};
-		CDD7EBDF1733B66100225F5A /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				CDD7EBE01733B66100225F5A /* Reachability.h */,
-				CDD7EBE11733B66100225F5A /* Reachability.m */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
-		CDD7EBE41733B69500225F5A /* Internet Doctor */ = {
-			isa = PBXGroup;
-			children = (
-				CDD7EBE51733B6A900225F5A /* NSInternetDoctor.h */,
-				CDD7EBE61733B6A900225F5A /* NSInternetDoctor.m */,
-			);
-			path = "Internet Doctor";
-			sourceTree = "<group>";
-		};
-		CDD7EBEA1733BC5D00225F5A /* Radio Player */ = {
-			isa = PBXGroup;
-			children = (
-				CDD7EBEB1733BC6D00225F5A /* GRRadioPlayer.h */,
-				CDD7EBEC1733BC6D00225F5A /* GRRadioPlayer.m */,
-			);
-			path = "Radio Player";
-			sourceTree = "<group>";
-		};
-		CDE43A7217303DD4004C0698 = {
-			isa = PBXGroup;
-			children = (
-				CDE43A8417303DD5004C0698 /* Greek Radio */,
-				CDE43A7D17303DD5004C0698 /* Frameworks */,
-				CDE43A7C17303DD5004C0698 /* Products */,
+				1338C1AB2FA8E4E100875B9B /* Greek Radio */,
+				1338C1BD2FA8E4E200875B9B /* Greek RadioTests */,
+				1338C1C72FA8E4E200875B9B /* Greek RadioUITests */,
+				1338C1AA2FA8E4E100875B9B /* Products */,
+				1338C1FC2FA94DF000875B9B /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
-		CDE43A7C17303DD5004C0698 /* Products */ = {
+		1338C1AA2FA8E4E100875B9B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CDE43A7B17303DD5004C0698 /* Greek Radio.app */,
+				1338C1A92FA8E4E100875B9B /* Greek Radio.app */,
+				1338C1BA2FA8E4E200875B9B /* Greek RadioTests.xctest */,
+				1338C1C42FA8E4E200875B9B /* Greek RadioUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CDE43A7D17303DD5004C0698 /* Frameworks */ = {
+		1338C1FC2FA94DF000875B9B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CD27CEE119DF7E3B00B02565 /* StoreKit.framework */,
-				CDFACF2619C8E32E00F87476 /* CoreMedia.framework */,
-				CDFACF2419C8CBAF00F87476 /* AVFoundation.framework */,
-				132003AF17E65A2C00829AA0 /* CoreMotion.framework */,
-				CD6AD36917312F8B0009A106 /* AudioToolbox.framework */,
-				CD6AD36717312F7E0009A106 /* CFNetwork.framework */,
-				CDA752F0173055DA005B25EC /* CoreData.framework */,
-				CDE43A8217303DD5004C0698 /* CoreGraphics.framework */,
-				CDE43A8017303DD5004C0698 /* Foundation.framework */,
-				CD92B5021734272800771F26 /* MediaPlayer.framework */,
-				CD7A02BA1732E5C7003A2E2D /* MessageUI.framework */,
-				CD7A0222173299AF003A2E2D /* QuartzCore.framework */,
-				CD92B4F91733EF7000771F26 /* Social.framework */,
-				CDD7EBE81733BA9500225F5A /* SystemConfiguration.framework */,
-				CDE43A7E17303DD5004C0698 /* UIKit.framework */,
+				1338C1FD2FA94DF000875B9B /* Unit */,
+				1338C1FE2FA94DF000875B9B /* UI */,
 			);
-			name = Frameworks;
+			path = Tests;
 			sourceTree = "<group>";
 		};
-		CDE43A8417303DD5004C0698 /* Greek Radio */ = {
+		1338C1FD2FA94DF000875B9B /* Unit */ = {
 			isa = PBXGroup;
 			children = (
-				13CDC18218715D4E0041FED4 /* Assets.xcassets */,
-				CD77D1991760B4640097F975 /* Greek Radio.entitlements */,
-				CD53C9511737A97800264230 /* Settings.bundle */,
-				CDE43AA817303F5B004C0698 /* Classes */,
-				CDE43AB9173041B8004C0698 /* Libraries */,
-				CDE43A8517303DD5004C0698 /* Supporting Files */,
-				CDE43AAC17303F5B004C0698 /* Views */,
+				1338C1ED2FA900A500875B9B /* Greek_RadioTests.swift */,
 			);
-			path = "Greek Radio";
+			path = Unit;
 			sourceTree = "<group>";
 		};
-		CDE43A8517303DD5004C0698 /* Supporting Files */ = {
+		1338C1FE2FA94DF000875B9B /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				CDE43AA117303F54004C0698 /* InfoPlist.strings */,
-				CDE43A8617303DD5004C0698 /* Greek Radio-Info.plist */,
-				CDE43A8A17303DD5004C0698 /* main.m */,
-				CDE43A8C17303DD5004C0698 /* Greek Radio-Prefix.pch */,
+				1338C1EF2FA900A500875B9B /* Greek_RadioUITests.swift */,
+				1338C1F02FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift */,
 			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CDE43AA817303F5B004C0698 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CD7A02BC1732E9AF003A2E2D /* Appearance */,
-				CDE43AA917303F5B004C0698 /* Application Delegate */,
-				CD9EF34D173A8211006AD8C3 /* Application Localization */,
-				CD92B5161735729E00771F26 /* Constants */,
-				CDA752EC17305471005B25EC /* Core Data */,
-				CDA226A31748089C00209736 /* Extensions */,
-				CDD7EBE41733B69500225F5A /* Internet Doctor */,
-				CD7A02071732939F003A2E2D /* Notification Center */,
-				CDD7EBEA1733BC5D00225F5A /* Radio Player */,
-				CDA9AFA5174551800047C1F1 /* Shoutcast */,
-				CDA752E5173049A0005B25EC /* Web Service */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		CDE43AA917303F5B004C0698 /* Application Delegate */ = {
-			isa = PBXGroup;
-			children = (
-				CDE43AAA17303F5B004C0698 /* GRAppDelegate.h */,
-				CDE43AAB17303F5B004C0698 /* GRAppDelegate.m */,
-			);
-			path = "Application Delegate";
-			sourceTree = "<group>";
-		};
-		CDE43AAC17303F5B004C0698 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CDA7534E17306A56005B25EC /* Cells */,
-				CD7A017D1732774F003A2E2D /* Helpers */,
-				CD7A018617327AC7003A2E2D /* Player */,
-				CD55C0D117442493000BFFE5 /* Settings */,
-				CD7A018717327ADD003A2E2D /* Station List */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CDE43AB9173041B8004C0698 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				CD53C9541737B0D400264230 /* Appirater */,
-				CD6E4A6C19C984A800DBA0A7 /* CWStatusBarNotification */,
-				CDA752DF1730451E005B25EC /* libz.dylib */,
-				CDD7EBDF1733B66100225F5A /* Reachability */,
-				1374C1561870439B006B2A15 /* UIActionSheet-Blocks */,
-				1374C15A1870439B006B2A15 /* UIAlertView-Blocks */,
-			);
-			path = Libraries;
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CDE43A7A17303DD5004C0698 /* Greek Radio */ = {
+		1338C1A82FA8E4E100875B9B /* Greek Radio */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CDE43A9E17303DD5004C0698 /* Build configuration list for PBXNativeTarget "Greek Radio" */;
+			buildConfigurationList = 1338C1CD2FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek Radio" */;
 			buildPhases = (
-				CD6E4A7219C9879300DBA0A7 /* ShellScript */,
-				CDE43A7717303DD5004C0698 /* Sources */,
-				CDE43A7817303DD5004C0698 /* Frameworks */,
-				CDE43A7917303DD5004C0698 /* Resources */,
+				1338C1A52FA8E4E100875B9B /* Sources */,
+				1338C1A62FA8E4E100875B9B /* Frameworks */,
+				1338C1A72FA8E4E100875B9B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				1338C1AB2FA8E4E100875B9B /* Greek Radio */,
+			);
 			name = "Greek Radio";
+			packageProductDependencies = (
+				F14A5C732FF1000100875B9B /* Supabase */,
+			);
 			productName = "Greek Radio";
-			productReference = CDE43A7B17303DD5004C0698 /* Greek Radio.app */;
+			productReference = 1338C1A92FA8E4E100875B9B /* Greek Radio.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1338C1B92FA8E4E200875B9B /* Greek RadioTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1338C1D22FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek RadioTests" */;
+			buildPhases = (
+				1338C1B62FA8E4E200875B9B /* Sources */,
+				1338C1B72FA8E4E200875B9B /* Frameworks */,
+				1338C1B82FA8E4E200875B9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1338C1BC2FA8E4E200875B9B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1338C1BD2FA8E4E200875B9B /* Greek RadioTests */,
+			);
+			name = "Greek RadioTests";
+			packageProductDependencies = (
+			);
+			productName = "Greek RadioTests";
+			productReference = 1338C1BA2FA8E4E200875B9B /* Greek RadioTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1338C1C32FA8E4E200875B9B /* Greek RadioUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1338C1D52FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek RadioUITests" */;
+			buildPhases = (
+				1338C1C02FA8E4E200875B9B /* Sources */,
+				1338C1C12FA8E4E200875B9B /* Frameworks */,
+				1338C1C22FA8E4E200875B9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1338C1C62FA8E4E200875B9B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1338C1C72FA8E4E200875B9B /* Greek RadioUITests */,
+			);
+			name = "Greek RadioUITests";
+			packageProductDependencies = (
+			);
+			productName = "Greek RadioUITests";
+			productReference = 1338C1C42FA8E4E200875B9B /* Greek RadioUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CDE43A7317303DD5004C0698 /* Project object */ = {
+		1338C1A12FA8E4E100875B9B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = GR;
-				LastUpgradeCheck = 0630;
-				ORGANIZATIONNAME = "Patrick Chamelo - nscoding";
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2640;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
-					CDE43A7A17303DD5004C0698 = {
-						DevelopmentTeam = HPSF3D2F4U;
-						SystemCapabilities = {
-							com.apple.InAppPurchase = {
-								enabled = 0;
-							};
-						};
+					1338C1A82FA8E4E100875B9B = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					1338C1B92FA8E4E200875B9B = {
+						CreatedOnToolsVersion = 26.4.1;
+						TestTargetID = 1338C1A82FA8E4E100875B9B;
+					};
+					1338C1C32FA8E4E200875B9B = {
+						CreatedOnToolsVersion = 26.4.1;
+						TestTargetID = 1338C1A82FA8E4E100875B9B;
 					};
 				};
 			};
-			buildConfigurationList = CDE43A7617303DD5004C0698 /* Build configuration list for PBXProject "Greek Radio" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			buildConfigurationList = 1338C1A42FA8E4E100875B9B /* Build configuration list for PBXProject "Greek Radio" */;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				el,
 				en,
+				Base,
 			);
-			mainGroup = CDE43A7217303DD4004C0698;
-			productRefGroup = CDE43A7C17303DD5004C0698 /* Products */;
+			mainGroup = 1338C1A02FA8E4E100875B9B;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F14A5C722FF1000100875B9B /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1338C1AA2FA8E4E100875B9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CDE43A7A17303DD5004C0698 /* Greek Radio */,
+				1338C1A82FA8E4E100875B9B /* Greek Radio */,
+				1338C1B92FA8E4E200875B9B /* Greek RadioTests */,
+				1338C1C32FA8E4E200875B9B /* Greek RadioUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CDE43A7917303DD5004C0698 /* Resources */ = {
+		1338C1A72FA8E4E100875B9B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE43AA217303F54004C0698 /* InfoPlist.strings in Resources */,
-				CD7A019117327AF4003A2E2D /* GRPlayerViewController.xib in Resources */,
-				CD53C9521737A97900264230 /* Settings.bundle in Resources */,
-				13EA5BBC1A341E6D00C264C8 /* Localizable.strings in Resources */,
-				13EA5BBB1A341E6D00C264C8 /* Localizable.strings in Resources */,
-				13EA5BC31A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */,
-				13EA5BC41A341E9800C264C8 /* AppiraterLocalizable.strings in Resources */,
-				13CDC18318715D4E0041FED4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1B82FA8E4E200875B9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1C22FA8E4E200875B9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		CD6E4A7219C9879300DBA0A7 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		CDE43A7717303DD5004C0698 /* Sources */ = {
+		1338C1A52FA8E4E100875B9B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDE43A8B17303DD5004C0698 /* main.m in Sources */,
-				CDE43AB417303F5B004C0698 /* GRAppDelegate.m in Sources */,
-				CDA752E8173049A0005B25EC /* GRWebService.m in Sources */,
-				CDA752EF1730548F005B25EC /* GRCoreDataStack.m in Sources */,
-				CDA752FE1730573C005B25EC /* GRStationsDAO.m in Sources */,
-				CDA75307173058DE005B25EC /* GreekRadioModel.xcdatamodeld in Sources */,
-				CDA75351173070A6005B25EC /* GRStationCellView.m in Sources */,
-				1374C15F1870439B006B2A15 /* UIActionSheet+Blocks.m in Sources */,
-				13CDC161187062970041FED4 /* GRStationsManager.m in Sources */,
-				CD7A018B17327ADD003A2E2D /* GRStationsTableViewController.m in Sources */,
-				13CDC18C187167250041FED4 /* UITableView+Extensions.m in Sources */,
-				CD7A019017327AF4003A2E2D /* GRPlayerViewController.m in Sources */,
-				CD7A020A173293D2003A2E2D /* GRNotificationCenter.m in Sources */,
-				1374C1611870439B006B2A15 /* UIAlertView+Blocks.m in Sources */,
-				CD7A02BF1732E9C8003A2E2D /* GRAppearance‎Helper.m in Sources */,
-				13A4C73F1873438D005DB591 /* GRUserDefaults.m in Sources */,
-				CDD7EBE21733B66100225F5A /* Reachability.m in Sources */,
-				CDD7EBE71733B6A900225F5A /* NSInternetDoctor.m in Sources */,
-				CDD7EBED1733BC6D00225F5A /* GRRadioPlayer.m in Sources */,
-				CD6E4A6F19C984A800DBA0A7 /* CWStatusBarNotification.m in Sources */,
-				CD83689F1997C1B800EFC0D1 /* UITextField+Extensions.m in Sources */,
-				CD92B501173400B600771F26 /* GRShareHelper.m in Sources */,
-				CD53C95E1737B0D400264230 /* Appirater.m in Sources */,
-				CDB6D19A1737D5B900E9D842 /* GRStation.m in Sources */,
-				CD55C0D5174424F6000BFFE5 /* GRSettingsViewController.m in Sources */,
-				CDA9AFA9174551990047C1F1 /* GRShoutCastHelper.m in Sources */,
-				CD53900217476F480044092D /* GRNavigationController.m in Sources */,
-				CDA226A6174808AF00209736 /* UIDevice+Extensions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1B62FA8E4E200875B9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1338C1EE2FA900A500875B9B /* Greek_RadioTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1338C1C02FA8E4E200875B9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1338C1F12FA900A500875B9B /* Greek_RadioUITests.swift in Sources */,
+				1338C1F22FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		13EA5BB61A341E6D00C264C8 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13EA5BB71A341E6D00C264C8 /* el */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		1338C1BC2FA8E4E200875B9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1338C1A82FA8E4E100875B9B /* Greek Radio */;
+			targetProxy = 1338C1BB2FA8E4E200875B9B /* PBXContainerItemProxy */;
 		};
-		13EA5BB91A341E6D00C264C8 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13EA5BBA1A341E6D00C264C8 /* en */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
+		1338C1C62FA8E4E200875B9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1338C1A82FA8E4E100875B9B /* Greek Radio */;
+			targetProxy = 1338C1C52FA8E4E200875B9B /* PBXContainerItemProxy */;
 		};
-		13EA5BBE1A341E9800C264C8 /* AppiraterLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13EA5BBF1A341E9800C264C8 /* el */,
-			);
-			name = AppiraterLocalizable.strings;
-			sourceTree = "<group>";
-		};
-		13EA5BC11A341E9800C264C8 /* AppiraterLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13EA5BC21A341E9800C264C8 /* en */,
-			);
-			name = AppiraterLocalizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		CDE43A9C17303DD5004C0698 /* Development */ = {
+		1338C1CE2FA8E4E200875B9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Greek Radio/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NSCoding.GreekRadio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1338C1CF2FA8E4E200875B9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3000;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Greek Radio/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.NSCoding.GreekRadio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1338C1D02FA8E4E200875B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APPSTORE=0";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Development;
+			name = Debug;
 		};
-		CDE43A9D17303DD5004C0698 /* App Store */ = {
+		1338C1D12FA8E4E200875B9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APPSTORE=1";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "App Store";
+			name = Release;
 		};
-		CDE43A9F17303DD5004C0698 /* Development */ = {
+		1338C1D32FA8E4E200875B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
-				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nscoding.Greek-RadioTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Greek Radio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Greek Radio";
 			};
-			name = Development;
+			name = Debug;
 		};
-		CDE43AA017303DD5004C0698 /* App Store */ = {
+		1338C1D42FA8E4E200875B9B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
-				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nscoding.Greek-RadioTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "d5131313-e2ab-4209-9010-62e03ffc68ac";
-				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Greek Radio.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Greek Radio";
 			};
-			name = "App Store";
+			name = Release;
 		};
-		CDE43AB717303FA6004C0698 /* Adhoc */ = {
+		1338C1D62FA8E4E200875B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				COPY_PHASE_STRIP = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "APPSTORE=0";
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Adhoc;
-		};
-		CDE43AB817303FA6004C0698 /* Adhoc */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Greek Radio/Greek Radio-Prefix.pch";
-				INFOPLIST_FILE = "Greek Radio/Greek Radio-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/**";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nscoding.Greek-RadioUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "14537C3B-93DD-4EE3-865F-19A0F55662DF";
-				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
+				TEST_TARGET_NAME = "Greek Radio";
 			};
-			name = Adhoc;
+			name = Debug;
+		};
+		1338C1D72FA8E4E200875B9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = HPSF3D2F4U;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.nscoding.Greek-RadioUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Greek Radio";
+			};
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CDE43A7617303DD5004C0698 /* Build configuration list for PBXProject "Greek Radio" */ = {
+		1338C1A42FA8E4E100875B9B /* Build configuration list for PBXProject "Greek Radio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CDE43A9C17303DD5004C0698 /* Development */,
-				CDE43A9D17303DD5004C0698 /* App Store */,
-				CDE43AB717303FA6004C0698 /* Adhoc */,
+				1338C1D02FA8E4E200875B9B /* Debug */,
+				1338C1D12FA8E4E200875B9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "App Store";
+			defaultConfigurationName = Release;
 		};
-		CDE43A9E17303DD5004C0698 /* Build configuration list for PBXNativeTarget "Greek Radio" */ = {
+		1338C1CD2FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek Radio" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CDE43A9F17303DD5004C0698 /* Development */,
-				CDE43AA017303DD5004C0698 /* App Store */,
-				CDE43AB817303FA6004C0698 /* Adhoc */,
+				1338C1CE2FA8E4E200875B9B /* Debug */,
+				1338C1CF2FA8E4E200875B9B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = "App Store";
+			defaultConfigurationName = Release;
+		};
+		1338C1D22FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek RadioTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1338C1D32FA8E4E200875B9B /* Debug */,
+				1338C1D42FA8E4E200875B9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1338C1D52FA8E4E200875B9B /* Build configuration list for PBXNativeTarget "Greek RadioUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1338C1D62FA8E4E200875B9B /* Debug */,
+				1338C1D72FA8E4E200875B9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		CDA75305173058DE005B25EC /* GreekRadioModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */,
-			);
-			currentVersion = CDA75306173058DE005B25EC /* GreekRadioModel.xcdatamodel */;
-			path = GreekRadioModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+/* Begin XCRemoteSwiftPackageReference section */
+		F14A5C722FF1000100875B9B /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase-community/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.37.0;
+			};
 		};
-/* End XCVersionGroup section */
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F14A5C732FF1000100875B9B /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F14A5C722FF1000100875B9B /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Supabase;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = CDE43A7317303DD5004C0698 /* Project object */;
+	rootObject = 1338C1A12FA8E4E100875B9B /* Project object */;
 }
