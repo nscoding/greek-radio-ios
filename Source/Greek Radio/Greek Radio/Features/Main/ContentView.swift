@@ -22,7 +22,15 @@ struct ContentView: View {
     @AppStorage(ReviewPromptStorage.nextEligibleDate) private var reviewPromptNextEligibleDate = 0.0
     @StateObject private var player = RadioPlayer.shared
     @StateObject private var stationStore = RadioStationStore.shared
-    @State private var selectedSection: AppSection = .stations
+    @AppStorage("selectedSection") private var selectedSectionRaw = AppSection.stations.rawValue
+
+    private var selectedSection: AppSection {
+        AppSection(rawValue: selectedSectionRaw) ?? .stations
+    }
+
+    private var selectedSectionBinding: Binding<AppSection> {
+        Binding(get: { selectedSection }, set: { selectedSectionRaw = $0.rawValue })
+    }
     @State private var selectedRegion = "All"
     @State private var searchText = ""
     @State private var selectedStation: RadioStation?
@@ -141,7 +149,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        TabView(selection: $selectedSection) {
+        TabView(selection: selectedSectionBinding) {
             ForEach(AppSection.allCases) { section in
                 NavigationStack {
                     rootContent(for: section)
@@ -1224,13 +1232,13 @@ private enum SupportedLanguage: String, CaseIterable, Identifiable {
     }
 }
 
-private enum AppSection: CaseIterable, Identifiable {
-    case home
-    case stations
-    case favorites
-    case settings
+private enum AppSection: String, CaseIterable, Identifiable {
+    case home = "home"
+    case stations = "stations"
+    case favorites = "favorites"
+    case settings = "settings"
 
-    var id: String { title }
+    var id: String { rawValue }
 
     var title: String {
         switch self {
