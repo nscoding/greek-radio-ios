@@ -31,7 +31,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		132FB3172FABC2110099E19C /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = Localizable.strings; sourceTree = "<group>"; };
 		1338C1A92FA8E4E100875B9B /* Greek Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greek Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1338C1BA2FA8E4E200875B9B /* Greek RadioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Greek RadioTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1338C1C42FA8E4E200875B9B /* Greek RadioUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Greek RadioUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,14 +103,6 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
-		132FB21B2FABBEE80099E19C /* el.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				132FB3162FABC2110099E19C /* Localizable.strings */,
-			);
-			path = el.lproj;
-			sourceTree = "<group>";
-		};
 		1338C1A02FA8E4E100875B9B = {
 			isa = PBXGroup;
 			children = (
@@ -122,7 +113,6 @@
 				1338C1FC2FA94DF000875B9B /* Tests */,
 				132A3BBB2FAA68A800C6B063 /* Scripts */,
 				CAFE0003CAFE0003CAFE0003 /* Frameworks */,
-				132FB21B2FABBEE80099E19C /* el.lproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -271,7 +261,6 @@
 			knownRegions = (
 				en,
 				Base,
-				Greek,
 				el,
 			);
 			mainGroup = 1338C1A02FA8E4E100875B9B;
@@ -376,17 +365,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		132FB3162FABC2110099E19C /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				132FB3172FABC2110099E19C /* el */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		1338C1CE2FA8E4E200875B9B /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -395,7 +373,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -431,7 +409,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -586,7 +564,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
@@ -608,7 +586,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
@@ -629,7 +607,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -649,7 +627,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3075;
+				CURRENT_PROJECT_VERSION = 3082;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;

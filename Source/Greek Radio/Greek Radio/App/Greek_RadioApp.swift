@@ -15,6 +15,7 @@ struct Greek_RadioApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .id(selectedAppLanguageCode)
                 .environment(\.locale, AppLanguage(rawValue: selectedAppLanguageCode)?.locale ?? AppLanguage.english.locale)
         }
         .modelContainer(for: [FavoriteStation.self])

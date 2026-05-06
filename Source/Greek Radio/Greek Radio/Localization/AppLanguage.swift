@@ -34,27 +34,27 @@ enum AppLanguage: String, CaseIterable, Identifiable {
         let fallback = Bundle.main.localizedString(forKey: key, value: key, table: nil)
 
         guard rawValue != AppLanguage.english.rawValue,
-              let bundle = localizedBundle else {
+              let localizedStrings = localizedStringsDictionary else {
             return fallback
         }
 
-        return bundle.localizedString(forKey: key, value: fallback, table: nil)
+        return localizedStrings[key] ?? fallback
     }
 
-    private var localizedBundle: Bundle? {
-        let candidateNames: [String]
+    private var localizedStringsDictionary: [String: String]? {
+        let candidateLocalizations: [String]
 
         switch self {
         case .english:
-            candidateNames = []
+            candidateLocalizations = []
         case .greek:
-            candidateNames = [rawValue, "Greek"]
+            candidateLocalizations = ["el"]
         }
 
-        for name in candidateNames {
-            if let localizationPath = Bundle.main.path(forResource: name, ofType: "lproj"),
-               let bundle = Bundle(path: localizationPath) {
-                return bundle
+        for localization in candidateLocalizations {
+            if let path = Bundle.main.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: localization),
+               let dictionary = NSDictionary(contentsOfFile: path) as? [String: String] {
+                return dictionary
             }
         }
 
