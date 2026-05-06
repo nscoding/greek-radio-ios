@@ -396,6 +396,35 @@ struct RadioStation: Identifiable, Hashable {
     var genreLabel: String {
         categories.first(where: { $0 != .all })?.title ?? "Live Radio"
     }
+
+    var artworkBadgeTitle: String {
+        let trimmedFrequency = frequency.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if let numericFrequency = trimmedFrequency.numericFrequencyComponent {
+            return numericFrequency
+        }
+
+        return "WEB"
+    }
+
+    var artworkBadgeSubtitle: String {
+        let trimmedFrequency = frequency.trimmingCharacters(in: .whitespacesAndNewlines)
+        let uppercasedFrequency = trimmedFrequency.uppercased()
+
+        if trimmedFrequency.numericFrequencyComponent != nil {
+            if uppercasedFrequency.contains("AM") {
+                return "AM"
+            }
+
+            return "FM"
+        }
+
+        if uppercasedFrequency.contains("WEB") {
+            return "STREAM"
+        }
+
+        return "LIVE"
+    }
 }
 
 enum StationCategory: String, CaseIterable, Identifiable {
@@ -556,5 +585,11 @@ private struct CachedRadioStation: Codable {
 private extension String {
     var nilIfEmpty: String? {
         isEmpty ? nil : self
+    }
+
+    var numericFrequencyComponent: String? {
+        let filtered = unicodeScalars.filter { CharacterSet(charactersIn: "0123456789.").contains($0) }
+        let value = String(String.UnicodeScalarView(filtered))
+        return value.isEmpty ? nil : value
     }
 }

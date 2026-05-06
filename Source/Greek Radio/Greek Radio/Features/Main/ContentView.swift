@@ -848,11 +848,18 @@ private struct PlayerSheet: View {
                             player.togglePlayback()
                         }
                     } label: {
-                        Image(systemName: isDisplayingCurrentStation && player.isPlaying ? "pause.fill" : "play.fill")
-                            .font(.system(size: 30, weight: .bold))
-                            .frame(width: 86, height: 86)
-                            .background(Color.white, in: Circle())
-                            .foregroundStyle(Color.black)
+                        ZStack {
+                            Image(systemName: "play.fill")
+                                .opacity(isDisplayingCurrentStation && player.isPlaying ? 0 : 1)
+
+                            Image(systemName: "pause.fill")
+                                .opacity(isDisplayingCurrentStation && player.isPlaying ? 1 : 0)
+                        }
+                        .font(.system(size: 30, weight: .bold))
+                        .frame(width: 30, height: 30)
+                        .frame(width: 86, height: 86)
+                        .background(Color.white, in: Circle())
+                        .foregroundStyle(Color.black)
                     }
 
                     Button {
@@ -890,22 +897,22 @@ private struct PlayerSheet: View {
                     .font(.headline)
             }
 
-            if player.isPlaying || player.isBuffering {
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .lastTextBaseline, spacing: 6) {
-                        Text(player.isBuffering ? "Fetching data" : "Stream rate")
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.white.opacity(0.88))
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .lastTextBaseline, spacing: 6) {
+                    Text(player.isBuffering ? "Fetching data" : "Stream rate")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.white.opacity(0.88))
 
-                        Text("\(player.currentKilobytesPerSecond, format: .number.precision(.fractionLength(1))) KB/s")
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(.white.opacity(0.72))
-                    }
-
-                    ThroughputGraph(samples: player.throughputSamples)
-                        .frame(height: 34)
+                    Text("\(player.currentKilobytesPerSecond, format: .number.precision(.fractionLength(1))) KB/s")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(.white.opacity(0.72))
                 }
+
+                ThroughputGraph(samples: player.throughputSamples)
+                    .frame(height: 34)
             }
+            .frame(height: 58, alignment: .top)
+            .opacity(player.isPlaying || player.isBuffering ? 1 : 0)
 
             Text(player.isBuffering
                  ? "The app is pulling audio data from the stream and filling the playback buffer."
@@ -1006,11 +1013,15 @@ private struct StationArtwork: View {
             .frame(width: size, height: size)
             .overlay {
                 VStack(spacing: size * 0.06) {
-                    Image(systemName: station.symbol)
-                        .font(.system(size: size * 0.33, weight: .bold))
-                    Text(station.shortName)
-                        .font(.system(size: size * 0.14, weight: .black, design: .rounded))
-                        .tracking(0.6)
+                    Text(station.artworkBadgeTitle)
+                        .font(.system(size: size * 0.28, weight: .black, design: .rounded))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+
+                    Text(station.artworkBadgeSubtitle)
+                        .font(.system(size: size * 0.14, weight: .bold, design: .rounded))
+                        .tracking(0.8)
+                        .opacity(0.86)
                 }
                 .foregroundStyle(.white)
             }
