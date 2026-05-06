@@ -868,6 +868,7 @@ private struct PlayerSheet: View {
                     .background(Color.white.opacity(0.12), in: Circle())
             }
         }
+        .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44, alignment: .leading)
     }
 
     private var reportProblemURL: URL? {
@@ -892,92 +893,93 @@ private struct PlayerSheet: View {
     }
 
     var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: accentTheme.playerGradientColors,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+        GeometryReader { geometry in
+            ZStack {
+                LinearGradient(
+                    colors: accentTheme.playerGradientColors,
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
 
-            VStack(spacing: 22) {
-                Spacer(minLength: 0)
+                VStack(spacing: 0) {
+                    headerBar
+                        .padding(.horizontal, 24)
+                        .padding(.top, geometry.safeAreaInsets.top + 20)
 
-                StationArtwork(station: displayedStation, accentTheme: accentTheme, size: 180)
-                    .shadow(color: .black.opacity(0.24), radius: 30, y: 16)
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(spacing: 22) {
+                            StationArtwork(station: displayedStation, accentTheme: accentTheme, size: 180)
+                                .shadow(color: .black.opacity(0.24), radius: 30, y: 16)
 
-                VStack(spacing: 8) {
-                    Text(displayedStation.name)
-                        .font(.system(size: 34, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .multilineTextAlignment(.center)
+                            VStack(spacing: 8) {
+                                Text(displayedStation.name)
+                                    .font(.system(size: 34, weight: .black, design: .rounded))
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.center)
 
-                    Text("\(displayedStation.frequency) • \(displayedStation.region)")
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(.white.opacity(0.82))
+                                Text("\(displayedStation.frequency) • \(displayedStation.region)")
+                                    .font(.title3.weight(.semibold))
+                                    .foregroundStyle(.white.opacity(0.82))
 
-                    Text(displayedStation.description)
-                        .font(.body)
-                        .foregroundStyle(.white.opacity(0.72))
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 4)
-                }
+                                Text(displayedStation.description)
+                                    .font(.body)
+                                    .foregroundStyle(.white.opacity(0.72))
+                                    .multilineTextAlignment(.center)
+                                    .padding(.top, 4)
+                            }
 
-                HStack(spacing: 28) {
-                    Button {
-                        player.skipBackward()
-                    } label: {
-                        Image(systemName: "backward.end.fill")
-                            .font(.title2)
-                            .frame(width: 58, height: 58)
-                            .background(Color.white.opacity(0.14), in: Circle())
-                    }
+                            HStack(spacing: 28) {
+                                Button {
+                                    player.skipBackward()
+                                } label: {
+                                    Image(systemName: "backward.end.fill")
+                                        .font(.title2)
+                                        .frame(width: 58, height: 58)
+                                        .background(Color.white.opacity(0.14), in: Circle())
+                                }
 
-                    Button {
-                        if !isDisplayingCurrentStation {
-                            player.play(station: displayedStation)
-                        } else {
-                            player.togglePlayback()
+                                Button {
+                                    if !isDisplayingCurrentStation {
+                                        player.play(station: displayedStation)
+                                    } else {
+                                        player.togglePlayback()
+                                    }
+                                } label: {
+                                    ZStack {
+                                        Image(systemName: "play.fill")
+                                            .opacity(isDisplayingCurrentStation && player.isPlaying ? 0 : 1)
+
+                                        Image(systemName: "pause.fill")
+                                            .opacity(isDisplayingCurrentStation && player.isPlaying ? 1 : 0)
+                                    }
+                                    .font(.system(size: 30, weight: .bold))
+                                    .frame(width: 30, height: 30)
+                                    .frame(width: 86, height: 86)
+                                    .background(Color.white, in: Circle())
+                                    .foregroundStyle(Color.black)
+                                }
+
+                                Button {
+                                    player.skipForward()
+                                } label: {
+                                    Image(systemName: "forward.end.fill")
+                                        .font(.title2)
+                                        .frame(width: 58, height: 58)
+                                        .background(Color.white.opacity(0.14), in: Circle())
+                                }
+                            }
+                            .foregroundStyle(.white)
+                            .padding(.top, 8)
+
+                            statusPanel
                         }
-                    } label: {
-                        ZStack {
-                            Image(systemName: "play.fill")
-                                .opacity(isDisplayingCurrentStation && player.isPlaying ? 0 : 1)
-
-                            Image(systemName: "pause.fill")
-                                .opacity(isDisplayingCurrentStation && player.isPlaying ? 1 : 0)
-                        }
-                        .font(.system(size: 30, weight: .bold))
-                        .frame(width: 30, height: 30)
-                        .frame(width: 86, height: 86)
-                        .background(Color.white, in: Circle())
-                        .foregroundStyle(Color.black)
-                    }
-
-                    Button {
-                        player.skipForward()
-                    } label: {
-                        Image(systemName: "forward.end.fill")
-                            .font(.title2)
-                            .frame(width: 58, height: 58)
-                            .background(Color.white.opacity(0.14), in: Circle())
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 24)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 24)
                     }
                 }
-                .foregroundStyle(.white)
-                .padding(.top, 8)
-
-                statusPanel
-
-                Spacer()
-            }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 24)
-            .padding(.top, 88)
-            .overlay(alignment: .top) {
-                headerBar
-                    .padding(.horizontal, 24)
-                    .padding(.top, 24)
-                    .padding(.top, 12)
             }
         }
     }
