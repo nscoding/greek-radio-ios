@@ -10,7 +10,6 @@
 		1338C1EE2FA900A500875B9B /* Greek_RadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1ED2FA900A500875B9B /* Greek_RadioTests.swift */; };
 		1338C1F12FA900A500875B9B /* Greek_RadioUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1EF2FA900A500875B9B /* Greek_RadioUITests.swift */; };
 		1338C1F22FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1338C1F02FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift */; };
-		CAFE0002CAFE0002CAFE0002 /* CarPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFE0001CAFE0001CAFE0001 /* CarPlay.framework */; };
 		F14A5C742FF1000100875B9B /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = F14A5C732FF1000100875B9B /* Supabase */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 		1338C1ED2FA900A500875B9B /* Greek_RadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioTests.swift; sourceTree = "<group>"; };
 		1338C1EF2FA900A500875B9B /* Greek_RadioUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioUITests.swift; sourceTree = "<group>"; };
 		1338C1F02FA900A500875B9B /* Greek_RadioUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Greek_RadioUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		CAFE0001CAFE0001CAFE0001 /* CarPlay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarPlay.framework; path = System/Library/Frameworks/CarPlay.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -78,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAFE0002CAFE0002CAFE0002 /* CarPlay.framework in Frameworks */,
 				F14A5C742FF1000100875B9B /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,7 +165,6 @@
 		CAFE0003CAFE0003CAFE0003 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CAFE0001CAFE0001CAFE0001 /* CarPlay.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -399,7 +395,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -435,7 +431,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Greek Radio/Greek_Radio.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -590,7 +586,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
@@ -612,7 +608,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
@@ -633,7 +629,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -653,7 +649,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3050;
+				CURRENT_PROJECT_VERSION = 3051;
 				DEVELOPMENT_TEAM = HPSF3D2F4U;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
