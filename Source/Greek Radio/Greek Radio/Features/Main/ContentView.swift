@@ -837,6 +837,7 @@ private struct PlayerSheet: View {
     let isFavorite: Bool
     let favoriteAction: () -> Void
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.openURL) private var openURL
 
     private var displayedStation: RadioStation {
         player.currentStation ?? station
@@ -844,6 +845,50 @@ private struct PlayerSheet: View {
 
     private var isDisplayingCurrentStation: Bool {
         player.currentStation?.id == displayedStation.id
+    }
+
+    private var headerBar: some View {
+        HStack {
+            Button(appLocalized("Close")) {
+                dismiss()
+            }
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(.white)
+            .padding(.horizontal, 14)
+            .frame(height: 36)
+            .background(Color.white.opacity(0.12), in: Capsule())
+
+            Spacer()
+
+            Button(action: favoriteAction) {
+                Image(systemName: isFavorite ? "heart.fill" : "heart")
+                    .font(.title3)
+                    .foregroundStyle(.white)
+                    .frame(width: 36, height: 36)
+                    .background(Color.white.opacity(0.12), in: Circle())
+            }
+        }
+    }
+
+    private var reportProblemURL: URL? {
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = "chamelo.patrik+greek-radio@gmail.com"
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: "\(displayedStation.name) not playing"),
+            URLQueryItem(
+                name: "body",
+                value: """
+                Station: \(displayedStation.name)
+                Frequency: \(displayedStation.frequency)
+                Region: \(displayedStation.region)
+
+                Problem:
+                The station is not playing.
+                """
+            )
+        ]
+        return components.url
     }
 
     var body: some View {
@@ -856,22 +901,6 @@ private struct PlayerSheet: View {
             .ignoresSafeArea()
 
             VStack(spacing: 22) {
-                HStack {
-                    Button(appLocalized("Close")) {
-                        dismiss()
-                    }
-                    .foregroundStyle(.white.opacity(0.82))
-
-                    Spacer()
-
-                    Button(action: favoriteAction) {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
-                            .font(.title3)
-                            .foregroundStyle(.white)
-                    }
-                }
-                .padding(.top, 12)
-
                 Spacer(minLength: 0)
 
                 StationArtwork(station: displayedStation, accentTheme: accentTheme, size: 180)
@@ -941,7 +970,15 @@ private struct PlayerSheet: View {
 
                 Spacer()
             }
-            .padding(24)
+            .padding(.horizontal, 24)
+            .padding(.bottom, 24)
+            .padding(.top, 88)
+            .overlay(alignment: .top) {
+                headerBar
+                    .padding(.horizontal, 24)
+                    .padding(.top, 24)
+                    .padding(.top, 12)
+            }
         }
     }
 
@@ -988,6 +1025,17 @@ private struct PlayerSheet: View {
                 .foregroundStyle(.white.opacity(0.72))
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
+
+            Button {
+                guard let reportProblemURL else { return }
+                openURL(reportProblemURL)
+            } label: {
+                Label(appLocalized("Report a problem"), systemImage: "exclamationmark.bubble")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top, 4)
+            }
         }
         .foregroundStyle(.white)
         .frame(maxWidth: .infinity, alignment: .leading)
