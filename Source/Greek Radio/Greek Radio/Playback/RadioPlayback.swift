@@ -394,7 +394,7 @@ struct RadioStation: Identifiable, Hashable {
     }
 
     var genreLabel: String {
-        categories.first(where: { $0 != .all })?.title ?? "Live Radio"
+        categories.first(where: { $0 != .all })?.title ?? appLocalized("Live Radio")
     }
 
     var artworkBadgeTitle: String {
@@ -420,10 +420,10 @@ struct RadioStation: Identifiable, Hashable {
         }
 
         if uppercasedFrequency.contains("WEB") {
-            return "STREAM"
+            return appLocalized("STREAM")
         }
 
-        return "LIVE"
+        return appLocalized("LIVE")
     }
 }
 
@@ -441,21 +441,21 @@ enum StationCategory: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .all: return "All"
-        case .music: return "Music"
-        case .news: return "News"
-        case .folk: return "Folk"
-        case .jazz: return "Jazz"
-        case .athens: return "Athens"
-        case .thessaloniki: return "Thess"
-        case .crete: return "Crete"
+        case .all: return appLocalized("All")
+        case .music: return appLocalized("Music")
+        case .news: return appLocalized("News")
+        case .folk: return appLocalized("Folk")
+        case .jazz: return appLocalized("Jazz")
+        case .athens: return appLocalized("Athens")
+        case .thessaloniki: return appLocalized("Thess")
+        case .crete: return appLocalized("Crete")
         }
     }
 
     var carPlayTitle: String {
         switch self {
         case .thessaloniki:
-            return "Thessaloniki"
+            return appLocalized("Thessaloniki")
         default:
             return title
         }
@@ -502,9 +502,9 @@ private struct SupabaseStationRow: Decodable {
             id: id ?? 0,
             name: name,
             shortName: shortName?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? compactShortName(from: name),
-            frequency: frequency?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? "Live",
-            region: region?.name?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? "Greece",
-            description: "Live Greek radio streaming.",
+            frequency: frequency?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? appLocalized("Live"),
+            region: region?.name?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? appLocalized("Greece"),
+            description: appLocalized("Live Greek radio streaming."),
             symbol: fallbackSymbol(for: stationCategories),
             streamURL: streamURL,
             palette: fallbackPalette,

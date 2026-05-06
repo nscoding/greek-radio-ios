@@ -16,6 +16,7 @@ struct ContentView: View {
     @Environment(\.requestReview) private var requestReview
     @Query(sort: \FavoriteStation.createdAt) private var storedFavorites: [FavoriteStation]
     @AppStorage("accentThemeID") private var accentThemeID = AccentTheme.aegean.rawValue
+    @AppStorage(AppLanguage.userDefaultsKey) private var selectedAppLanguageCode = AppLanguage.english.rawValue
     @AppStorage(ReviewPromptStorage.hasCompleted) private var hasCompletedReviewPrompt = false
     @AppStorage(ReviewPromptStorage.declineCount) private var reviewPromptDeclineCount = 0
     @AppStorage(ReviewPromptStorage.nextEligibleDate) private var reviewPromptNextEligibleDate = 0.0
@@ -35,6 +36,14 @@ struct ContentView: View {
 
     private var accentTheme: AccentTheme {
         AccentTheme(rawValue: accentThemeID) ?? .sunset
+    }
+
+    private var selectedAppLanguage: AppLanguage {
+        AppLanguage(rawValue: selectedAppLanguageCode) ?? .english
+    }
+
+    private func localized(_ key: String) -> String {
+        selectedAppLanguage.localizedString(key)
     }
 
     private var pageGradientColors: [Color] {
@@ -76,7 +85,7 @@ struct ContentView: View {
         components.scheme = "mailto"
         components.path = "chamelo.patrik+greek-radio@gmail.com"
         components.queryItems = [
-            URLQueryItem(name: "subject", value: "Greek Radio Support")
+            URLQueryItem(name: "subject", value: localized("Greek Radio Support"))
         ]
         return components.url
     }
@@ -105,6 +114,10 @@ struct ContentView: View {
         )
 
         return ["All"] + uniqueRegions.sorted()
+    }
+
+    private func displayRegionName(_ region: String) -> String {
+        region == "All" ? localized("All") : region
     }
 
     private var featuredStation: RadioStation? {
@@ -168,16 +181,16 @@ struct ContentView: View {
         .onChange(of: stationStore.stations.map(\.id)) { _, _ in
             refreshFeaturedStation()
         }
-        .alert("Enjoying Greek Radio?", isPresented: $isReviewPromptPresented) {
-            Button("Not Now") {
+        .alert(appLocalized("Enjoying Greek Radio?"), isPresented: $isReviewPromptPresented) {
+            Button(appLocalized("Not Now")) {
                 recordReviewPromptDecline()
             }
 
-            Button("Review Now") {
+            Button(appLocalized("Review Now")) {
                 completeReviewPromptFlow()
             }
         } message: {
-            Text("Would you like to leave a quick App Store review?")
+            Text(appLocalized("Would you like to leave a quick App Store review?"))
         }
     }
 
@@ -234,9 +247,9 @@ struct ContentView: View {
                         if featuredStation != nil {
                             featuredCard
                         }
-                        stationSection(title: "Popular Right Now", stations: popularStations)
+                        stationSection(title: localized("Popular Right Now"), stations: popularStations)
                     case .stations:
-                        stationSection(title: "Top Stations", stations: filteredStations)
+                        stationSection(title: localized("Top Stations"), stations: filteredStations)
                     case .favorites:
                         favoritesSection
                     case .settings:
@@ -256,7 +269,7 @@ struct ContentView: View {
 
     private var header: some View {
         HStack {
-            Text("Greek Radio")
+            Text(appLocalized("Greek Radio"))
                 .font(.largeTitle.weight(.bold))
                 .foregroundStyle(.primary)
 
@@ -275,7 +288,7 @@ struct ContentView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
 
-            TextField("Search stations, genres, or cities...", text: $searchText)
+            TextField(appLocalized("Search stations, genres, or cities..."), text: $searchText)
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
         }
@@ -291,7 +304,7 @@ struct ContentView: View {
                     Button {
                         selectedRegion = region
                     } label: {
-                        Text(region)
+                        Text(displayRegionName(region))
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(selectedRegion == region ? Color.white : Color.primary.opacity(0.72))
                             .padding(.horizontal, 18)
@@ -326,7 +339,7 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 18) {
                         HStack {
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("Editor Pick")
+                                Text(appLocalized("Editor Pick"))
                                     .font(.caption.weight(.bold))
                                     .foregroundStyle(.white.opacity(0.82))
 
@@ -348,7 +361,7 @@ struct ContentView: View {
 
                         HStack(spacing: 10) {
                             Label(featuredStation.genreLabel, systemImage: "music.note")
-                            Label("Background audio", systemImage: "iphone.radiowaves.left.and.right")
+                            Label(appLocalized("Background audio"), systemImage: "iphone.radiowaves.left.and.right")
                         }
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(.white.opacity(0.88))
@@ -377,7 +390,7 @@ struct ContentView: View {
 
                 Spacer()
 
-                Text("\(stations.count) live")
+                Text("\(stations.count) \(appLocalized("live"))")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(accentTheme.primary)
             }
@@ -385,7 +398,7 @@ struct ContentView: View {
             if stationStore.isLoading && stations.isEmpty {
                 loadingState
             } else if stations.isEmpty {
-                emptyState(title: "No stations found", message: stationStore.errorMessage ?? "Try another search or choose a different category.")
+                emptyState(title: localized("No stations found"), message: stationStore.errorMessage ?? localized("Try another search or choose a different category."))
             } else {
                 LazyVStack(spacing: 14) {
                     ForEach(stations) { station in
@@ -406,13 +419,13 @@ struct ContentView: View {
 
     private var favoritesSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Favorites")
+            Text(appLocalized("Favorites"))
                 .font(.title2.weight(.bold))
 
             if stationStore.isLoading && filteredStations.isEmpty {
                 loadingState
             } else if filteredStations.isEmpty {
-                emptyState(title: "No favorites yet", message: "Tap the heart on a station to keep it here.")
+                emptyState(title: localized("No favorites yet"), message: localized("Tap the heart on a station to keep it here."))
             } else {
                 LazyVStack(spacing: 14) {
                     ForEach(filteredStations) { station in
@@ -433,10 +446,10 @@ struct ContentView: View {
 
     private var settingsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Accent Color")
+            Text(appLocalized("Accent Color"))
                 .font(.title2.weight(.bold))
 
-            Text("Choose a predefined color theme for the app interface.")
+            Text(appLocalized("Choose a predefined color theme for the app interface."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
@@ -480,7 +493,57 @@ struct ContentView: View {
                 }
             }
 
-            Text("Support")
+            Text(appLocalized("Language"))
+                .font(.title2.weight(.bold))
+                .padding(.top, 8)
+
+            Text(appLocalized("Supported languages for the app. Tap a language to switch immediately."))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+
+            VStack(spacing: 14) {
+                ForEach(SupportedLanguage.allCases) { language in
+                    Button {
+                        selectedAppLanguageCode = language.rawValue
+                    } label: {
+                        HStack(spacing: 14) {
+                            Text(language.flag)
+                                .font(.title2)
+                                .frame(width: 28, height: 28)
+
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(language.localizedName)
+                                    .font(.headline)
+                                    .foregroundStyle(.primary)
+
+                                if language.rawValue == selectedAppLanguageCode {
+                                    Text(appLocalized("Current app language"))
+                                        .font(.caption.weight(.semibold))
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+
+                            Spacer()
+
+                            if language.rawValue == selectedAppLanguageCode {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.title3)
+                                    .foregroundStyle(accentTheme.primary)
+                            }
+                        }
+                        .padding(18)
+                        .background(cardBackground, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                                .stroke(language.rawValue == selectedAppLanguageCode ? accentTheme.primary.opacity(0.5) : Color.primary.opacity(0.08), lineWidth: language.rawValue == selectedAppLanguageCode ? 2 : 1)
+                        }
+                        .shadow(color: cardShadowColor, radius: 18, y: 10)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+
+            Text(appLocalized("Support"))
                 .font(.title2.weight(.bold))
                 .padding(.top, 8)
 
@@ -494,7 +557,7 @@ struct ContentView: View {
                         .foregroundStyle(accentTheme.primary)
                         .frame(width: 28, height: 28)
 
-                    Text("Email Support")
+                    Text(appLocalized("Email Support"))
                         .font(.headline)
                         .foregroundStyle(.primary)
 
@@ -537,7 +600,7 @@ struct ContentView: View {
             ProgressView()
                 .tint(accentTheme.primary)
 
-            Text("Loading stations...")
+            Text(appLocalized("Loading stations..."))
                 .font(.headline)
                 .foregroundStyle(.secondary)
         }
@@ -561,7 +624,7 @@ struct ContentView: View {
                         .foregroundStyle(.primary)
                         .lineLimit(1)
 
-                    Text(player.isPlaying ? "PLAYING NOW" : "PAUSED")
+                    Text(player.isPlaying ? localized("PLAYING NOW") : localized("PAUSED"))
                         .font(.caption.weight(.bold))
                         .foregroundStyle(.secondary)
                 }
@@ -755,7 +818,7 @@ private struct StationRow: View {
                 VStack(spacing: 4) {
                     Image(systemName: isPlaying ? "speaker.wave.2.fill" : "play.circle")
                         .font(.title3.weight(.semibold))
-                    Text(isPlaying ? "LIVE" : "PLAY")
+                    Text(isPlaying ? appLocalized("LIVE") : appLocalized("PLAY"))
                         .font(.caption2.weight(.bold))
                 }
                 .foregroundStyle(isPlaying ? accentTheme.primary : Color.primary.opacity(0.75))
@@ -795,7 +858,7 @@ private struct PlayerSheet: View {
 
             VStack(spacing: 22) {
                 HStack {
-                    Button("Close") {
+                    Button(appLocalized("Close")) {
                         dismiss()
                     }
                     .foregroundStyle(.white.opacity(0.82))
@@ -808,6 +871,7 @@ private struct PlayerSheet: View {
                             .foregroundStyle(.white)
                     }
                 }
+                .padding(.top, 12)
 
                 Spacer(minLength: 0)
 
@@ -884,24 +948,28 @@ private struct PlayerSheet: View {
 
     private var statusPanel: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 10) {
+            HStack(alignment: .top, spacing: 10) {
                 if player.isBuffering {
                     ProgressView()
                         .tint(.white)
                         .controlSize(.small)
                 } else {
                     Image(systemName: player.isPlaying ? "waveform" : "pause.circle")
+                        .padding(.top, 2)
                 }
 
-                Text(player.isBuffering ? "Buffering stream..." : (player.isPlaying ? "Streaming live in the background" : "Ready to resume playback"))
+                Text(player.isBuffering ? appLocalized("Buffering stream...") : (player.isPlaying ? appLocalized("Streaming live in the background") : appLocalized("Ready to resume playback")))
                     .font(.headline)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .lastTextBaseline, spacing: 6) {
-                    Text(player.isBuffering ? "Fetching data" : "Stream rate")
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(player.isBuffering ? appLocalized("Fetching data") : appLocalized("Stream rate"))
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(.white.opacity(0.88))
+                        .multilineTextAlignment(.leading)
 
                     Text("\(player.currentKilobytesPerSecond, format: .number.precision(.fractionLength(1))) KB/s")
                         .font(.caption.weight(.bold))
@@ -911,14 +979,16 @@ private struct PlayerSheet: View {
                 ThroughputGraph(samples: player.throughputSamples)
                     .frame(height: 34)
             }
-            .frame(height: 58, alignment: .top)
+            .frame(height: 72, alignment: .top)
             .opacity(player.isPlaying || player.isBuffering ? 1 : 0)
 
             Text(player.isBuffering
-                 ? "The app is pulling audio data from the stream and filling the playback buffer."
-                 : "The audio session is configured for background playback, so the stream can continue when the app is locked or moved behind another app.")
+                 ? appLocalized("The app is pulling audio data from the stream and filling the playback buffer.")
+                 : appLocalized("The audio session is configured for background playback, so the stream can continue when the app is locked or moved behind another app."))
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.72))
+                .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .foregroundStyle(.white)
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1040,15 +1110,15 @@ private enum AccentTheme: String, CaseIterable, Identifiable {
     var label: String {
         switch self {
         case .sunset:
-            return "Sunset"
+            return appLocalized("Sunset")
         case .aegean:
-            return "Aegean"
+            return appLocalized("Aegean")
         case .olive:
-            return "Olive"
+            return appLocalized("Olive")
         case .berry:
-            return "Berry"
+            return appLocalized("Berry")
         case .graphite:
-            return "Graphite"
+            return appLocalized("Graphite")
         }
     }
 
@@ -1080,6 +1150,31 @@ private enum AccentTheme: String, CaseIterable, Identifiable {
     }
 }
 
+private enum SupportedLanguage: String, CaseIterable, Identifiable {
+    case english = "en"
+    case greek = "el"
+
+    var id: String { rawValue }
+
+    var flag: String {
+        switch self {
+        case .english:
+            return "🇬🇧"
+        case .greek:
+            return "🇬🇷"
+        }
+    }
+
+    var localizedName: String {
+        switch self {
+        case .english:
+            return "English"
+        case .greek:
+            return "Ελληνικά"
+        }
+    }
+}
+
 private enum AppSection: CaseIterable, Identifiable {
     case home
     case stations
@@ -1090,19 +1185,19 @@ private enum AppSection: CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .home: return "HOME"
-        case .stations: return "STATIONS"
-        case .favorites: return "FAVORITES"
-        case .settings: return "SETTINGS"
+        case .home: return appLocalized("HOME")
+        case .stations: return appLocalized("STATIONS")
+        case .favorites: return appLocalized("FAVORITES")
+        case .settings: return appLocalized("SETTINGS")
         }
     }
 
     var tabTitle: String {
         switch self {
-        case .home: return "Home"
-        case .stations: return "Stations"
-        case .favorites: return "Favorites"
-        case .settings: return "Settings"
+        case .home: return appLocalized("Home")
+        case .stations: return appLocalized("Stations")
+        case .favorites: return appLocalized("Favorites")
+        case .settings: return appLocalized("Settings")
         }
     }
 

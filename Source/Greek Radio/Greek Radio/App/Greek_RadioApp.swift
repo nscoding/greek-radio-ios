@@ -10,9 +10,12 @@ import SwiftData
 
 @main
 struct Greek_RadioApp: App {
+    @AppStorage(AppLanguage.userDefaultsKey) private var selectedAppLanguageCode = AppLanguage.english.rawValue
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.locale, AppLanguage(rawValue: selectedAppLanguageCode)?.locale ?? AppLanguage.english.locale)
         }
         .modelContainer(for: [FavoriteStation.self])
     }

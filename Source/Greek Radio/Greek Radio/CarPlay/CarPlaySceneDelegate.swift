@@ -69,12 +69,12 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
 
     private func makeStationsTemplate() -> CPListTemplate {
         let template = CPListTemplate(
-            title: "Stations",
+            title: String(localized: "Stations"),
             sections: stationSections(from: stationStore.stations)
         )
         template.tabImage = UIImage(systemName: "radio")
-        template.emptyViewTitleVariants = ["Loading Stations"]
-        template.emptyViewSubtitleVariants = ["Please wait…"]
+        template.emptyViewTitleVariants = [String(localized: "Loading Stations")]
+        template.emptyViewSubtitleVariants = [String(localized: "Please wait…")]
         return template
     }
 
@@ -82,12 +82,12 @@ final class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegat
         let favoriteIDs = CarPlayFavorites.load()
         let stations = stationStore.stations.filter { favoriteIDs.contains($0.id) }
         let template = CPListTemplate(
-            title: "Favorites",
+            title: String(localized: "Favorites"),
             sections: stationSections(from: stations)
         )
         template.tabImage = UIImage(systemName: "heart")
-        template.emptyViewTitleVariants = ["No Favorites"]
-        template.emptyViewSubtitleVariants = ["Add favorites in the Greek Radio app."]
+        template.emptyViewTitleVariants = [String(localized: "No Favorites")]
+        template.emptyViewSubtitleVariants = [String(localized: "Add favorites in the Greek Radio app.")]
         return template
     }
 
