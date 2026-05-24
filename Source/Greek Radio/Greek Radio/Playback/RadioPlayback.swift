@@ -368,12 +368,18 @@ final class RadioPlayer: NSObject, ObservableObject {
             return
         }
 
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+        var nowPlayingInfo: [String: Any] = [
             MPMediaItemPropertyTitle: currentStation.name,
             MPMediaItemPropertyArtist: "\(currentStation.frequency) • \(currentStation.region)",
             MPNowPlayingInfoPropertyIsLiveStream: true,
             MPNowPlayingInfoPropertyPlaybackRate: isPlaying ? 1.0 : 0.0
         ]
+
+        if let artwork = currentStation.nowPlayingArtwork {
+            nowPlayingInfo[MPMediaItemPropertyArtwork] = artwork
+        }
+
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
     }
 }
 
@@ -424,6 +430,82 @@ struct RadioStation: Identifiable, Hashable {
         }
 
         return appLocalized("LIVE")
+    }
+
+    var nowPlayingArtwork: MPMediaItemArtwork? {
+        let size = CGSize(width: 512, height: 512)
+        let image = renderNowPlayingImage(size: size)
+
+        return MPMediaItemArtwork(boundsSize: size) { _ in
+            image
+        }
+    }
+
+    private func renderNowPlayingImage(size: CGSize) -> UIImage {
+        let format = UIGraphicsImageRendererFormat()
+        format.opaque = true
+
+        return UIGraphicsImageRenderer(size: size, format: format).image { context in
+            let cgContext = context.cgContext
+            let rect = CGRect(origin: .zero, size: size)
+            let colors = palette.map { UIColor($0).cgColor }
+            let gradientColors = colors.isEmpty ? [UIColor.systemBlue.cgColor, UIColor.systemTeal.cgColor] : colors
+            let colorSpace = CGColorSpaceCreateDeviceRGB()
+
+            if let gradient = CGGradient(colorsSpace: colorSpace, colors: gradientColors as CFArray, locations: nil) {
+                cgContext.drawLinearGradient(
+                    gradient,
+                    start: CGPoint(x: rect.minX, y: rect.minY),
+                    end: CGPoint(x: rect.maxX, y: rect.maxY),
+                    options: []
+                )
+            } else {
+                UIColor.systemBlue.setFill()
+                cgContext.fill(rect)
+            }
+
+            UIColor.white.withAlphaComponent(0.16).setFill()
+            cgContext.fillEllipse(in: CGRect(x: size.width * 0.58, y: -size.height * 0.12, width: size.width * 0.5, height: size.height * 0.5))
+            UIColor.black.withAlphaComponent(0.16).setFill()
+            cgContext.fillEllipse(in: CGRect(x: -size.width * 0.18, y: size.height * 0.62, width: size.width * 0.48, height: size.height * 0.48))
+
+            let badgeRect = rect.insetBy(dx: 56, dy: 56)
+            let badgePath = UIBezierPath(roundedRect: badgeRect, cornerRadius: 84)
+            UIColor.white.withAlphaComponent(0.18).setFill()
+            badgePath.fill()
+            UIColor.white.withAlphaComponent(0.28).setStroke()
+            badgePath.lineWidth = 2
+            badgePath.stroke()
+
+            let titleAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.systemFont(ofSize: 112, weight: .black),
+                .foregroundColor: UIColor.white
+            ]
+            let subtitleAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.systemFont(ofSize: 46, weight: .heavy),
+                .foregroundColor: UIColor.white.withAlphaComponent(0.82)
+            ]
+            let title = artworkBadgeTitle as NSString
+            let subtitle = artworkBadgeSubtitle as NSString
+            let titleSize = title.size(withAttributes: titleAttributes)
+            let subtitleSize = subtitle.size(withAttributes: subtitleAttributes)
+            let totalHeight = titleSize.height + 12 + subtitleSize.height
+            let titleRect = CGRect(
+                x: (size.width - titleSize.width) / 2,
+                y: (size.height - totalHeight) / 2,
+                width: titleSize.width,
+                height: titleSize.height
+            )
+            let subtitleRect = CGRect(
+                x: (size.width - subtitleSize.width) / 2,
+                y: titleRect.maxY + 12,
+                width: subtitleSize.width,
+                height: subtitleSize.height
+            )
+
+            title.draw(in: titleRect, withAttributes: titleAttributes)
+            subtitle.draw(in: subtitleRect, withAttributes: subtitleAttributes)
+        }
     }
 }
 

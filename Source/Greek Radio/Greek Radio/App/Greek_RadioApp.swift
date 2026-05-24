@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct Greek_RadioApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @AppStorage(AppLanguage.userDefaultsKey) private var selectedAppLanguageCode = AppLanguage.english.rawValue
 
     var body: some Scene {

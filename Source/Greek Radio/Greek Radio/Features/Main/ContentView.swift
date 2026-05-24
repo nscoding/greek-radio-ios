@@ -20,6 +20,7 @@ struct ContentView: View {
     @AppStorage(ReviewPromptStorage.hasCompleted) private var hasCompletedReviewPrompt = false
     @AppStorage(ReviewPromptStorage.declineCount) private var reviewPromptDeclineCount = 0
     @AppStorage(ReviewPromptStorage.nextEligibleDate) private var reviewPromptNextEligibleDate = 0.0
+    @AppStorage(AppShortcut.pendingStationIDKey) private var pendingShortcutStationID = ""
     @StateObject private var player = RadioPlayer.shared
     @StateObject private var stationStore = RadioStationStore.shared
     @AppStorage("selectedSection") private var selectedSectionRaw = AppSection.stations.rawValue
@@ -185,9 +186,23 @@ struct ContentView: View {
         .task {
             await stationStore.loadStationsIfNeeded()
             refreshFeaturedStation()
+            handlePendingShortcutIfNeeded()
+            updateHomeScreenQuickActions()
         }
         .onChange(of: stationStore.stations.map(\.id)) { _, _ in
             refreshFeaturedStation()
+            handlePendingShortcutIfNeeded()
+            updateHomeScreenQuickActions()
+        }
+        .onChange(of: storedFavorites.map(\.stationID)) { _, _ in
+            updateHomeScreenQuickActions()
+        }
+        .onChange(of: pendingShortcutStationID) { _, _ in
+            handlePendingShortcutIfNeeded()
+        }
+        .onOpenURL { url in
+            guard AppShortcut.handle(url) else { return }
+            handlePendingShortcutIfNeeded()
         }
         .alert(appLocalized("Enjoying Greek Radio?"), isPresented: $isReviewPromptPresented) {
             Button(appLocalized("Not Now")) {
@@ -714,6 +729,26 @@ struct ContentView: View {
         isPlayerPresented = true
     }
 
+    private func handlePendingShortcutIfNeeded() {
+        guard let stationID = Int64(pendingShortcutStationID),
+              let station = stationStore.stations.first(where: { $0.id == stationID }) else {
+            return
+        }
+
+        pendingShortcutStationID = ""
+        openStation(station)
+    }
+
+    private func updateHomeScreenQuickActions() {
+        let favoriteStations = storedFavorites
+            .sorted { $0.createdAt > $1.createdAt }
+            .compactMap { favorite in
+                stationStore.stations.first { $0.id == favorite.stationID }
+            }
+
+        AppShortcut.updateShortcuts(favoriteStations: favoriteStations)
+    }
+
     private func toggleFavorite(_ station: RadioStation) {
         let wasAddingFavorite = storedFavorites.contains(where: { $0.stationID == station.id }) == false
 
@@ -867,6 +902,19 @@ private struct PlayerSheet: View {
             .background(Color.white.opacity(0.12), in: Capsule())
 
             Spacer()
+
+            ShareLink(
+                item: AppShortcut.stationURL(for: displayedStation.id),
+                subject: Text(displayedStation.name),
+                message: Text("\(displayedStation.name) • \(displayedStation.frequency)")
+            ) {
+                Image(systemName: "square.and.arrow.up")
+                    .font(.title3)
+                    .foregroundStyle(.white)
+                    .frame(width: 36, height: 36)
+                    .background(Color.white.opacity(0.12), in: Circle())
+            }
+            .accessibilityLabel(appLocalized("Share Station"))
 
             Button(action: favoriteAction) {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")
