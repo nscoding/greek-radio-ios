@@ -5,8 +5,15 @@
 //  Created by Patrik Tomas Chamelo on 5/4/26.
 //
 
+import Combine
 import Foundation
 import SwiftData
+
+final class FavoritesStore: ObservableObject {
+    static let shared = FavoritesStore()
+    @Published var stationIDs: Set<Int64> = []
+    private init() {}
+}
 
 @Model
 final class FavoriteStation {

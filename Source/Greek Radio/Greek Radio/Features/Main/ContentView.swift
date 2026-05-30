@@ -184,6 +184,7 @@ struct ContentView: View {
             }
         }
         .task {
+            FavoritesStore.shared.stationIDs = Set(storedFavorites.map(\.stationID))
             await stationStore.loadStationsIfNeeded()
             refreshFeaturedStation()
             handlePendingShortcutIfNeeded()
@@ -194,7 +195,8 @@ struct ContentView: View {
             handlePendingShortcutIfNeeded()
             updateHomeScreenQuickActions()
         }
-        .onChange(of: storedFavorites.map(\.stationID)) { _, _ in
+        .onChange(of: storedFavorites.map(\.stationID)) { _, newIDs in
+            FavoritesStore.shared.stationIDs = Set(newIDs)
             updateHomeScreenQuickActions()
         }
         .onChange(of: pendingShortcutStationID) { _, _ in

@@ -170,6 +170,7 @@ final class RadioPlayer: NSObject, ObservableObject {
         configureAudioSession()
         configureRemoteCommands()
         observePlayerState()
+        observeAudioSessionInterruptions()
     }
 
     func play(station: RadioStation) {
@@ -275,6 +276,33 @@ final class RadioPlayer: NSObject, ObservableObject {
         }
     }
 
+    private func observeAudioSessionInterruptions() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAudioSessionInterruption),
+            name: AVAudioSession.interruptionNotification,
+            object: AVAudioSession.sharedInstance()
+        )
+    }
+
+    @objc private func handleAudioSessionInterruption(_ notification: Notification) {
+        guard
+            let info = notification.userInfo,
+            let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
+            let type = AVAudioSession.InterruptionType(rawValue: typeValue)
+        else { return }
+
+        if type == .ended {
+            let shouldResume = (info[AVAudioSessionInterruptionOptionKey] as? UInt)
+                .flatMap { AVAudioSession.InterruptionOptions(rawValue: $0) }
+                .map { $0.contains(.shouldResume) } ?? false
+
+            guard shouldResume, isPlaying, currentStation != nil else { return }
+            activateSession()
+            player.play()
+        }
+    }
+
     private func observePlayerState() {
         playerStatusObservation = player.observe(\.timeControlStatus, options: [.initial, .new]) { [weak self] player, _ in
             DispatchQueue.main.async {
@@ -365,6 +393,7 @@ final class RadioPlayer: NSObject, ObservableObject {
     private func updateNowPlaying() {
         guard let currentStation else {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
+            MPNowPlayingInfoCenter.default().playbackState = .stopped
             return
         }
 
@@ -380,6 +409,7 @@ final class RadioPlayer: NSObject, ObservableObject {
         }
 
         MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+        MPNowPlayingInfoCenter.default().playbackState = isPlaying ? .playing : .paused
     }
 }
 
