@@ -12,7 +12,13 @@ import SwiftData
 final class FavoritesStore: ObservableObject {
     static let shared = FavoritesStore()
     @Published var stationIDs: Set<Int64> = []
-    private init() {}
+
+    private init() {
+        guard let container = try? ModelContainer(for: FavoriteStation.self) else { return }
+        let context = ModelContext(container)
+        let favorites = (try? context.fetch(FetchDescriptor<FavoriteStation>())) ?? []
+        stationIDs = Set(favorites.map(\.stationID))
+    }
 }
 
 @Model
