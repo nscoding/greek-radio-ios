@@ -159,6 +159,7 @@ final class RadioPlayer: NSObject, ObservableObject {
     private var itemStatusObservation: NSKeyValueObservation?
     private var bufferEmptyObservation: NSKeyValueObservation?
     private var likelyToKeepUpObservation: NSKeyValueObservation?
+    private var wasPlayingBeforeInterruption = false
     private var accessLogTimer: Timer?
     private var transferStartDate: Date?
     private var lastObservedBitrate: Double = 128_000
@@ -292,12 +293,14 @@ final class RadioPlayer: NSObject, ObservableObject {
             let type = AVAudioSession.InterruptionType(rawValue: typeValue)
         else { return }
 
-        if type == .ended {
+        if type == .began {
+            wasPlayingBeforeInterruption = isPlaying
+        } else if type == .ended {
             let shouldResume = (info[AVAudioSessionInterruptionOptionKey] as? UInt)
                 .flatMap { AVAudioSession.InterruptionOptions(rawValue: $0) }
                 .map { $0.contains(.shouldResume) } ?? false
 
-            guard shouldResume, isPlaying, currentStation != nil else { return }
+            guard shouldResume, wasPlayingBeforeInterruption, currentStation != nil else { return }
             activateSession()
             player.play()
         }
