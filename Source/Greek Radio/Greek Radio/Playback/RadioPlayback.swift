@@ -160,6 +160,8 @@ final class RadioPlayer: NSObject, ObservableObject {
     private var bufferEmptyObservation: NSKeyValueObservation?
     private var likelyToKeepUpObservation: NSKeyValueObservation?
     private var wasPlayingBeforeInterruption = false
+    private var userWantsPlayback = false
+    private var interruptionResumeWorkItem: DispatchWorkItem?
     private var accessLogTimer: Timer?
     private var transferStartDate: Date?
     private var lastObservedBitrate: Double = 128_000
@@ -172,9 +174,15 @@ final class RadioPlayer: NSObject, ObservableObject {
         configureRemoteCommands()
         observePlayerState()
         observeAudioSessionInterruptions()
+        observeAudioSessionRouteChanges()
+        observeMediaServicesReset()
     }
 
     func play(station: RadioStation) {
+        interruptionResumeWorkItem?.cancel()
+        interruptionResumeWorkItem = nil
+        userWantsPlayback = true
+        wasPlayingBeforeInterruption = false
         currentStation = station
         isPlaying = true
         isBuffering = true
@@ -222,16 +230,27 @@ final class RadioPlayer: NSObject, ObservableObject {
     }
 
     func togglePlayback() {
+        interruptionResumeWorkItem?.cancel()
+        interruptionResumeWorkItem = nil
+
         if isPlaying {
+            userWantsPlayback = false
+            wasPlayingBeforeInterruption = false
             player.pause()
             isPlaying = false
             isBuffering = false
             currentKilobytesPerSecond = 0
         } else {
+            userWantsPlayback = true
+            wasPlayingBeforeInterruption = false
             activateSession()
-            player.play()
-            isPlaying = true
-            isBuffering = player.currentItem?.isPlaybackLikelyToKeepUp == false
+            if let currentStation, player.currentItem == nil || player.currentItem?.status == .failed {
+                play(station: currentStation)
+            } else {
+                player.play()
+                isPlaying = true
+                isBuffering = player.currentItem?.isPlaybackLikelyToKeepUp == false
+            }
         }
         updateNowPlaying()
     }
@@ -286,7 +305,25 @@ final class RadioPlayer: NSObject, ObservableObject {
         )
     }
 
-    @objc private func handleAudioSessionInterruption(_ notification: Notification) {
+    private func observeAudioSessionRouteChanges() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleAudioSessionRouteChange),
+            name: AVAudioSession.routeChangeNotification,
+            object: AVAudioSession.sharedInstance()
+        )
+    }
+
+    private func observeMediaServicesReset() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleMediaServicesReset),
+            name: AVAudioSession.mediaServicesWereResetNotification,
+            object: nil
+        )
+    }
+
+    @objc func handleAudioSessionInterruption(_ notification: Notification) {
         guard
             let info = notification.userInfo,
             let typeValue = info[AVAudioSessionInterruptionTypeKey] as? UInt,
@@ -294,15 +331,110 @@ final class RadioPlayer: NSObject, ObservableObject {
         else { return }
 
         if type == .began {
-            wasPlayingBeforeInterruption = isPlaying
-        } else if type == .ended {
-            let shouldResume = (info[AVAudioSessionInterruptionOptionKey] as? UInt)
-                .flatMap { AVAudioSession.InterruptionOptions(rawValue: $0) }
-                .map { $0.contains(.shouldResume) } ?? false
+            interruptionResumeWorkItem?.cancel()
+            interruptionResumeWorkItem = nil
 
-            guard shouldResume, wasPlayingBeforeInterruption, currentStation != nil else { return }
-            activateSession()
-            player.play()
+            // Check if playback was active or intended before the interruption began.
+            // (iOS might halt the player before this notification arrives, so check userWantsPlayback too)
+            wasPlayingBeforeInterruption = isPlaying || userWantsPlayback
+
+            if wasPlayingBeforeInterruption {
+                player.pause()
+                DispatchQueue.main.async { [weak self] in
+                    self?.isBuffering = false
+                    self?.updateNowPlaying()
+                }
+            }
+        } else if type == .ended {
+            let optionsValue = info[AVAudioSessionInterruptionOptionKey] as? UInt
+            let shouldResumeOption = optionsValue.map { AVAudioSession.InterruptionOptions(rawValue: $0).contains(.shouldResume) }
+
+            // In CarPlay and phone calls, CallKit often omits .shouldResume or provides 0 even when the user
+            // was actively listening to radio. If the user was playing before the call, resume unless explicitly prohibited.
+            let shouldResume = shouldResumeOption ?? true
+
+            guard shouldResume, wasPlayingBeforeInterruption, let currentStation else { return }
+
+            interruptionResumeWorkItem?.cancel()
+
+            // Delay slightly (0.3s) to allow CarPlay and in-car Bluetooth hardware to finish
+            // switching audio routing from the call profile (HFP/telephony) back to media playback (CarPlay/A2DP).
+            let workItem = DispatchWorkItem { [weak self] in
+                guard let self, self.wasPlayingBeforeInterruption, let station = self.currentStation else { return }
+
+                // Do not resume if another audio app (e.g. Spotify) took over audio during the interruption
+                guard !AVAudioSession.sharedInstance().isOtherAudioPlaying else {
+                    self.wasPlayingBeforeInterruption = false
+                    self.userWantsPlayback = false
+                    self.isPlaying = false
+                    self.updateNowPlaying()
+                    return
+                }
+
+                self.wasPlayingBeforeInterruption = false
+                self.resumeOrRestartPlayback(for: station)
+            }
+
+            interruptionResumeWorkItem = workItem
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: workItem)
+        }
+    }
+
+    private func resumeOrRestartPlayback(for station: RadioStation, retryCount: Int = 0) {
+        do {
+            try AVAudioSession.sharedInstance().setActive(true)
+            // For live streams, re-connecting to the station ensures a fresh TCP socket and live buffer
+            // rather than stalling on a dead socket from a multi-minute call.
+            play(station: station)
+        } catch {
+            if retryCount < 3 {
+                let delay = 0.35 * Double(retryCount + 1)
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+                    self?.resumeOrRestartPlayback(for: station, retryCount: retryCount + 1)
+                }
+            } else {
+                print("Audio session reactivation failed after interruption: \(error.localizedDescription)")
+                isPlaying = false
+                isBuffering = false
+                userWantsPlayback = false
+                updateNowPlaying()
+            }
+        }
+    }
+
+    @objc private func handleAudioSessionRouteChange(_ notification: Notification) {
+        guard
+            let info = notification.userInfo,
+            let reasonValue = info[AVAudioSessionRouteChangeReasonKey] as? UInt,
+            let reason = AVAudioSession.RouteChangeReason(rawValue: reasonValue)
+        else { return }
+
+        switch reason {
+        case .oldDeviceUnavailable:
+            // CarPlay disconnected, car turned off, or headphones unplugged: pause immediately
+            DispatchQueue.main.async { [weak self] in
+                guard let self, self.isPlaying else { return }
+                self.interruptionResumeWorkItem?.cancel()
+                self.interruptionResumeWorkItem = nil
+                self.userWantsPlayback = false
+                self.wasPlayingBeforeInterruption = false
+                self.player.pause()
+                self.isPlaying = false
+                self.isBuffering = false
+                self.updateNowPlaying()
+            }
+        default:
+            break
+        }
+    }
+
+    @objc private func handleMediaServicesReset() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.configureAudioSession()
+            if self.userWantsPlayback, let station = self.currentStation {
+                self.play(station: station)
+            }
         }
     }
 
@@ -370,15 +502,29 @@ final class RadioPlayer: NSObject, ObservableObject {
         commandCenter.previousTrackCommand.isEnabled = true
 
         commandCenter.playCommand.addTarget { [weak self] _ in
-            self?.activateSession()
-            self?.player.play()
-            self?.updateNowPlaying()
+            guard let self else { return .commandFailed }
+            self.interruptionResumeWorkItem?.cancel()
+            self.interruptionResumeWorkItem = nil
+            self.userWantsPlayback = true
+            self.wasPlayingBeforeInterruption = false
+            self.activateSession()
+            if let currentStation = self.currentStation, self.player.currentItem == nil || self.player.currentItem?.status == .failed {
+                self.play(station: currentStation)
+            } else {
+                self.player.play()
+            }
+            self.updateNowPlaying()
             return .success
         }
 
         commandCenter.pauseCommand.addTarget { [weak self] _ in
-            self?.player.pause()
-            self?.updateNowPlaying()
+            guard let self else { return .commandFailed }
+            self.interruptionResumeWorkItem?.cancel()
+            self.interruptionResumeWorkItem = nil
+            self.userWantsPlayback = false
+            self.wasPlayingBeforeInterruption = false
+            self.player.pause()
+            self.updateNowPlaying()
             return .success
         }
 
@@ -427,9 +573,46 @@ struct RadioStation: Identifiable, Hashable {
     let streamURL: URL
     let palette: [Color]
     let categories: [StationCategory]
+    let searchCorpus: [String]
+
+    init(
+        id: Int64,
+        name: String,
+        shortName: String,
+        frequency: String,
+        region: String,
+        description: String,
+        symbol: String,
+        streamURL: URL,
+        palette: [Color],
+        categories: [StationCategory],
+        searchCorpus: [String]? = nil
+    ) {
+        self.id = id
+        self.name = name
+        self.shortName = shortName
+        self.frequency = frequency
+        self.region = region
+        self.description = description
+        self.symbol = symbol
+        self.streamURL = streamURL
+        self.palette = palette
+        self.categories = categories
+
+        if let searchCorpus {
+            self.searchCorpus = searchCorpus
+        } else {
+            let searchable = [name, frequency, region, description, categories.map(\.title).joined(separator: " ")].joined(separator: " ")
+            self.searchCorpus = GreekSearchMatcher.searchCorpus(for: searchable)
+        }
+    }
 
     var searchableText: String {
         [name, frequency, region, description, categories.map(\.title).joined(separator: " ")].joined(separator: " ")
+    }
+
+    func matchesSearch(_ query: String) -> Bool {
+        GreekSearchMatcher.matches(query: query, inCorpus: searchCorpus)
     }
 
     var genreLabel: String {

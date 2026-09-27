@@ -102,7 +102,7 @@ struct ContentView: View {
     private var filteredStations: [RadioStation] {
         stationStore.stations.filter { station in
             let matchesRegion = selectedRegion == "All" || station.region == selectedRegion
-            let matchesSearch = searchText.isEmpty || station.searchableText.localizedCaseInsensitiveContains(searchText)
+            let matchesSearch = searchText.isEmpty || station.matchesSearch(searchText)
 
             switch selectedSection {
             case .home, .stations:
