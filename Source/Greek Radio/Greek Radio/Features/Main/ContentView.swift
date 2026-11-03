@@ -32,12 +32,25 @@ struct ContentView: View {
     private var selectedSectionBinding: Binding<AppSection> {
         Binding(get: { selectedSection }, set: { selectedSectionRaw = $0.rawValue })
     }
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @State private var selectedRegion = "All"
     @State private var searchText = ""
     @State private var selectedStation: RadioStation?
     @State private var isPlayerPresented = false
     @State private var featuredStationID: Int64?
     @State private var isReviewPromptPresented = false
+    @State private var isHingeOpen = false
+
+    private var usesSplitLayout: Bool {
+        if #available(iOS 27.1, *) {
+            return horizontalSizeClass == .regular || isHingeOpen
+        }
+        return horizontalSizeClass == .regular
+    }
+
+    private var activeSplitStation: RadioStation? {
+        player.currentStation ?? selectedStation ?? featuredStation ?? stationStore.stations.first
+    }
 
     private var favoriteIDs: Set<Int64> {
         Set(storedFavorites.map(\.stationID))
@@ -150,6 +163,87 @@ struct ContentView: View {
     }
 
     var body: some View {
+        mainView
+            .tint(accentTheme.primary)
+            .modifier(HingeObserverModifier(isHingeOpen: $isHingeOpen))
+            .onChange(of: usesSplitLayout) { _, isSplit in
+                if isSplit {
+                    isPlayerPresented = false
+                }
+            }
+            .sheet(isPresented: $isPlayerPresented) {
+                if let station = selectedStation ?? player.currentStation {
+                    PlayerSheet(
+                        station: station,
+                        player: player,
+                        accentTheme: accentTheme,
+                        isFavorite: favoriteIDs.contains(station.id),
+                        favoriteAction: { toggleFavorite(station) }
+                    )
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
+                }
+            }
+            .task {
+                FavoritesStore.shared.stationIDs = Set(storedFavorites.map(\.stationID))
+                await stationStore.loadStationsIfNeeded()
+                refreshFeaturedStation()
+                handlePendingShortcutIfNeeded()
+                updateHomeScreenQuickActions()
+            }
+            .onChange(of: stationStore.stations.map(\.id)) { _, _ in
+                refreshFeaturedStation()
+                handlePendingShortcutIfNeeded()
+                updateHomeScreenQuickActions()
+            }
+            .onChange(of: storedFavorites.map(\.stationID)) { _, newIDs in
+                FavoritesStore.shared.stationIDs = Set(newIDs)
+                updateHomeScreenQuickActions()
+            }
+            .onChange(of: pendingShortcutStationID) { _, _ in
+                handlePendingShortcutIfNeeded()
+            }
+            .onOpenURL { url in
+                guard AppShortcut.handle(url) else { return }
+                handlePendingShortcutIfNeeded()
+            }
+            .alert(appLocalized("Enjoying Greek Radio?"), isPresented: $isReviewPromptPresented) {
+                Button(appLocalized("Not Now")) {
+                    recordReviewPromptDecline()
+                }
+
+                Button(appLocalized("Review Now")) {
+                    completeReviewPromptFlow()
+                }
+            } message: {
+                Text(appLocalized("Would you like to leave a quick App Store review?"))
+            }
+    }
+
+    @ViewBuilder
+    private var mainView: some View {
+        if #available(iOS 27.1, *), usesSplitLayout {
+            ArrangementView {
+                tabNavigationView
+                    .splitArrangementLayoutRatio(minHorizontal: 0.45, idealHorizontal: 0.52, maxHorizontal: 0.6)
+            } secondary: {
+                splitPlayerPane
+                    .splitArrangementLayoutRatio(minHorizontal: 0.4, idealHorizontal: 0.48, maxHorizontal: 0.55)
+            }
+            .arrangementViewStyle(.split)
+        } else {
+            tabNavigationView
+                .safeAreaInset(edge: .bottom) {
+                    if let currentStation = player.currentStation {
+                        miniPlayer(for: currentStation)
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 68)
+                    }
+                }
+        }
+    }
+
+    private var tabNavigationView: some View {
         TabView(selection: selectedSectionBinding) {
             ForEach(AppSection.allCases) { section in
                 NavigationStack {
@@ -162,60 +256,44 @@ struct ContentView: View {
                 .tag(section)
             }
         }
-        .tint(accentTheme.primary)
-        .safeAreaInset(edge: .bottom) {
-            if let currentStation = player.currentStation {
-                miniPlayer(for: currentStation)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 68)
-            }
-        }
-        .sheet(isPresented: $isPlayerPresented) {
-            if let station = selectedStation ?? player.currentStation {
-                PlayerSheet(
-                    station: station,
-                    player: player,
-                    accentTheme: accentTheme,
-                    isFavorite: favoriteIDs.contains(station.id),
-                    favoriteAction: { toggleFavorite(station) }
-                )
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.visible)
-            }
-        }
-        .task {
-            FavoritesStore.shared.stationIDs = Set(storedFavorites.map(\.stationID))
-            await stationStore.loadStationsIfNeeded()
-            refreshFeaturedStation()
-            handlePendingShortcutIfNeeded()
-            updateHomeScreenQuickActions()
-        }
-        .onChange(of: stationStore.stations.map(\.id)) { _, _ in
-            refreshFeaturedStation()
-            handlePendingShortcutIfNeeded()
-            updateHomeScreenQuickActions()
-        }
-        .onChange(of: storedFavorites.map(\.stationID)) { _, newIDs in
-            FavoritesStore.shared.stationIDs = Set(newIDs)
-            updateHomeScreenQuickActions()
-        }
-        .onChange(of: pendingShortcutStationID) { _, _ in
-            handlePendingShortcutIfNeeded()
-        }
-        .onOpenURL { url in
-            guard AppShortcut.handle(url) else { return }
-            handlePendingShortcutIfNeeded()
-        }
-        .alert(appLocalized("Enjoying Greek Radio?"), isPresented: $isReviewPromptPresented) {
-            Button(appLocalized("Not Now")) {
-                recordReviewPromptDecline()
-            }
+    }
 
-            Button(appLocalized("Review Now")) {
-                completeReviewPromptFlow()
+    @ViewBuilder
+    private var splitPlayerPane: some View {
+        if let station = activeSplitStation {
+            PlayerSheet(
+                station: station,
+                player: player,
+                accentTheme: accentTheme,
+                isFavorite: favoriteIDs.contains(station.id),
+                favoriteAction: { toggleFavorite(station) },
+                showsCloseButton: false
+            )
+        } else {
+            ZStack {
+                LinearGradient(
+                    colors: accentTheme.playerGradientColors,
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
+                VStack(spacing: 14) {
+                    Image(systemName: "dot.radiowaves.left.and.right")
+                        .font(.system(size: 44, weight: .bold))
+                        .foregroundStyle(.white.opacity(0.85))
+
+                    Text(appLocalized("Greek Radio"))
+                        .font(.title2.weight(.bold))
+                        .foregroundStyle(.white)
+
+                    Text(appLocalized("Live Greek radio streaming."))
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.72))
+                        .multilineTextAlignment(.center)
+                }
+                .padding(32)
             }
-        } message: {
-            Text(appLocalized("Would you like to leave a quick App Store review?"))
         }
     }
 
@@ -728,7 +806,9 @@ struct ContentView: View {
     private func openStation(_ station: RadioStation) {
         selectedStation = station
         player.play(station: station)
-        isPlayerPresented = true
+        if !usesSplitLayout {
+            isPlayerPresented = true
+        }
     }
 
     private func handlePendingShortcutIfNeeded() {
@@ -875,12 +955,31 @@ private struct StationRow: View {
     }
 }
 
+private struct HingeObserverModifier: ViewModifier {
+    @Binding var isHingeOpen: Bool
+
+    func body(content: Content) -> some View {
+        if #available(iOS 27.1, *) {
+            content.onHingeChange { _, newContext in
+                if let hinge = newContext.hinge {
+                    isHingeOpen = hinge.status == .partiallyOpen || hinge.status == .fullyOpen
+                } else {
+                    isHingeOpen = false
+                }
+            }
+        } else {
+            content
+        }
+    }
+}
+
 private struct PlayerSheet: View {
     let station: RadioStation
     @ObservedObject var player: RadioPlayer
     let accentTheme: AccentTheme
     let isFavorite: Bool
     let favoriteAction: () -> Void
+    var showsCloseButton = true
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
 
@@ -894,14 +993,23 @@ private struct PlayerSheet: View {
 
     private var headerBar: some View {
         HStack {
-            Button(appLocalized("Close")) {
-                dismiss()
+            if showsCloseButton {
+                Button(appLocalized("Close")) {
+                    dismiss()
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 14)
+                .frame(height: 36)
+                .background(Color.white.opacity(0.12), in: Capsule())
+            } else {
+                Label(appLocalized("Now Playing"), systemImage: "dot.radiowaves.left.and.right")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.white.opacity(0.9))
+                    .padding(.horizontal, 14)
+                    .frame(height: 36)
+                    .background(Color.white.opacity(0.12), in: Capsule())
             }
-            .font(.subheadline.weight(.semibold))
-            .foregroundStyle(.white)
-            .padding(.horizontal, 14)
-            .frame(height: 36)
-            .background(Color.white.opacity(0.12), in: Capsule())
 
             Spacer()
 
